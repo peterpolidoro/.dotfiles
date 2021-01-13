@@ -4,17 +4,21 @@ This repo is the home of my custom system configuration which enables a
 consistent computing experience across multiple machines. These days I primarily
 use GNU/Linux via the [[https://guix.gnu.org][GNU Guix distribution]].
 
-I manage the various configuration files in this repo using [[https://www.gnu.org/software/stow/][GNU Stow]]. This
-allows me to set up symlinks for all of my dotfiles using a single command:
-
 This setup is based on [[https://github.com/daviwil/dotfiles]]
+
+I manage the various configuration files in this repo using [[https://www.gnu.org/software/stow/][GNU Stow]]. This
+allows me to set up symlinks for all of my dotfiles using the commands:
 
 #+BEGIN_SRC sh
 	cd ~
 	git clone git@github.com:peterpolidoro/.dotfiles.git
 	cd .dotfiles
-	stow . -vt ~ # install links
-	stow -D . -v -t ~ # uninstall links
+	# simulate installing links to show what install will do
+	make simulate
+	# install links
+	make install
+	# uninstall links
+	make clean
 #+END_SRC
 
 * Principles
