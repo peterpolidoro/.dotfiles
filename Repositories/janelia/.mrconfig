@@ -2,10 +2,6 @@
 checkout = 
 	git clone 'git@github.com:peterpolidoro/camera_computer_linux.git' 'camera_computer_linux'
 
-[cudahog]
-checkout = 
-	git clone 'git@bitbucket.org:peterpolidoro/cudahog.git' 'cudahog'
-
 [fluid_handling]
 checkout = 
 	git clone 'git@github.com:peterpolidoro/fluid_handling.git' 'fluid_handling'
@@ -26,8 +22,3 @@ checkout =
 checkout = 
 	git clone 'git@github.com:peterpolidoro/python_sample_project.git' 'python_sample_project'
 
-[bitflow]
-checkout = 
-	git clone 'git@github.com:JaneliaSciComp/bitflow.git' 'bitflow'
-	cd bitflow
-	git remote add peterpolidoro git@bitbucket.org:peterpolidoro/bitflow.git

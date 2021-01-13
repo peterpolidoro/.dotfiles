@@ -72,14 +72,6 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/qm.git
 	git remote add source git@github.com:QuantumLeaps/qm.git
 
-[sachac.emacs.d]
-checkout =
-	git clone 'git@github.com:peterpolidoro/sachac.emacs.d.git' 'sachac.emacs.d'
-	cd sachac.emacs.d
-	git remote add public https://github.com/peterpolidoro/sachac.emacs.d.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/sachac.emacs.d.git
-	git remote add source git@github.com:sachac/.emacs.d.git
-
 [cybernetic-architecture-presentation]
 checkout =
 	git clone 'git@github.com:peterpolidoro/cybernetic-architecture-presentation.git' 'cybernetic-architecture-presentation'
