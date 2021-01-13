@@ -10,7 +10,7 @@ allows me to set up symlinks for all of my dotfiles using a single command:
 This setup is based on [[https://github.com/daviwil/dotfiles]]
 
 #+BEGIN_SRC sh
-	stow .
+	stow . -vt ~
 #+END_SRC
 
 * Principles
