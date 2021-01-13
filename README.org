@@ -1,4 +1,4 @@
-#+TITLE: =~/dotfiles=
+#+TITLE: =~/.dotfiles=
 
 This repo is the home of my custom system configuration which enables a
 consistent computing experience across multiple machines. These days I primarily
@@ -10,7 +10,11 @@ allows me to set up symlinks for all of my dotfiles using a single command:
 This setup is based on [[https://github.com/daviwil/dotfiles]]
 
 #+BEGIN_SRC sh
-	stow . -vt ~
+  cd ~
+  git clone git@github.com:peterpolidoro/.dotfiles.git
+  cd .dotfiles
+	stow . -vt ~ # install links
+  stow -D . -v -t ~ # uninstall links
 #+END_SRC
 
 * Principles
