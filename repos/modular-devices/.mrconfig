@@ -1,0 +1,246 @@
+[generate_modular_device_documentation]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/generate_modular_device_documentation.git' 'generate_modular_device_documentation'
+	cd generate_modular_device_documentation
+	git remote add public https://github.com/janelia-modular-devices/generate_modular_device_documentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/generate_modular_device_documentation.git
+
+[aalborg_mfc_interface]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/aalborg_mfc_interface.git' 'aalborg_mfc_interface'
+	cd aalborg_mfc_interface
+	git remote add public https://github.com/janelia-modular-devices/aalborg_mfc_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/aalborg_mfc_interface.git
+
+[mixed_signal_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/mixed_signal_controller.git' 'mixed_signal_controller'
+	cd mixed_signal_controller
+	git remote add public https://github.com/janelia-modular-devices/mixed_signal_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mixed_signal_controller.git
+
+[modular_device_enclosure]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_enclosure.git' 'modular_device_enclosure'
+	cd modular_device_enclosure
+	git remote add public https://github.com/janelia-modular-devices/modular_device_enclosure.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_enclosure.git
+
+[modular_client_nodejs]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_client_nodejs.git' 'modular_client_nodejs'
+	cd modular_client_nodejs
+	git remote add public https://github.com/janelia-modular-devices/modular_client_nodejs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_client_nodejs.git
+
+[modular-devices]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular-devices.git' 'modular-devices'
+	cd modular-devices
+	git remote add public https://github.com/janelia-modular-devices/modular-devices.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular-devices.git
+	git submodule init
+	git submodule update
+
+[power_switch_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/power_switch_controller.git' 'power_switch_controller'
+	cd power_switch_controller
+	git remote add public https://github.com/janelia-modular-devices/power_switch_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/power_switch_controller.git
+
+[pwm_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/pwm_controller.git' 'pwm_controller'
+	cd pwm_controller
+	git remote add public https://github.com/janelia-modular-devices/pwm_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pwm_controller.git
+
+[stepper_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/stepper_controller.git' 'stepper_controller'
+	cd stepper_controller
+	git remote add public https://github.com/janelia-modular-devices/stepper_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stepper_controller.git
+
+[audio_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/audio_controller.git' 'audio_controller'
+	cd audio_controller
+	git remote add public https://github.com/janelia-modular-devices/audio_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/audio_controller.git
+
+[modular_device_protocol]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_protocol.git' 'modular_device_protocol'
+	cd modular_device_protocol
+	git remote add public https://github.com/janelia-modular-devices/modular_device_protocol.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_protocol.git
+
+[modular_device_serial_terminal]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_serial_terminal.git' 'modular_device_serial_terminal'
+	cd modular_device_serial_terminal
+	git remote add public https://github.com/janelia-modular-devices/modular_device_serial_terminal.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_serial_terminal.git
+
+[modular_device_standalone_interface]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_standalone_interface.git' 'modular_device_standalone_interface'
+	cd modular_device_standalone_interface
+	git remote add public https://github.com/janelia-modular-devices/modular_device_standalone_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_standalone_interface.git
+
+[led_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/led_controller.git' 'led_controller'
+	cd led_controller
+	git remote add public https://github.com/janelia-modular-devices/led_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/led_controller.git
+
+[h_bridge_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/h_bridge_controller.git' 'h_bridge_controller'
+	cd h_bridge_controller
+	git remote add public https://github.com/janelia-modular-devices/h_bridge_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/h_bridge_controller.git
+
+[encoder_interface]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/encoder_interface.git' 'encoder_interface'
+	cd encoder_interface
+	git remote add public https://github.com/janelia-modular-devices/encoder_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/encoder_interface.git
+
+[relay_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/relay_controller.git' 'relay_controller'
+	cd relay_controller
+	git remote add public https://github.com/janelia-modular-devices/relay_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/relay_controller.git
+
+[modular_device_base]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_base.git' 'modular_device_base'
+	cd modular_device_base
+	git remote add public https://github.com/janelia-modular-devices/modular_device_base.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_base.git
+
+[user_interface]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/user_interface.git' 'user_interface'
+	cd user_interface
+	git remote add public https://github.com/janelia-modular-devices/user_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/user_interface.git
+
+[high_power_switch_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/high_power_switch_controller.git' 'high_power_switch_controller'
+	cd high_power_switch_controller
+	git remote add public https://github.com/janelia-modular-devices/high_power_switch_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/high_power_switch_controller.git
+
+[encoder_interface_simple]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/encoder_interface_simple.git' 'encoder_interface_simple'
+	cd encoder_interface_simple
+	git remote add public https://github.com/janelia-modular-devices/encoder_interface_simple.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/encoder_interface_simple.git
+
+[optical_switch_interface]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/optical_switch_interface.git' 'optical_switch_interface'
+	cd optical_switch_interface
+	git remote add public https://github.com/janelia-modular-devices/optical_switch_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/optical_switch_interface.git
+
+[step_dir_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/step_dir_controller.git' 'step_dir_controller'
+	cd step_dir_controller
+	git remote add public https://github.com/janelia-modular-devices/step_dir_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/step_dir_controller.git
+
+[rung_wheel_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/rung_wheel_controller.git' 'rung_wheel_controller'
+	cd rung_wheel_controller
+	git remote add public https://github.com/janelia-modular-devices/rung_wheel_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rung_wheel_controller.git
+
+[pellet_dispenser]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/pellet_dispenser.git' 'pellet_dispenser'
+	cd pellet_dispenser
+	git remote add public https://github.com/janelia-modular-devices/pellet_dispenser.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pellet_dispenser.git
+
+[auditory_stimulator]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/auditory_stimulator.git' 'auditory_stimulator'
+	cd auditory_stimulator
+	git remote add public https://github.com/janelia-modular-devices/auditory_stimulator.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/auditory_stimulator.git
+
+[sleep_assay_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/sleep_assay_controller.git' 'sleep_assay_controller'
+	cd sleep_assay_controller
+	git remote add public https://github.com/janelia-modular-devices/sleep_assay_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/sleep_assay_controller.git
+
+[mouse_joystick_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/mouse_joystick_controller.git' 'mouse_joystick_controller'
+	cd mouse_joystick_controller
+	git remote add public https://github.com/janelia-modular-devices/mouse_joystick_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mouse_joystick_controller.git
+
+[modular_device_wiring]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/modular_device_wiring.git' 'modular_device_wiring'
+	cd modular_device_wiring
+	git remote add public https://github.com/janelia-modular-devices/modular_device_wiring.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_wiring.git
+
+[spinning_platform_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/spinning_platform_controller.git' 'spinning_platform_controller'
+	cd spinning_platform_controller
+	git remote add public https://github.com/janelia-modular-devices/spinning_platform_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/spinning_platform_controller.git
+
+[head_fixation_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/head_fixation_controller.git' 'head_fixation_controller'
+	cd head_fixation_controller
+	git remote add public https://github.com/janelia-modular-devices/head_fixation_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/head_fixation_controller.git
+
+[ethoscope_stepper_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/ethoscope_stepper_controller.git' 'ethoscope_stepper_controller'
+	cd ethoscope_stepper_controller
+	git remote add public https://github.com/janelia-modular-devices/ethoscope_stepper_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ethoscope_stepper_controller.git
+
+[backlight_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/backlight_controller.git' 'backlight_controller'
+	cd backlight_controller
+	git remote add public https://github.com/janelia-modular-devices/backlight_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/backlight_controller.git
+
+[fly_bowl_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/fly_bowl_controller.git' 'fly_bowl_controller'
+	cd fly_bowl_controller
+	git remote add public https://github.com/janelia-modular-devices/fly_bowl_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fly_bowl_controller.git
+
+[hplc_controller]
+checkout =
+	git clone 'git@github.com:janelia-modular-devices/hplc_controller.git' 'hplc_controller'
+	cd hplc_controller
+	git remote add public https://github.com/janelia-modular-devices/hplc_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hplc_controller.git

@@ -1,0 +1,230 @@
+[HRIM]
+checkout =
+	git clone 'git@github.com:janelia-ros/HRIM.git' 'HRIM'
+	cd HRIM
+	git remote add public https://github.com/janelia-ros/HRIM.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HRIM.git
+	git remote add source git@github.com:AcutronicRobotics/HRIM.git
+
+[BehaviorTree.CPP]
+checkout =
+	git clone 'git@github.com:janelia-ros/BehaviorTree.CPP.git' 'BehaviorTree.CPP'
+	cd BehaviorTree.CPP
+	git remote add public https://github.com/janelia-ros/BehaviorTree.CPP.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/BehaviorTree.CPP.git
+	git remote add source git@github.com:BehaviorTree/BehaviorTree.CPP.git
+
+[Groot]
+checkout =
+	git clone 'git@github.com:janelia-ros/Groot.git' 'Groot'
+	cd Groot
+	git remote add public https://github.com/janelia-ros/Groot.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Groot.git
+	git remote add source git@github.com:BehaviorTree/Groot.git
+
+[phidgets_drivers]
+checkout =
+	git clone 'git@github.com:janelia-ros/phidgets_drivers.git' 'phidgets_drivers'
+	cd phidgets_drivers
+	git remote add public https://github.com/janelia-ros/phidgets_drivers.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/phidgets_drivers.git
+	git remote add source git@github.com:ros-drivers/phidgets_drivers.git
+	git remote add clalancette git@github.com:clalancette/phidgets_drivers.git
+
+[rosdistro]
+checkout =
+	git clone 'git@github.com:janelia-ros/rosdistro.git' 'rosdistro'
+	cd rosdistro
+	git remote add public https://github.com/janelia-ros/rosdistro.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rosdistro.git
+	git remote add source git@github.com:ros/rosdistro.git
+
+[zaber_stage_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/zaber_stage_ros.git' 'zaber_stage_ros'
+	cd zaber_stage_ros
+	git remote add public https://github.com/janelia-ros/zaber_stage_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/zaber_stage_ros.git
+
+[rosdep_sources]
+checkout =
+	git clone 'git@github.com:janelia-ros/rosdep_sources.git' 'rosdep_sources'
+	cd rosdep_sources
+	git remote add public https://github.com/janelia-ros/rosdep_sources.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rosdep_sources.git
+
+[mightex_controller_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/mightex_controller_ros.git' 'mightex_controller_ros'
+	cd mightex_controller_ros
+	git remote add public https://github.com/janelia-ros/mightex_controller_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mightex_controller_ros.git
+
+[pyaudio_controller_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/pyaudio_controller_ros.git' 'pyaudio_controller_ros'
+	cd pyaudio_controller_ros
+	git remote add public https://github.com/janelia-ros/pyaudio_controller_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pyaudio_controller_ros.git
+
+[pointgrey_camera_driver]
+checkout =
+	git clone 'git@github.com:janelia-ros/pointgrey_camera_driver.git' 'pointgrey_camera_driver'
+	cd pointgrey_camera_driver
+	git remote add public https://github.com/janelia-ros/pointgrey_camera_driver.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pointgrey_camera_driver.git
+	git remote add source git@github.com:ros-drivers/pointgrey_camera_driver.git
+
+[blob_tracker_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/blob_tracker_ros.git' 'blob_tracker_ros'
+	cd blob_tracker_ros
+	git remote add public https://github.com/janelia-ros/blob_tracker_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/blob_tracker_ros.git
+
+[mmf_writer_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/mmf_writer_ros.git' 'mmf_writer_ros'
+	cd mmf_writer_ros
+	git remote add public https://github.com/janelia-ros/mmf_writer_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mmf_writer_ros.git
+	git remote add source git@github.com:bafonso/mmf_writer_ros.git
+
+[lavis]
+checkout =
+	git clone 'git@github.com:peterpolidoro/lavis.git' 'lavis'
+	cd lavis
+	git remote add public https://github.com/peterpolidoro/lavis.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lavis.git
+	git remote add zlaticlab git@github.com:ZlaticLab/lavis.git
+
+[larvae_behavior_classifier_ros]
+checkout =
+	git clone 'git@github.com:peterpolidoro/larvae_behavior_classifier_ros.git' 'larvae_behavior_classifier_ros'
+	cd larvae_behavior_classifier_ros
+	git remote add public https://github.com/peterpolidoro/larvae_behavior_classifier_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/larvae_behavior_classifier_ros.git
+	git remote add zlaticlab git@github.com:ZlaticLab/larvae_behavior_classifier_ros.git
+
+[roscpp_code_format]
+checkout =
+	git clone 'git@github.com:janelia-ros/roscpp_code_format.git' 'roscpp_code_format'
+	cd roscpp_code_format
+	git remote add public https://github.com/janelia-ros/roscpp_code_format.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/roscpp_code_format.git
+	git remote add source git@github.com:davetcoleman/roscpp_code_format.git
+
+[rosbridge_tester]
+checkout =
+	git clone 'git@github.com:janelia-ros/rosbridge_tester.git' 'rosbridge_tester'
+	cd rosbridge_tester
+	git remote add public https://github.com/janelia-ros/rosbridge_tester.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rosbridge_tester.git
+
+[zebrafish_tracker]
+checkout =
+	git clone 'git@github.com:janelia-ros/zebrafish_tracker.git' 'zebrafish_tracker'
+	cd zebrafish_tracker
+	git remote add public https://github.com/janelia-ros/zebrafish_tracker.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/zebrafish_tracker.git
+
+[modular_client_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/modular_client_ros.git' 'modular_client_ros'
+	cd modular_client_ros
+	git remote add public https://github.com/janelia-ros/modular_client_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_client_ros.git
+
+[raw_video_stream_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/raw_video_stream_ros.git' 'raw_video_stream_ros'
+	cd raw_video_stream_ros
+	git remote add public https://github.com/janelia-ros/raw_video_stream_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/raw_video_stream_ros.git
+
+[image_topic_to_image_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/image_topic_to_image_ros.git' 'image_topic_to_image_ros'
+	cd image_topic_to_image_ros
+	git remote add public https://github.com/janelia-ros/image_topic_to_image_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/image_topic_to_image_ros.git
+
+[phidgets_stage_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/phidgets_stage_ros.git' 'phidgets_stage_ros'
+	cd phidgets_stage_ros
+	git remote add public https://github.com/janelia-ros/phidgets_stage_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/phidgets_stage_ros.git
+
+[ros_map]
+checkout =
+	git clone 'git@github.com:janelia-ros/ros_map.git' 'ros_map'
+	cd ros_map
+	git remote add public https://github.com/janelia-ros/ros_map.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ros_map.git
+	git remote add source git@github.com:DLu/ros_map.git
+
+[ros2_examples]
+checkout =
+	git clone 'git@github.com:janelia-ros/ros2_examples.git' 'ros2_examples'
+	cd ros2_examples
+	git remote add public https://github.com/janelia-ros/ros2_examples.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ros2_examples.git
+	git remote add source git@github.com:ros2/examples.git
+
+[lickport_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/lickport_ros.git' 'lickport_ros'
+	cd lickport_ros
+	git remote add public https://github.com/janelia-ros/lickport_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lickport_ros.git
+
+[tunnel_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/tunnel_ros.git' 'tunnel_ros'
+	cd tunnel_ros
+	git remote add public https://github.com/janelia-ros/tunnel_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tunnel_ros.git
+
+[phidgets_python_drivers_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/phidgets_python_drivers_ros.git' 'phidgets_python_drivers_ros'
+	cd phidgets_python_drivers_ros
+	git remote add public https://github.com/janelia-ros/phidgets_python_drivers_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/phidgets_python_drivers_ros.git
+
+[common_interfaces_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/common_interfaces_ros.git' 'common_interfaces_ros'
+	cd common_interfaces_ros
+	git remote add public https://github.com/janelia-ros/common_interfaces_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/common_interfaces_ros.git
+
+[smart_cage_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/smart_cage_ros.git' 'smart_cage_ros'
+	cd smart_cage_ros
+	git remote add public https://github.com/janelia-ros/smart_cage_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/smart_cage_ros.git
+
+[usb_camera_driver_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/usb_camera_driver_ros.git' 'usb_camera_driver_ros'
+	cd usb_camera_driver_ros
+	git remote add public https://github.com/janelia-ros/usb_camera_driver_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/usb_camera_driver_ros.git
+	git remote add source git@github.com:klintan/ros2_usb_camera.git
+
+[y_arena_odor_controller_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/y_arena_odor_controller_ros.git' 'y_arena_odor_controller_ros'
+	cd y_arena_odor_controller_ros
+	git remote add public https://github.com/janelia-ros/y_arena_odor_controller_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/y_arena_odor_controller_ros.git
+
+[ros_setup]
+checkout =
+	git clone 'git@github.com:janelia-ros/ros_setup.git' 'ros_setup'
+	cd ros_setup
+	git remote add public https://github.com/janelia-ros/ros_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ros_setup.git

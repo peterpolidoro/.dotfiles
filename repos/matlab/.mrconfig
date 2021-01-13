@@ -1,0 +1,16 @@
+[modular_client_matlab]
+checkout = 
+	git clone 'git@github.com:janelia-matlab/modular_client_matlab.git' 'modular_client_matlab'
+	cd modular_client_matlab
+	git remote add public https://github.com/janelia-matlab/modular_client_matlab.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_client_matlab.git
+	git submodule init
+	git submodule update
+
+[jsonlab]
+checkout = 
+	git clone 'git@github.com:janelia-matlab/jsonlab.git' 'jsonlab'
+	cd jsonlab
+	git remote add public https://github.com/janelia-matlab/jsonlab.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/jsonlab.git
+	git remote add source git@github.com:fangq/jsonlab.git

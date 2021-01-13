@@ -1,0 +1,224 @@
+[fly-alcohol-assay]
+checkout =
+	git clone 'git@github.com:janelia-idf/fly-alcohol-assay.git' 'fly-alcohol-assay'
+	cd fly-alcohol-assay
+	git remote add public https://github.com/janelia-idf/fly-alcohol-assay.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fly-alcohol-assay.git
+
+[fly-alcohol-assay-config]
+checkout =
+	git clone 'git@github.com:janelia-idf/fly-alcohol-assay-config.git' 'fly-alcohol-assay-config'
+	cd fly-alcohol-assay-config
+	git remote add public https://github.com/janelia-idf/fly-alcohol-assay-config.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fly-alcohol-assay-config.git
+
+[gpu_image_processing]
+checkout =
+	git clone 'git@github.com:janelia-idf/gpu_image_processing.git' 'gpu_image_processing'
+	cd gpu_image_processing
+	git remote add public https://github.com/janelia-idf/gpu_image_processing.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/gpu_image_processing.git
+
+[elf]
+checkout =
+	git clone 'git@github.com:janelia-idf/elf.git' 'elf'
+	cd elf
+	git remote add public https://github.com/janelia-idf/elf.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/elf.git
+	git submodule init
+	git submodule update
+
+[stern_odor_rig]
+checkout =
+	git clone 'git@github.com:janelia-idf/stern_odor_rig.git' 'stern_odor_rig'
+	cd stern_odor_rig
+	git remote add public https://github.com/janelia-idf/stern_odor_rig.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stern_odor_rig.git
+
+[kaiyu_odor_rig]
+checkout =
+	git clone 'git@github.com:janelia-idf/kaiyu_odor_rig.git' 'kaiyu_odor_rig'
+	cd kaiyu_odor_rig
+	git remote add public https://github.com/janelia-idf/kaiyu_odor_rig.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/kaiyu_odor_rig.git
+
+[elf_config]
+checkout =
+	git clone 'git@github.com:janelia-idf/elf_config.git' 'elf_config'
+	cd elf_config
+	git remote add public https://github.com/janelia-idf/elf_config.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/elf_config.git
+
+[fly-sorter]
+checkout =
+	git clone 'git@github.com:janelia-idf/fly-sorter.git' 'fly-sorter'
+	cd fly-sorter
+	git remote add public https://github.com/janelia-idf/fly-sorter.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fly-sorter.git
+
+[elf_calibration]
+checkout =
+	git clone 'git@github.com:janelia-idf/elf_calibration.git' 'elf_calibration'
+	cd elf_calibration
+	git remote add public https://github.com/janelia-idf/elf_calibration.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/elf_calibration.git
+
+[github_profiles]
+checkout =
+	git clone 'git@github.com:janelia-idf/github_profiles.git' 'github_profiles'
+	cd github_profiles
+	git remote add public https://github.com/janelia-idf/github_profiles.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/github_profiles.git
+
+[bias]
+checkout =
+	git clone 'git@github.com:janelia-idf/bias.git' 'bias'
+	cd bias
+	git remote add public https://github.com/janelia-idf/bias.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/bias.git
+
+[bias_docs]
+checkout =
+	git clone 'git@github.com:janelia-idf/bias_docs.git' 'bias_docs'
+	cd bias_docs
+	git remote add public https://github.com/janelia-idf/bias_docs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/bias_docs.git
+
+[arduino_stepper_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_stepper_controller.git' 'arduino_stepper_controller'
+	cd arduino_stepper_controller
+	git remote add public https://github.com/janelia-idf/arduino_stepper_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_stepper_controller.git
+
+[sleep_assay]
+checkout =
+	git clone 'git@github.com:janelia-idf/sleep_assay.git' 'sleep_assay'
+	cd sleep_assay
+	git remote add public https://github.com/janelia-idf/sleep_assay.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/sleep_assay.git
+
+[SuperAudioBoard]
+checkout =
+	git clone 'git@github.com:janelia-idf/SuperAudioBoard.git' 'SuperAudioBoard'
+	cd SuperAudioBoard
+	git remote add public https://github.com/janelia-idf/SuperAudioBoard.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SuperAudioBoard.git
+	git remote add source git@github.com:whollender/SuperAudioBoard.git
+
+[pySolo]
+checkout =
+	git clone 'git@github.com:janelia-idf/pySolo.git' 'pySolo'
+	cd pySolo
+	git remote add public https://github.com/janelia-idf/pySolo.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pySolo.git
+	git remote add source git@github.com:gilestrolab/pySolo.git
+
+[myrepos]
+checkout =
+	git clone 'git@github.com:janelia-idf/myrepos.git' 'myrepos'
+	cd myrepos
+	git remote add public https://github.com/janelia-idf/myrepos.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/myrepos.git
+	git remote add source git@github.com:joeyh/myrepos.git
+
+[pySolo-Video]
+checkout =
+	git clone 'git@github.com:janelia-idf/pySolo-Video.git' 'pySolo-Video'
+	cd pySolo-Video
+	git remote add public https://github.com/janelia-idf/pySolo-Video.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pySolo-Video.git
+	git remote add source git@github.com:gilestrolab/pySolo-Video.git
+
+[LibreCAD]
+checkout =
+	git clone 'git@github.com:janelia-idf/LibreCAD.git' 'LibreCAD'
+	cd LibreCAD
+	git remote add public https://github.com/janelia-idf/LibreCAD.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LibreCAD.git
+	git remote add source git@github.com:LibreCAD/LibreCAD.git
+
+[udev_setup]
+checkout =
+	git clone 'git@github.com:janelia-idf/udev_setup.git' 'udev_setup'
+	cd udev_setup
+	git remote add public https://github.com/janelia-idf/udev_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/udev_setup.git
+
+[arduino_relay_remote_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_relay_remote_controller.git' 'arduino_relay_remote_controller'
+	cd arduino_relay_remote_controller
+	git remote add public https://github.com/janelia-idf/arduino_relay_remote_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_relay_remote_controller.git
+
+[LL-DAM-Analysis]
+checkout =
+	git clone 'git@github.com:janelia-idf/LL-DAM-Analysis.git' 'LL-DAM-Analysis'
+	cd LL-DAM-Analysis
+	git remote add public https://github.com/janelia-idf/LL-DAM-Analysis.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LL-DAM-Analysis.git
+
+[PySolo-LL]
+checkout =
+	git clone 'git@github.com:janelia-idf/PySolo-LL.git' 'PySolo-LL'
+	cd PySolo-LL
+	git remote add public https://github.com/janelia-idf/PySolo-LL.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PySolo-LL.git
+	git remote add source git@github.com:laughreyl/PySolo-LL.git
+
+[arduino_current_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_current_controller.git' 'arduino_current_controller'
+	cd arduino_current_controller
+	git remote add public https://github.com/janelia-idf/arduino_current_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_current_controller.git
+
+[arduino_dac]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_dac.git' 'arduino_dac'
+	cd arduino_dac
+	git remote add public https://github.com/janelia-idf/arduino_dac.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_dac.git
+
+[arduino_libs]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_libs.git' 'arduino_libs'
+	cd arduino_libs
+	git remote add public https://github.com/janelia-idf/arduino_libs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_libs.git
+
+[arduino_olfactometer]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_olfactometer.git' 'arduino_olfactometer'
+	cd arduino_olfactometer
+	git remote add public https://github.com/janelia-idf/arduino_olfactometer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_olfactometer.git
+
+[arduino_puffer]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_puffer.git' 'arduino_puffer'
+	cd arduino_puffer
+	git remote add public https://github.com/janelia-idf/arduino_puffer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_puffer.git
+
+[arduino_relay_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_relay_controller.git' 'arduino_relay_controller'
+	cd arduino_relay_controller
+	git remote add public https://github.com/janelia-idf/arduino_relay_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_relay_controller.git
+
+[arduino_relay_mfc_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_relay_mfc_controller.git' 'arduino_relay_mfc_controller'
+	cd arduino_relay_mfc_controller
+	git remote add public https://github.com/janelia-idf/arduino_relay_mfc_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_relay_mfc_controller.git
+
+[arduino_valve_controller]
+checkout =
+	git clone 'git@github.com:janelia-idf/arduino_valve_controller.git' 'arduino_valve_controller'
+	cd arduino_valve_controller
+	git remote add public https://github.com/janelia-idf/arduino_valve_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_valve_controller.git

@@ -1,0 +1,41 @@
+[arduino]
+chain = true
+
+[caltech]
+chain = true
+
+[idf]
+chain = true
+
+[janelia]
+chain = true
+
+[jet]
+chain = true
+
+[kicad]
+chain = true
+
+[modular-devices]
+chain = true
+
+[peter]
+chain = true
+
+[pypi]
+chain = true
+
+[ros]
+chain = true
+
+[matlab]
+chain = true
+
+[labview]
+chain = true
+
+[npm]
+chain = true
+
+[embedded]
+chain = true

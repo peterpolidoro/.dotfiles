@@ -1,0 +1,20 @@
+[caltech_led_arrays]
+checkout = 
+	git clone 'git@github.com:peterpolidoro/caltech_led_arrays.git' 'caltech_led_arrays'
+	cd caltech_led_arrays
+	git remote add public https://github.com/peterpolidoro/caltech_led_arrays.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/caltech_led_arrays.git
+
+[Flyatar]
+checkout = 
+	git clone 'git@github.com:peterpolidoro/Flyatar.git' 'Flyatar'
+	cd Flyatar
+	git remote add public https://github.com/peterpolidoro/Flyatar.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Flyatar.git
+
+[RoboFly]
+checkout = 
+	git clone 'git@github.com:peterpolidoro/RoboFly.git' 'RoboFly'
+	cd RoboFly
+	git remote add public https://github.com/peterpolidoro/RoboFly.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/RoboFly.git

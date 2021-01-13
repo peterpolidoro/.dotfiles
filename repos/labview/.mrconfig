@@ -1,0 +1,8 @@
+[modular_client_labview]
+checkout = 
+	git clone 'git@github.com:janelia-labview/modular_client_labview.git' 'modular_client_labview'
+	cd modular_client_labview
+	git remote add public https://github.com/janelia-labview/modular_client_labview.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_client_labview.git
+	git submodule init
+	git submodule update

@@ -1,0 +1,198 @@
+[home_automation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/home_automation.git' 'home_automation'
+	cd home_automation
+	git remote add public https://github.com/peterpolidoro/home_automation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/home_automation.git
+
+[fstab_janelia]
+checkout =
+	git clone 'git@github.com:peterpolidoro/fstab_janelia.git' 'fstab_janelia'
+	cd fstab_janelia
+	git remote add public https://github.com/peterpolidoro/fstab_janelia.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fstab_janelia.git
+
+[janelia_performance_reviews]
+checkout =
+	git clone 'git@github.com:peterpolidoro/janelia_performance_reviews.git' 'janelia_performance_reviews'
+
+[markup_testing]
+checkout =
+	git clone 'git@github.com:peterpolidoro/markup_testing.git' 'markup_testing'
+	cd markup_testing
+	git remote add public https://github.com/peterpolidoro/markup_testing.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/markup_testing.git
+
+# [public]
+# checkout =
+#		git clone 'peterpolidoro@peterpolidoro.net:git/public.git' 'public'
+
+[arduino-tutorial]
+checkout =
+	git clone 'git@github.com:peterpolidoro/arduino-tutorial.git' 'arduino-tutorial'
+	cd arduino-tutorial
+	git remote add public https://github.com/peterpolidoro/arduino-tutorial.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino-tutorial.git
+
+[machine-communication-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/machine-communication-presentation.git' 'machine-communication-presentation'
+	cd machine-communication-presentation
+	git remote add public https://github.com/peterpolidoro/machine-communication-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/machine-communication-presentation.git
+
+[mal]
+checkout =
+	git clone 'git@github.com:peterpolidoro/mal.git' 'mal'
+	cd mal
+	git remote add public https://github.com/peterpolidoro/mal.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mal.git
+	git remote add source git@github.com:kanaka/mal.git
+
+[resume]
+checkout =
+	git clone 'git@github.com:peterpolidoro/resume.git' 'resume'
+	cd resume
+	git remote add public https://github.com/peterpolidoro/resume.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/resume.git
+
+[HRIM]
+checkout =
+	git clone 'git@github.com:peterpolidoro/HRIM.git' 'HRIM'
+	cd HRIM
+	git remote add public https://github.com/peterpolidoro/HRIM.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HRIM.git
+	git remote add source git@github.com:erlerobot/HRIM.git
+
+[qm]
+checkout =
+	git clone 'git@github.com:peterpolidoro/qm.git' 'qm'
+	cd qm
+	git remote add public https://github.com/peterpolidoro/qm.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qm.git
+	git remote add source git@github.com:QuantumLeaps/qm.git
+
+[sachac.emacs.d]
+checkout =
+	git clone 'git@github.com:peterpolidoro/sachac.emacs.d.git' 'sachac.emacs.d'
+	cd sachac.emacs.d
+	git remote add public https://github.com/peterpolidoro/sachac.emacs.d.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/sachac.emacs.d.git
+	git remote add source git@github.com:sachac/.emacs.d.git
+
+[cybernetic-architecture-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/cybernetic-architecture-presentation.git' 'cybernetic-architecture-presentation'
+	cd cybernetic-architecture-presentation
+	git remote add public https://github.com/peterpolidoro/cybernetic-architecture-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/cybernetic-architecture-presentation.git
+
+[open-science-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/open-science-presentation.git' 'open-science-presentation'
+	cd open-science-presentation
+	git remote add public https://github.com/peterpolidoro/open-science-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/open-science-presentation.git
+
+[nand2tetris]
+checkout =
+	git clone 'git@github.com:peterpolidoro/nand2tetris.git' 'nand2tetris'
+	cd nand2tetris
+	git remote add public https://github.com/peterpolidoro/nand2tetris.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nand2tetris.git
+
+[science_lib]
+checkout =
+	git clone 'git@github.com:peterpolidoro/science_lib.git' 'science_lib'
+	cd science_lib
+	git remote add public https://github.com/peterpolidoro/science_lib.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/science_lib.git
+	git remote add source git@github.com:media-lib/science_lib.git
+
+[Janelia-Smart-cage-scripts]
+checkout =
+	git clone 'git@github.com:peterpolidoro/Janelia-Smart-cage-scripts.git' 'Janelia-Smart-cage-scripts'
+	cd Janelia-Smart-cage-scripts
+	git remote add public https://github.com/peterpolidoro/Janelia-Smart-cage-scripts.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Janelia-Smart-cage-scripts.git
+	git remote add source git@github.com:nwtien/Janelia-Smart-cage-scripts.git
+
+[deja-vu-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/deja-vu-presentation.git' 'deja-vu-presentation'
+	cd deja-vu-presentation
+	git remote add public https://github.com/peterpolidoro/deja-vu-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/deja-vu-presentation.git
+
+[conference-expenses-2019]
+checkout =
+	git clone 'git@github.com:peterpolidoro/conference-expenses-2019.git' 'conference-expenses-2019'
+	cd conference-expenses-2019
+	git remote add public https://github.com/peterpolidoro/conference-expenses-2019.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/conference-expenses-2019.git
+
+[easier-to-change-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/easier-to-change-presentation.git' 'easier-to-change-presentation'
+	cd easier-to-change-presentation
+	git remote add public https://github.com/peterpolidoro/easier-to-change-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/easier-to-change-presentation.git
+
+[science-systems-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/science-systems-presentation.git' 'science-systems-presentation'
+	cd science-systems-presentation
+	git remote add public https://github.com/peterpolidoro/science-systems-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/science-systems-presentation.git
+
+[smart-cage-presentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/smart-cage-presentation.git' 'smart-cage-presentation'
+	cd smart-cage-presentation
+	git remote add public https://github.com/peterpolidoro/smart-cage-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/smart-cage-presentation.git
+
+[hoop-coop]
+checkout =
+	git clone 'git@github.com:peterpolidoro/hoop-coop.git' 'hoop-coop'
+	cd hoop-coop
+	git remote add public https://github.com/peterpolidoro/hoop-coop.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hoop-coop.git
+
+[peterpolidoro]
+checkout =
+	git clone 'git@github.com:peterpolidoro/peterpolidoro.git' 'peterpolidoro'
+	cd peterpolidoro
+	git remote add public https://github.com/peterpolidoro/peterpolidoro.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/peterpolidoro.git
+
+[docker-library-docs]
+checkout =
+	git clone 'git@github.com:peterpolidoro/docker-library-docs.git' 'docker-library-docs'
+	cd docker-library-docs
+	git remote add public https://github.com/peterpolidoro/docker-library-docs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/docker-library-docs.git
+	git remote add source git@github.com:docker-library/docs.git
+
+[emacs-from-scratch]
+checkout =
+	git clone 'git@github.com:peterpolidoro/emacs-from-scratch.git' 'emacs-from-scratch'
+	cd emacs-from-scratch
+	git remote add public https://github.com/peterpolidoro/emacs-from-scratch.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/emacs-from-scratch.git
+	git remote add source git@github.com:daviwil/emacs-from-scratch.git
+
+[emacs-application-framework]
+checkout =
+	git clone 'git@github.com:peterpolidoro/emacs-application-framework.git' 'emacs-application-framework'
+	cd emacs-application-framework
+	git remote add public https://github.com/peterpolidoro/emacs-application-framework.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/emacs-application-framework.git
+	git remote add source git@github.com:manateelazycat/emacs-application-framework.git
+
+[cable-stayed-bird-feeder]
+checkout =
+	git clone 'git@github.com:peterpolidoro/cable-stayed-bird-feeder.git' 'cable-stayed-bird-feeder'
+	cd cable-stayed-bird-feeder
+	git remote add public https://github.com/peterpolidoro/cable-stayed-bird-feeder.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/cable-stayed-bird-feeder.git

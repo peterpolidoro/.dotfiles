@@ -1,0 +1,133 @@
+[qpc]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qpc.git' 'qpc'
+	cd qpc
+	git remote add public https://github.com/janelia-embedded/qpc.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qpc.git
+	git remote add source git@github.com:QuantumLeaps/qpc.git
+
+[qpcpp]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qpcpp.git' 'qpcpp'
+	cd qpcpp
+	git remote add public https://github.com/janelia-embedded/qpcpp.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qpcpp.git
+	git remote add source git@github.com:QuantumLeaps/qpcpp.git
+
+[qpn]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qpn.git' 'qpn'
+	cd qpn
+	git remote add public https://github.com/janelia-embedded/qpn.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qpn.git
+	git remote add source git@github.com:QuantumLeaps/qpn.git
+
+[qm]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qm.git' 'qm'
+	cd qm
+	git remote add public https://github.com/janelia-embedded/qm.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qm.git
+	git remote add source git@github.com:QuantumLeaps/qm.git
+
+[qtools]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qtools.git' 'qtools'
+	cd qtools
+	git remote add public https://github.com/janelia-embedded/qtools.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qtools.git
+	git remote add source git@github.com:QuantumLeaps/qtools.git
+
+[dds_xrce_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/dds_xrce_setup.git' 'dds_xrce_setup'
+	cd dds_xrce_setup
+	git remote add public https://github.com/janelia-embedded/dds_xrce_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/dds_xrce_setup.git
+
+[nvidia_jetson_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nvidia_jetson_setup.git' 'nvidia_jetson_setup'
+	cd nvidia_jetson_setup
+	git remote add public https://github.com/janelia-embedded/nvidia_jetson_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nvidia_jetson_setup.git
+
+[nuttx]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nuttx.git' 'nuttx'
+	cd nuttx
+	git remote add public https://github.com/janelia-embedded/nuttx.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx.git
+	git remote add source git@github.com:microROS/NuttX.git
+	git remote add nuttx git@bitbucket.org:nuttx/nuttx.git
+	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx.git
+
+[nuttx_apps]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nuttx_apps.git' 'nuttx_apps'
+	cd nuttx_apps
+	git remote add public https://github.com/janelia-embedded/nuttx_apps.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_apps.git
+	git remote add source git@github.com:microROS/apps.git
+	git remote add nuttx git@bitbucket.org:nuttx/apps.git
+
+[nuttx_tools]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nuttx_tools.git' 'nuttx_tools'
+	cd nuttx_tools
+	git remote add public https://github.com/janelia-embedded/nuttx_tools.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_tools.git
+	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx_tools.git
+	git remote add source git@bitbucket.org:nuttx/tools.git
+
+[nuttx_uclibc]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nuttx_uclibc.git' 'nuttx_uclibc'
+	cd nuttx_uclibc
+	git remote add public https://github.com/janelia-embedded/nuttx_uclibc.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_uclibc.git
+	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx_uclibc.git
+	git remote add source git@bitbucket.org:nuttx/uclibc.git
+
+[nuttx_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/nuttx_setup.git' 'nuttx_setup'
+	cd nuttx_setup
+	git remote add public https://github.com/janelia-embedded/nuttx_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_setup.git
+
+[platformio_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/platformio_setup.git' 'platformio_setup'
+	cd platformio_setup
+	git remote add public https://github.com/janelia-embedded/platformio_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/platformio_setup.git
+
+[qp_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/qp_setup.git' 'qp_setup'
+	cd qp_setup
+	git remote add public https://github.com/janelia-embedded/qp_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qp_setup.git
+
+[xilinx_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/xilinx_setup.git' 'xilinx_setup'
+	cd xilinx_setup
+	git remote add public https://github.com/janelia-embedded/xilinx_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/xilinx_setup.git
+
+[microros_teensy]
+checkout =
+	git clone 'git@github.com:janelia-embedded/microros_teensy.git' 'microros_teensy'
+	cd microros_teensy
+	git remote add public https://github.com/janelia-embedded/microros_teensy.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/microros_teensy.git
+
+[tytools]
+checkout =
+	git clone 'git@github.com:janelia-embedded/tytools.git' 'tytools'
+	cd tytools
+	git remote add public https://github.com/janelia-embedded/tytools.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tytools.git
+	git remote add source git@github.com:Koromix/tytools.git

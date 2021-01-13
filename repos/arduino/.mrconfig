@@ -1,0 +1,808 @@
+[arduino-libraries]
+checkout =
+	git clone 'git@github.com:janelia-arduino/arduino-libraries.git' 'arduino-libraries'
+	cd arduino-libraries
+	git remote add public https://github.com/janelia-arduino/arduino-libraries.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino-libraries.git
+	git submodule init
+	git submodule update
+
+[arduino_setup]
+checkout =
+	git clone 'git@github.com:janelia-arduino/arduino_setup.git' 'arduino_setup'
+	cd arduino_setup
+	git remote add public https://github.com/janelia-arduino/arduino_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_setup.git
+
+[janelia-arduino-board-index]
+checkout =
+	git clone 'git@github.com:janelia-arduino/janelia-arduino-board-index.git' 'janelia-arduino-board-index'
+	cd janelia-arduino-board-index
+	git remote add public https://github.com/janelia-arduino/janelia-arduino-board-index.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-arduino-board-index.git
+
+[ArduinoJson]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ArduinoJson.git' 'ArduinoJson'
+	cd ArduinoJson
+	git remote add public https://github.com/janelia-arduino/ArduinoJson.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ArduinoJson.git
+	git remote add source git@github.com:bblanchon/ArduinoJson.git
+
+[StandaloneInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/StandaloneInterface.git' 'StandaloneInterface'
+	cd StandaloneInterface
+	git remote add public https://github.com/janelia-arduino/StandaloneInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/StandaloneInterface.git
+
+[avr-stl]
+checkout =
+	git clone 'git@github.com:janelia-arduino/avr-stl.git' 'avr-stl'
+	cd avr-stl
+	git remote add public https://github.com/janelia-arduino/avr-stl.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/avr-stl.git
+
+[Flash]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Flash.git' 'Flash'
+	cd Flash
+	git remote add public https://github.com/janelia-arduino/Flash.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Flash.git
+	git remote add source git@github.com:schinken/Flash.git
+
+[MemoryFree]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MemoryFree.git' 'MemoryFree'
+	cd MemoryFree
+	git remote add public https://github.com/janelia-arduino/MemoryFree.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MemoryFree.git
+	git remote add source git@github.com:McNeight/MemoryFree.git
+
+[ModularServer]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ModularServer.git' 'ModularServer'
+	cd ModularServer
+	git remote add public https://github.com/janelia-arduino/ModularServer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ModularServer.git
+
+[StandardCplusplus]
+checkout =
+	git clone 'git@github.com:janelia-arduino/StandardCplusplus.git' 'StandardCplusplus'
+	cd StandardCplusplus
+	git remote add public https://github.com/janelia-arduino/StandardCplusplus.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/StandardCplusplus.git
+	git remote add source git@github.com:maniacbug/StandardCplusplus.git
+
+[TimerOne]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TimerOne.git' 'TimerOne'
+	cd TimerOne
+	git remote add public https://github.com/janelia-arduino/TimerOne.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TimerOne.git
+	git remote add source git@github.com:PaulStoffregen/TimerOne.git
+
+[TimerThree]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TimerThree.git' 'TimerThree'
+	cd TimerThree
+	git remote add public https://github.com/janelia-arduino/TimerThree.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TimerThree.git
+	git remote add source git@github.com:PaulStoffregen/TimerThree.git
+
+[Filters]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Filters.git' 'Filters'
+	cd Filters
+	git remote add public https://github.com/janelia-arduino/Filters.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Filters.git
+
+[Audio]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Audio.git' 'Audio'
+	cd Audio
+	git remote add public https://github.com/janelia-arduino/Audio.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Audio.git
+	git remote add source git@github.com:PaulStoffregen/Audio.git
+
+[SerialFlash]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SerialFlash.git' 'SerialFlash'
+	cd SerialFlash
+	git remote add public https://github.com/janelia-arduino/SerialFlash.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SerialFlash.git
+	git remote add source git@github.com:PaulStoffregen/SerialFlash.git
+
+[AD5666]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AD5666.git' 'AD5666'
+	cd AD5666
+	git remote add public https://github.com/janelia-arduino/AD5666.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AD5666.git
+
+[AD57X4R]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AD57X4R.git' 'AD57X4R'
+	cd AD57X4R
+	git remote add public https://github.com/janelia-arduino/AD57X4R.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AD57X4R.git
+
+[AD7328]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AD7328.git' 'AD7328'
+	cd AD7328
+	git remote add public https://github.com/janelia-arduino/AD7328.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AD7328.git
+
+[Array]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Array.git' 'Array'
+	cd Array
+	git remote add public https://github.com/janelia-arduino/Array.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Array.git
+
+[BCSIII]
+checkout =
+	git clone 'git@github.com:janelia-arduino/BCSIII.git' 'BCSIII'
+	cd BCSIII
+	git remote add public https://github.com/janelia-arduino/BCSIII.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/BCSIII.git
+
+[CS]
+checkout =
+	git clone 'git@github.com:janelia-arduino/CS.git' 'CS'
+	cd CS
+	git remote add public https://github.com/janelia-arduino/CS.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/CS.git
+
+[MCP23S17]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MCP23S17.git' 'MCP23S17'
+	cd MCP23S17
+	git remote add public https://github.com/janelia-arduino/MCP23S17.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MCP23S17.git
+
+[LCD2x16]
+checkout =
+	git clone 'git@github.com:janelia-arduino/LCD2x16.git' 'LCD2x16'
+	cd LCD2x16
+	git remote add public https://github.com/janelia-arduino/LCD2x16.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LCD2x16.git
+
+[BetterMap]
+checkout =
+	git clone 'git@github.com:janelia-arduino/BetterMap.git' 'BetterMap'
+	cd BetterMap
+	git remote add public https://github.com/janelia-arduino/BetterMap.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/BetterMap.git
+
+[ConstantVariable]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ConstantVariable.git' 'ConstantVariable'
+	cd ConstantVariable
+	git remote add public https://github.com/janelia-arduino/ConstantVariable.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ConstantVariable.git
+
+[Encoder]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Encoder.git' 'Encoder'
+	cd Encoder
+	git remote add public https://github.com/janelia-arduino/Encoder.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Encoder.git
+	git remote add source git@github.com:PaulStoffregen/Encoder.git
+
+[EventController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EventController.git' 'EventController'
+	cd EventController
+	git remote add public https://github.com/janelia-arduino/EventController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EventController.git
+
+[FilterSmooth]
+checkout =
+	git clone 'git@github.com:janelia-arduino/FilterSmooth.git' 'FilterSmooth'
+	cd FilterSmooth
+	git remote add public https://github.com/janelia-arduino/FilterSmooth.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FilterSmooth.git
+
+[GenericSerial]
+checkout =
+	git clone 'git@github.com:janelia-arduino/GenericSerial.git' 'GenericSerial'
+	cd GenericSerial
+	git remote add public https://github.com/janelia-arduino/GenericSerial.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/GenericSerial.git
+
+[IndexedContainer]
+checkout =
+	git clone 'git@github.com:janelia-arduino/IndexedContainer.git' 'IndexedContainer'
+	cd IndexedContainer
+	git remote add public https://github.com/janelia-arduino/IndexedContainer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/IndexedContainer.git
+
+[IndexedSet]
+checkout =
+	git clone 'git@github.com:janelia-arduino/IndexedSet.git' 'IndexedSet'
+	cd IndexedSet
+	git remote add public https://github.com/janelia-arduino/IndexedSet.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/IndexedSet.git
+
+[InputCapture]
+checkout =
+	git clone 'git@github.com:janelia-arduino/InputCapture.git' 'InputCapture'
+	cd InputCapture
+	git remote add public https://github.com/janelia-arduino/InputCapture.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/InputCapture.git
+
+[LinearSensorArray]
+checkout =
+	git clone 'git@github.com:janelia-arduino/LinearSensorArray.git' 'LinearSensorArray'
+	cd LinearSensorArray
+	git remote add public https://github.com/janelia-arduino/LinearSensorArray.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LinearSensorArray.git
+
+[NewhavenDisplay]
+checkout =
+	git clone 'git@github.com:janelia-arduino/NewhavenDisplay.git' 'NewhavenDisplay'
+	cd NewhavenDisplay
+	git remote add public https://github.com/janelia-arduino/NewhavenDisplay.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/NewhavenDisplay.git
+
+[TLE72X]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TLE72X.git' 'TLE72X'
+	cd TLE72X
+	git remote add public https://github.com/janelia-arduino/TLE72X.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TLE72X.git
+
+[SavedVariable]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SavedVariable.git' 'SavedVariable'
+	cd SavedVariable
+	git remote add public https://github.com/janelia-arduino/SavedVariable.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SavedVariable.git
+
+[Streaming]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Streaming.git' 'Streaming'
+	cd Streaming
+	git remote add public https://github.com/janelia-arduino/Streaming.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Streaming.git
+
+[Tlc5940]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Tlc5940.git' 'Tlc5940'
+	cd Tlc5940
+	git remote add public https://github.com/janelia-arduino/Tlc5940.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Tlc5940.git
+	git remote add source git@github.com:PaulStoffregen/Tlc5940.git
+
+[Watchdog]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Watchdog.git' 'Watchdog'
+	cd Watchdog
+	git remote add public https://github.com/janelia-arduino/Watchdog.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Watchdog.git
+
+[JsonStream]
+checkout =
+	git clone 'git@github.com:janelia-arduino/JsonStream.git' 'JsonStream'
+	cd JsonStream
+	git remote add public https://github.com/janelia-arduino/JsonStream.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/JsonStream.git
+
+[JsonSanitizer]
+checkout =
+	git clone 'git@github.com:janelia-arduino/JsonSanitizer.git' 'JsonSanitizer'
+	cd JsonSanitizer
+	git remote add public https://github.com/janelia-arduino/JsonSanitizer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/JsonSanitizer.git
+
+[ModularClient]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ModularClient.git' 'ModularClient'
+	cd ModularClient
+	git remote add public https://github.com/janelia-arduino/ModularClient.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ModularClient.git
+
+[jsmn]
+checkout =
+	git clone 'git@github.com:janelia-arduino/jsmn.git' 'jsmn'
+	cd jsmn
+	git remote add public https://github.com/janelia-arduino/jsmn.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/jsmn.git
+	git remote add source git@github.com:zserge/jsmn.git
+
+[Vector]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Vector.git' 'Vector'
+	cd Vector
+	git remote add public https://github.com/janelia-arduino/Vector.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Vector.git
+
+[JsmnStream]
+checkout =
+	git clone 'git@github.com:janelia-arduino/JsmnStream.git' 'JsmnStream'
+	cd JsmnStream
+	git remote add public https://github.com/janelia-arduino/JsmnStream.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/JsmnStream.git
+
+[EncoderPlus]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EncoderPlus.git' 'EncoderPlus'
+	cd EncoderPlus
+	git remote add public https://github.com/janelia-arduino/EncoderPlus.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EncoderPlus.git
+	git remote add source git@github.com:PaulStoffregen/Encoder.git
+
+[NHD-1.69-160128ASC3_Example]
+checkout =
+	git clone 'git@github.com:janelia-arduino/NHD-1.69-160128ASC3_Example.git' 'NHD-1.69-160128ASC3_Example'
+	cd NHD-1.69-160128ASC3_Example
+	git remote add public https://github.com/janelia-arduino/NHD-1.69-160128ASC3_Example.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/NHD-1.69-160128ASC3_Example.git
+
+[SerialReceiver]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SerialReceiver.git' 'SerialReceiver'
+	cd SerialReceiver
+	git remote add public https://github.com/janelia-arduino/SerialReceiver.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SerialReceiver.git
+
+[Adafruit-PWM-Servo-Driver-Library]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Adafruit-PWM-Servo-Driver-Library.git' 'Adafruit-PWM-Servo-Driver-Library'
+	cd Adafruit-PWM-Servo-Driver-Library
+	git remote add public https://github.com/janelia-arduino/Adafruit-PWM-Servo-Driver-Library.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Adafruit-PWM-Servo-Driver-Library.git
+	git remote add source git@github.com:adafruit/Adafruit-PWM-Servo-Driver-Library.git
+
+[Firmata]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Firmata.git' 'Firmata'
+	cd Firmata
+	git remote add public https://github.com/janelia-arduino/Firmata.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Firmata.git
+	git remote add source git@github.com:firmata/arduino.git
+
+[SD]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SD.git' 'SD'
+	cd SD
+	git remote add public https://github.com/janelia-arduino/SD.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SD.git
+	git remote add source git@github.com:arduino-libraries/SD.git
+
+[SPI]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SPI.git' 'SPI'
+	cd SPI
+	git remote add public https://github.com/janelia-arduino/SPI.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SPI.git
+	git remote add source git@github.com:PaulStoffregen/SPI.git
+
+[Functor]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Functor.git' 'Functor'
+	cd Functor
+	git remote add public https://github.com/janelia-arduino/Functor.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Functor.git
+
+[ConcatenatedArray]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ConcatenatedArray.git' 'ConcatenatedArray'
+	cd ConcatenatedArray
+	git remote add public https://github.com/janelia-arduino/ConcatenatedArray.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ConcatenatedArray.git
+
+[ModularDeviceBase]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ModularDeviceBase.git' 'ModularDeviceBase'
+	cd ModularDeviceBase
+	git remote add public https://github.com/janelia-arduino/ModularDeviceBase.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ModularDeviceBase.git
+
+[HBridgeController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/HBridgeController.git' 'HBridgeController'
+	cd HBridgeController
+	git remote add public https://github.com/janelia-arduino/HBridgeController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HBridgeController.git
+
+[RungWheelController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/RungWheelController.git' 'RungWheelController'
+	cd RungWheelController
+	git remote add public https://github.com/janelia-arduino/RungWheelController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/RungWheelController.git
+
+[FunctorCallbacks]
+checkout =
+	git clone 'git@github.com:janelia-arduino/FunctorCallbacks.git' 'FunctorCallbacks'
+	cd FunctorCallbacks
+	git remote add public https://github.com/janelia-arduino/FunctorCallbacks.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FunctorCallbacks.git
+
+[AudioController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AudioController.git' 'AudioController'
+	cd AudioController
+	git remote add public https://github.com/janelia-arduino/AudioController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AudioController.git
+
+[StepDirController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/StepDirController.git' 'StepDirController'
+	cd StepDirController
+	git remote add public https://github.com/janelia-arduino/StepDirController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/StepDirController.git
+
+[PowerSwitchController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/PowerSwitchController.git' 'PowerSwitchController'
+	cd PowerSwitchController
+	git remote add public https://github.com/janelia-arduino/PowerSwitchController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PowerSwitchController.git
+
+[AuditoryStimulator]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AuditoryStimulator.git' 'AuditoryStimulator'
+	cd AuditoryStimulator
+	git remote add public https://github.com/janelia-arduino/AuditoryStimulator.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AuditoryStimulator.git
+
+[AccelStepper]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AccelStepper.git' 'AccelStepper'
+	cd AccelStepper
+	git remote add public https://github.com/janelia-arduino/AccelStepper.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AccelStepper.git
+
+[TMC429]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TMC429.git' 'TMC429'
+	cd TMC429
+	git remote add public https://github.com/janelia-arduino/TMC429.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TMC429.git
+
+[TMC26X]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TMC26X.git' 'TMC26X'
+	cd TMC26X
+	git remote add public https://github.com/janelia-arduino/TMC26X.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TMC26X.git
+
+[StepperController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/StepperController.git' 'StepperController'
+	cd StepperController
+	git remote add public https://github.com/janelia-arduino/StepperController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/StepperController.git
+
+[PelletDispenser]
+checkout =
+	git clone 'git@github.com:janelia-arduino/PelletDispenser.git' 'PelletDispenser'
+	cd PelletDispenser
+	git remote add public https://github.com/janelia-arduino/PelletDispenser.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PelletDispenser.git
+
+[StageController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/StageController.git' 'StageController'
+	cd StageController
+	git remote add public https://github.com/janelia-arduino/StageController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/StageController.git
+
+[HighPowerSwitchController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/HighPowerSwitchController.git' 'HighPowerSwitchController'
+	cd HighPowerSwitchController
+	git remote add public https://github.com/janelia-arduino/HighPowerSwitchController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HighPowerSwitchController.git
+
+[SleepAssayController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SleepAssayController.git' 'SleepAssayController'
+	cd SleepAssayController
+	git remote add public https://github.com/janelia-arduino/SleepAssayController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SleepAssayController.git
+
+[Time]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Time.git' 'Time'
+	cd Time
+	git remote add public https://github.com/janelia-arduino/Time.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Time.git
+	git remote add source git@github.com:PaulStoffregen/Time.git
+
+[Ethernet]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Ethernet.git' 'Ethernet'
+	cd Ethernet
+	git remote add public https://github.com/janelia-arduino/Ethernet.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Ethernet.git
+	git remote add source git@github.com:PaulStoffregen/Ethernet.git
+
+[Temboo]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Temboo.git' 'Temboo'
+	cd Temboo
+	git remote add public https://github.com/janelia-arduino/Temboo.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Temboo.git
+	git remote add source git@github.com:arduino-libraries/Temboo.git
+
+[EncoderFunctors]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EncoderFunctors.git' 'EncoderFunctors'
+	cd EncoderFunctors
+	git remote add public https://github.com/janelia-arduino/EncoderFunctors.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EncoderFunctors.git
+
+[EncoderInterfaceSimple]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EncoderInterfaceSimple.git' 'EncoderInterfaceSimple'
+	cd EncoderInterfaceSimple
+	git remote add public https://github.com/janelia-arduino/EncoderInterfaceSimple.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EncoderInterfaceSimple.git
+
+[OpticalSwitchInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/OpticalSwitchInterface.git' 'OpticalSwitchInterface'
+	cd OpticalSwitchInterface
+	git remote add public https://github.com/janelia-arduino/OpticalSwitchInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/OpticalSwitchInterface.git
+
+[LedController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/LedController.git' 'LedController'
+	cd LedController
+	git remote add public https://github.com/janelia-arduino/LedController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LedController.git
+
+[MixingValveController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MixingValveController.git' 'MixingValveController'
+	cd MixingValveController
+	git remote add public https://github.com/janelia-arduino/MixingValveController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MixingValveController.git
+
+[TMC2130]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TMC2130.git' 'TMC2130'
+	cd TMC2130
+	git remote add public https://github.com/janelia-arduino/TMC2130.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TMC2130.git
+
+[MouseJoystickController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MouseJoystickController.git' 'MouseJoystickController'
+	cd MouseJoystickController
+	git remote add public https://github.com/janelia-arduino/MouseJoystickController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MouseJoystickController.git
+
+[Gaussian]
+checkout =
+	git clone 'git@github.com:janelia-arduino/Gaussian.git' 'Gaussian'
+	cd Gaussian
+	git remote add public https://github.com/janelia-arduino/Gaussian.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/Gaussian.git
+	git remote add source git@github.com:ivanseidel/Gaussian.git
+
+[SerialInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SerialInterface.git' 'SerialInterface'
+	cd SerialInterface
+	git remote add public https://github.com/janelia-arduino/SerialInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SerialInterface.git
+
+[WireInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/WireInterface.git' 'WireInterface'
+	cd WireInterface
+	git remote add public https://github.com/janelia-arduino/WireInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/WireInterface.git
+
+[ModularDeviceTemplate]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ModularDeviceTemplate.git' 'ModularDeviceTemplate'
+	cd ModularDeviceTemplate
+	git remote add public https://github.com/janelia-arduino/ModularDeviceTemplate.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ModularDeviceTemplate.git
+
+[SpinningPlatformController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SpinningPlatformController.git' 'SpinningPlatformController'
+	cd SpinningPlatformController
+	git remote add public https://github.com/janelia-arduino/SpinningPlatformController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SpinningPlatformController.git
+
+[GradientController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/GradientController.git' 'GradientController'
+	cd GradientController
+	git remote add public https://github.com/janelia-arduino/GradientController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/GradientController.git
+
+[PulseController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/PulseController.git' 'PulseController'
+	cd PulseController
+	git remote add public https://github.com/janelia-arduino/PulseController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PulseController.git
+
+[MPR121]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MPR121.git' 'MPR121'
+	cd MPR121
+	git remote add public https://github.com/janelia-arduino/MPR121.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MPR121.git
+
+[ZebrafishTrackerController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ZebrafishTrackerController.git' 'ZebrafishTrackerController'
+	cd ZebrafishTrackerController
+	git remote add public https://github.com/janelia-arduino/ZebrafishTrackerController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ZebrafishTrackerController.git
+
+[UltravioletDetectorInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/UltravioletDetectorInterface.git' 'UltravioletDetectorInterface'
+	cd UltravioletDetectorInterface
+	git remote add public https://github.com/janelia-arduino/UltravioletDetectorInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/UltravioletDetectorInterface.git
+
+[LavisController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/LavisController.git' 'LavisController'
+	cd LavisController
+	git remote add public https://github.com/janelia-arduino/LavisController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LavisController.git
+
+[SoundTransmitter]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SoundTransmitter.git' 'SoundTransmitter'
+	cd SoundTransmitter
+	git remote add public https://github.com/janelia-arduino/SoundTransmitter.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SoundTransmitter.git
+
+[HeadFixationController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/HeadFixationController.git' 'HeadFixationController'
+	cd HeadFixationController
+	git remote add public https://github.com/janelia-arduino/HeadFixationController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HeadFixationController.git
+
+[OdorNozzleController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/OdorNozzleController.git' 'OdorNozzleController'
+	cd OdorNozzleController
+	git remote add public https://github.com/janelia-arduino/OdorNozzleController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/OdorNozzleController.git
+
+[BacklightController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/BacklightController.git' 'BacklightController'
+	cd BacklightController
+	git remote add public https://github.com/janelia-arduino/BacklightController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/BacklightController.git
+
+[EthoscopeStepperController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EthoscopeStepperController.git' 'EthoscopeStepperController'
+	cd EthoscopeStepperController
+	git remote add public https://github.com/janelia-arduino/EthoscopeStepperController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EthoscopeStepperController.git
+
+[AnalogController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AnalogController.git' 'AnalogController'
+	cd AnalogController
+	git remote add public https://github.com/janelia-arduino/AnalogController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AnalogController.git
+
+[HplcController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/HplcController.git' 'HplcController'
+	cd HplcController
+	git remote add public https://github.com/janelia-arduino/HplcController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/HplcController.git
+
+[DigitalController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/DigitalController.git' 'DigitalController'
+	cd DigitalController
+	git remote add public https://github.com/janelia-arduino/DigitalController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/DigitalController.git
+
+[FlyBowlController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/FlyBowlController.git' 'FlyBowlController'
+	cd FlyBowlController
+	git remote add public https://github.com/janelia-arduino/FlyBowlController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FlyBowlController.git
+
+[PumpInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/PumpInterface.git' 'PumpInterface'
+	cd PumpInterface
+	git remote add public https://github.com/janelia-arduino/PumpInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PumpInterface.git
+
+[PCA9685]
+checkout =
+	git clone 'git@github.com:janelia-arduino/PCA9685.git' 'PCA9685'
+	cd PCA9685
+	git remote add public https://github.com/janelia-arduino/PCA9685.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/PCA9685.git
+
+[ServoController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/ServoController.git' 'ServoController'
+	cd ServoController
+	git remote add public https://github.com/janelia-arduino/ServoController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ServoController.git
+
+[OlfactoryArenaController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/OlfactoryArenaController.git' 'OlfactoryArenaController'
+	cd OlfactoryArenaController
+	git remote add public https://github.com/janelia-arduino/OlfactoryArenaController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/OlfactoryArenaController.git
+
+[TouchInterface]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TouchInterface.git' 'TouchInterface'
+	cd TouchInterface
+	git remote add public https://github.com/janelia-arduino/TouchInterface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TouchInterface.git
+
+[qpn-arduino]
+checkout =
+	git clone 'git@github.com:janelia-arduino/qpn-arduino.git' 'qpn-arduino'
+	cd qpn-arduino
+	git remote add public https://github.com/janelia-arduino/qpn-arduino.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/qpn-arduino.git
+	git remote add source git@github.com:QuantumLeaps/qpn-arduino.git
+
+[AS5048]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AS5048.git' 'AS5048'
+	cd AS5048
+	git remote add public https://github.com/janelia-arduino/AS5048.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AS5048.git
+
+[EncoderInterfaceMagnetic]
+checkout =
+	git clone 'git@github.com:janelia-arduino/EncoderInterfaceMagnetic.git' 'EncoderInterfaceMagnetic'
+	cd EncoderInterfaceMagnetic
+	git remote add public https://github.com/janelia-arduino/EncoderInterfaceMagnetic.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/EncoderInterfaceMagnetic.git
+
+[FieldStimulationController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/FieldStimulationController.git' 'FieldStimulationController'
+	cd FieldStimulationController
+	git remote add public https://github.com/janelia-arduino/FieldStimulationController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FieldStimulationController.git
+
+[YArenaOdorController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/YArenaOdorController.git' 'YArenaOdorController'
+	cd YArenaOdorController
+	git remote add public https://github.com/janelia-arduino/YArenaOdorController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/YArenaOdorController.git
+
+[WatchdogTeensy4]
+checkout =
+	git clone 'git@github.com:janelia-arduino/WatchdogTeensy4.git' 'WatchdogTeensy4'
+	cd WatchdogTeensy4
+	git remote add public https://github.com/janelia-arduino/WatchdogTeensy4.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/WatchdogTeensy4.git
+	git remote add source git@github.com:tonton81/WDT_T4.git
+
+[FreeRTOS-Teensy4]
+checkout =
+	git clone 'git@github.com:janelia-arduino/FreeRTOS-Teensy4.git' 'FreeRTOS-Teensy4'
+	cd FreeRTOS-Teensy4
+	git remote add public https://github.com/janelia-arduino/FreeRTOS-Teensy4.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FreeRTOS-Teensy4.git
+	git remote add source git@github.com:discord-intech/FreeRTOS-Teensy4.git

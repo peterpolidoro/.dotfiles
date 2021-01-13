@@ -1,0 +1,45 @@
+[angular2-quickstart]
+checkout = 
+	git clone 'git@github.com:janelia-npm/angular2-quickstart.git' 'angular2-quickstart'
+	cd angular2-quickstart
+	git remote add public https://github.com/janelia-npm/angular2-quickstart.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/angular2-quickstart.git
+
+[angular2-tour-of-heroes]
+checkout = 
+	git clone 'git@github.com:janelia-npm/angular2-tour-of-heroes.git' 'angular2-tour-of-heroes'
+	cd angular2-tour-of-heroes
+	git remote add public https://github.com/janelia-npm/angular2-tour-of-heroes.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/angular2-tour-of-heroes.git
+	git remote add source git@github.com:johnpapa/angular2-tour-of-heroes.git
+
+[lavis-gui]
+checkout = 
+	git clone 'git@github.com:janelia-npm/lavis-gui.git' 'lavis-gui'
+	cd lavis-gui
+	git remote add public https://github.com/janelia-npm/lavis-gui.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lavis-gui.git
+
+[roslibjs]
+checkout = 
+	git clone 'git@github.com:janelia-npm/roslibjs.git' 'roslibjs'
+	cd roslibjs
+	git remote add public https://github.com/janelia-npm/roslibjs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/roslibjs.git
+	git remote add source git@github.com:RobotWebTools/roslibjs.git
+
+[starting-with-angular2]
+checkout = 
+	git clone 'git@github.com:janelia-npm/starting-with-angular2.git' 'starting-with-angular2'
+	cd starting-with-angular2
+	git remote add public https://github.com/janelia-npm/starting-with-angular2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/starting-with-angular2.git
+	git remote add source git@github.com:AlohaCode/StartingWithAngular2-CompletedProject.git
+
+[ng2-bootstrap]
+checkout = 
+	git clone 'git@github.com:janelia-npm/ng2-bootstrap.git' 'ng2-bootstrap'
+	cd ng2-bootstrap
+	git remote add public https://github.com/janelia-npm/ng2-bootstrap.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ng2-bootstrap.git
+	git remote add source git@github.com:valor-software/ng2-bootstrap.git

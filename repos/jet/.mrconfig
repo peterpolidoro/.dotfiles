@@ -1,0 +1,100 @@
+[git_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/git_setup.git' 'git_setup'
+	cd git_setup
+	git remote add public https://github.com/janelia-experimental-technology/git_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/git_setup.git
+
+[ZebrafishTracker]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/ZebrafishTracker.git' 'ZebrafishTracker'
+	cd ZebrafishTracker
+	git remote add public https://github.com/janelia-experimental-technology/ZebrafishTracker.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ZebrafishTracker.git
+
+[ZebrafishTrackerConfiguration]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/ZebrafishTrackerConfiguration.git' 'ZebrafishTrackerConfiguration'
+	cd ZebrafishTrackerConfiguration
+	git remote add public https://github.com/janelia-experimental-technology/ZebrafishTrackerConfiguration.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ZebrafishTrackerConfiguration.git
+
+[linear_motor_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/linear_motor_setup.git' 'linear_motor_setup'
+	cd linear_motor_setup
+	git remote add public https://github.com/janelia-experimental-technology/linear_motor_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/linear_motor_setup.git
+
+[hplc_instrument]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/hplc_instrument.git' 'hplc_instrument'
+	cd hplc_instrument
+	git remote add public https://github.com/janelia-experimental-technology/hplc_instrument.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hplc_instrument.git
+
+[phidgets_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/phidgets_setup.git' 'phidgets_setup'
+	cd phidgets_setup
+	git remote add public https://github.com/janelia-experimental-technology/phidgets_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/phidgets_setup.git
+
+[FG_Test]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/FG_Test.git' 'FG_Test'
+	cd FG_Test
+	git remote add public https://github.com/janelia-experimental-technology/FG_Test.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FG_Test.git
+	git remote add source git@github.com:cculianu/FG_Test.git
+
+[ethoscope]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/ethoscope.git' 'ethoscope'
+	cd ethoscope
+	git remote add public https://github.com/janelia-experimental-technology/ethoscope.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ethoscope.git
+	git remote add source git@github.com:JaneliaSciComp/ethoscope.git
+
+[smart_cage]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/smart_cage.git' 'smart_cage'
+	cd smart_cage
+	git remote add public https://github.com/janelia-experimental-technology/smart_cage.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/smart_cage.git
+
+[micro-manager]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/micro-manager.git' 'micro-manager'
+	cd micro-manager
+	git remote add public https://github.com/janelia-experimental-technology/micro-manager.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/micro-manager.git
+	git remote add source git@github.com:micro-manager/micro-manager.git
+
+[hybridizer]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/hybridizer.git' 'hybridizer'
+	cd hybridizer
+	git remote add public https://github.com/janelia-experimental-technology/hybridizer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hybridizer.git
+
+[raspberrypi_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/raspberrypi_setup.git' 'raspberrypi_setup'
+	cd raspberrypi_setup
+	git remote add public https://github.com/janelia-experimental-technology/raspberrypi_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/raspberrypi_setup.git
+
+[docker_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/docker_setup.git' 'docker_setup'
+	cd docker_setup
+	git remote add public https://github.com/janelia-experimental-technology/docker_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/docker_setup.git
+
+[y-arena]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/y-arena.git' 'y-arena'
+	cd y-arena
+	git remote add public https://github.com/janelia-experimental-technology/y-arena.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/y-arena.git

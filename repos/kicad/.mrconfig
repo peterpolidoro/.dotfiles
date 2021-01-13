@@ -1,0 +1,337 @@
+[kicad-libraries]
+checkout =
+	git clone 'git@github.com:janelia-kicad/kicad-libraries.git' 'kicad-libraries'
+	cd kicad-libraries
+	git remote add public https://github.com/janelia-kicad/kicad-libraries.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/kicad-libraries.git
+
+[digikey-kicad-library]
+checkout =
+	git clone 'git@github.com:janelia-kicad/digikey-kicad-library.git' 'digikey-kicad-library'
+	cd digikey-kicad-library
+	git remote add public https://github.com/janelia-kicad/digikey-kicad-library.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/digikey-kicad-library.git
+	git remote add source git@github.com:digikey/digikey-kicad-library.git
+
+[generate_kicad_documentation]
+checkout =
+	git clone 'git@github.com:janelia-kicad/generate_kicad_documentation.git' 'generate_kicad_documentation'
+	cd generate_kicad_documentation
+	git remote add public https://github.com/janelia-kicad/generate_kicad_documentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/generate_kicad_documentation.git
+
+[FreeRouting]
+checkout =
+	git clone 'git@github.com:janelia-kicad/FreeRouting.git' 'FreeRouting'
+	cd FreeRouting
+	git remote add public https://github.com/janelia-kicad/FreeRouting.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FreeRouting.git
+
+[mezzanine-community]
+checkout =
+	git clone 'git@github.com:janelia-kicad/mezzanine-community.git' 'mezzanine-community'
+	cd mezzanine-community
+	git remote add public https://github.com/janelia-kicad/mezzanine-community.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mezzanine-community.git
+	git remote add source git@github.com:96boards/mezzanine-community.git
+
+[filter42]
+checkout =
+	git clone 'git@github.com:janelia-kicad/filter42.git' 'filter42'
+	cd filter42
+	git remote add public https://github.com/janelia-kicad/filter42.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/filter42.git
+
+[template_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/template_5x3.git' 'template_5x3'
+	cd template_5x3
+	git remote add public https://github.com/janelia-kicad/template_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/template_5x3.git
+
+[template_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/template_3x2.git' 'template_3x2'
+	cd template_3x2
+	git remote add public https://github.com/janelia-kicad/template_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/template_3x2.git
+
+[modular_device_base_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/modular_device_base_5x3.git' 'modular_device_base_5x3'
+	cd modular_device_base_5x3
+	git remote add public https://github.com/janelia-kicad/modular_device_base_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_base_5x3.git
+
+[modular_device_base_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/modular_device_base_3x2.git' 'modular_device_base_3x2'
+	cd modular_device_base_3x2
+	git remote add public https://github.com/janelia-kicad/modular_device_base_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_base_3x2.git
+
+[relay_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/relay_controller_5x3.git' 'relay_controller_5x3'
+	cd relay_controller_5x3
+	git remote add public https://github.com/janelia-kicad/relay_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/relay_controller_5x3.git
+
+[relay_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/relay_controller_3x2.git' 'relay_controller_3x2'
+	cd relay_controller_3x2
+	git remote add public https://github.com/janelia-kicad/relay_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/relay_controller_3x2.git
+
+[h_bridge_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/h_bridge_controller_5x3.git' 'h_bridge_controller_5x3'
+	cd h_bridge_controller_5x3
+	git remote add public https://github.com/janelia-kicad/h_bridge_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/h_bridge_controller_5x3.git
+
+[h_bridge_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/h_bridge_controller_3x2.git' 'h_bridge_controller_3x2'
+	cd h_bridge_controller_3x2
+	git remote add public https://github.com/janelia-kicad/h_bridge_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/h_bridge_controller_3x2.git
+
+[high_power_switch_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/high_power_switch_controller_5x3.git' 'high_power_switch_controller_5x3'
+	cd high_power_switch_controller_5x3
+	git remote add public https://github.com/janelia-kicad/high_power_switch_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/high_power_switch_controller_5x3.git
+
+[high_power_switch_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/high_power_switch_controller_3x2.git' 'high_power_switch_controller_3x2'
+	cd high_power_switch_controller_3x2
+	git remote add public https://github.com/janelia-kicad/high_power_switch_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/high_power_switch_controller_3x2.git
+
+[optical_switch_interface_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/optical_switch_interface_5x3.git' 'optical_switch_interface_5x3'
+	cd optical_switch_interface_5x3
+	git remote add public https://github.com/janelia-kicad/optical_switch_interface_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/optical_switch_interface_5x3.git
+
+[optical_switch_interface_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/optical_switch_interface_3x2.git' 'optical_switch_interface_3x2'
+	cd optical_switch_interface_3x2
+	git remote add public https://github.com/janelia-kicad/optical_switch_interface_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/optical_switch_interface_3x2.git
+
+[encoder_interface_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/encoder_interface_5x3.git' 'encoder_interface_5x3'
+	cd encoder_interface_5x3
+	git remote add public https://github.com/janelia-kicad/encoder_interface_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/encoder_interface_5x3.git
+
+[encoder_interface_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/encoder_interface_3x2.git' 'encoder_interface_3x2'
+	cd encoder_interface_3x2
+	git remote add public https://github.com/janelia-kicad/encoder_interface_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/encoder_interface_3x2.git
+
+[encoder_interface_simple_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/encoder_interface_simple_3x2.git' 'encoder_interface_simple_3x2'
+	cd encoder_interface_simple_3x2
+	git remote add public https://github.com/janelia-kicad/encoder_interface_simple_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/encoder_interface_simple_3x2.git
+
+[audio_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/audio_controller_5x3.git' 'audio_controller_5x3'
+	cd audio_controller_5x3
+	git remote add public https://github.com/janelia-kicad/audio_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/audio_controller_5x3.git
+
+[audio_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/audio_controller_3x2.git' 'audio_controller_3x2'
+	cd audio_controller_3x2
+	git remote add public https://github.com/janelia-kicad/audio_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/audio_controller_3x2.git
+
+[step_dir_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/step_dir_controller_5x3.git' 'step_dir_controller_5x3'
+	cd step_dir_controller_5x3
+	git remote add public https://github.com/janelia-kicad/step_dir_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/step_dir_controller_5x3.git
+
+[step_dir_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/step_dir_controller_3x2.git' 'step_dir_controller_3x2'
+	cd step_dir_controller_3x2
+	git remote add public https://github.com/janelia-kicad/step_dir_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/step_dir_controller_3x2.git
+
+[stepper_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/stepper_controller_5x3.git' 'stepper_controller_5x3'
+	cd stepper_controller_5x3
+	git remote add public https://github.com/janelia-kicad/stepper_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stepper_controller_5x3.git
+
+[stepper_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/stepper_controller_3x2.git' 'stepper_controller_3x2'
+	cd stepper_controller_3x2
+	git remote add public https://github.com/janelia-kicad/stepper_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stepper_controller_3x2.git
+
+[power_switch_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/power_switch_controller_5x3.git' 'power_switch_controller_5x3'
+	cd power_switch_controller_5x3
+	git remote add public https://github.com/janelia-kicad/power_switch_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/power_switch_controller_5x3.git
+
+[power_switch_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/power_switch_controller_3x2.git' 'power_switch_controller_3x2'
+	cd power_switch_controller_3x2
+	git remote add public https://github.com/janelia-kicad/power_switch_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/power_switch_controller_3x2.git
+
+[valve_boards]
+checkout =
+	git clone 'git@github.com:janelia-kicad/valve_boards.git' 'valve_boards'
+	cd valve_boards
+	git remote add public https://github.com/janelia-kicad/valve_boards.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/valve_boards.git
+
+[rs232_interface_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/rs232_interface_3x2.git' 'rs232_interface_3x2'
+	cd rs232_interface_3x2
+	git remote add public https://github.com/janelia-kicad/rs232_interface_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rs232_interface_3x2.git
+
+[i2c_interface_terminator]
+checkout =
+	git clone 'git@github.com:janelia-kicad/i2c_interface_terminator.git' 'i2c_interface_terminator'
+	cd i2c_interface_terminator
+	git remote add public https://github.com/janelia-kicad/i2c_interface_terminator.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/i2c_interface_terminator.git
+
+[i2c_interface_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/i2c_interface_3x2.git' 'i2c_interface_3x2'
+	cd i2c_interface_3x2
+	git remote add public https://github.com/janelia-kicad/i2c_interface_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/i2c_interface_3x2.git
+
+[i2c_interface_mpr121]
+checkout =
+	git clone 'git@github.com:janelia-kicad/i2c_interface_mpr121.git' 'i2c_interface_mpr121'
+	cd i2c_interface_mpr121
+	git remote add public https://github.com/janelia-kicad/i2c_interface_mpr121.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/i2c_interface_mpr121.git
+
+[light_sensor_boards]
+checkout =
+	git clone 'git@github.com:janelia-kicad/light_sensor_boards.git' 'light_sensor_boards'
+	cd light_sensor_boards
+	git remote add public https://github.com/janelia-kicad/light_sensor_boards.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/light_sensor_boards.git
+
+[modular_device_remote_switch]
+checkout =
+	git clone 'git@github.com:janelia-kicad/modular_device_remote_switch.git' 'modular_device_remote_switch'
+	cd modular_device_remote_switch
+	git remote add public https://github.com/janelia-kicad/modular_device_remote_switch.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_device_remote_switch.git
+
+[backlight_controller_5x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/backlight_controller_5x3.git' 'backlight_controller_5x3'
+	cd backlight_controller_5x3
+	git remote add public https://github.com/janelia-kicad/backlight_controller_5x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/backlight_controller_5x3.git
+
+[backlight_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/backlight_controller_3x2.git' 'backlight_controller_3x2'
+	cd backlight_controller_3x2
+	git remote add public https://github.com/janelia-kicad/backlight_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/backlight_controller_3x2.git
+
+[backlight_controller_6x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/backlight_controller_6x3.git' 'backlight_controller_6x3'
+	cd backlight_controller_6x3
+	git remote add public https://github.com/janelia-kicad/backlight_controller_6x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/backlight_controller_6x3.git
+
+[ethoscope_stepper_controller_3x3]
+checkout =
+	git clone 'git@github.com:janelia-kicad/ethoscope_stepper_controller_3x3.git' 'ethoscope_stepper_controller_3x3'
+	cd ethoscope_stepper_controller_3x3
+	git remote add public https://github.com/janelia-kicad/ethoscope_stepper_controller_3x3.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ethoscope_stepper_controller_3x3.git
+
+[dac_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/dac_controller_3x2.git' 'dac_controller_3x2'
+	cd dac_controller_3x2
+	git remote add public https://github.com/janelia-kicad/dac_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/dac_controller_3x2.git
+
+[fly_bowl_wiring]
+checkout =
+	git clone 'git@github.com:janelia-kicad/fly_bowl_wiring.git' 'fly_bowl_wiring'
+	cd fly_bowl_wiring
+	git remote add public https://github.com/janelia-kicad/fly_bowl_wiring.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/fly_bowl_wiring.git
+
+[sleep_assay_wiring]
+checkout =
+	git clone 'git@github.com:janelia-kicad/sleep_assay_wiring.git' 'sleep_assay_wiring'
+	cd sleep_assay_wiring
+	git remote add public https://github.com/janelia-kicad/sleep_assay_wiring.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/sleep_assay_wiring.git
+
+[servo_controller_3x2]
+checkout =
+	git clone 'git@github.com:janelia-kicad/servo_controller_3x2.git' 'servo_controller_3x2'
+	cd servo_controller_3x2
+	git remote add public https://github.com/janelia-kicad/servo_controller_3x2.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/servo_controller_3x2.git
+
+[smart_cage_wiring]
+checkout =
+	git clone 'git@github.com:janelia-kicad/smart_cage_wiring.git' 'smart_cage_wiring'
+	cd smart_cage_wiring
+	git remote add public https://github.com/janelia-kicad/smart_cage_wiring.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/smart_cage_wiring.git
+
+[power_switch_controller_pi]
+checkout =
+	git clone 'git@github.com:janelia-kicad/power_switch_controller_pi.git' 'power_switch_controller_pi'
+	cd power_switch_controller_pi
+	git remote add public https://github.com/janelia-kicad/power_switch_controller_pi.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/power_switch_controller_pi.git
+
+[y_arena_odor_controller]
+checkout =
+	git clone 'git@github.com:janelia-kicad/y_arena_odor_controller.git' 'y_arena_odor_controller'
+	cd y_arena_odor_controller
+	git remote add public https://github.com/janelia-kicad/y_arena_odor_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/y_arena_odor_controller.git
+
+[pellet_dispenser_controller]
+checkout =
+	git clone 'git@github.com:janelia-kicad/pellet_dispenser_controller.git' 'pellet_dispenser_controller'
+	cd pellet_dispenser_controller
+	git remote add public https://github.com/janelia-kicad/pellet_dispenser_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pellet_dispenser_controller.git
