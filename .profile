@@ -16,11 +16,6 @@ for i in $GUIX_EXTRA_PROFILES/*; do
   unset profile
 done
 
-if [ -n "$GUIX_ENVIRONMENT" ]
-then
-    export PS1="\u@\h \w [ENV]\$ "
-fi
-
 # Don't use the system-wide PulseAudio configuration
 # unset PULSE_CONFIG
 # unset PULSE_CLIENTCONFIG
