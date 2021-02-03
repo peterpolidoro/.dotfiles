@@ -6,15 +6,20 @@ GUIX_PROFILE="$HOME/.guix-profile"
 . "$GUIX_PROFILE"/etc/profile
 
 # Load additional Guix profiles
-# GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-# for i in $GUIX_EXTRA_PROFILES/*; do
-#   profile=$i/$(basename "$i")
-#   if [ -f "$profile"/etc/profile ]; then
-#     GUIX_PROFILE="$profile"
-#     . "$GUIX_PROFILE"/etc/profile
-#   fi
-#   unset profile
-# done
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+for i in $GUIX_EXTRA_PROFILES/*; do
+  profile=$i/$(basename "$i")
+  if [ -f "$profile"/etc/profile ]; then
+    GUIX_PROFILE="$profile"
+    . "$GUIX_PROFILE"/etc/profile
+  fi
+  unset profile
+done
+
+if [ -n "$GUIX_ENVIRONMENT" ]
+then
+    export PS1="\u@\h \w [ENV]\$ "
+fi
 
 # Don't use the system-wide PulseAudio configuration
 # unset PULSE_CONFIG
@@ -67,4 +72,10 @@ export CC="gcc"
 # }
 
 # Load .bashrc to get login environment
+
+# guix install nss-certs
+export SSL_CERT_DIR="$HOME/.guix-profile/etc/ssl/certs"
+export SSL_CERT_FILE="$HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt"
+export GIT_SSL_CAINFO="$SSL_CERT_FILE"
+
 [ -f ~/.bashrc ] && . ~/.bashrc
