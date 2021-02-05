@@ -28,6 +28,8 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/ArduinoJson.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/ArduinoJson.git
 	git remote add source git@github.com:bblanchon/ArduinoJson.git
+	git fetch --all
+	git checkout --track origin/6.x
 
 [StandaloneInterface]
 checkout =

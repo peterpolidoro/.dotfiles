@@ -66,11 +66,10 @@ export CC="gcc"
 #     fi
 # }
 
-# Load .bashrc to get login environment
-
 # guix install nss-certs
 export SSL_CERT_DIR="$HOME/.guix-profile/etc/ssl/certs"
 export SSL_CERT_FILE="$HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt"
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 
+# Load .bashrc to get login environment
 [ -f ~/.bashrc ] && . ~/.bashrc

@@ -72,12 +72,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Adjust the prompt depending on whether we're in 'guix environment'.
-if [ -n "$GUIX_ENVIRONMENT" ]
-then
-    export PS1='[env]\u@\h \w\$ '
-fi
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -121,3 +115,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Adjust the prompt depending on whether we're in 'guix environment'.
+if [ -n "$GUIX_ENVIRONMENT" ]
+then
+    export PS1='[env]\u@\h \w\$ '
+fi
+
+# Load .bashrc-local to get local login environment
+[ -f ~/.bashrc-local ] && . ~/.bashrc-local
