@@ -102,6 +102,20 @@ allows me to set up symlinks for all of my dotfiles using the commands:
 	Instructions for installing a system from a Guix configuration can be found in
 	the [[file:Systems.org::*System Installation][System Installation]] section of [[file:Systems.org][Systems.org]].
 
+* Password Management
+
+#+BEGIN_SRC sh
+
+	guix install gnupg password-store
+	gpg --generate-key
+	gpg --list-key
+	gpg --export-secret-keys --armor <fingerprint> > privkey.asc
+	gpg --export --armor <fingerprint> > pubkey.asc
+	pass init <fingerprint>
+	pass git init
+
+#+END_SRC
+	
 * License
 
 	Released under the [[./LICENSE][GPL v3]] unless otherwise specified by license files in
