@@ -1621,27 +1621,18 @@ I've got a folder of custom Emacs Lisp libraries which must be added to the load
 
 * Applications
 
-** Mail
+** Email
 
 My mail configuration is stored in [[file:Email.org][Email.org]]. We merely
 require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src emacs-lisp
 
-  ;; Only fetch mail on knave
-  (setq pjp/mail-enabled (string-equal system-name "knave"))
-  (setq pjp/mu4e-inbox-query nil)
-  (when pjp/mail-enabled
-    (require 'pjp-email))
-
-#+end_src
-
-*Guix Packages*
-
-=emacs-mu4e-alert= pulls in =mu= so we don't need to specify it here also.
-
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
-
-  "emacs-mu4e-alert"
+	;; Only fetch mail on knave
+	;; (setq pjp/mail-enabled (string-equal system-name "knave"))
+	(setq pjp/mail-enabled (string-equal system-name "test"))
+	(setq pjp/mu4e-inbox-query nil)
+	(when pjp/mail-enabled
+		(require 'pjp-email))
 
 #+end_src

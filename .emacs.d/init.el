@@ -782,7 +782,8 @@ display-time-default-load-average nil)
 	(eshell-git-prompt-use-theme 'powerline))
 
 ;; Only fetch mail on knave
-(setq pjp/mail-enabled (string-equal system-name "knave"))
+;; (setq pjp/mail-enabled (string-equal system-name "knave"))
+(setq pjp/mail-enabled (string-equal system-name "test"))
 (setq pjp/mu4e-inbox-query nil)
 (when pjp/mail-enabled
-  (require 'pjp-email))
+	(require 'pjp-email))
