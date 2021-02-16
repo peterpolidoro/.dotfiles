@@ -787,3 +787,5 @@ display-time-default-load-average nil)
 (setq pjp/mu4e-inbox-query nil)
 (when pjp/mail-enabled
 	(require 'pjp-email))
+
+(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))

@@ -1636,3 +1636,13 @@ require it here to have it loaded in the main Emacs configuration.
 		(require 'pjp-email))
 
 #+end_src
+
+** Arduino
+
+#+begin_src emacs-lisp
+
+	(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
+
+#+end_src
+
+	 
