@@ -355,6 +355,16 @@
   ("C-." . helpful-at-point)
   ("C-h c". helpful-command))
 
+(defvar pjp/help-buffers '("^\\*Help\\*$"
+													 "^\\*helpful"))
+
+(while pjp/help-buffers
+	(add-to-list 'display-buffer-alist
+							 `(,(car pjp/help-buffers)
+								 (display-buffer-pop-up-frame)
+								 ))
+	(setq pjp/help-buffers (cdr pjp/help-buffers)))
+
 (use-package avy
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
 

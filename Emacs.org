@@ -737,6 +737,22 @@
 
    #+end_src
 
+** Helpful and Help Buffer Placement
+	 
+   #+begin_src emacs-lisp
+
+		 (defvar pjp/help-buffers '("^\\*Help\\*$"
+																"^\\*helpful"))
+
+		 (while pjp/help-buffers
+			 (add-to-list 'display-buffer-alist
+										`(,(car pjp/help-buffers)
+											(display-buffer-pop-up-frame)
+											))
+			 (setq pjp/help-buffers (cdr pjp/help-buffers)))
+
+   #+end_src
+
 ** Jumping with Avy
 
    #+begin_src emacs-lisp
