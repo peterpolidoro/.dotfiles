@@ -832,6 +832,13 @@
        :bind (:map dired-mode-map
                    ("." . dired-hide-dotfiles-mode)))
 
+     (use-package dired-single
+       :ensure nil
+       :after dired
+       :bind (:map dired-mode-map
+                   ("C-b" . dired-single-up-directory)
+                   ("C-f" . dired-single-buffer)))
+
    #+end_src
 
 ** Opening Files Externally
@@ -1347,10 +1354,75 @@
 
     #+begin_src emacs-lisp
 
-      (use-package ccls
-        :hook ((c-mode c++-mode objc-mode cuda-mode) .
-               (lambda () (require 'ccls) (lsp))))
+			;; (use-package ccls
+			;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
+			;;          (lambda () (require 'ccls) (lsp))))
 
+			;; Unfortunately many standard c++ header files have no file
+			;; extension, and so will not typically be identified by emacs as c++
+			;; files. The following code is intended to solve this problem.
+			;; (require 'cl)
+
+			(defun file-in-directory-list-p (file dirlist)
+				"Returns true if the file specified is contained within one of
+					the directories in the list. The directories must also exist."
+				(let ((dirs (mapcar 'expand-file-name dirlist))
+							(filedir (expand-file-name (file-name-directory file))))
+					(and
+					 (file-directory-p filedir)
+					 (member-if (lambda (x) ; Check directory prefix matches
+												(string-match (substring x 0 (min(length filedir) (length x))) filedir))
+											dirs))))
+
+			(defun buffer-standard-include-p ()
+				"Returns true if the current buffer is contained within one of
+					the directories in the INCLUDE environment variable."
+				(and (getenv "INCLUDE")
+						 (file-in-directory-list-p buffer-file-name (split-string (getenv "INCLUDE") path-separator))))
+
+			(add-to-list 'magic-fallback-mode-alist '(buffer-standard-include-p . c++-mode))
+
+			;; function decides whether .h file is C or C++ header, sets C++ by
+			;; default because there's more chance of there being a .h without a
+			;; .cc than a .h without a .c (ie. for C++ template files)
+			(defun c-c++-header ()
+				"sets either c-mode or c++-mode, whichever is appropriate for
+					header"
+				(interactive)
+				(let ((c-file (concat (substring (buffer-file-name) 0 -1) "c")))
+					(if (file-exists-p c-file)
+							(c-mode)
+						(c++-mode))))
+			(add-to-list 'auto-mode-alist '("\\.h\\'" . c-c++-header))
+			;; and if that doesn't work, a function to toggle between c-mode and
+			;; c++-mode
+			(defun c-c++-toggle ()
+				"toggles between c-mode and c++-mode"
+				(interactive)
+				(cond ((string= major-mode "c-mode")
+							 (c++-mode))
+							((string= major-mode "c++-mode")
+							 (c-mode))))
+
+			(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+
+			;; ROS style formatting
+			(defun ROS-c-mode-hook()
+				(setq c-basic-offset 2)
+				(setq indent-tabs-mode nil)
+				(c-set-offset 'substatement-open 0)
+				(c-set-offset 'innamespace 0)
+				(c-set-offset 'case-label '+)
+				(c-set-offset 'brace-list-open 0)
+				(c-set-offset 'brace-list-intro '+)
+				(c-set-offset 'brace-list-entry 0)
+				(c-set-offset 'member-init-intro 0)
+				(c-set-offset 'statement-case-open 0)
+				(c-set-offset 'arglist-intro '+)
+				(c-set-offset 'arglist-cont-nonempty '+)
+				(c-set-offset 'arglist-close '+)
+				(c-set-offset 'template-args-cont '+))
+			(add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
     #+end_src
 
 *** Emacs Lisp
