@@ -422,6 +422,11 @@
 	:bind (:map dired-mode-map
 							("<tab>" . dired-subtree-cycle)))
 
+(use-package dired-collapse
+	:ensure t
+	:after dired
+	:hook (dired-mode . dired-collapse-mode))
+
 (use-package openwith
   :config
   (setq openwith-associations
