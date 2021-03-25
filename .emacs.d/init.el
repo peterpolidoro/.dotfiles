@@ -390,31 +390,37 @@
 (setq even-window-sizes nil)
 
 (use-package dired
-  :ensure nil
-  :defer 1
-  :hook (dired-mode . dired-hide-details-mode)
-  :bind (:map dired-mode-map
-              ("C-b" . dired-single-up-directory)
-              ("C-f" . dired-single-buffer))
-  :commands (dired dired-jump)
-  :config
-  (setq dired-listing-switches "-agho --group-directories-first"
-        dired-omit-verbose nil)
+	:ensure nil
+	:defer 1
+	:hook (dired-mode . dired-hide-details-mode)
+	:bind (:map dired-mode-map
+							("C-b" . dired-single-up-directory)
+							("C-f" . dired-single-buffer))
+	:commands (dired dired-jump)
+	:config
+	(setq dired-listing-switches "-agho --group-directories-first"
+				dired-omit-verbose nil)
 
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
+	(use-package all-the-icons-dired
+		:hook (dired-mode . all-the-icons-dired-mode)))
 
 (use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :bind (:map dired-mode-map
-              ("." . dired-hide-dotfiles-mode)))
+	:hook (dired-mode . dired-hide-dotfiles-mode)
+	:bind (:map dired-mode-map
+							("." . dired-hide-dotfiles-mode)))
 
 (use-package dired-single
-  :ensure nil
-  :after dired
-  :bind (:map dired-mode-map
-              ("C-b" . dired-single-up-directory)
-              ("C-f" . dired-single-buffer)))
+	:ensure t
+	:after dired
+	:bind (:map dired-mode-map
+							("C-b" . dired-single-up-directory)
+							("C-f" . dired-single-buffer)))
+
+(use-package dired-subtree
+	:ensure t
+	:after dired
+	:bind (:map dired-mode-map
+							("<tab>" . dired-subtree-cycle)))
 
 (use-package openwith
   :config
