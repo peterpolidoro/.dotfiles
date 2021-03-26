@@ -1331,33 +1331,28 @@
 
     #+begin_src emacs-lisp
 
-      (use-package typescript-mode
-        :mode "\\.ts\\'"
-        :config
-        (setq typescript-indent-level 2))
+			(use-package typescript-mode
+				:mode "\\.ts\\'"
+				:config
+				(setq typescript-indent-level 2))
 
-      (defun pjp/set-js-indentation ()
-        (setq js-indent-level 2)
-        (setq-default tab-width 2))
+			(setq js-indent-level 2)
+			(setq js2-basic-offset 2)
 
-      (use-package js2-mode
-        :mode "\\.jsx?\\'"
-        :config
-        ;; Use js2-mode for Node scripts
-        (add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
+			(use-package js2-mode
+				:mode "\\.jsx?\\'"
+				:config
+				;; Use js2-mode for Node scripts
+				(add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
 
-        ;; Don't use built-in syntax checking
-        (setq js2-mode-show-strict-warnings nil)
+				;; Don't use built-in syntax checking
+				(setq js2-mode-show-strict-warnings nil)
 
-        ;; Set up proper indentation in JavaScript and JSON files
-        (add-hook 'js2-mode-hook #'pjp/set-js-indentation)
-        (add-hook 'json-mode-hook #'pjp/set-js-indentation))
-
-      (use-package prettier-js
-        :hook ((js2-mode . prettier-js-mode)
-               (typescript-mode . prettier-js-mode))
-        :config
-        (setq prettier-js-show-errors nil))
+			(use-package prettier-js
+				:hook ((js2-mode . prettier-js-mode)
+							 (typescript-mode . prettier-js-mode))
+				:config
+				(setq prettier-js-show-errors nil))
 
     #+end_src
 
