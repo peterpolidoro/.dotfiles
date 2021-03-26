@@ -1338,15 +1338,13 @@
 
 			(setq js-indent-level 2)
 			(setq js2-basic-offset 2)
+			(setq js2-mode-show-strict-warnings nil)
 
 			(use-package js2-mode
 				:mode "\\.jsx?\\'"
 				:config
 				;; Use js2-mode for Node scripts
-				(add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode))
-
-				;; Don't use built-in syntax checking
-				(setq js2-mode-show-strict-warnings nil)
+				(add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode)))
 
 			(use-package prettier-js
 				:hook ((js2-mode . prettier-js-mode)
