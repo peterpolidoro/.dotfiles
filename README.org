@@ -11,6 +11,10 @@ allows me to set up symlinks for all of my dotfiles using the commands:
 
 #+BEGIN_SRC sh
 	cd ~
+	rm .profile
+	rm .bashrc
+	GUIX_PROFILE="$HOME/.guix-profile"
+  . "$GUIX_PROFILE"/etc/profile
 	git clone git@github.com:peterpolidoro/.dotfiles.git
 	cd .dotfiles
 	# simulate installing links to show what install will do
