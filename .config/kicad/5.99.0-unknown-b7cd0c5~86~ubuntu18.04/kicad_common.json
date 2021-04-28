@@ -1,0 +1,42 @@
+{
+  "appearance": {
+    "canvas_scale": 1.0,
+    "icon_scale": 0,
+    "use_icons_in_menus": true
+  },
+  "environment": {
+    "show_warning_dialog": false,
+    "vars": {
+      "KICAD_SYMBOL_DIR": "/usr/share/kicad/library",
+      "KICAD_TEMPLATE_DIR": "/usr/share/kicad/template",
+      "KICAD_USER_TEMPLATE_DIR": "/home/polidorop/kicad/template",
+      "KISYS3DMOD": "/usr/share/kicad/modules/packages3d/",
+      "KISYSMOD": "/usr/share/kicad/modules"
+    }
+  },
+  "graphics": {
+    "cairo_antialiasing_mode": 0,
+    "opengl_antialiasing_mode": 0
+  },
+  "input": {
+    "auto_pan": false,
+    "center_on_zoom": true,
+    "immediate_actions": true,
+    "mousewheel_pan": false,
+    "prefer_select_to_drag": true,
+    "warp_mouse_on_move": true
+  },
+  "meta": {
+    "filename": "kicad_common",
+    "version": 0
+  },
+  "system": {
+    "autosave_interval": 600,
+    "editor_name": "",
+    "file_history_size": 9,
+    "language": "Default",
+    "pdf_viewer_name": "",
+    "use_system_pdf_viewer": true,
+    "working_dir": "/mnt/idf/PROJECTS/ID&F/LICK PORT/ECAD/DUAL_LICK_PORT/gerbers"
+  }
+}
