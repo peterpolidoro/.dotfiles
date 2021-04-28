@@ -335,3 +335,10 @@ checkout =
 	cd pellet_dispenser_controller
 	git remote add public https://github.com/janelia-kicad/pellet_dispenser_controller.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/pellet_dispenser_controller.git
+
+[lick_detector]
+checkout =
+	git clone 'git@github.com:janelia-kicad/lick_detector.git' 'lick_detector'
+	cd lick_detector
+	git remote add public https://github.com/janelia-kicad/lick_detector.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lick_detector.git
