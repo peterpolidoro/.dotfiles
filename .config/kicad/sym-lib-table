@@ -18,7 +18,7 @@
   (lib (name Audio)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Audio.lib)(options "")(descr "Audio devices")(disabled))
   (lib (name Battery_Management)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Battery_Management.lib)(options "")(descr "Battery management ICs")(disabled))
   (lib (name Comparator)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Comparator.lib)(options "")(descr "Comparator symbols")(disabled))
-  (lib (name Connector)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Connector.lib)(options "")(descr "Connector symbols (Examples: Terminal Block, D-SUB, DIN, USB...)")(disabled))
+  (lib (name Connector)(type Legacy)(uri /home/external-drive/polidorop/.guix-profile/share/kicad/library/Connector.lib)(options "")(descr "Connector symbols (Examples: Terminal Block, D-SUB, DIN, USB...)")(disabled))
   (lib (name Connector_Generic)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Connector_Generic.lib)(options "")(descr "Generic connector symbols")(disabled))
   (lib (name Connector_Generic_MountingPin)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Connector_Generic_MountingPin.lib)(options "")(descr "Generic connectors with mechanical mounting pin")(disabled))
   (lib (name Connector_Generic_Shielded)(type Legacy)(uri ${KICAD_SYMBOL_DIR}/Connector_Generic_Shielded.lib)(options "")(descr "Generic shielded connector symbols")(disabled))

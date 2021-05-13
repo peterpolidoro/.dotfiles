@@ -451,28 +451,30 @@
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
-  (variable-pitch-mode 1)
-  (auto-fill-mode 0))
+	(variable-pitch-mode 1)
+	(auto-fill-mode 0))
 
 (use-package org
-  :defer t
-  :hook (org-mode . pjp/org-mode-setup)
-  :config
-  (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 2
-        org-hide-block-startup nil
-        org-src-preserve-indentation nil
-        org-startup-folded 'content
-        org-descriptive-links nil
-        org-cycle-separator-lines 2)
+	:defer t
+	:hook (org-mode . pjp/org-mode-setup)
+	:config
+	(setq org-src-fontify-natively t
+				org-src-tab-acts-natively t
+				org-edit-src-content-indentation 2
+				org-hide-block-startup nil
+				org-src-preserve-indentation nil
+				org-startup-folded 'content
+				org-descriptive-links nil
+				org-cycle-separator-lines 2)
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (ledger . t)))
+	(org-babel-do-load-languages
+	 'org-babel-load-languages
+	 '((emacs-lisp . t)
+		 (shell . t)
+		 (python . t)
+		 (ledger . t)))
 
-  ;; NOTE: Subsequent sections are still part of this use-package block!
+	;; NOTE: Subsequent sections are still part of this use-package block!
 
 ;; Since we don't want to disable org-confirm-babel-evaluate all
 ;; of the time, do it around the after-save-hook
@@ -521,6 +523,82 @@
 
 ;; This ends the use-package org-mode block
 )
+
+(setq org-src-fontify-natively t
+			org-src-tab-acts-natively t)
+
+(setq org-descriptive-links nil)
+
+(eval-after-load "org"
+	'(require 'ox-org nil t))
+
+(eval-after-load "org"
+	'(require 'ox-md nil t))
+
+(eval-after-load "org"
+	'(require 'ox-gfm nil t))
+
+(defun org-include-img-from-pdf (&rest _)
+	"Convert pdf files to image files in org-mode bracket links.
+
+		# ()convertfrompdf:t # This is a special comment; tells that the upcoming
+												 # link points to the to-be-converted-to file.
+		# If you have a foo.pdf that you need to convert to foo.png, use the
+		# foo.png file name in the link.
+		[[./foo.png]]
+"
+	(interactive)
+	(if (executable-find "convert")
+			(save-excursion
+				(goto-char (point-min))
+				(while (re-search-forward "^[ \t]*#\\s-+()convertfrompdf\\s-*:\\s-*t"
+																	nil :noerror)
+					;; Keep on going to the next line till it finds a line with bracketed
+					;; file link.
+					(while (progn
+									 (forward-line 1)
+									 (not (looking-at org-bracket-link-regexp))))
+					;; Get the sub-group 1 match, the link, from `org-bracket-link-regexp'
+					(let ((link (match-string-no-properties 1)))
+						(when (stringp link)
+							(let* ((imgfile (expand-file-name link))
+										 (pdffile (expand-file-name
+															 (concat (file-name-sans-extension imgfile)
+																			 "." "pdf")))
+										 (cmd (concat "convert -density 96 -quality 85 "
+																	pdffile " " imgfile)))
+								(when (and (file-readable-p pdffile)
+													 (file-newer-than-file-p pdffile imgfile))
+									;; This block is executed only if pdffile is newer than
+									;; imgfile or if imgfile does not exist.
+									(shell-command cmd)
+									(message "%s" cmd)))))))
+		(user-error "`convert' executable (part of Imagemagick) is not found")))
+
+;; (defun my/org-include-img-from-pdf-before-save ()
+;;   "Execute `org-include-img-from-pdf' just before saving the file."
+;;     (add-hook 'before-save-hook #'org-include-img-from-pdf nil :local))
+;; (add-hook 'org-mode-hook #'my/org-include-img-from-pdf-before-save)
+
+;; If you want to attempt to auto-convert PDF to PNG  only during exports, and not during each save.
+(with-eval-after-load 'ox
+	(add-hook 'org-export-before-processing-hook #'org-include-img-from-pdf))
+
+(defconst help/org-special-pre "^\s*#[+]")
+(defun help/org-2every-src-block (fn)
+	"Visit every Source-Block and evaluate `FN'."
+	(interactive)
+	(save-excursion
+		(goto-char (point-min))
+		(let ((case-fold-search t))
+			(while (re-search-forward (concat help/org-special-pre "BEGIN_SRC") nil t)
+				(let ((element (org-element-at-point)))
+					(when (eq (org-element-type element) 'src-block)
+						(funcall fn element)))))
+		(save-buffer)))
+;;(define-key org-mode-map (kbd "M-]") (lambda () (interactive)
+;;																			 (help/org-2every-src-block
+;;																				'org-babel-remove-result)))
 
 (defun pjp/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
