@@ -342,3 +342,10 @@ checkout =
 	cd lick_detector
 	git remote add public https://github.com/janelia-kicad/lick_detector.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/lick_detector.git
+
+[lick_detector_interface]
+checkout =
+	git clone 'git@github.com:janelia-kicad/lick_detector_interface.git' 'lick_detector_interface'
+	cd lick_detector_interface
+	git remote add public https://github.com/janelia-kicad/lick_detector_interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lick_detector_interface.git
