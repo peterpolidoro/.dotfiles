@@ -1,10 +1,10 @@
-SchematicFramePos_x=1919
-SchematicFramePos_y=0
+SchematicFramePos_x=-1
+SchematicFramePos_y=25
 SchematicFrameSize_x=1920
-SchematicFrameSize_y=1200
+SchematicFrameSize_y=1144
 SchematicFrameMaximized=1
 SchematicFrameAutoSaveInterval=600
-SchematicFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1016;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=212;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=36;besth=688;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=384;besth=184;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(4,3,0)=36|dock_size(2,1,0)=36|dock_size(5,0,0)=386|dock_size(3,6,0)=30|
+SchematicFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1016;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=212;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=36;besth=688;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=382;besth=153;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=398;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(4,3,0)=36|dock_size(2,1,0)=36|dock_size(5,0,0)=384|dock_size(3,6,0)=34|
 SchematicFrameMostRecentlyUsedPath=/home/polidorop
 SchematicFrameShowGrid=1
 SchematicFrameGridColor=rgb(132, 132, 132)
@@ -79,15 +79,15 @@ Color4DErcEEx=rgb(132, 0, 0)
 Color4DGridEx=rgb(132, 132, 132)
 Color4DBgCanvasEx=rgb(255, 255, 255)
 Color4DBrighenedEx=rgb(255, 0, 255)
-file1=/home/external-drive/polidorop/Repositories/kicad/lick_detector/lick_detector.sch
+file1=/home/external-drive/polidorop/Repositories/kicad/lickport_array_module/lickport_array_module.sch
 file2=/home/external-drive/polidorop/Repositories/kicad/y_arena_odor_controller/y_arena_odor_controller.sch
-file3=/home/polidorop/git/kicad/stepper_controller_5x3/stepper_controller_5x3.sch
-file4=/home/polidorop/git/kicad/y_arena_odor_controller/y_arena_odor_controller.sch
-file5=/home/polidorop/git/kicad/pellet_dispenser_controller/pellet_dispenser_controller.sch
-file6=/home/polidorop/git/kicad/encoder_interface_simple_3x2/encoder_interface_simple_3x2.sch
-file7=/home/polidorop/git/kicad/y_arena_valve_controller/y_arena_valve_controller.sch
-file8=/home/polidorop/git/kicad/power_switch_controller_3x2/power_switch_controller_3x2.sch
-file9=/home/polidorop/git/kicad/y_arena_valve_board/y_arena_valve_board.sch
+file3=/home/external-drive/polidorop/Repositories/kicad/lick_detector_interface/lick_detector_interface.sch
+file4=/home/external-drive/polidorop/Repositories/kicad/lick_detector_interface/lick_detector.sch
+file5=/home/external-drive/polidorop/Repositories/kicad/lick_detector/lick_detector.sch
+file6=/home/external-drive/polidorop/Repositories/kicad/stepper_controller_3x2/stepper_controller_3x2.sch
+file7=/home/polidorop/git/kicad/stepper_controller_5x3/stepper_controller_5x3.sch
+file8=/home/polidorop/git/kicad/y_arena_odor_controller/y_arena_odor_controller.sch
+file9=/home/polidorop/git/kicad/pellet_dispenser_controller/pellet_dispenser_controller.sch
 PlotModeColor=1
 PlotFrameRef=1
 PlotFormat=4
@@ -101,11 +101,11 @@ LibeditFramePos_y=25
 LibeditFrameSize_x=1920
 LibeditFrameSize_y=1144
 LibeditFrameMaximized=1
-LibeditFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=757;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=398;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=212;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ComponentTree;caption=Libraries;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=250;besth=-1;minw=250;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=36;besth=382;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=768;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=382;besth=159;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(3,6,0)=30|dock_size(4,3,0)=36|dock_size(4,1,0)=252|dock_size(2,1,0)=36|dock_size(5,0,0)=384|
+LibeditFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=757;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=398;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=212;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ComponentTree;caption=Libraries;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=250;besth=-1;minw=250;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=36;besth=382;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=768;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=382;besth=153;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(3,6,0)=34|dock_size(4,3,0)=36|dock_size(4,1,0)=252|dock_size(2,1,0)=36|dock_size(5,0,0)=384|
 LibeditFrameMostRecentlyUsedPath=/home/polidorop
 LibeditFrameShowGrid=1
 LibeditFrameGridColor=rgb(132, 132, 132)
-LibeditFrame_LastGridSize=6
+LibeditFrame_LastGridSize=5
 LibeditFrameFirstRunShown=0
 LibeditFrameDevelMaxUndoItems=0
 LibeditFrameGalDisplayOptionsOpenGLAntialiasingMode=0
