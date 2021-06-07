@@ -349,3 +349,10 @@ checkout =
 	cd lick_detector_interface
 	git remote add public https://github.com/janelia-kicad/lick_detector_interface.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/lick_detector_interface.git
+
+[lickport_array_module]
+checkout =
+	git clone 'git@github.com:janelia-kicad/lickport_array_module.git' 'lickport_array_module'
+	cd lickport_array_module
+	git remote add public https://github.com/janelia-kicad/lickport_array_module.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lickport_array_module.git

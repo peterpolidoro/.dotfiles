@@ -14,10 +14,10 @@ OpenGLAntialiasingMode=1
 CairoAntialiasingMode=0
 CanvasScale=0
 [EnvironmentVariables]
-KICAD_PTEMPLATES=/home/external-drive/polidorop/.guix-profile/share/kicad/template
-KICAD_SYMBOL_DIR=/home/external-drive/polidorop/.guix-profile/share/kicad/library
+KICAD_PTEMPLATES=/usr/share/kicad/template
+KICAD_SYMBOL_DIR=/usr/share/kicad/library
 KICAD_USER_DIR=/home/external-drive/polidorop/Repositories/kicad/kicad-libraries
 KICAD_USER_TEMPLATE_DIR=/home/kicad/template
 KIGITHUB=https://github.com/KiCad
-KISYS3DMOD=/home/external-drive/polidorop/.guix-profile/share/kicad/packages3d
-KISYSMOD=/home/external-drive/polidorop/.guix-profile/share/kicad/modules
+KISYS3DMOD=/usr/share/kicad/packages3d
+KISYSMOD=/usr/share/kicad/modules
