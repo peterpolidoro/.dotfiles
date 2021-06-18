@@ -1,0 +1,7 @@
+[user]
+	email = peterpolidoro@gmail.com
+	name = Peter Polidoro
+[pull]
+	rebase = false
+[core]
+	editor = emacs

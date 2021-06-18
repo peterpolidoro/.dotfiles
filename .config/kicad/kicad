@@ -7,9 +7,9 @@ KicadFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer
 KicadFrameMostRecentlyUsedPath=/home/external-drive/polidorop/Repositories/kicad/lickport_array_module/
 LeftWinWidth=331
 file1=/home/external-drive/polidorop/Repositories/kicad/lickport_array_module/lickport_array_module.pro
-file2=/home/external-drive/polidorop/Repositories/kicad/y_arena_odor_controller/y_arena_odor_controller.pro
-file3=/home/external-drive/polidorop/Repositories/kicad/lick_detector_interface/lick_detector_interface.pro
-file4=/home/external-drive/polidorop/Repositories/kicad/lick_detector/lick_detector.pro
+file2=/home/external-drive/polidorop/Repositories/kicad/lick_detector/lick_detector.pro
+file3=/home/external-drive/polidorop/Repositories/kicad/y_arena_odor_controller/y_arena_odor_controller.pro
+file4=/home/external-drive/polidorop/Repositories/kicad/lick_detector_interface/lick_detector_interface.pro
 file5=/home/external-drive/polidorop/Repositories/kicad/stepper_controller_3x2/stepper_controller_3x2.pro
 file6=/home/polidorop/git/kicad/pellet_dispenser_controller/pellet_dispenser_controller.pro
 file7=/home/polidorop/git/kicad/encoder_interface_simple_3x2/encoder_interface_simple_3x2.pro
