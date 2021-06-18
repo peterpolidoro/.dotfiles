@@ -1016,12 +1016,12 @@
 		 (defun org-include-img-from-pdf (&rest _)
 			 "Convert pdf files to image files in org-mode bracket links.
 
-				 # ()convertfrompdf:t # This is a special comment; tells that the upcoming
-															# link points to the to-be-converted-to file.
-				 # If you have a foo.pdf that you need to convert to foo.png, use the
-				 # foo.png file name in the link.
-				 [[./foo.png]]
-		 "
+									 # ()convertfrompdf:t # This is a special comment; tells that the upcoming
+																				# link points to the to-be-converted-to file.
+									 # If you have a foo.pdf that you need to convert to foo.png, use the
+									 # foo.png file name in the link.
+									 [[./foo.png]]
+							 "
 			 (interactive)
 			 (if (executable-find "convert")
 					 (save-excursion

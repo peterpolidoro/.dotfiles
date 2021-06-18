@@ -816,3 +816,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/LickportArrayController.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/LickportArrayController.git
 
+[AT42QT]
+checkout =
+	git clone 'git@github.com:janelia-arduino/AT42QT.git' 'AT42QT'
+	cd AT42QT
+	git remote add public https://github.com/janelia-arduino/AT42QT.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/AT42QT.git
+
