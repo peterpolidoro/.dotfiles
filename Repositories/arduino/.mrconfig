@@ -823,3 +823,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/AT42QT.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/AT42QT.git
 
+[QTouch]
+checkout =
+	git clone 'git@github.com:janelia-arduino/QTouch.git' 'QTouch'
+	cd QTouch
+	git remote add public https://github.com/janelia-arduino/QTouch.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/QTouch.git
+
