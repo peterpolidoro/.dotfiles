@@ -329,12 +329,12 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/y_arena_odor_controller.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/y_arena_odor_controller.git
 
-[pellet_dispenser_controller]
+[reach_controller]
 checkout =
-	git clone 'git@github.com:janelia-kicad/pellet_dispenser_controller.git' 'pellet_dispenser_controller'
-	cd pellet_dispenser_controller
-	git remote add public https://github.com/janelia-kicad/pellet_dispenser_controller.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/pellet_dispenser_controller.git
+	git clone 'git@github.com:janelia-kicad/reach_controller.git' 'reach_controller'
+	cd reach_controller
+	git remote add public https://github.com/janelia-kicad/reach_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/reach_controller.git
 
 [lick_detector]
 checkout =
