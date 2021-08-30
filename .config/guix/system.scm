@@ -44,7 +44,7 @@
   (bootloader
     (bootloader-configuration
       (bootloader grub-efi-bootloader)
-      (targets "/boot/efi")
+      (targets (list "/boot/efi")
       (keyboard-layout keyboard-layout)))
   (file-systems
     (cons* (file-system
