@@ -1,5 +1,5 @@
 SchematicFramePos_x=0
-SchematicFramePos_y=25
+SchematicFramePos_y=49
 SchematicFrameSize_x=1920
 SchematicFrameSize_y=1144
 SchematicFrameMaximized=1
@@ -26,7 +26,7 @@ RepeatStepX=0
 RepeatStepY=100
 RepeatLabelIncrement=1
 DefaultBusWidth=12
-DefaultDrawLineWidth=6
+DefaultDrawLineWidth=7
 ShowHiddenPins=0
 HorizVertLinesOnly=1
 AutoplaceFields=1
@@ -96,7 +96,7 @@ PlotHPGLPaperSize=0
 PlotHPGLPenSize=0.4826
 bom_plugins=(plugins  (plugin /usr/share/kicad/plugins/bom2csv.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/bom2csv.xsl\\" \\"%I\\"")  (opts nickname=bom2csv))  (plugin /usr/share/kicad/plugins/bom2grouped_csv.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/bom2grouped_csv.xsl\\" \\"%I\\"")  (opts nickname=bom2grouped_csv))  (plugin /usr/share/kicad/plugins/bom_sorted_by_ref.py (cmd "python \\"/usr/share/kicad/plugins/bom_sorted_by_ref.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_sorted_by_ref))  (plugin /usr/share/kicad/plugins/netlist_form_cadstar.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/netlist_form_cadstar.xsl\\" \\"%I\\"")  (opts nickname=netlist_form_cadstar))  (plugin /usr/share/kicad/plugins/bom_csv_sorted_by_ref.py (cmd "python \\"/usr/share/kicad/plugins/bom_csv_sorted_by_ref.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_csv_sorted_by_ref))  (plugin /usr/share/kicad/plugins/netlist_form_OrcadPcb2.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/netlist_form_OrcadPcb2.xsl\\" \\"%I\\"")  (opts nickname=netlist_form_OrcadPcb2))  (plugin /usr/share/kicad/plugins/bom_html_grouped_by_value.py (cmd "python \\"/usr/share/kicad/plugins/bom_html_grouped_by_value.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_html_grouped_by_value))  (plugin /usr/share/kicad/plugins/bom_csv_grouped_by_value.py (cmd "python \\"/usr/share/kicad/plugins/bom_csv_grouped_by_value.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_csv_grouped_by_value))  (plugin /usr/share/kicad/plugins/netlist_form_cadstar-RINF.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/netlist_form_cadstar-RINF.xsl\\" \\"%I\\"")  (opts nickname=netlist_form_cadstar-RINF))  (plugin /usr/share/kicad/plugins/bom_html_with_advanced_grouping.py (cmd "python \\"/usr/share/kicad/plugins/bom_html_with_advanced_grouping.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_html_with_advanced_grouping))  (plugin /usr/share/kicad/plugins/bom_with_title_block_2_csv.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/bom_with_title_block_2_csv.xsl\\" \\"%I\\"")  (opts nickname=bom_with_title_block_2_csv))  (plugin /usr/share/kicad/plugins/netlist_form_pads-pcb.asc.xsl (cmd "xsltproc -o \\"%O\\" \\"/usr/share/kicad/plugins/netlist_form_pads-pcb.asc.xsl\\" \\"%I\\"")  (opts nickname=netlist_form_pads-pcb.asc))  (plugin /usr/share/kicad/plugins/bom_csv_grouped_by_value_with_fp.py (cmd "python \\"/usr/share/kicad/plugins/bom_csv_grouped_by_value_with_fp.py\\" \\"%I\\" \\"%O\\"")  (opts nickname=bom_csv_grouped_by_value_with_fp))  (plugin /usr/share/kicad/plugins/kicad_netlist_reader.py (cmd "")  (opts nickname=kicad_netlist_reader)))
 bom_plugin_selected=kicad_netlist_reader
-LibeditFramePos_x=-1
+LibeditFramePos_x=0
 LibeditFramePos_y=25
 LibeditFrameSize_x=1920
 LibeditFrameSize_y=1144
