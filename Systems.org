@@ -1,0 +1,111 @@
+#+title: Peter Polidoro System Configuration with Guix
+#+AUTHOR: Peter Polidoro
+#+EMAIL: peterpolidoro@gmail.com
+#+PROPERTY: header-args    :tangle-mode (identity #o444)
+#+PROPERTY: header-args:sh :tangle-mode (identity #o555)
+
+* Channels
+* Systems
+
+** Base Configuration
+* Profile Management
+
+I like to separate my packages into separate manifests that get installed as
+profiles which can be updated independently. These profiles get installed under
+the =~/.guix-extra-profiles= path and sourced by my =~/.profile= when I log in.
+
+To make the management of multiple profiles easier, I've created a couple of shell scripts:
+
+** Activating Profiles
+
+This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs those profiles for the first time.  For example:
+
+#+begin_src sh
+
+activate-profiles desktop emacs music
+
+#+end_src
+
+*.bin/activate-profiles:*
+
+#+begin_src sh :tangle .bin/activate-profiles :shebang #!/bin/bash
+
+# NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
+
+GREEN='\033[1;32m'
+RED='\033[1;30m'
+NC='\033[0m'
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+
+profiles=$*
+if [[ $# -eq 0 ]]; then
+    profiles="$HOME/.config/guix/manifests/*.scm";
+fi
+
+for profile in $profiles; do
+  # Remove the path and file extension, if any
+  profileName=$(basename $profile)
+  profileName="${profileName%.*}"
+  profilePath="$GUIX_EXTRA_PROFILES/$profileName"
+  manifestPath=$HOME/.config/guix/manifests/$profileName.scm
+
+  if [ -f $manifestPath ]; then
+    echo
+    echo -e "${GREEN}Activating profile:" $manifestPath "${NC}"
+    echo
+
+    mkdir -p $profilePath
+    guix package --manifest=$manifestPath --profile="$profilePath/$profileName"
+
+    # Source the new profile
+    GUIX_PROFILE="$profilePath/$profileName"
+    if [ -f $GUIX_PROFILE/etc/profile ]; then
+        . "$GUIX_PROFILE"/etc/profile
+    else
+        echo -e "${RED}Couldn't find profile:" $GUIX_PROFILE/etc/profile "${NC}"
+    fi
+  else
+    echo "No profile found at path" $profilePath
+  fi
+done
+
+#+end_src
+
+** Updating Profiles
+
+This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs any updates to the packages contained within them.  If no profile names are provided, it walks the list of profile directories under =~/.guix-extra-profiles= and updates each one of them.
+
+#+begin_src sh
+
+update-profiles emacs
+
+#+end_src
+
+*.bin/update-profiles:*
+
+#+begin_src sh :tangle .bin/update-profiles :shebang #!/bin/bash
+
+# NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
+
+GREEN='\033[1;32m'
+NC='\033[0m'
+GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
+
+profiles=$*
+if [[ $# -eq 0 ]]; then
+    profiles="$GUIX_EXTRA_PROFILES/*";
+fi
+
+for profile in $profiles; do
+  profileName=$(basename $profile)
+  profilePath=$GUIX_EXTRA_PROFILES/$profileName
+
+  echo
+  echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
+  echo
+
+  guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
+done
+
+#+end_src
+

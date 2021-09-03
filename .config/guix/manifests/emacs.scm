@@ -3,6 +3,12 @@
    
    "emacs-use-package"
    
+   "emacs-guix"
+   
+   "guile"
+   
+   "guix"
+   
    "emacs-no-littering"
    
    "emacs-which-key"

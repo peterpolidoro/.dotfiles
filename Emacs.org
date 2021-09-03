@@ -3,6 +3,7 @@
 #+EMAIL: peterpolidoro@gmail.com
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
+
 * Introduction
   
   This initialization file is based on David Wilson's awesome Emacs configuration: https://github.com/daviwil
@@ -81,7 +82,7 @@
 
 * Package Management
 
-  Use =guix= to install package repositories and load =use-package= to
+  Use =Guix= to install package repositories and load =use-package= to
   manage package configuration.
 
 ** use-package
@@ -100,6 +101,20 @@
    #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
 "emacs-use-package"
+
+   #+end_src
+
+	 ** Guix
+
+   *Guix Packages*
+
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-guix"
+
+"guile"
+
+"guix"
 
    #+end_src
 
@@ -2247,8 +2262,6 @@ pip install --user "python-language-server[all]"
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 
    #+end_src
-
-   
 
 * Emacs Profile
 
