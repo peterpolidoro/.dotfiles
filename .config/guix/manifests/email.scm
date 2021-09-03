@@ -1,3 +1,3 @@
 (specifications->manifest
  '("isync"
-	 "emacs-mu4e-alert"))
+   "emacs-mu4e-alert"))
