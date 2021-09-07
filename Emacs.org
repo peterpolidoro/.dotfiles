@@ -477,9 +477,9 @@
 
     #+begin_src emacs-lisp
 
-    (use-package undo-tree
-      :init
-      (global-undo-tree-mode 1))
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1))
 
     #+end_src
 
@@ -1001,74 +1001,74 @@
 
 ** Use spaces instead of tabs for indentation
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 
-  (setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
-#+end_src
+   #+end_src
 
 ** Automatically clean whitespace
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 
-  (use-package ws-butler
-    :hook ((text-mode . ws-butler-mode)
-           (prog-mode . ws-butler-mode)))
+(use-package ws-butler
+  :hook ((text-mode . ws-butler-mode)
+         (prog-mode . ws-butler-mode)))
 
-#+end_src
+   #+end_src
 
-*Guix Packages*
+   *Guix Packages*
 
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
-  "emacs-ws-butler"
+"emacs-ws-butler"
 
-#+end_src
+   #+end_src
 
 ** Use Parinfer for Lispy languages
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 
-  (use-package parinfer
-    :disabled
-    :hook ((clojure-mode . parinfer-mode)
-           (emacs-lisp-mode . parinfer-mode)
-           (common-lisp-mode . parinfer-mode)
-           (scheme-mode . parinfer-mode)
-           (lisp-mode . parinfer-mode))
-    :config
-    (setq parinfer-extensions
+(use-package parinfer
+  :disabled
+  :hook ((clojure-mode . parinfer-mode)
+         (emacs-lisp-mode . parinfer-mode)
+         (common-lisp-mode . parinfer-mode)
+         (scheme-mode . parinfer-mode)
+         (lisp-mode . parinfer-mode))
+  :config
+  (setq parinfer-extensions
         '(defaults       ; should be included.
-          pretty-parens  ; different paren styles for different modes.
-          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-          smart-yank)))  ; Yank behavior depend on mode.
+           pretty-parens  ; different paren styles for different modes.
+           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+           smart-yank)))  ; Yank behavior depend on mode.
 
-#+end_src
+   #+end_src
 
-*Guix Packages*
+   *Guix Packages*
 
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
-  "emacs-parinfer-mode"
+"emacs-parinfer-mode"
 
-#+end_src
+   #+end_src
 
 ** Origami.el for Folding
 
-#+begin_src emacs-lisp
+   #+begin_src emacs-lisp
 
 (use-package origami
   :hook (yaml-mode . origami-mode))
 
-#+end_src
+   #+end_src
 
-*Guix Packages*
+   *Guix Packages*
 
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
 "emacs-origami-el"
 
-#+end_src
+   #+end_src
 
 * Window Management
 
@@ -2338,11 +2338,18 @@ pip install --user "python-language-server[all]"
    #+begin_src emacs-lisp
 
 ;; Only fetch mail on knave
-;; (setq pjp/mail-enabled (string-equal system-name "knave"))
-(setq pjp/mail-enabled (string-equal system-name "test"))
-(setq pjp/mu4e-inbox-query nil)
-(when pjp/mail-enabled
-  (require 'pjp-email))
+;;(setq pjp/mail-enabled (member system-name '("knave" "precision")))
+;;(setq pjp/mu4e-inbox-query nil)
+;;(when pjp/mail-enabled
+;;  (require 'pjp-email))
+
+   #+end_src
+
+   *Guix Packages*
+
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-mu4e-alert"
 
    #+end_src
 

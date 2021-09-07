@@ -169,9 +169,9 @@
 (global-set-key (kbd "s-p")    'windmove-up)
 (global-set-key (kbd "s-n")  'windmove-down)
 
-    (use-package undo-tree
-      :init
-      (global-undo-tree-mode 1))
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1))
 
 (load-theme 'euphoria t t)
 (enable-theme 'euphoria)
@@ -410,25 +410,25 @@
          ("C-(" . er/mark-outside-pairs)
          ("C-)" . er/mark-inside-pairs)))
 
-  (setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
-  (use-package ws-butler
-    :hook ((text-mode . ws-butler-mode)
-           (prog-mode . ws-butler-mode)))
+(use-package ws-butler
+  :hook ((text-mode . ws-butler-mode)
+         (prog-mode . ws-butler-mode)))
 
-  (use-package parinfer
-    :disabled
-    :hook ((clojure-mode . parinfer-mode)
-           (emacs-lisp-mode . parinfer-mode)
-           (common-lisp-mode . parinfer-mode)
-           (scheme-mode . parinfer-mode)
-           (lisp-mode . parinfer-mode))
-    :config
-    (setq parinfer-extensions
+(use-package parinfer
+  :disabled
+  :hook ((clojure-mode . parinfer-mode)
+         (emacs-lisp-mode . parinfer-mode)
+         (common-lisp-mode . parinfer-mode)
+         (scheme-mode . parinfer-mode)
+         (lisp-mode . parinfer-mode))
+  :config
+  (setq parinfer-extensions
         '(defaults       ; should be included.
-          pretty-parens  ; different paren styles for different modes.
-          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-          smart-yank)))  ; Yank behavior depend on mode.
+           pretty-parens  ; different paren styles for different modes.
+           smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+           smart-yank)))  ; Yank behavior depend on mode.
 
 (use-package origami
   :hook (yaml-mode . origami-mode))
@@ -932,10 +932,9 @@
   (eshell-git-prompt-use-theme 'powerline))
 
 ;; Only fetch mail on knave
-;; (setq pjp/mail-enabled (string-equal system-name "knave"))
-(setq pjp/mail-enabled (string-equal system-name "test"))
-(setq pjp/mu4e-inbox-query nil)
-(when pjp/mail-enabled
-  (require 'pjp-email))
+;;(setq pjp/mail-enabled (member system-name '("knave" "precision")))
+;;(setq pjp/mu4e-inbox-query nil)
+;;(when pjp/mail-enabled
+;;  (require 'pjp-email))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))

@@ -12,6 +12,9 @@
 	(setq mu4e-get-mail-command "mbsync -a")
 	(setq mu4e-maildir "~/Email")
 
+  ;; Use Ivy for mu4e completions (maildir folders, etc)
+  (setq mu4e-completing-read-function #'ivy-completing-read)
+
 	;; Make sure that moving a message (like to Trash) causes the
 	;; message to get a new file name.  This helps to avoid the
 	;; dreaded "UID is N beyond highest assigned" error.

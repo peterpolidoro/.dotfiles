@@ -53,9 +53,9 @@
    
    "emacs-expand-region"
    
-     "emacs-ws-butler"
+   "emacs-ws-butler"
    
-     "emacs-parinfer-mode"
+   "emacs-parinfer-mode"
    
    "emacs-origami-el"
    
@@ -133,5 +133,7 @@
    "emacs-xterm-color"
    
    "emacs-exec-path-from-shell"
+   
+   "emacs-mu4e-alert"
    
    ))
