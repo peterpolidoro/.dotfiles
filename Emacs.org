@@ -473,6 +473,24 @@
 
     #+end_src
 
+*** Undo-Tree
+
+    #+begin_src emacs-lisp
+
+    (use-package undo-tree
+      :init
+      (global-undo-tree-mode 1))
+
+    #+end_src
+
+    *Guix Packages*
+
+    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-undo-tree"
+
+    #+end_src
+
 ** Theme
 
    #+begin_src emacs-lisp
@@ -978,6 +996,79 @@
 "emacs-expand-region"
 
    #+end_src
+
+* Editing Configuration
+
+** Use spaces instead of tabs for indentation
+
+#+begin_src emacs-lisp
+
+  (setq-default indent-tabs-mode nil)
+
+#+end_src
+
+** Automatically clean whitespace
+
+#+begin_src emacs-lisp
+
+  (use-package ws-butler
+    :hook ((text-mode . ws-butler-mode)
+           (prog-mode . ws-butler-mode)))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+  "emacs-ws-butler"
+
+#+end_src
+
+** Use Parinfer for Lispy languages
+
+#+begin_src emacs-lisp
+
+  (use-package parinfer
+    :disabled
+    :hook ((clojure-mode . parinfer-mode)
+           (emacs-lisp-mode . parinfer-mode)
+           (common-lisp-mode . parinfer-mode)
+           (scheme-mode . parinfer-mode)
+           (lisp-mode . parinfer-mode))
+    :config
+    (setq parinfer-extensions
+        '(defaults       ; should be included.
+          pretty-parens  ; different paren styles for different modes.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+  "emacs-parinfer-mode"
+
+#+end_src
+
+** Origami.el for Folding
+
+#+begin_src emacs-lisp
+
+(use-package origami
+  :hook (yaml-mode . origami-mode))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-origami-el"
+
+#+end_src
 
 * Window Management
 

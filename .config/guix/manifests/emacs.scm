@@ -15,6 +15,8 @@
    
    "emacs-smartparens"
    
+   "emacs-undo-tree"
+   
    "emacs-emojify"
    
    "emacs-all-the-icons"
@@ -50,6 +52,12 @@
    "emacs-avy"
    
    "emacs-expand-region"
+   
+     "emacs-ws-butler"
+   
+     "emacs-parinfer-mode"
+   
+   "emacs-origami-el"
    
    ;;"emacs-dired-single"
    "emacs-dired-hacks"

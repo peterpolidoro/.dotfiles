@@ -169,6 +169,10 @@
 (global-set-key (kbd "s-p")    'windmove-up)
 (global-set-key (kbd "s-n")  'windmove-down)
 
+    (use-package undo-tree
+      :init
+      (global-undo-tree-mode 1))
+
 (load-theme 'euphoria t t)
 (enable-theme 'euphoria)
 (setq color-theme-is-global t)
@@ -405,6 +409,29 @@
          ("M-]" . er/contract-region)
          ("C-(" . er/mark-outside-pairs)
          ("C-)" . er/mark-inside-pairs)))
+
+  (setq-default indent-tabs-mode nil)
+
+  (use-package ws-butler
+    :hook ((text-mode . ws-butler-mode)
+           (prog-mode . ws-butler-mode)))
+
+  (use-package parinfer
+    :disabled
+    :hook ((clojure-mode . parinfer-mode)
+           (emacs-lisp-mode . parinfer-mode)
+           (common-lisp-mode . parinfer-mode)
+           (scheme-mode . parinfer-mode)
+           (lisp-mode . parinfer-mode))
+    :config
+    (setq parinfer-extensions
+        '(defaults       ; should be included.
+          pretty-parens  ; different paren styles for different modes.
+          smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+          smart-yank)))  ; Yank behavior depend on mode.
+
+(use-package origami
+  :hook (yaml-mode . origami-mode))
 
 (setq display-buffer-base-action
       '(display-buffer-reuse-mode-window
