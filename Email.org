@@ -18,6 +18,7 @@
 
 (use-package mu4e
   :defer 20 ; Wait until 20 seconds after startup
+  :bind ("C-x m" . mu4e)
   :config
 
   ;; Load org-mode integration
@@ -41,31 +42,40 @@
   (setq mu4e-contexts
         (list
          (make-mu4e-context
-            :name "Gmail"
-            :match-func (lambda (msg)
-                          (when msg
-                            (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
-            :vars '((user-full-name . "Peter Polidoro")
-                    (mu4e-sent-messages-behavior . sent)
-                    (mu4e-drafts-folder . "/Drafts")
-                    (mu4e-sent-folder . "/Sent")
-                    (mu4e-trash-folder . "/Trash")
-                    (user-mail-address . "peterpolidoro@gmail.com")
-                    (mu4e-refile-folder . "/All")
-                    ))
-          ,(make-mu4e-context
-            :name "Janelia"
-            :match-func (lambda (msg)
-                          (when msg
-                            (string-prefix-p "/Janelia" (mu4e-message-field msg :maildir))))
-            :vars '((user-full-name . "Peter Polidoro")
-                    (user-mail-address . "polidorop@janelia.hhmi.org")
-                    (mu4e-drafts-folder . "/Drafts")
-                    (mu4e-sent-folder . "/Sent")
-                    (mu4e-trash-folder . "/Trash")
-                    (mu4e-refile-folder . "/Archive")
-                    ))
-          ))
+          :name "gmail"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name . "Peter Polidoro")
+                  (user-mail-address . "peterpolidoro@gmail.com")
+                  (smtpmail-smtp-user  . "peterpolidoro@gmail.com")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type  . ssl)
+                  (mu4e-refile-folder . "/Gmail/All")
+                  (mu4e-drafts-folder . "/Gmail/Drafts")
+                  (mu4e-sent-folder . "/Gmail/Sent")
+                  (mu4e-trash-folder . "/Gmail/Trash")
+                  (mu4e-sent-messages-behavior . sent)
+                  ))
+         (make-mu4e-context
+          :name "janelia"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/Janelia" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name . "Peter Polidoro")
+                  (user-mail-address . "polidorop@janelia.hhmi.org")
+                  (smtpmail-smtp-user  . "ppolidoro@hhmi.org")
+                  (smtpmail-smtp-server  . "smtp.office365.com")
+                  (smtpmail-smtp-service . 587)
+                  (smtpmail-stream-type  . starttls)
+                  (mu4e-drafts-folder . "/Janelia/Drafts")
+                  (mu4e-sent-folder . "/Janelia/Sent")
+                  (mu4e-trash-folder . "/Janelia/Trash")
+                  (mu4e-refile-folder . "/Janelia/Archive")
+                  (mu4e-sent-messages-behavior . sent)
+                  ))
+         ))
   (setq mu4e-context-policy 'pick-first)
 
   ;; Prevent mu4e from permanently deleting trashed items
@@ -94,11 +104,7 @@
   (setq mu4e-compose-dont-reply-to-self t)
 
   ;; Use mu4e for sending e-mail
-  (setq mail-user-agent 'mu4e-user-agent
-        message-send-mail-function 'smtpmail-send-it
-        smtpmail-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-service 465
-        smtpmail-stream-type  'ssl)
+  (setq message-send-mail-function 'smtpmail-send-it)
 
   ;; Signing messages (use mml-secure-sign-pgpmime)
   ;; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
@@ -268,7 +274,7 @@ Port 993
 User polidorop@hhmi.org
 PassCmd "pass Email/polidorop@janelia.hhmi.org"
 SSLType IMAPS
-SSLVersions TLSv1.3
+SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 Timeout 120
 PipelineDepth 50
@@ -277,8 +283,8 @@ IMAPStore janelia-remote
 Account janelia
 
 MaildirStore janelia-local
-Path ~/Mail/Janelia/
-Inbox ~/Mail/Janelia/Inbox/
+Path ~/Email/Janelia/
+Inbox ~/Email/Janelia/Inbox/
 SubFolders Verbatim
 
 Channel janelia
@@ -290,7 +296,7 @@ Sync All
 Create Both
 SyncState *
 
-#+end_src
+  #+end_src
 
 * Dependencies
 
