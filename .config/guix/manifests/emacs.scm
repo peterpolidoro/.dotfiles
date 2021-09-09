@@ -59,6 +59,10 @@
    
    "emacs-origami-el"
    
+   "emacs-password-store"
+   
+   "emacs-auth-source-pass"
+   
    ;;"emacs-dired-single"
    "emacs-dired-hacks"
    

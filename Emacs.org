@@ -1092,6 +1092,35 @@
 
    #+end_src
 
+* Credential Management
+
+  I use [[https://www.passwordstore.org/][pass]] to manage all of my passwords
+  locally. I also use
+  [[https://github.com/DamienCassou/auth-password-store][auth-source-pass]] as the
+  primary =auth-source= provider so that all passwords are stored in a single
+  place.
+
+  #+begin_src emacs-lisp
+
+(use-package password-store
+  :config
+  (setq password-store-password-length 12))
+
+(use-package auth-source-pass
+  :config
+  (auth-source-pass-enable))
+
+  #+end_src
+
+  *Guix Packages*
+
+  #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-password-store"
+
+"emacs-auth-source-pass"
+
+  #+end_src
 * File Browsing
 
 ** Dired
