@@ -39,7 +39,7 @@
    
    "emacs-counsel"
    
-   "emacs-ivy-posframe"
+   ;; "emacs-ivy-posframe"
    
    "emacs-prescient"
    

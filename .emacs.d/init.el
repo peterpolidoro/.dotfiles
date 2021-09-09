@@ -52,6 +52,8 @@
 ;; Add my library path to load-path
 (push "~/.dotfiles/.emacs.d/lisp" load-path)
 
+(server-start)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package which-key
@@ -283,12 +285,12 @@
   (setq ivy-wrap t)
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
-  
+
   ;; Use different regex strategies per completion command
   (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
   (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
   (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
-  
+
   ;; Set minibuffer height for different commands
   (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
   (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
@@ -350,6 +352,7 @@
 (use-package wgrep)
 
 (use-package ivy-posframe
+  :disabled
   :custom
   (ivy-posframe-width      115)
   (ivy-posframe-min-width  115)
@@ -932,9 +935,9 @@
   (eshell-git-prompt-use-theme 'powerline))
 
 ;; Only fetch mail on knave
-;;(setq pjp/mail-enabled (member system-name '("knave" "precision")))
-;;(setq pjp/mu4e-inbox-query nil)
-;;(when pjp/mail-enabled
-;;  (require 'pjp-email))
+(setq pjp/mail-enabled (member system-name '("knave" "precision")))
+(setq pjp/mu4e-inbox-query nil)
+(when pjp/mail-enabled
+  (require 'pjp-email))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))

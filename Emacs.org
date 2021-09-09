@@ -104,7 +104,7 @@
 
    #+end_src
 
-	 ** Guix
+   ** Guix
 
    *Guix Packages*
 
@@ -167,7 +167,7 @@
 
   Start the Emacs server from this instance so that all =emacsclient= calls are routed here.
 
-  #+begin_src emacs-lisp :tangle no
+  #+begin_src emacs-lisp
 
 (server-start)
 
@@ -789,12 +789,12 @@
   (setq ivy-wrap t)
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
-  
+
   ;; Use different regex strategies per completion command
   (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
   (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
   (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
-  
+
   ;; Set minibuffer height for different commands
   (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
   (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
@@ -856,6 +856,7 @@
 (use-package wgrep)
 
 (use-package ivy-posframe
+  :disabled
   :custom
   (ivy-posframe-width      115)
   (ivy-posframe-min-width  115)
@@ -890,7 +891,7 @@
 
 "emacs-counsel"
 
-"emacs-ivy-posframe"
+;; "emacs-ivy-posframe"
 
 "emacs-prescient"
 
@@ -1118,9 +1119,9 @@
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode)
   :bind (:map dired-mode-map
-							("." . dired-hide-dotfiles-mode)))
+              ("." . dired-hide-dotfiles-mode)))
 
-	 #+end_src
+   #+end_src
 
    #+begin_src emacs-lisp :tangle no
 
@@ -1796,12 +1797,12 @@ pip install --user "python-language-server[all]"
   (dap-node-setup)
 
   (dap-register-debug-template "Node: Attach"
-															 (list :type "node"
-																		 :cwd nil
-																		 :request "attach"
-																		 :program nil
-																		 :port 9229
-																		 :name "Node::Run")))
+                               (list :type "node"
+                                     :cwd nil
+                                     :request "attach"
+                                     :program nil
+                                     :port 9229
+                                     :name "Node::Run")))
 
     #+end_src
 
@@ -1870,10 +1871,10 @@ pip install --user "python-language-server[all]"
 ;; files. The following code is intended to solve this problem.
 (require 'cl)
 
-		#+end_src
+    #+end_src
     
 
-		#+begin_src emacs-lisp
+    #+begin_src emacs-lisp
 
 (defun file-in-directory-list-p (file dirlist)
   "Returns true if the file specified is contained within one of
@@ -2338,10 +2339,10 @@ pip install --user "python-language-server[all]"
    #+begin_src emacs-lisp
 
 ;; Only fetch mail on knave
-;;(setq pjp/mail-enabled (member system-name '("knave" "precision")))
-;;(setq pjp/mu4e-inbox-query nil)
-;;(when pjp/mail-enabled
-;;  (require 'pjp-email))
+(setq pjp/mail-enabled (member system-name '("knave" "precision")))
+(setq pjp/mu4e-inbox-query nil)
+(when pjp/mail-enabled
+  (require 'pjp-email))
 
    #+end_src
 
