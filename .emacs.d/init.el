@@ -947,5 +947,6 @@
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
+  (global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))

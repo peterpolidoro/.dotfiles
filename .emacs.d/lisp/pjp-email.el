@@ -1,6 +1,5 @@
 (use-package mu4e
-  :defer 20 ; Wait until 20 seconds after startup
-  :bind ("C-x m" . mu4e)
+  ;; :defer 20 ; Wait until 20 seconds after startup
   :config
 
   ;; Load org-mode integration
@@ -121,8 +120,8 @@
   ;;   (interactive)
   ;;   (mu4e-headers-search pjp/mu4e-inbox-query))
 
-  ;; Start mu4e in the background so that it syncs mail periodically
-  (mu4e t))
+  ;; Start mu4e
+  (call-interactively 'mu4e))
 
 (use-package mu4e-alert
   :after mu4e
