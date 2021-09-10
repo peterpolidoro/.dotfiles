@@ -169,7 +169,7 @@
 
   #+begin_src emacs-lisp
 
-(server-start)
+;; (server-start)
 
   #+end_src
 
@@ -2368,10 +2368,10 @@ pip install --user "python-language-server[all]"
    #+begin_src emacs-lisp
 
 ;; Only fetch mail on knave
-(setq pjp/mail-enabled (member system-name '("knave" "precision")))
-(setq pjp/mu4e-inbox-query nil)
-(when pjp/mail-enabled
-  (require 'pjp-email))
+;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))
+;; (setq pjp/mu4e-inbox-query nil)
+;; (when pjp/mail-enabled
+;;   (require 'pjp-email))
 
    #+end_src
 

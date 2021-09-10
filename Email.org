@@ -65,7 +65,7 @@
                           (string-prefix-p "/Janelia" (mu4e-message-field msg :maildir))))
           :vars '((user-full-name . "Peter Polidoro")
                   (user-mail-address . "polidorop@janelia.hhmi.org")
-                  (smtpmail-smtp-user  . "ppolidoro@hhmi.org")
+                  (smtpmail-smtp-user  . "polidorop@hhmi.org")
                   (smtpmail-smtp-server  . "smtp.office365.com")
                   (smtpmail-smtp-service . 587)
                   (smtpmail-stream-type  . starttls)
@@ -168,22 +168,6 @@
 (provide 'pjp-email)
 
   #+end_src
-* Passwords
-
-  #+BEGIN_SRC sh
-
-gpg --full-generate-key
-# Select (1) RSA and RSA (default)
-# Keysize: 4096
-# Expires: 0
-# Real name: Peter Polidoro
-# Email address: peterpolidoro@gmail.com
-# Comments: Peter Polidoro GPG Key
-pass init peterpolidoro@gmail.com
-pass insert Email/peterpolidoro@gmail.com
-pass insert Email/polidorop@janelia.hhmi.org
-
-  #+END_SRC
 
 * Email Synchronization
 
@@ -195,7 +179,7 @@ IMAPAccount gmail
 Host imap.gmail.com
 Port 993
 User peterpolidoro@gmail.com
-PassCmd "pass Email/peterpolidoro@gmail.com"
+PassCmd "pass email/gmail.com/peterpolidoro@gmail.com"
 SSLType IMAPS
 SSLVersions TLSv1.3
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -272,7 +256,7 @@ IMAPAccount janelia
 Host outlook.office365.com
 Port 993
 User polidorop@hhmi.org
-PassCmd "pass Email/polidorop@janelia.hhmi.org"
+PassCmd "pass email/office365.com/polidorop@hhmi.org"
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -309,6 +293,23 @@ SyncState *
    "isync"))
 
   #+end_src
+
+* Passwords
+
+  #+BEGIN_SRC sh
+
+gpg --full-generate-key
+# Select (1) RSA and RSA (default)
+# Keysize: 4096
+# Expires: 0
+# Real name: Peter Polidoro
+# Email address: peterpolidoro@gmail.com
+# Comments: Peter Polidoro GPG Key
+pass init peterpolidoro@gmail.com
+pass insert email/gmail.com/peterpolidoro@gmail.com
+pass insert email/office365.com/polidorop@hhmi.org
+
+  #+END_SRC
 
 * Setup, Sync, Init, and Index
 

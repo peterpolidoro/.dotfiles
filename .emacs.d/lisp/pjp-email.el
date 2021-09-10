@@ -47,7 +47,7 @@
                           (string-prefix-p "/Janelia" (mu4e-message-field msg :maildir))))
           :vars '((user-full-name . "Peter Polidoro")
                   (user-mail-address . "polidorop@janelia.hhmi.org")
-                  (smtpmail-smtp-user  . "ppolidoro@hhmi.org")
+                  (smtpmail-smtp-user  . "polidorop@hhmi.org")
                   (smtpmail-smtp-server  . "smtp.office365.com")
                   (smtpmail-smtp-service . 587)
                   (smtpmail-stream-type  . starttls)

@@ -52,7 +52,7 @@
 ;; Add my library path to load-path
 (push "~/.dotfiles/.emacs.d/lisp" load-path)
 
-(server-start)
+;; (server-start)
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -943,9 +943,9 @@
   (eshell-git-prompt-use-theme 'powerline))
 
 ;; Only fetch mail on knave
-(setq pjp/mail-enabled (member system-name '("knave" "precision")))
-(setq pjp/mu4e-inbox-query nil)
-(when pjp/mail-enabled
-  (require 'pjp-email))
+;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))
+;; (setq pjp/mu4e-inbox-query nil)
+;; (when pjp/mail-enabled
+;;   (require 'pjp-email))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
