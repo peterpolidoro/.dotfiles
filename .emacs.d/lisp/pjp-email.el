@@ -134,4 +134,12 @@
 
   (mu4e-alert-enable-notifications))
 
+(use-package org-mime
+  :after mu4e
+  :config
+  (setq org-mime-export-options '(:section-numbers nil
+                                                   :with-author nil
+                                                   :with-toc nil))
+  )
+
 (provide 'pjp-email)

@@ -140,4 +140,6 @@
    
    "emacs-mu4e-alert"
    
+   "emacs-org-mime"
+   
    ))

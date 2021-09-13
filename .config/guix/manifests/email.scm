@@ -1,3 +1,4 @@
 (specifications->manifest
  '("mu"
-   "isync"))
+   "isync"
+   ))

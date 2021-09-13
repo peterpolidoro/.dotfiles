@@ -94,11 +94,15 @@
 (require 'diminish)
 (require 'bind-key)
 
-   #+end_src
+(use-package geiser
+  :custom
+  (geiser-active-implementations '(guile)))
+
+  #+end_src
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-use-package"
 
@@ -108,7 +112,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-guix"
 
@@ -146,7 +150,7 @@
 
   *Guix Packages*
 
-  #+begin_src scheme :noweb-ref packages :noweb-sep ""
+  #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-no-littering"
 
@@ -200,7 +204,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-which-key"
 
@@ -439,7 +443,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-smartparens"
 
@@ -485,7 +489,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-undo-tree"
 
@@ -565,7 +569,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-emojify"
 
@@ -583,7 +587,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-all-the-icons"
 
@@ -620,7 +624,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-minions"
 
@@ -649,7 +653,7 @@
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-diminish"
 
@@ -672,7 +676,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-alert"
 
@@ -693,7 +697,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 ;;"emacs-super-save"
 
@@ -755,7 +759,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-hydra"
 
@@ -883,7 +887,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-ivy"
 
@@ -928,7 +932,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-helpful"
 
@@ -968,7 +972,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-avy"
 
@@ -992,7 +996,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-expand-region"
 
@@ -1020,7 +1024,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-ws-butler"
 
@@ -1048,7 +1052,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-parinfer-mode"
 
@@ -1065,7 +1069,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-origami-el"
 
@@ -1114,7 +1118,7 @@
 
   *Guix Packages*
 
-  #+begin_src scheme :noweb-ref packages :noweb-sep ""
+  #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-password-store"
 
@@ -1177,13 +1181,13 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 ;;"emacs-dired-single"
 
    #+end_src
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 "emacs-dired-hacks"
 
 "emacs-all-the-icons-dired"
@@ -1220,7 +1224,7 @@
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-openwith"
 
@@ -1278,7 +1282,7 @@
 
   *Guix Packages*
 
-  #+begin_src scheme :noweb-ref packages :noweb-sep ""
+  #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-org"
 
@@ -1548,7 +1552,7 @@
 
        *Guix Packages*
 
-       #+begin_src scheme :noweb-ref packages :noweb-sep ""
+       #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-lsp-mode"
 
@@ -1580,7 +1584,7 @@
 
     #+end_src
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-dap-mode"
 
@@ -1663,7 +1667,7 @@ pip install --user "python-language-server[all]"
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-company"
 
@@ -1692,7 +1696,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-magit"
 
@@ -1709,7 +1713,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 ;;"emacs-forge"
 
@@ -1730,7 +1734,7 @@ pip install --user "python-language-server[all]"
     
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-magit-todos"
 
@@ -1762,7 +1766,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-projectile"
 
@@ -1875,7 +1879,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-js2-mode"
 
@@ -1986,7 +1990,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-paredit"
 
@@ -2017,7 +2021,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-markdown-mode"
 
@@ -2044,7 +2048,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-web-mode"
 
@@ -2061,7 +2065,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-yaml-mode"
 
@@ -2093,7 +2097,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-flycheck"
 
@@ -2112,7 +2116,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-yasnippet"
 
@@ -2133,7 +2137,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-smartparens"
 
@@ -2150,7 +2154,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-rainbow-delimiters"
 
@@ -2174,7 +2178,7 @@ pip install --user "python-language-server[all]"
 
     *Guix Packages*
 
-    #+begin_src scheme :noweb-ref packages :noweb-sep ""
+    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-rainbow-mode"
 
@@ -2252,7 +2256,7 @@ pip install --user "python-language-server[all]"
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-vterm"
 
@@ -2346,7 +2350,7 @@ pip install --user "python-language-server[all]"
 
        *Guix Packages*
 
-       #+begin_src scheme :noweb-ref packages :noweb-sep ""
+       #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-eshell-z"
 
@@ -2372,15 +2376,17 @@ pip install --user "python-language-server[all]"
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
-  (global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
+(global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
 
    #+end_src
 
    *Guix Packages*
 
-   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+   #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-mu4e-alert"
+
+"emacs-org-mime"
 
    #+end_src
 
@@ -2396,7 +2402,7 @@ pip install --user "python-language-server[all]"
 
   *.config/guix/manifests/emacs.scm:*
 
-  #+begin_src scheme :tangle .config/guix/manifests/emacs.scm :noweb yes
+  #+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/emacs.scm :noweb yes
 
 (specifications->manifest
  '("emacs"

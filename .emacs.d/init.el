@@ -32,6 +32,10 @@
 (require 'diminish)
 (require 'bind-key)
 
+(use-package geiser
+  :custom
+  (geiser-active-implementations '(guile)))
+
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
@@ -947,6 +951,6 @@
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
-  (global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
+(global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
