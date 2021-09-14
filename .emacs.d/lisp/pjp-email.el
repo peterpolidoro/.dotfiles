@@ -56,6 +56,23 @@
                   (mu4e-refile-folder . "/Janelia/Archive")
                   (mu4e-sent-messages-behavior . sent)
                   ))
+         (make-mu4e-context
+          :name "polidoro"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/Polidoro" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name . "Peter Polidoro")
+                  (user-mail-address . "peter@polidoro.io")
+                  (smtpmail-smtp-user  . "peter@polidoro.io")
+                  (smtpmail-smtp-server  . "smtp.dreamhost.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type  . ssl)
+                  (mu4e-drafts-folder . "/Polidoro/Drafts")
+                  (mu4e-sent-folder . "/Polidoro/Sent")
+                  (mu4e-trash-folder . "/Polidoro/Trash")
+                  (mu4e-refile-folder . "/Polidoro/Archive")
+                  (mu4e-sent-messages-behavior . sent)
+                  ))
          ))
   (setq mu4e-context-policy 'pick-first)
 

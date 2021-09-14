@@ -76,6 +76,23 @@
                   (mu4e-refile-folder . "/Janelia/Archive")
                   (mu4e-sent-messages-behavior . sent)
                   ))
+         (make-mu4e-context
+          :name "polidoro"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/Polidoro" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name . "Peter Polidoro")
+                  (user-mail-address . "peter@polidoro.io")
+                  (smtpmail-smtp-user  . "peter@polidoro.io")
+                  (smtpmail-smtp-server  . "smtp.dreamhost.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type  . ssl)
+                  (mu4e-drafts-folder . "/Polidoro/Drafts")
+                  (mu4e-sent-folder . "/Polidoro/Sent")
+                  (mu4e-trash-folder . "/Polidoro/Trash")
+                  (mu4e-refile-folder . "/Polidoro/Archive")
+                  (mu4e-sent-messages-behavior . sent)
+                  ))
          ))
   (setq mu4e-context-policy 'pick-first)
 
@@ -381,6 +398,34 @@ Sync All
 Create Both
 SyncState *
 
+IMAPAccount polidoro
+Host imap.dreamhost.com
+Port 993
+User peter@polidoro.io
+PassCmd "pass email/dreamhost.com/peter@polidoro.io"
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Timeout 120
+PipelineDepth 50
+
+IMAPStore polidoro-remote
+Account polidoro
+
+MaildirStore polidoro-local
+Path ~/Email/Polidoro/
+Inbox ~/Email/Polidoro/Inbox
+SubFolders Verbatim
+
+Channel polidoro
+Far :polidoro-remote:
+Near :polidoro-local:
+Patterns *
+Expunge Both
+Sync All
+Create Both
+SyncState *
+
   #+end_src
 
 * Dependencies
@@ -408,6 +453,7 @@ gpg --full-generate-key
 pass init peterpolidoro@gmail.com
 pass insert email/gmail.com/peterpolidoro@gmail.com
 pass insert email/office365.com/polidorop@hhmi.org
+pass insert email/dreamhost.com/peter@polidoro.io
 
   #+END_SRC
 
@@ -415,10 +461,11 @@ pass insert email/office365.com/polidorop@hhmi.org
 
   #+BEGIN_SRC sh
 
-mkdir -p ~/Email/Gmail ~/Email/Janelia
+mkdir -p ~/Email/Gmail ~/Email/Janelia ~/Email/Polidoro
 mbsync --list gmail
 mbsync --list janelia
+mbsync --list polidoro
 mbsync -a
-mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org
+mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
   #+END_SRC
