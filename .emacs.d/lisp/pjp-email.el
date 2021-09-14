@@ -3,7 +3,7 @@
   :config
 
   ;; Load org-mode integration
-  (require 'org-mu4e)
+  (require 'mu4e-org)
 
   ;; Refresh mail using isync every 5 minutes
   (setq mu4e-update-interval (* 10 60))
@@ -138,8 +138,90 @@
   :after mu4e
   :config
   (setq org-mime-export-options '(:section-numbers nil
-                                                   :with-author nil
-                                                   :with-toc nil))
+                                  :with-author nil
+                                  :with-toc nil))
   )
+
+(defun org-mime-org-buffer-htmlize ()
+  "Create an email buffer containing the current org-mode file
+  exported to html and encoded in both html and in org formats as
+  mime alternatives."
+  (interactive)
+  (org-mime-send-buffer 'html)
+  (message-goto-to))
+
+(defun org-mime-subtree ()
+  "Create an email buffer containing the current org-mode subtree
+  exported to a org format or to the format specified by the
+  MAIL_FMT property of the subtree."
+  (interactive)
+  (org-mime-send-subtree
+   (or (org-entry-get nil "MAIL_FMT" org-mime-use-property-inheritance) 'org))
+  (message-goto-to))
+
+(defun mu4e-compose-org-mail ()
+ (interactive)
+ (mu4e-compose-new)
+ (org-mu4e-compose-org-mode))
+
+(defun htmlize-and-send ()
+  "When in an org-mu4e-compose-org-mode message, htmlize and send it."
+  (interactive)
+  (when (member 'org~mu4e-mime-switch-headers-or-body post-command-hook)
+    (org-mime-htmlize)
+    (message-send-and-exit)))
+
+(add-hook 'org-ctrl-c-ctrl-c-hook 'htmlize-and-send t)
+
+(defun org-mime-compose (body fmt file &optional to subject headers)
+  (require 'message)
+  (let ((bhook
+         (lambda (body fmt)
+           (let ((hook (intern (concat "org-mime-pre-"
+                                       (symbol-name fmt)
+                                       "-hook"))))
+             (if (> (eval `(length ,hook)) 0)
+                 (with-temp-buffer
+                   (insert body)
+                   (goto-char (point-min))
+                   (eval `(run-hooks ',hook))
+                   (buffer-string))
+               body))))
+        (fmt (if (symbolp fmt) fmt (intern fmt)))
+        (files (org-element-map (org-element-parse-buffer) 'link
+                 (lambda (link)
+                   (when (string= (org-element-property :type link) "file")
+                     (file-truename (org-element-property :path link)))))))
+    (compose-mail to subject headers nil)
+    (message-goto-body)
+    (cond
+     ((eq fmt 'org)
+      (require 'ox-org)
+      (insert (org-export-string-as
+               (org-babel-trim (funcall bhook body 'org)) 'org t)))
+     ((eq fmt 'ascii)
+      (require 'ox-ascii)
+      (insert (org-export-string-as
+               (concat "#+Title:\n" (funcall bhook body 'ascii)) 'ascii t)))
+     ((or (eq fmt 'html) (eq fmt 'html-ascii))
+      (require 'ox-ascii)
+      (require 'ox-org)
+      (let* ((org-link-file-path-type 'absolute)
+             ;; we probably don't want to export a huge style file
+             (org-export-htmlize-output-type 'inline-css)
+             (org-html-with-latex 'dvipng)
+             (html-and-images
+              (org-mime-replace-images
+               (org-export-string-as (funcall bhook body 'html) 'html t)))
+             (images (cdr html-and-images))
+             (html (org-mime-apply-html-hook (car html-and-images))))
+        (insert (org-mime-multipart
+                 (org-export-string-as
+                  (org-babel-trim
+                   (funcall bhook body (if (eq fmt 'html) 'org 'ascii)))
+                  (if (eq fmt 'html) 'org 'ascii) t)
+                 html)
+                (mapconcat 'identity images "\n")))))
+    (mapc #'mml-attach-file files)))
 
 (provide 'pjp-email)
