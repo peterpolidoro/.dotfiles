@@ -53,7 +53,6 @@
                   (smtpmail-smtp-server  . "smtp.gmail.com")
                   (smtpmail-smtp-service . 465)
                   (smtpmail-stream-type  . ssl)
-                  (mu4e-refile-folder . "/Gmail/All")
                   (mu4e-drafts-folder . "/Gmail/Drafts")
                   (mu4e-sent-folder . "/Gmail/Sent")
                   (mu4e-trash-folder . "/Gmail/Trash")
@@ -73,7 +72,6 @@
                   (mu4e-drafts-folder . "/Janelia/Drafts")
                   (mu4e-sent-folder . "/Janelia/Sent")
                   (mu4e-trash-folder . "/Janelia/Trash")
-                  (mu4e-refile-folder . "/Janelia/Archive")
                   (mu4e-sent-messages-behavior . sent)
                   ))
          (make-mu4e-context
@@ -90,7 +88,6 @@
                   (mu4e-drafts-folder . "/Polidoro/Drafts")
                   (mu4e-sent-folder . "/Polidoro/Sent")
                   (mu4e-trash-folder . "/Polidoro/Trash")
-                  (mu4e-refile-folder . "/Polidoro/Archive")
                   (mu4e-sent-messages-behavior . sent)
                   ))
          ))
@@ -131,31 +128,35 @@
   ;; additional non-Gmail addresses and want assign them different
   ;; behavior.)
 
-  ;; setup some handy shortcuts
-  ;; you can quickly switch to your Inbox -- press ``ji''
-  ;; then, when you want archive some messages, move them to
-  ;; the 'All Email' folder by pressing ``ma''.
-  ;; (setq mu4e-maildir-shortcuts
-  ;;       '(("/Gmail/Inbox" . ?i)
-  ;;         ("/Gmail/Drafts" . ?d)
-  ;;         ("/Gmail/Sent" . ?s)
-  ;;         ("/Gmail/Trash" . ?t)))
-
   (add-to-list 'mu4e-bookmarks
                (make-mu4e-bookmark
                 :name "All Inboxes"
-                :query "maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox"
+                :query "maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox"
                 :key ?i))
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
 
   (setq pjp/mu4e-inbox-query
-        "(maildir:/Personal/Inbox OR maildir:/Gmail/Inbox) AND flag:unread")
+        "(maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox) AND flag:unread")
+
+  (setq mu4e-maildir-shortcuts
+        '(("/Gmail/Inbox" . ?g)
+          ("/Janelia/Inbox" . ?j)
+          ("/Polidoro/Inbox" . ?p)
+          ))
 
   ;; (defun pjp/go-to-inbox ()
   ;;   (interactive)
   ;;   (mu4e-headers-search pjp/mu4e-inbox-query))
+
+  (setq mu4e-headers-fields
+        '((:human-date . 12)
+          (:from-or-to . 20)
+          (:subject . 50)
+          (:maildir . 16)
+          (:flags . 4)
+          ))
 
   ;; Start mu4e
   (call-interactively 'mu4e))
@@ -189,91 +190,24 @@
   :after mu4e
   :config
   (setq org-mime-export-options '(:section-numbers nil
-                                  :with-author nil
-                                  :with-toc nil))
+                                                   :with-author nil
+                                                   :with-toc nil))
+
+  (add-hook 'message-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c o") 'org-mime-edit-mail-in-org-mode)))
+  (advice-add 'org-mime-edit-src-exit :after
+              (defun pjp-org-mime-edit-src-exit ()
+                "Add function calls after org-mime-edit-src-exit"
+                (org-mime-htmlize)))
+  (advice-add 'org-mime-htmlize :after 'message-goto-to)
+  (add-hook 'message-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c M-o") 'org-mime-htmlize)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c M-o") 'org-mime-org-buffer-htmlize)))
   )
-
-(defun org-mime-org-buffer-htmlize ()
-  "Create an email buffer containing the current org-mode file
-  exported to html and encoded in both html and in org formats as
-  mime alternatives."
-  (interactive)
-  (org-mime-send-buffer 'html)
-  (message-goto-to))
-
-(defun org-mime-subtree ()
-  "Create an email buffer containing the current org-mode subtree
-  exported to a org format or to the format specified by the
-  MAIL_FMT property of the subtree."
-  (interactive)
-  (org-mime-send-subtree
-   (or (org-entry-get nil "MAIL_FMT" org-mime-use-property-inheritance) 'org))
-  (message-goto-to))
-
-(defun mu4e-compose-org-mail ()
- (interactive)
- (mu4e-compose-new)
- (org-mu4e-compose-org-mode))
-
-(defun htmlize-and-send ()
-  "When in an org-mu4e-compose-org-mode message, htmlize and send it."
-  (interactive)
-  (when (member 'org~mu4e-mime-switch-headers-or-body post-command-hook)
-    (org-mime-htmlize)
-    (message-send-and-exit)))
-
-(add-hook 'org-ctrl-c-ctrl-c-hook 'htmlize-and-send t)
-
-(defun org-mime-compose (body fmt file &optional to subject headers)
-  (require 'message)
-  (let ((bhook
-         (lambda (body fmt)
-           (let ((hook (intern (concat "org-mime-pre-"
-                                       (symbol-name fmt)
-                                       "-hook"))))
-             (if (> (eval `(length ,hook)) 0)
-                 (with-temp-buffer
-                   (insert body)
-                   (goto-char (point-min))
-                   (eval `(run-hooks ',hook))
-                   (buffer-string))
-               body))))
-        (fmt (if (symbolp fmt) fmt (intern fmt)))
-        (files (org-element-map (org-element-parse-buffer) 'link
-                 (lambda (link)
-                   (when (string= (org-element-property :type link) "file")
-                     (file-truename (org-element-property :path link)))))))
-    (compose-mail to subject headers nil)
-    (message-goto-body)
-    (cond
-     ((eq fmt 'org)
-      (require 'ox-org)
-      (insert (org-export-string-as
-               (org-babel-trim (funcall bhook body 'org)) 'org t)))
-     ((eq fmt 'ascii)
-      (require 'ox-ascii)
-      (insert (org-export-string-as
-               (concat "#+Title:\n" (funcall bhook body 'ascii)) 'ascii t)))
-     ((or (eq fmt 'html) (eq fmt 'html-ascii))
-      (require 'ox-ascii)
-      (require 'ox-org)
-      (let* ((org-link-file-path-type 'absolute)
-             ;; we probably don't want to export a huge style file
-             (org-export-htmlize-output-type 'inline-css)
-             (org-html-with-latex 'dvipng)
-             (html-and-images
-              (org-mime-replace-images
-               (org-export-string-as (funcall bhook body 'html) 'html t)))
-             (images (cdr html-and-images))
-             (html (org-mime-apply-html-hook (car html-and-images))))
-        (insert (org-mime-multipart
-                 (org-export-string-as
-                  (org-babel-trim
-                   (funcall bhook body (if (eq fmt 'html) 'org 'ascii)))
-                  (if (eq fmt 'html) 'org 'ascii) t)
-                 html)
-                (mapconcat 'identity images "\n")))))
-    (mapc #'mml-attach-file files)))
 
    #+end_src
 
@@ -326,13 +260,6 @@ Create Near
 Expunge Both
 SyncState *
 
-Channel gmail-all
-Far :gmail-remote:"[Gmail]/All Mail"
-Near :gmail-local:All
-Create Near
-Expunge Both
-SyncState *
-
 Channel gmail-drafts
 Far :gmail-remote:"[Gmail]/Drafts"
 Near :gmail-local:Drafts
@@ -364,7 +291,6 @@ SyncState *
 # Get all the channels together into a group.
 Group gmail
 Channel gmail-inbox
-Channel gmail-all
 Channel gmail-drafts
 Channel gmail-sent
 Channel gmail-starred
