@@ -1,6 +1,6 @@
 #+title: Peter Polidoro Emacs Configuration
 #+AUTHOR: Peter Polidoro
-#+EMAIL: peterpolidoro@gmail.com
+#+EMAIL: peter@polidoro.io
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
 * Introduction
@@ -22,7 +22,7 @@
    #+begin_src emacs-lisp
 
 (setq user-full-name "Peter Polidoro"
-      user-mail-address "peterpolidoro@gmail.com")
+      user-mail-address "peter@polidoro.io")
 
    #+end_src
 

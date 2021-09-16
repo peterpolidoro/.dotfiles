@@ -375,9 +375,9 @@ gpg --full-generate-key
 # Keysize: 4096
 # Expires: 0
 # Real name: Peter Polidoro
-# Email address: peterpolidoro@gmail.com
+# Email address: peter@polidoro.io
 # Comments: Peter Polidoro GPG Key
-pass init peterpolidoro@gmail.com
+pass init peter@polidoro.io
 pass insert email/gmail.com/peterpolidoro@gmail.com
 pass insert email/office365.com/polidorop@hhmi.org
 pass insert email/dreamhost.com/peter@polidoro.io

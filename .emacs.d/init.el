@@ -2,7 +2,7 @@
 ;;       in Emacs and init.el will be generated automatically!
 
 (setq user-full-name "Peter Polidoro"
-      user-mail-address "peterpolidoro@gmail.com")
+      user-mail-address "peter@polidoro.io")
 
 ;; Adjust this font size for each system
 (defvar pjp/default-font-size 120)

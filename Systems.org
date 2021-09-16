@@ -1,6 +1,6 @@
 #+title: Peter Polidoro System Configuration with Guix
 #+AUTHOR: Peter Polidoro
-#+EMAIL: peterpolidoro@gmail.com
+#+EMAIL: peter@polidoro.io
 #+PROPERTY: header-args    :tangle-mode (identity #o444)
 #+PROPERTY: header-args:sh :tangle-mode (identity #o555)
 
