@@ -479,27 +479,27 @@
   :after dired
   :hook (dired-mode . dired-collapse-mode))
 
-(use-package openwith
-  :config
-  (setq openwith-associations
-        (list
-         (list (openwith-make-extension-regexp
-                '("mpg" "mpeg" "mp3" "mp4"
-                  "avi" "wmv" "wav" "mov" "flv"
-                  "ogm" "ogg" "mkv"))
-               "mpv"
-               '(file))
-         (list (openwith-make-extension-regexp
-                '("xbm" "pbm" "pgm" "ppm" "pnm"
-                  "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
-               ;; causing feh to be opened...
-               "feh"
-               '(file))
-         (list (openwith-make-extension-regexp
-                '("pdf"))
-               "zathura"
-               '(file))))
-  (openwith-mode 1))
+;; (use-package openwith
+;;   :config
+;;   (setq openwith-associations
+;;         (list
+;;          (list (openwith-make-extension-regexp
+;;                 '("mpg" "mpeg" "mp3" "mp4"
+;;                   "avi" "wmv" "wav" "mov" "flv"
+;;                   "ogm" "ogg" "mkv"))
+;;                "mpv"
+;;                '(file))
+;;          (list (openwith-make-extension-regexp
+;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
+;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
+;;                ;; causing feh to be opened...
+;;                "feh"
+;;                '(file))
+;;          (list (openwith-make-extension-regexp
+;;                 '("pdf"))
+;;                "zathura"
+;;                '(file))))
+;;   (openwith-mode 1))
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
