@@ -5,13 +5,6 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/arduino_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_setup.git
 
-[janelia-arduino-board-index]
-checkout =
-	git clone 'git@github.com:janelia-arduino/janelia-arduino-board-index.git' 'janelia-arduino-board-index'
-	cd janelia-arduino-board-index
-	git remote add public https://github.com/janelia-arduino/janelia-arduino-board-index.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-arduino-board-index.git
-
 [ArduinoJson]
 checkout =
 	git clone 'git@github.com:janelia-arduino/ArduinoJson.git' 'ArduinoJson'
