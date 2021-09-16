@@ -181,13 +181,6 @@ checkout =
 	git remote add public https://github.com/janelia-idf/arduino_dac.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_dac.git
 
-[arduino_libs]
-checkout =
-	git clone 'git@github.com:janelia-idf/arduino_libs.git' 'arduino_libs'
-	cd arduino_libs
-	git remote add public https://github.com/janelia-idf/arduino_libs.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/arduino_libs.git
-
 [arduino_olfactometer]
 checkout =
 	git clone 'git@github.com:janelia-idf/arduino_olfactometer.git' 'arduino_olfactometer'
