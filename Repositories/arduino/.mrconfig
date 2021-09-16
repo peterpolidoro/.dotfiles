@@ -1,12 +1,3 @@
-[arduino-libraries]
-checkout =
-	git clone 'git@github.com:janelia-arduino/arduino-libraries.git' 'arduino-libraries'
-	cd arduino-libraries
-	git remote add public https://github.com/janelia-arduino/arduino-libraries.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/arduino-libraries.git
-	git submodule init
-	git submodule update
-
 [arduino_setup]
 checkout =
 	git clone 'git@github.com:janelia-arduino/arduino_setup.git' 'arduino_setup'
