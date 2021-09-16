@@ -51,7 +51,9 @@ export EDITOR="$VISUAL"
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 # alias teensy_loader_cli='/home/polidorop/teensy/teensy_loader_cli/teensy_loader_cli'
 #source /usr/share/vcstool-completion/vcs.bash
-# alias mrstatus="mr -m run git status -s"
+
+alias mrstatus="mr -m run git status -s"
+
 # alias arduino='/home/polidorop/ArduinoIde/arduino-1.8.13/arduino'
 # vterm_printf(){
 #     if [ -n "$TMUX" ]; then

@@ -3,7 +3,6 @@
 #+EMAIL: peterpolidoro@gmail.com
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
-
 * Introduction
   
   This initialization file is based on David Wilson's awesome Emacs configuration: https://github.com/daviwil
@@ -18,7 +17,6 @@
   #+end_src
 
 * Setup
-  
 ** Who am I?
 
    #+begin_src emacs-lisp
@@ -98,7 +96,7 @@
   :custom
   (geiser-active-implementations '(guile)))
 
-  #+end_src
+   #+end_src
 
    *Guix Packages*
 
@@ -178,7 +176,6 @@
   #+end_src
 
 * Keyboard Bindings
-
 ** ESC Cancels All
 
    #+begin_src emacs-lisp
@@ -211,7 +208,6 @@
    #+end_src
 
 * General Configuration
-
 ** User Interface
 
 *** Clean up Emacs' user interface, make it more minimal.
@@ -1003,7 +999,6 @@
    #+end_src
 
 * Editing Configuration
-
 ** Use spaces instead of tabs for indentation
 
    #+begin_src emacs-lisp
@@ -1076,7 +1071,6 @@
    #+end_src
 
 * Window Management
-
 ** Control Buffer Placement
 
    Emacs' default buffer placement algorithm is pretty disruptive if you like
@@ -1126,7 +1120,6 @@
 
   #+end_src
 * File Browsing
-
 ** Dired
 
    #+begin_src emacs-lisp
@@ -1141,7 +1134,22 @@
   :config
   (setq dired-listing-switches "-agho --group-directories-first"
         dired-omit-verbose nil)
-  
+
+  (defun find-text-files ()
+    "Find all text files in path recursively, not in .git directory."
+    (interactive)
+    (find-dired default-directory
+                "-type f \
+               -not -path \"*/.git/*\" \
+               -not -path \"*.pdf\" \
+               -not -path \"*.zip\" \
+               -not -path \"*.png\" \
+               -not -path \"*.jpg\" \
+               -not -path \"*.gif\" \
+               -not -path \"*.exe\" \
+               -not -path \"*.odt\" \
+"))
+
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode)))
 
@@ -2185,7 +2193,6 @@ pip install --user "python-language-server[all]"
     #+end_src
 
 * Terminals
-
 ** term-mode
 
    =term-mode= is a built-in terminal emulator in Emacs. Because it is written
@@ -2363,7 +2370,6 @@ pip install --user "python-language-server[all]"
        #+end_src
 
 * Applications
-
 ** Email
 
    My mail configuration is stored in [[file:Email.org][Email.org]]. We merely

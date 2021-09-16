@@ -466,7 +466,22 @@
   :config
   (setq dired-listing-switches "-agho --group-directories-first"
         dired-omit-verbose nil)
-  
+
+  (defun find-text-files ()
+    "Find all text files in path recursively, not in .git directory."
+    (interactive)
+    (find-dired default-directory
+                "-type f \
+               -not -path \"*/.git/*\" \
+               -not -path \"*.pdf\" \
+               -not -path \"*.zip\" \
+               -not -path \"*.png\" \
+               -not -path \"*.jpg\" \
+               -not -path \"*.gif\" \
+               -not -path \"*.exe\" \
+               -not -path \"*.odt\" \
+"))
+
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode)))
 
