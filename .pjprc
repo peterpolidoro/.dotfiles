@@ -1,0 +1,9 @@
+#! /bin/sh
+mrstatus() { mr -m run git status -s; }
+updateemailaddress() {
+    find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/peterpolidoro\@gmail.com/peter\@polidoro.io/g';
+    mr -q run git commit -a -m "Update email address";
+    mr -q run git push origin master;
+    mr -q run git push peterpolidoro master;
+}
+alias arduino='~/ArduinoIde/arduino-1.8.13/arduino'

@@ -1,3 +1,0 @@
-#! /bin/sh
-alias mrstatus="mr -m run git status -s"
-alias arduino='~/ArduinoIde/arduino-1.8.13/arduino'

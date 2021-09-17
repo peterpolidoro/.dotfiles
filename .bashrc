@@ -125,4 +125,4 @@ fi
 # Load .bashrc-local to get local login environment
 [ -f ~/.bashrc-local ] && . ~/.bashrc-local
 
-source ~/.alias
+source ~/.pjprc
