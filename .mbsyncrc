@@ -1,0 +1,124 @@
+IMAPAccount gmail
+Host imap.gmail.com
+Port 993
+User peterpolidoro@gmail.com
+PassCmd "pass email/gmail.com/peterpolidoro@gmail.com"
+SSLType IMAPS
+SSLVersions TLSv1.3
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+# Throttle mbsync so we don't go over gmail's quota: OVERQUOTA error would
+# eventually be returned otherwise. For more details see:
+# https://sourceforge.net/p/isync/mailman/message/35458365/
+Timeout 120
+PipelineDepth 50
+
+# Define the remote from which mail will be synced
+IMAPStore gmail-remote
+Account gmail
+
+# Define where mail will be stored
+MaildirStore gmail-local
+Path ~/Email/Gmail/
+Inbox ~/Email/Gmail/Inbox
+# REQUIRED ONLY IF YOU WANT TO DOWNLOAD ALL SUBFOLDERS; SYNCING SLOWS DOWN
+SubFolders Verbatim
+
+Channel gmail-inbox
+Far :gmail-remote:
+Near :gmail-local:
+Patterns "INBOX" "Arch*"
+Create Near
+Expunge Both
+SyncState *
+
+Channel gmail-drafts
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:Drafts
+Create Near
+Expunge Both
+SyncState *
+
+Channel gmail-sent
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:Sent
+Create Near
+Expunge Both
+SyncState *
+
+Channel gmail-starred
+Far :gmail-remote:"[Gmail]/Starred"
+Near :gmail-local:Starred
+Create Near
+Expunge Both
+SyncState *
+
+Channel gmail-trash
+Far :gmail-remote:"[Gmail]/Trash"
+Near :gmail-local:Trash
+Create Near
+Expunge Both
+SyncState *
+
+# Get all the channels together into a group.
+Group gmail
+Channel gmail-inbox
+Channel gmail-drafts
+Channel gmail-sent
+Channel gmail-starred
+Channel gmail-trash
+
+IMAPAccount janelia
+Host outlook.office365.com
+Port 993
+User polidorop@hhmi.org
+PassCmd "pass email/office365.com/polidorop@hhmi.org"
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Timeout 120
+PipelineDepth 50
+
+IMAPStore janelia-remote
+Account janelia
+
+MaildirStore janelia-local
+Path ~/Email/Janelia/
+Inbox ~/Email/Janelia/Inbox
+SubFolders Verbatim
+
+Channel janelia
+Far :janelia-remote:
+Near :janelia-local:
+Patterns *
+Expunge Both
+Sync All
+Create Both
+SyncState *
+
+IMAPAccount polidoro
+Host imap.dreamhost.com
+Port 993
+User peter@polidoro.io
+PassCmd "pass email/dreamhost.com/peter@polidoro.io"
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Timeout 120
+PipelineDepth 50
+
+IMAPStore polidoro-remote
+Account polidoro
+
+MaildirStore polidoro-local
+Path ~/Email/Polidoro/
+Inbox ~/Email/Polidoro/Inbox
+SubFolders Verbatim
+
+Channel polidoro
+Far :polidoro-remote:
+Near :polidoro-local:
+Patterns *
+Expunge Both
+Sync All
+Create Both
+SyncState *
