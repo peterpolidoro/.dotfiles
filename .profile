@@ -16,6 +16,12 @@ done
 GUIX_PROFILE="$HOME/.guix-profile"
 . "$GUIX_PROFILE"/etc/profile
 
+# Load the current Guix profile Note, that the “current” profile should be
+# sourced the last. Thus the latest guix (fetched by guix pull) will have a
+# priority.
+GUIX_PROFILE="$HOME/.config/guix/current"
+. "$GUIX_PROFILE/etc/profile"
+
 # Don't use the system-wide PulseAudio configuration
 # unset PULSE_CONFIG
 # unset PULSE_CLIENTCONFIG
