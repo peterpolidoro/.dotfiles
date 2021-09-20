@@ -6,4 +6,22 @@ updateemailaddress() {
     mr -q run git push origin master;
     mr -q run git push peterpolidoro master;
 }
-alias arduino='~/ArduinoIde/arduino-1.8.13/arduino'
+gitstatusall() {
+    for f in $(pwd)/*; do
+        if [ -d "$f" ]; then
+            cd "$f";
+            echo $(pwd);
+            git status ;
+        fi
+    done
+}
+gitpushall() {
+    for f in $(pwd)/*; do
+        if [ -d "$f" ]; then
+            cd "$f";
+            echo $(pwd);
+            git status;
+        fi
+    done
+}
+alias arduino='~/ArduinoIde/arduino-1.8.16/arduino'
