@@ -72,6 +72,8 @@
    
    "emacs-org"
    
+   "emacs-org-roam"
+   
    "emacs-lsp-mode"
    
    "emacs-lsp-ui"

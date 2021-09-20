@@ -518,14 +518,18 @@
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
+  (org-indent-mode)
+  (diminish org-indent-mode)
   (variable-pitch-mode 1)
-  (auto-fill-mode 0))
+  (auto-fill-mode 0)
+  )
 
 (use-package org
   :defer t
   :hook (org-mode . pjp/org-mode-setup)
   :config
-  (setq org-src-fontify-natively t
+  (setq org-ellipsis " ▾"
+        org-src-fontify-natively t
         org-src-tab-acts-natively t
         org-edit-src-content-indentation 2
         org-hide-block-startup nil
@@ -533,29 +537,29 @@
         org-startup-folded 'content
         org-descriptive-links nil
         org-cycle-separator-lines 2)
-  
+
   (setq org-modules
         '(org-crypt
           org-habit
           org-bookmark
           org-eshell
           org-irc))
-  
+
   (setq org-refile-targets '((nil :maxlevel . 1)
                              (org-agenda-files :maxlevel . 1)))
-  
+
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-use-outline-path t)
-  
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
      (shell . t)
      (python . t)
      (ledger . t)))
-  
+
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-  
+
   ;; NOTE: Subsequent sections are still part of this use-package block!
 
 ;; Since we don't want to disable org-confirm-babel-evaluate all
@@ -602,6 +606,80 @@
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
 (add-to-list 'org-structure-template-alist '("json" . "src json"))
+
+(use-package org-roam
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory "~/Notes/Roam/")
+  (org-roam-completion-everywhere t)
+  (org-roam-completion-system 'default)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      #'org-roam-capture--get-point
+      "%?"
+      :file-name "%<%Y%m%d%H%M%S>-${slug}"
+      :head "#+title: ${title}\n"
+      :unnarrowed t)
+     ("ll" "link note" plain
+      #'org-roam-capture--get-point
+      "* %^{Link}"
+      :file-name "Inbox"
+      :olp ("Links")
+      :unnarrowed t
+      :immediate-finish)
+     ("lt" "link task" entry
+      #'org-roam-capture--get-point
+      "* TODO %^{Link}"
+      :file-name "Inbox"
+      :olp ("Tasks")
+      :unnarrowed t
+      :immediate-finish)))
+  (org-roam-dailies-directory "Journal/")
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry
+      #'org-roam-capture--get-point
+      "* %?"
+      :file-name "Journal/%<%Y-%m-%d>"
+      :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+     ("t" "Task" entry
+      #'org-roam-capture--get-point
+      "* TODO %?\n  %U\n  %a\n  %i"
+      :file-name "Journal/%<%Y-%m-%d>"
+      :olp ("Tasks")
+      :empty-lines 1
+      :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+     ("j" "journal" entry
+      #'org-roam-capture--get-point
+      "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
+      :file-name "Journal/%<%Y-%m-%d>"
+      :olp ("Log")
+      :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+     ("l" "log entry" entry
+      #'org-roam-capture--get-point
+      "* %<%I:%M %p> - %?"
+      :file-name "Journal/%<%Y-%m-%d>"
+      :olp ("Log")
+      :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+     ("m" "meeting" entry
+      #'org-roam-capture--get-point
+      "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
+      :file-name "Journal/%<%Y-%m-%d>"
+      :olp ("Log")
+      :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")))
+  :bind (:map org-roam-mode-map
+              (("C-c n l"   . org-roam)
+               ("C-c n f"   . org-roam-find-file)
+               ("C-c n d"   . org-roam-dailies-find-date)
+               ("C-c n c"   . org-roam-dailies-capture-today)
+               ("C-c n C r" . org-roam-dailies-capture-tomorrow)
+               ("C-c n t"   . org-roam-dailies-find-today)
+               ("C-c n y"   . org-roam-dailies-find-yesterday)
+               ("C-c n r"   . org-roam-dailies-find-tomorrow)
+               ("C-c n g"   . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
 
 ;; This ends the use-package org-mode block
 )
@@ -919,7 +997,7 @@
   :config
   (setq explicit-shell-file-name "bash") ;; Change this to zsh, etc
   ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
-  
+
   ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
 
@@ -940,10 +1018,10 @@
 (defun pjp/configure-eshell ()
   ;; Save command history when commands are entered
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
-  
+
   ;; Truncate buffer for performance
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
-  
+
   (setq eshell-history-size         10000
         eshell-buffer-maximum-lines 10000
         eshell-hist-ignoredups t
@@ -954,11 +1032,11 @@
 (use-package eshell
   :hook (eshell-first-time-mode . pjp/configure-eshell)
   :config
-  
+
   (with-eval-after-load 'esh-opt
     (setq eshell-destroy-buffer-when-process-dies t)
     (setq eshell-visual-commands '("htop")))
-  
+
   (eshell-git-prompt-use-theme 'powerline))
 
 ;; Only fetch mail on knave
