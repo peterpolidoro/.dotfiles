@@ -142,4 +142,14 @@
    
    "emacs-org-mime"
    
+   "emacs-guix"
+   
+   "emacs-daemons"
+   
+   "emacs-docker"
+   
+   "emacs-docker-tramp"
+   
+   "emacs-dockerfile-mode"
+   
    ))

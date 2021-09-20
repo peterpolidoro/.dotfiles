@@ -969,3 +969,16 @@
 (global-set-key (kbd "C-x m") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
+
+(use-package guix
+  :defer t)
+
+(use-package daemons
+  :commands daemons)
+
+(use-package docker
+  :commands docker)
+
+(use-package docker-tramp
+  :defer t
+  :after docker)

@@ -2404,6 +2404,65 @@ pip install --user "python-language-server[all]"
 
    #+end_src
 
+* System Utilities
+** Guix
+
+   #+begin_src emacs-lisp
+
+(use-package guix
+  :defer t)
+
+   #+end_src
+
+   *Guix Packages*
+
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-guix"
+
+   #+end_src
+
+** Daemons
+
+   #+begin_src emacs-lisp
+
+(use-package daemons
+  :commands daemons)
+
+   #+end_src
+
+   *Guix Packages*
+
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-daemons"
+
+   #+end_src
+
+** Docker
+
+   #+begin_src emacs-lisp
+
+(use-package docker
+  :commands docker)
+
+(use-package docker-tramp
+  :defer t
+  :after docker)
+
+   #+end_src
+
+   *Guix Packages*
+
+   #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-docker"
+
+"emacs-docker-tramp"
+
+"emacs-dockerfile-mode"
+
+   #+end_src
 * Emacs Profile
 
   *.config/guix/manifests/emacs.scm:*
