@@ -57,8 +57,6 @@
    
    "emacs-expand-region"
    
-   "emacs-ws-butler"
-   
    "emacs-parinfer-mode"
    
    "emacs-origami-el"
@@ -114,6 +112,10 @@
    
    "emacs-paredit"
    
+   "emacs-geiser"
+   
+   "emacs-geiser-guile"
+   
    "emacs-markdown-mode"
    
    "emacs-web-mode"
@@ -152,10 +154,10 @@
    
    "emacs-daemons"
    
-   "emacs-docker"
+   ;; "emacs-docker"
    
-   "emacs-docker-tramp"
+   ;; "emacs-docker-tramp"
    
-   "emacs-dockerfile-mode"
+   ;; "emacs-dockerfile-mode"
    
    ))

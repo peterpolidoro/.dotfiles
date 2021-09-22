@@ -32,10 +32,6 @@
 (require 'diminish)
 (require 'bind-key)
 
-(use-package geiser
-  :custom
-  (geiser-active-implementations '(guile)))
-
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
@@ -422,9 +418,66 @@
 
 (setq-default indent-tabs-mode nil)
 
-(use-package ws-butler
-  :hook ((text-mode . ws-butler-mode)
-         (prog-mode . ws-butler-mode)))
+(use-package whitespace
+  :diminish (global-whitespace-mode
+             whitespace-mode
+             whitespace-newline-mode)
+  :commands (whitespace-buffer
+             whitespace-cleanup
+             whitespace-mode)
+  :init
+  (progn
+    (hook-into-modes 'whitespace-mode
+                     '(prog-mode-hook
+                       c-mode-common-hook))
+
+    (defun normalize-file ()
+      (interactive)
+      (save-excursion
+        (goto-char (point-min))
+        (whitespace-cleanup)
+        (delete-trailing-whitespace)
+        (goto-char (point-max))
+        (delete-blank-lines)
+        (set-buffer-file-coding-system 'unix)
+        (goto-char (point-min))
+        (while (re-search-forward "\r$" nil t)
+          (replace-match ""))
+        (set-buffer-file-coding-system 'utf-8)
+        (let ((require-final-newline t))
+          (save-buffer))))
+
+    (defun maybe-turn-on-whitespace ()
+      "Depending on the file, maybe clean up whitespace."
+      (let ((file (expand-file-name ".clean"))
+            parent-dir)
+        (while (and (not (file-exists-p file))
+                    (progn
+                      (setq parent-dir
+                            (file-name-directory
+                             (directory-file-name
+                              (file-name-directory file))))
+                      ;; Give up if we are already at the root dir.
+                      (not (string= (file-name-directory file)
+                                    parent-dir))))
+          ;; Move up to the parent dir and try again.
+          (setq file (expand-file-name ".clean" parent-dir)))
+        ;; If we found a change log in a parent, use that.
+        (when (and (file-exists-p file)
+                   (not (file-exists-p ".noclean"))
+                   (not (and buffer-file-name
+                             (string-match "\\.texi\\'" buffer-file-name))))
+          (add-hook 'write-contents-hooks
+                    #'(lambda ()
+                        (ignore (whitespace-cleanup))) nil t)
+          (whitespace-cleanup))))
+
+    (add-hook 'find-file-hooks 'maybe-turn-on-whitespace t))
+
+  :config
+  (progn
+    (remove-hook 'find-file-hooks 'whitespace-buffer)
+    (remove-hook 'kill-buffer-hook 'whitespace-buffer)))
 
 (use-package parinfer
   :disabled
@@ -874,12 +927,27 @@
 
 (use-package paredit
   :config
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  ;; enable in the *scratch* buffer
-  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'ielm-mode-hook #'paredit-mode)
-  (add-hook 'lisp-mode-hook #'paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook #'enable-paredit-mode)
+  )
+
+;; TODO: This causes issues for some reason.
+;; :bind (:map geiser-mode-map
+;;        ("TAB" . completion-at-point))
+
+(use-package geiser
+  :config
+  ;; (setq geiser-default-implementation 'gambit)
+  (setq geiser-default-implementation 'guile)
+  (setq geiser-active-implementations '(gambit guile))
+  (setq geiser-repl-default-port 44555) ; For Gambit Scheme
+  (setq geiser-implementations-alist '(((regexp "\\.scm$") gambit)
+                                       ((regexp "\\.sld") gambit))))
 
 (use-package markdown-mode
   :mode "\\.md\\'"
