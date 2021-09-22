@@ -31,6 +31,10 @@
    
    ;;"emacs-super-save"
    
+   "emacs-pinentry"
+   
+   "pinentry-emacs"
+   
    "emacs-hydra"
    
    "emacs-ivy"

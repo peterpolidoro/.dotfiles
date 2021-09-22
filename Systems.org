@@ -6,8 +6,34 @@
 
 * Channels
 * Systems
-
 ** Base Configuration
+** Machines
+*** Per-System Settings
+
+Some settings need to be customized on a per-system basis without tweaking
+individual configuration files. Thanks to org-mode's =noweb= functionality, I
+can define a set of variables that can be tweaked for each system and applied
+across these configuration files when they get generated.
+
+I also define a function called =pjp/system-settings-get= which can retrieve
+these settings appropriately.
+
+#+begin_src emacs-lisp :tangle .emacs.d/per-system-settings.el :noweb yes
+
+(require 'map) ;; Needed for map-merge
+
+(setq pjp/system-settings
+  (map-merge
+    'list
+    '((desktop/dpi . 180)
+      (emacs/default-face-size . 220)
+      (emacs/variable-face-size . 245)
+      (emacs/fixed-face-size . 200)
+      )
+    <<system-settings>>))
+
+#+end_src
+
 * Profile Management
 
 I like to separate my packages into separate manifests that get installed as
@@ -109,3 +135,52 @@ done
 
 #+end_src
 
+* Dotfiles Management
+** Updating
+
+Updating my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
+
+*.bin/update-dotfiles*
+
+#+begin_src sh :tangle .bin/update-dotfiles :shebang #!/bin/sh
+
+  # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+  cd $(dirname $(readlink -f $0))
+  cd ..
+
+  # The heavy lifting is done by an Emacs script
+  emacs -Q --script ./.emacs.d/tangle-dotfiles.el
+
+  # Make sure any running Emacs instance gets updated settings
+  emacsclient -e '(load-file "~/.emacs.d/per-system-settings.el")' -a "echo 'Emacs is not currently running'"
+
+  # Update configuration symlinks
+  make install
+
+#+end_src
+
+*.emacs.d/tangle-dotfiles.el*
+
+#+begin_src emacs-lisp :tangle .emacs.d/tangle-dotfiles.el
+
+  (require 'org)
+  (load-file "~/.dotfiles/.emacs.d/lisp/pjp-settings.el")
+
+  ;; Don't ask when evaluating code blocks
+  (setq org-confirm-babel-evaluate nil)
+
+  (let* ((dotfiles-path (expand-file-name "~/.dotfiles"))
+	 (org-files (directory-files dotfiles-path nil "\\.org$")))
+
+    (defun pjp/tangle-org-file (org-file)
+      (message "\n\033[1;32mUpdating %s\033[0m\n" org-file)
+      (org-babel-tangle-file (expand-file-name org-file dotfiles-path)))
+
+    ;; Tangle Systems.org first
+    (pjp/tangle-org-file "Systems.org")
+
+    (dolist (org-file org-files)
+      (unless (member org-file '("README.org" "Systems.org"))
+      	(pjp/tangle-org-file org-file))))
+
+#+end_src
