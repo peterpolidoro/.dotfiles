@@ -1029,6 +1029,13 @@ tweaking Org agenda views much less annoying.
 #+begin_src emacs-lisp
 
 (setq-default show-trailing-whitespace t)
+(dolist (hook '(special-mode-hook
+                term-mode-hook
+                comint-mode-hook
+                compilation-mode-hook
+                minibuffer-setup-hook))
+  (add-hook hook
+            (lambda () (setq show-trailing-whitespace nil))))
 
 #+end_src
 
