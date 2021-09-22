@@ -427,9 +427,9 @@
              whitespace-mode)
   :init
   (progn
-    (hook-into-modes 'whitespace-mode
-                     '(prog-mode-hook
-                       c-mode-common-hook))
+    (add-hook 'whitespace-mode
+              '(prog-mode-hook
+                c-mode-common-hook))
 
     (defun normalize-file ()
       (interactive)
