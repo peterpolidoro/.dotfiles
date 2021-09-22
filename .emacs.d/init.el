@@ -156,7 +156,7 @@
 (use-package smartparens
   :config
   (smartparens-global-mode t)
-  
+
   (sp-pair "'" nil :actions :rem)
   (sp-pair "`" nil :actions :rem)
   (setq sp-highlight-pair-overlay nil))
@@ -418,66 +418,7 @@
 
 (setq-default indent-tabs-mode nil)
 
-(use-package whitespace
-  :diminish (global-whitespace-mode
-             whitespace-mode
-             whitespace-newline-mode)
-  :commands (whitespace-buffer
-             whitespace-cleanup
-             whitespace-mode)
-  :init
-  (progn
-    (add-hook 'whitespace-mode
-              '(prog-mode-hook
-                c-mode-common-hook))
-
-    (defun normalize-file ()
-      (interactive)
-      (save-excursion
-        (goto-char (point-min))
-        (whitespace-cleanup)
-        (delete-trailing-whitespace)
-        (goto-char (point-max))
-        (delete-blank-lines)
-        (set-buffer-file-coding-system 'unix)
-        (goto-char (point-min))
-        (while (re-search-forward "\r$" nil t)
-          (replace-match ""))
-        (set-buffer-file-coding-system 'utf-8)
-        (let ((require-final-newline t))
-          (save-buffer))))
-
-    (defun maybe-turn-on-whitespace ()
-      "Depending on the file, maybe clean up whitespace."
-      (let ((file (expand-file-name ".clean"))
-            parent-dir)
-        (while (and (not (file-exists-p file))
-                    (progn
-                      (setq parent-dir
-                            (file-name-directory
-                             (directory-file-name
-                              (file-name-directory file))))
-                      ;; Give up if we are already at the root dir.
-                      (not (string= (file-name-directory file)
-                                    parent-dir))))
-          ;; Move up to the parent dir and try again.
-          (setq file (expand-file-name ".clean" parent-dir)))
-        ;; If we found a change log in a parent, use that.
-        (when (and (file-exists-p file)
-                   (not (file-exists-p ".noclean"))
-                   (not (and buffer-file-name
-                             (string-match "\\.texi\\'" buffer-file-name))))
-          (add-hook 'write-contents-hooks
-                    #'(lambda ()
-                        (ignore (whitespace-cleanup))) nil t)
-          (whitespace-cleanup))))
-
-    (add-hook 'find-file-hooks 'maybe-turn-on-whitespace t))
-
-  :config
-  (progn
-    (remove-hook 'find-file-hooks 'whitespace-buffer)
-    (remove-hook 'kill-buffer-hook 'whitespace-buffer)))
+(setq-default show-trailing-whitespace t)
 
 (use-package parinfer
   :disabled
@@ -663,20 +604,24 @@
 (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
 (add-to-list 'org-structure-template-alist '("json" . "src json"))
 
-;; (use-package org-roam
-;;   :init
-;;   (setq org-roam-v2-ack t)
-;;   :custom
-;;   (org-roam-directory (file-truename "~/Org/Roam"))
-;;   (org-roam-completion-everywhere t)
-;;   (org-roam-completion-system 'default)
-;;   :bind (("C-c n l" . org-roam-buffer-toggle)
-;;          ("C-c n f" . org-roam-node-find)
-;;          ("C-c n g" . org-roam-graph)
-;;          ("C-c n i" . org-roam-node-insert)
-;;          ("C-c n c" . org-roam-capture)
-;;          ;; Dailies
-;;          ("C-c n j" . org-roam-dailies-capture-today)))
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory (file-truename "~/Repositories/peter/org/roam"))
+  (org-roam-completion-everywhere t)
+  (org-roam-completion-system 'default)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
 
 ;; This ends the use-package org-mode block
 )
@@ -697,7 +642,7 @@
 
 (defun org-include-img-from-pdf (&rest _)
   "Convert pdf files to image files in org-mode bracket links.
-                 
+
                                                                          # ()convertfrompdf:t # This is a special comment; tells that the upcoming
                                                                                                                                                                 # link points to the to-be-converted-to file.
                                                                          # If you have a foo.pdf that you need to convert to foo.png, use the
@@ -796,7 +741,7 @@
   (progn
     ;; Use Company for completion
     (bind-key [remap completion-at-point] #'company-complete company-mode-map)
-    
+
     (setq company-tooltip-align-annotations t
           ;; Easy navigation to candidates with M-<n>
           company-show-numbers t)
@@ -960,10 +905,10 @@
                     (markdown-header-face-4 . 1.0)
                     (markdown-header-face-5 . 1.0)))
       (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
-  
+
   (defun pjp/markdown-mode-hook ()
     (pjp/set-markdown-header-font-sizes))
-  
+
   (add-hook 'markdown-mode-hook 'pjp/markdown-mode-hook))
 
 (use-package web-mode

@@ -1,3 +1,10 @@
+[org]
+checkout =
+	git clone 'git@github.com:peterpolidoro/org.git' 'org'
+	cd org
+	git remote add public https://github.com/peterpolidoro/org.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/org.git
+
 [home_automation]
 checkout =
 	git clone 'git@github.com:peterpolidoro/home_automation.git' 'home_automation'
