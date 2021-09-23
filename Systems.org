@@ -23,21 +23,64 @@ these settings appropriately.
 (require 'map) ;; Needed for map-merge
 
 (setq pjp/system-settings
-  (map-merge
-    'list
-    '((desktop/dpi . 180)
-      (emacs/default-face-size . 220)
-      (emacs/variable-face-size . 245)
-      (emacs/fixed-face-size . 200)
-      )
-    <<system-settings>>))
+      (map-merge
+       'list
+       '((desktop/dpi . 180)
+         (emacs/default-face-size . 220)
+         (emacs/variable-face-size . 245)
+         (emacs/fixed-face-size . 200)
+         )
+       <<system-settings>>))
+
+#+end_src
+
+** Upgrading
+
+*.bin/upgrade-system*
+
+#+begin_src sh :tangle .bin/upgrade-system :shebang #!/bin/sh
+
+FILE=/etc/config.scm
+if [ -f "$FILE" ]; then
+    echo "Upgrading Guix System..."
+    guix pull
+    sudo guix system reconfigure /etc/config.scm
+else
+    echo "Upgrading Guix on a Debian-based foreign distro..."
+    sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
+    sudo -i guix pull
+    sudo systemctl restart guix-daemon.service
+fi
+
+#+end_src
+
+*.bin/upgrade-packages*
+
+#+begin_src sh :tangle .bin/upgrade-packages :shebang #!/bin/sh
+
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+
+guix pull
+./upgrade-profiles
+
+#+end_src
+
+*.bin/upgrade-all*
+
+#+begin_src sh :tangle .bin/update-all :shebang #!/bin/sh
+
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+./upgrade-system
+./upgrade-packages
 
 #+end_src
 
 * Profile Management
 
 I like to separate my packages into separate manifests that get installed as
-profiles which can be updated independently. These profiles get installed under
+profiles which can be upgraded independently. These profiles get installed under
 the =~/.guix-extra-profiles= path and sourced by my =~/.profile= when I log in.
 
 To make the management of multiple profiles easier, I've created a couple of shell scripts:
@@ -69,47 +112,47 @@ if [[ $# -eq 0 ]]; then
 fi
 
 for profile in $profiles; do
-  # Remove the path and file extension, if any
-  profileName=$(basename $profile)
-  profileName="${profileName%.*}"
-  profilePath="$GUIX_EXTRA_PROFILES/$profileName"
-  manifestPath=$HOME/.config/guix/manifests/$profileName.scm
+    # Remove the path and file extension, if any
+    profileName=$(basename $profile)
+    profileName="${profileName%.*}"
+    profilePath="$GUIX_EXTRA_PROFILES/$profileName"
+    manifestPath=$HOME/.config/guix/manifests/$profileName.scm
 
-  if [ -f $manifestPath ]; then
-    echo
-    echo -e "${GREEN}Activating profile:" $manifestPath "${NC}"
-    echo
+    if [ -f $manifestPath ]; then
+        echo
+        echo -e "${GREEN}Activating profile:" $manifestPath "${NC}"
+        echo
 
-    mkdir -p $profilePath
-    guix package --manifest=$manifestPath --profile="$profilePath/$profileName"
+        mkdir -p $profilePath
+        guix package --manifest=$manifestPath --profile="$profilePath/$profileName"
 
-    # Source the new profile
-    GUIX_PROFILE="$profilePath/$profileName"
-    if [ -f $GUIX_PROFILE/etc/profile ]; then
-        . "$GUIX_PROFILE"/etc/profile
+        # Source the new profile
+        GUIX_PROFILE="$profilePath/$profileName"
+        if [ -f $GUIX_PROFILE/etc/profile ]; then
+            . "$GUIX_PROFILE"/etc/profile
+        else
+            echo -e "${RED}Couldn't find profile:" $GUIX_PROFILE/etc/profile "${NC}"
+        fi
     else
-        echo -e "${RED}Couldn't find profile:" $GUIX_PROFILE/etc/profile "${NC}"
+        echo "No profile found at path" $profilePath
     fi
-  else
-    echo "No profile found at path" $profilePath
-  fi
 done
 
 #+end_src
 
 ** Updating Profiles
 
-This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs any updates to the packages contained within them.  If no profile names are provided, it walks the list of profile directories under =~/.guix-extra-profiles= and updates each one of them.
+This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs any upgrades to the packages contained within them.  If no profile names are provided, it walks the list of profile directories under =~/.guix-extra-profiles= and upgrades each one of them.
 
 #+begin_src sh
 
-update-profiles emacs
+upgrade-profiles emacs
 
 #+end_src
 
-*.bin/update-profiles:*
+*.bin/upgrade-profiles:*
 
-#+begin_src sh :tangle .bin/update-profiles :shebang #!/bin/bash
+#+begin_src sh :tangle .bin/upgrade-profiles :shebang #!/bin/bash
 
 # NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
 
@@ -123,14 +166,14 @@ if [[ $# -eq 0 ]]; then
 fi
 
 for profile in $profiles; do
-  profileName=$(basename $profile)
-  profilePath=$GUIX_EXTRA_PROFILES/$profileName
+    profileName=$(basename $profile)
+    profilePath=$GUIX_EXTRA_PROFILES/$profileName
 
-  echo
-  echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
-  echo
+    echo
+    echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
+    echo
 
-  guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
+    guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
 done
 
 #+end_src
@@ -140,22 +183,22 @@ done
 
 Updating my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
 
-*.bin/update-dotfiles*
+*.bin/upgrade-dotfiles*
 
-#+begin_src sh :tangle .bin/update-dotfiles :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/bin/sh
 
-  # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
-  cd $(dirname $(readlink -f $0))
-  cd ..
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+cd ..
 
-  # The heavy lifting is done by an Emacs script
-  emacs -Q --script ./.emacs.d/tangle-dotfiles.el
+# The heavy lifting is done by an Emacs script
+emacs -Q --script ./.emacs.d/tangle-dotfiles.el
 
-  # Make sure any running Emacs instance gets updated settings
-  emacsclient -e '(load-file "~/.emacs.d/per-system-settings.el")' -a "echo 'Emacs is not currently running'"
+# Make sure any running Emacs instance gets upgraded settings
+emacsclient -e '(load-file "~/.emacs.d/per-system-settings.el")' -a "echo 'Emacs is not currently running'"
 
-  # Update configuration symlinks
-  make install
+# Upgrade configuration symlinks
+make install
 
 #+end_src
 
@@ -163,24 +206,24 @@ Updating my dotfiles requires running a script in Emacs to loop over all of my l
 
 #+begin_src emacs-lisp :tangle .emacs.d/tangle-dotfiles.el
 
-  (require 'org)
-  (load-file "~/.dotfiles/.emacs.d/lisp/pjp-settings.el")
+(require 'org)
+(load-file "~/.dotfiles/.emacs.d/lisp/pjp-settings.el")
 
-  ;; Don't ask when evaluating code blocks
-  (setq org-confirm-babel-evaluate nil)
+;; Don't ask when evaluating code blocks
+(setq org-confirm-babel-evaluate nil)
 
-  (let* ((dotfiles-path (expand-file-name "~/.dotfiles"))
-	 (org-files (directory-files dotfiles-path nil "\\.org$")))
+(let* ((dotfiles-path (expand-file-name "~/.dotfiles"))
+	     (org-files (directory-files dotfiles-path nil "\\.org$")))
 
-    (defun pjp/tangle-org-file (org-file)
-      (message "\n\033[1;32mUpdating %s\033[0m\n" org-file)
-      (org-babel-tangle-file (expand-file-name org-file dotfiles-path)))
+  (defun pjp/tangle-org-file (org-file)
+    (message "\n\033[1;32mUpdating %s\033[0m\n" org-file)
+    (org-babel-tangle-file (expand-file-name org-file dotfiles-path)))
 
-    ;; Tangle Systems.org first
-    (pjp/tangle-org-file "Systems.org")
+  ;; Tangle Systems.org first
+  (pjp/tangle-org-file "Systems.org")
 
-    (dolist (org-file org-files)
-      (unless (member org-file '("README.org" "Systems.org"))
-      	(pjp/tangle-org-file org-file))))
+  (dolist (org-file org-files)
+    (unless (member org-file '("README.org" "Systems.org"))
+      (pjp/tangle-org-file org-file))))
 
 #+end_src

@@ -11,12 +11,12 @@ if [[ $# -eq 0 ]]; then
 fi
 
 for profile in $profiles; do
-  profileName=$(basename $profile)
-  profilePath=$GUIX_EXTRA_PROFILES/$profileName
+    profileName=$(basename $profile)
+    profilePath=$GUIX_EXTRA_PROFILES/$profileName
 
-  echo
-  echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
-  echo
+    echo
+    echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
+    echo
 
-  guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
+    guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
 done

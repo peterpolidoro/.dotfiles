@@ -1,0 +1,12 @@
+#!/bin/sh
+FILE=/etc/config.scm
+if [ -f "$FILE" ]; then
+    echo "Upgrading Guix System..."
+    guix pull
+    sudo guix system reconfigure /etc/config.scm
+else
+    echo "Upgrading Guix on a Debian-based foreign distro..."
+    sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
+    sudo -i guix pull
+    sudo systemctl restart guix-daemon.service
+fi
