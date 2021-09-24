@@ -305,35 +305,12 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/EncoderPlus.git
 	git remote add source git@github.com:PaulStoffregen/Encoder.git
 
-[NHD-1.69-160128ASC3_Example]
-checkout =
-	git clone 'git@github.com:janelia-arduino/NHD-1.69-160128ASC3_Example.git' 'NHD-1.69-160128ASC3_Example'
-	cd NHD-1.69-160128ASC3_Example
-	git remote add public https://github.com/janelia-arduino/NHD-1.69-160128ASC3_Example.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/NHD-1.69-160128ASC3_Example.git
-
 [SerialReceiver]
 checkout =
 	git clone 'git@github.com:janelia-arduino/SerialReceiver.git' 'SerialReceiver'
 	cd SerialReceiver
 	git remote add public https://github.com/janelia-arduino/SerialReceiver.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/SerialReceiver.git
-
-[Adafruit-PWM-Servo-Driver-Library]
-checkout =
-	git clone 'git@github.com:janelia-arduino/Adafruit-PWM-Servo-Driver-Library.git' 'Adafruit-PWM-Servo-Driver-Library'
-	cd Adafruit-PWM-Servo-Driver-Library
-	git remote add public https://github.com/janelia-arduino/Adafruit-PWM-Servo-Driver-Library.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/Adafruit-PWM-Servo-Driver-Library.git
-	git remote add source git@github.com:adafruit/Adafruit-PWM-Servo-Driver-Library.git
-
-[Firmata]
-checkout =
-	git clone 'git@github.com:janelia-arduino/Firmata.git' 'Firmata'
-	cd Firmata
-	git remote add public https://github.com/janelia-arduino/Firmata.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/Firmata.git
-	git remote add source git@github.com:firmata/arduino.git
 
 [SD]
 checkout =
@@ -492,14 +469,6 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/Ethernet.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/Ethernet.git
 	git remote add source git@github.com:PaulStoffregen/Ethernet.git
-
-[Temboo]
-checkout =
-	git clone 'git@github.com:janelia-arduino/Temboo.git' 'Temboo'
-	cd Temboo
-	git remote add public https://github.com/janelia-arduino/Temboo.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/Temboo.git
-	git remote add source git@github.com:arduino-libraries/Temboo.git
 
 [EncoderFunctors]
 checkout =
@@ -726,14 +695,6 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/TouchInterface.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/TouchInterface.git
 
-[qpn-arduino]
-checkout =
-	git clone 'git@github.com:janelia-arduino/qpn-arduino.git' 'qpn-arduino'
-	cd qpn-arduino
-	git remote add public https://github.com/janelia-arduino/qpn-arduino.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/qpn-arduino.git
-	git remote add source git@github.com:QuantumLeaps/qpn-arduino.git
-
 [AS5048]
 checkout =
 	git clone 'git@github.com:janelia-arduino/AS5048.git' 'AS5048'
@@ -770,14 +731,6 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/WatchdogTeensy4.git
 	git remote add source git@github.com:tonton81/WDT_T4.git
 
-[FreeRTOS-Teensy4]
-checkout =
-	git clone 'git@github.com:janelia-arduino/FreeRTOS-Teensy4.git' 'FreeRTOS-Teensy4'
-	cd FreeRTOS-Teensy4
-	git remote add public https://github.com/janelia-arduino/FreeRTOS-Teensy4.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/FreeRTOS-Teensy4.git
-	git remote add source git@github.com:discord-intech/FreeRTOS-Teensy4.git
-
 [LickportArrayController]
 checkout =
 	git clone 'git@github.com:janelia-arduino/LickportArrayController.git' 'LickportArrayController'
@@ -791,13 +744,6 @@ checkout =
 	cd AT42QT
 	git remote add public https://github.com/janelia-arduino/AT42QT.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/AT42QT.git
-
-[QTouch]
-checkout =
-	git clone 'git@github.com:janelia-arduino/QTouch.git' 'QTouch'
-	cd QTouch
-	git remote add public https://github.com/janelia-arduino/QTouch.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/QTouch.git
 
 [library-registry]
 checkout =
