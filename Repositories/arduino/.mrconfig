@@ -22,13 +22,6 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/StandaloneInterface.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/StandaloneInterface.git
 
-[avr-stl]
-checkout =
-	git clone 'git@github.com:janelia-arduino/avr-stl.git' 'avr-stl'
-	cd avr-stl
-	git remote add public https://github.com/janelia-arduino/avr-stl.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/avr-stl.git
-
 [Flash]
 checkout =
 	git clone 'git@github.com:janelia-arduino/Flash.git' 'Flash'
