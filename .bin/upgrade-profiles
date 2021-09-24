@@ -15,7 +15,7 @@ for profile in $profiles; do
     profilePath=$GUIX_EXTRA_PROFILES/$profileName
 
     echo
-    echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
+    echo -e "${GREEN}Upgrading profile:" $profilePath "${NC}"
     echo
 
     guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"

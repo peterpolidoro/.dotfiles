@@ -62,6 +62,7 @@ fi
 cd $(dirname $(readlink -f $0))
 
 guix pull
+guix package -u
 ./upgrade-profiles
 
 #+end_src
@@ -140,7 +141,7 @@ done
 
 #+end_src
 
-** Updating Profiles
+** Upgrading Profiles
 
 This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs any upgrades to the packages contained within them.  If no profile names are provided, it walks the list of profile directories under =~/.guix-extra-profiles= and upgrades each one of them.
 
@@ -170,7 +171,7 @@ for profile in $profiles; do
     profilePath=$GUIX_EXTRA_PROFILES/$profileName
 
     echo
-    echo -e "${GREEN}Updating profile:" $profilePath "${NC}"
+    echo -e "${GREEN}Upgrading profile:" $profilePath "${NC}"
     echo
 
     guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
@@ -179,9 +180,9 @@ done
 #+end_src
 
 * Dotfiles Management
-** Updating
+** Upgrading
 
-Updating my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
+Upgrading my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
 
 *.bin/upgrade-dotfiles*
 
@@ -216,7 +217,7 @@ make install
 	     (org-files (directory-files dotfiles-path nil "\\.org$")))
 
   (defun pjp/tangle-org-file (org-file)
-    (message "\n\033[1;32mUpdating %s\033[0m\n" org-file)
+    (message "\n\033[1;32mUpgrading %s\033[0m\n" org-file)
     (org-babel-tangle-file (expand-file-name org-file dotfiles-path)))
 
   ;; Tangle Systems.org first
