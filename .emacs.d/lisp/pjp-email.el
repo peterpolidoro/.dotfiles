@@ -20,6 +20,8 @@
   ;; See this link for more info: https://stackoverflow.com/a/43461973
   (setq mu4e-change-filenames-when-moving t)
 
+  (setq mu4e-headers-show-threads nil)
+
   ;; Set up contexts for email accounts
   (setq mu4e-contexts
         (list
