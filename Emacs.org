@@ -487,6 +487,16 @@ based on the prefix keys you entered.
 
 #+end_src
 
+*** Uniquify
+
+#+begin_src emacs-lisp
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq-default frame-title-format "%b (%f)")
+
+#+end_src
+
 ** Theme
 
 #+begin_src emacs-lisp

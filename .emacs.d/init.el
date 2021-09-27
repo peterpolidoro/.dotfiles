@@ -175,6 +175,10 @@
   :init
   (global-undo-tree-mode 1))
 
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq-default frame-title-format "%b (%f)")
+
 (load-theme 'euphoria t t)
 (enable-theme 'euphoria)
 (setq color-theme-is-global t)
