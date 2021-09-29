@@ -23,6 +23,8 @@ This file generates [[file:init.el][init.el]] which will be loaded by Emacs at s
 
 (setq user-full-name "Peter Polidoro"
       user-mail-address "peter@polidoro.io")
+(setq copyright-names-regexp
+      (format "%s <%s>" user-full-name user-mail-address))
 
 #+end_src
 
@@ -2580,6 +2582,19 @@ require it here to have it loaded in the main Emacs configuration.
 ;; "emacs-dockerfile-mode"
 
 #+end_src
+
+* Guix Perfect Setup
+
+#+begin_src emacs-lisp
+
+(with-eval-after-load 'geiser-guile
+  (add-to-list 'geiser-guile-load-path "~/guix"))
+(with-eval-after-load 'yasnippet
+  (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
+(load-file "~/guix/etc/copyright.el")
+
+#+end_src
+
 * Emacs Profile
 
 *.config/guix/manifests/emacs.scm:*

@@ -3,6 +3,8 @@
 
 (setq user-full-name "Peter Polidoro"
       user-mail-address "peter@polidoro.io")
+(setq copyright-names-regexp
+      (format "%s <%s>" user-full-name user-mail-address))
 
 ;; Adjust this font size for each system
 (defvar pjp/default-font-size 120)
@@ -1045,3 +1047,9 @@
 (use-package docker-tramp
   :defer t
   :after docker)
+
+(with-eval-after-load 'geiser-guile
+  (add-to-list 'geiser-guile-load-path "~/guix"))
+(with-eval-after-load 'yasnippet
+  (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
+(load-file "~/guix/etc/copyright.el")
