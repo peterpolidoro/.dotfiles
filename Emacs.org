@@ -1733,6 +1733,18 @@ the path to your virtual environment before loading your project.
 
 #+end_src
 
+*** Send e-mail for Git patches
+
+OK, this isn't Emacs configuration, but it's relevant to development!
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"git"
+"git:send-email"
+
+#+end_src
 ** Company Mode
 
 [[http://company-mode.github.io/][Company Mode]] provides a nicer in-buffer completion interface than

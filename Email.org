@@ -25,6 +25,10 @@
   ;; Load org-mode integration
   (require 'mu4e-org)
 
+  ;; (require git-email-mu4e)
+
+  (setq mu4e-attachment-dir "~/Downloads")
+
   ;; Refresh mail using isync every 5 minutes
   (setq mu4e-update-interval (* 10 60))
   (setq mu4e-get-mail-command "mbsync -a")
@@ -116,7 +120,9 @@
 
   ;; Display options
   (setq mu4e-view-show-images t)
-  (setq mu4e-view-show-addresses 't)
+  (setq mu4e-view-show-addresses t)
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
 
   ;; Composing mail
   (setq mu4e-compose-dont-reply-to-self t)
@@ -125,7 +131,8 @@
   (setq message-send-mail-function 'smtpmail-send-it)
 
   ;; Signing messages (use mml-secure-sign-pgpmime)
-  ;; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
+  (setq mml-secure-openpgp-signers '("C068EB0AB1B573BDB39FA662A121AF8A1FE021D6"))
+  (setq mml-secure-opengpg-sign-with-sender t)
 
   ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
   ;; additional non-Gmail addresses and want assign them different

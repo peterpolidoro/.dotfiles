@@ -86,6 +86,9 @@
    
    "emacs-dap-mode"
    
+   "git"
+   "git:send-email"
+   
    "emacs-company"
    
    "emacs-magit"
