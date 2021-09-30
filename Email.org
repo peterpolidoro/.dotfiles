@@ -6,17 +6,17 @@
 
 ** mu4e
 
-   [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] is the best mail
-   interface I've ever used because it's fast and makes it really easy to power
-   through a huge email backlog. Love the ability to capture links to emails with
-   org-mode too.
+[[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] is the best mail
+interface I've ever used because it's fast and makes it really easy to power
+through a huge email backlog. Love the ability to capture links to emails with
+org-mode too.
 
-   Useful mu4e manual pages:
+Useful mu4e manual pages:
 
-   - [[https://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings][Key bindings]]
-   - [[https://www.djcbsoftware.nl/code/mu/mu4e/Org_002dmode-links.html#Org_002dmode-links][org-mode integration]]
+- [[https://www.djcbsoftware.nl/code/mu/mu4e/MSGV-Keybindings.html#MSGV-Keybindings][Key bindings]]
+- [[https://www.djcbsoftware.nl/code/mu/mu4e/Org_002dmode-links.html#Org_002dmode-links][org-mode integration]]
 
-   #+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
 (use-package mu4e
   ;; :defer 20 ; Wait until 20 seconds after startup
@@ -45,6 +45,23 @@
   (setq mu4e-change-filenames-when-moving t)
 
   (setq mu4e-headers-show-threads nil)
+
+  (setq mml-secure-openpgp-signers '("C068EB0AB1B573BDB39FA662A121AF8A1FE021D6"))
+  (setq mml-secure-opengpg-sign-with-sender t)
+  ;; (setq mm-sign-option 'guided)
+  (defun sign-or-encrypt-message ()
+    (let ((answer (read-from-minibuffer "Sign or encrypt?\nEmpty to do nothing.\n[s/e]: ")))
+      (cond
+       ((string-equal answer "s") (progn
+                                    (message "Signing message.")
+                                    (mml-secure-message-sign-pgpmime)))
+       ((string-equal answer "e") (progn
+                                    (message "Encrypt and signing message.")
+                                    (mml-secure-message-encrypt-pgpmime)))
+       (t (progn
+            (message "Dont sign or encrypt message.")
+            nil)))))
+  (add-hook 'message-send-hook 'sign-or-encrypt-message)
 
   ;; Set up contexts for email accounts
   (setq mu4e-contexts
@@ -130,10 +147,6 @@
   ;; Use mu4e for sending e-mail
   (setq message-send-mail-function 'smtpmail-send-it)
 
-  ;; Signing messages (use mml-secure-sign-pgpmime)
-  (setq mml-secure-openpgp-signers '("C068EB0AB1B573BDB39FA662A121AF8A1FE021D6"))
-  (setq mml-secure-opengpg-sign-with-sender t)
-
   ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
   ;; additional non-Gmail addresses and want assign them different
   ;; behavior.)
@@ -171,13 +184,13 @@
   ;; Start mu4e
   (call-interactively 'mu4e))
 
-   #+end_src
+  #+end_src
 
 ** mu4e-alert
 
-   Use [[https://github.com/iqbalansari/mu4e-alert][mu4e-alert]] to show notifications when e-mail comes in:
+Use [[https://github.com/iqbalansari/mu4e-alert][mu4e-alert]] to show notifications when e-mail comes in:
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
 (use-package mu4e-alert
   :after mu4e
@@ -190,11 +203,11 @@
 
   (mu4e-alert-enable-notifications))
 
-   #+end_src
+#+end_src
 
 ** org-mime
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
 (use-package org-mime
   :after mu4e
@@ -219,23 +232,23 @@
               (local-set-key (kbd "C-c M-o") 'org-mime-org-buffer-htmlize)))
   )
 
-   #+end_src
+#+end_src
 
 ** provide pjp-email
 
-   Provide the =pjp-email= package so that it can be =require='d:
+Provide the =pjp-email= package so that it can be =require='d:
 
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
 (provide 'pjp-email)
 
-   #+end_src
+#+end_src
 
 * Email Synchronization
 
-  Configuration docs: https://manpages.debian.org/unstable/isync/mbsync.1.en.html
+Configuration docs: https://manpages.debian.org/unstable/isync/mbsync.1.en.html
 
-  #+begin_src conf :tangle .mbsyncrc
+#+begin_src conf :tangle .mbsyncrc
 
 IMAPAccount gmail
 Host imap.gmail.com
@@ -362,22 +375,22 @@ Sync All
 Create Both
 SyncState *
 
-  #+end_src
+#+end_src
 
 * Dependencies
 
-  #+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/email.scm
+#+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/email.scm
 
 (specifications->manifest
  '("mu"
    "isync"
    ))
 
-  #+end_src
+#+end_src
 
 * Passwords
 
-  #+BEGIN_SRC sh
+#+BEGIN_SRC sh
 
 gpg --full-generate-key
 # Select (1) RSA and RSA (default)
@@ -391,11 +404,11 @@ pass insert email/gmail.com/peterpolidoro@gmail.com
 pass insert email/office365.com/polidorop@hhmi.org
 pass insert email/dreamhost.com/peter@polidoro.io
 
-  #+END_SRC
+#+END_SRC
 
 * Setup, Sync, Init, and Index
 
-  #+BEGIN_SRC sh
+#+BEGIN_SRC sh
 
 mkdir -p ~/Email/Gmail ~/Email/Janelia ~/Email/Polidoro
 mbsync --list gmail
@@ -404,4 +417,4 @@ mbsync --list polidoro
 mbsync -a
 mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
-  #+END_SRC
+#+END_SRC

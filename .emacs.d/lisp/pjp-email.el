@@ -26,6 +26,23 @@
 
   (setq mu4e-headers-show-threads nil)
 
+  (setq mml-secure-openpgp-signers '("C068EB0AB1B573BDB39FA662A121AF8A1FE021D6"))
+  (setq mml-secure-opengpg-sign-with-sender t)
+  ;; (setq mm-sign-option 'guided)
+  (defun sign-or-encrypt-message ()
+    (let ((answer (read-from-minibuffer "Sign or encrypt?\nEmpty to do nothing.\n[s/e]: ")))
+      (cond
+       ((string-equal answer "s") (progn
+                                    (message "Signing message.")
+                                    (mml-secure-message-sign-pgpmime)))
+       ((string-equal answer "e") (progn
+                                    (message "Encrypt and signing message.")
+                                    (mml-secure-message-encrypt-pgpmime)))
+       (t (progn
+            (message "Dont sign or encrypt message.")
+            nil)))))
+  (add-hook 'message-send-hook 'sign-or-encrypt-message)
+
   ;; Set up contexts for email accounts
   (setq mu4e-contexts
         (list
@@ -109,10 +126,6 @@
 
   ;; Use mu4e for sending e-mail
   (setq message-send-mail-function 'smtpmail-send-it)
-
-  ;; Signing messages (use mml-secure-sign-pgpmime)
-  (setq mml-secure-openpgp-signers '("C068EB0AB1B573BDB39FA662A121AF8A1FE021D6"))
-  (setq mml-secure-opengpg-sign-with-sender t)
 
   ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
   ;; additional non-Gmail addresses and want assign them different
