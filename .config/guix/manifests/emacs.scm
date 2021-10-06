@@ -163,4 +163,6 @@
    
    ;; "emacs-dockerfile-mode"
    
+   "emacs-envrc"
+   
    ))

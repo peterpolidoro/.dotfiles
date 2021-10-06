@@ -1053,3 +1053,5 @@
 (with-eval-after-load 'yasnippet
   (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
 (load-file "~/guix/etc/copyright.el")
+
+(envrc-global-mode)

@@ -2606,7 +2606,22 @@ require it here to have it loaded in the main Emacs configuration.
 (load-file "~/guix/etc/copyright.el")
 
 #+end_src
+* Development Environment
+** direnv
 
+#+begin_src emacs-lisp
+
+(envrc-global-mode)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-envrc"
+
+#+end_src
 * Emacs Profile
 
 *.config/guix/manifests/emacs.scm:*
