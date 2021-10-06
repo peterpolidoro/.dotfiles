@@ -1,4 +1,14 @@
 #! /bin/sh
+
+# Adjust the prompt depending on whether we're in 'guix environment'.
+if [ -n "$GUIX_ENVIRONMENT" ]
+then
+    export PS1='[env]\u@\h \w\$ '
+fi
+
+# Load .bashrc-local to get local login environment
+[ -f ~/.bashrc-local ] && . ~/.bashrc-local
+
 mrstatus() { mr -m run git status -s; }
 updateemailaddress() {
     find . \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i 's/peterpolidoro\@gmail.com/peter\@polidoro.io/g';
@@ -25,3 +35,5 @@ gitpushall() {
     done
 }
 alias arduino='~/ArduinoIde/arduino-1.8.16/arduino'
+
+eval "$(direnv hook bash)"
