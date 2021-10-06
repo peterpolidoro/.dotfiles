@@ -356,3 +356,10 @@ checkout =
 	cd lickport_array_module
 	git remote add public https://github.com/janelia-kicad/lickport_array_module.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/lickport_array_module.git
+
+[stepper_driver]
+checkout =
+	git clone 'git@github.com:janelia-kicad/stepper_driver.git' 'stepper_driver'
+	cd stepper_driver
+	git remote add public https://github.com/janelia-kicad/stepper_driver.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stepper_driver.git
