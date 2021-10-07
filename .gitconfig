@@ -5,3 +5,4 @@
 	rebase = false
 [core]
 	editor = emacs
+	excludesFile = ~/.gitignore_global
