@@ -1,0 +1,16 @@
+#+TITLE: Engineering Configuration
+
+* Guix Packages
+
+#+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/engineering.scm
+
+(specifications->manifest
+ '("kicad"
+   "kicad-doc"
+   "kicad-symbols"
+   "kicad-footprints"
+   "kicad-packages3d"
+   "kicad-templates"
+   ))
+
+#+end_src
