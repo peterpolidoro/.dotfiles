@@ -760,10 +760,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/PrintCppVersion.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/PrintCppVersion.git
 
-[ModularDeviceDocumentation]
+[GenerateModularDeviceDocumentation]
 checkout =
-	git clone 'git@github.com:janelia-arduino/ModularDeviceDocumentation.git' 'ModularDeviceDocumentation'
-	cd ModularDeviceDocumentation
-	git remote add public https://github.com/janelia-arduino/ModularDeviceDocumentation.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/ModularDeviceDocumentation.git
+	git clone 'git@github.com:janelia-arduino/GenerateModularDeviceDocumentation.git' 'GenerateModularDeviceDocumentation'
+	cd GenerateModularDeviceDocumentation
+	git remote add public https://github.com/janelia-arduino/GenerateModularDeviceDocumentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/GenerateModularDeviceDocumentation.git
 
