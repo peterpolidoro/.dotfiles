@@ -1,0 +1,132 @@
+#+TITLE: Desktop Environment
+
+#+PROPERTY: header-args :mkdirp yes
+#+PROPERTY: header-args:sh   :tangle-mode (identity #o555)
+#+PROPERTY: header-args:conf :tangle-mode (identity #o555)
+
+This file contains configuration for my overall desktop environment.  My workflow is driven by Emacs but there are still a number of applications, tools, themes, and fonts that I must install to have a complete desktop experience.
+
+* System Packages
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"glibc-locales"
+"make"
+"stow"
+"direnv"
+
+
+#+end_src
+
+* System Settings
+
+Load system-specific settings from =.emacs.d/per-system-settings.el= and unpack relevant values into blocks so that they can be used in configuration file blocks.  These settings are configured in [[file:Systems.org::*Per-System Settings][Systems.org]].
+
+#+NAME: system-settings
+#+begin_src emacs-lisp :session system-settings
+(load-file ".emacs.d/per-system-settings.el")
+#+end_src
+
+#+NAME: get-setting
+#+begin_src emacs-lisp :var name="nil" :session system-settings
+(pjp/system-settings-get (intern name))
+#+end_src
+
+* Fonts and Themes
+
+I use [[https://github.com/derat/xsettingsd][xsettingsd]] as a minimal settings daemon for Xorg applications.  It replaces similar daemons from desktop environments like GNOME and XFCE and enables me to use a simple configuration file like the following:
+
+*.config/xsettingsd/xsettingsd.conf:*
+
+#+begin_src conf :tangle .config/xsettingsd/xsettingsd.conf :noweb yes
+
+Net/ThemeName "Matcha-dark-azul"
+Net/IconThemeName "Papirus-Dark"
+Gtk/DecorationLayout "menu:minimize,maximize,close"
+Gtk/FontName "Cantarell 11"
+Gtk/MonospaceFontName "Fira Mono 10"
+Gtk/CursorThemeName "Adwaita"
+Xft/Antialias 1
+Xft/Hinting 0
+Xft/HintStyle "hintnone"
+Xft/DPI <<dpi()>> # 1024 * DPI
+
+#+end_src
+
+I also have to do an extra step to make sure Emacs can find the font path from the "desktop" profile.
+
+*.config/fontconfig/fonts.conf:*
+
+#+begin_src xml :tangle .config/fontconfig/fonts.conf
+
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <dir>~/.dotfiles/fonts</dir>
+  <dir>~/.guix-extra-profiles/desktop/desktop/share/fonts</dir>
+  <alias>
+    <family>Apple Color Emoji</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+</fontconfig>
+
+#+end_src
+
+*DPI*
+
+#+NAME: dpi
+#+begin_src emacs-lisp :session=system-settings :var settings=system-settings
+(* 1024 (alist-get 'desktop/dpi pjp/system-settings))
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+;; Settin gs Manager
+"xsettingsd"
+
+;; GTK Themes
+"arc-icon-theme"
+"matcha-theme"
+"hicolor-icon-theme"
+"gnome-icon-theme"
+"gnome-backgrounds"
+"papirus-icon-theme"
+"breeze-icons"
+
+;; Fonts
+"font-fira-code"
+"font-jetbrains-mono"
+"font-iosevka"
+"font-iosevka-aile"
+"font-abattis-cantarell"
+"font-dejavu"
+"font-google-noto"
+"font-gnu-freefont"
+"font-liberation"
+"font-awesome"
+"font-google-material-design-icons"
+"gs-fonts"
+
+#+end_src
+
+* Desktop Profile
+
+The =desktop.scm= manifest holds the list of packages that I use to configure my desktop environment.  The package names are pulled from the relevant sections titled *Guix Packages* in this file (=Desktop.org=).
+
+*.config/guix/manifests/desktop.scm:*
+
+#+begin_src scheme :tangle .config/guix/manifests/desktop.scm :noweb yes
+
+(specifications->manifest
+ '(
+   <<packages>>
+   ))
+
+#+end_src
+

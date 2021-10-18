@@ -540,10 +540,7 @@ makes that automatic.
 
 *** Set the font
 
-I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://fonts.google.com/specimen/Cantarell][Cantarell]] fonts for this configuration which
-will more than likely need to be installed on your machine. Both can usually
-be found in the various Linux distro package managers or downloaded from the
-links above.
+Fonts are installed from the "desktop" profile.
 
 #+begin_src emacs-lisp
 
@@ -553,7 +550,8 @@ links above.
 (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
 
 #+end_src
 

@@ -209,7 +209,8 @@
 (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
 
 (defun pjp/replace-unicode-font-mapping (block-name old-font new-font)
   (let* ((block-idx (cl-position-if
