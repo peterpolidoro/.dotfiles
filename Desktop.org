@@ -17,7 +17,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 "stow"
 "direnv"
 
-
 #+end_src
 
 * System Settings

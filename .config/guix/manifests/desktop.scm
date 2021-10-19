@@ -6,7 +6,6 @@
    "stow"
    "direnv"
    
-   
    ;; Settin gs Manager
    "xsettingsd"
    
