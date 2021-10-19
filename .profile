@@ -1,4 +1,4 @@
-export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+export GUIX_LOCPATH=$HOME/.guix-extra-profiles/desktop/desktop/lib/locale
 
 # Augment PATH
 # export PATH="$HOME/.bin:$HOME/.npm-global/bin:$PATH"
