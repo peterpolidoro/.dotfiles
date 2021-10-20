@@ -1045,7 +1045,7 @@
 ;;   (setq eshell-highlight-prompt nil
 ;;         eshell-prompt-function 'epe-theme-lambda))
 
-(eshell-did-you-mean-setup)
+;; (eshell-did-you-mean-setup)
 
 (use-package eshell-bookmark
   :after eshell
