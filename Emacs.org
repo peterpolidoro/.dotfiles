@@ -47,6 +47,18 @@ This file generates [[file:init.el][init.el]] which will be loaded by Emacs at s
 
 #+end_src
 
+* System Dependent Settings
+
+#+begin_src emacs-lisp
+
+(pcase system-type
+  ((or 'gnu/linx 'gnu)
+   (setq use-package-always-ensure nil))
+  ((or 'darwin 'ms-dos 'windows-nt 'cygwin)
+   (setq use-package-always-ensure t)))
+
+#+end_src
+
 * Handle Warnings
 
 Package cl is deprecated, remove warning.

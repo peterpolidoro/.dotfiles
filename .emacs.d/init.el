@@ -13,6 +13,12 @@
 ;; Make frame transparency overridable
 (defvar pjp/frame-transparency '(95 . 95))
 
+(pcase system-type
+  ((or 'gnu/linx 'gnu)
+   (setq use-package-always-ensure nil))
+  ((or 'darwin 'ms-dos 'windows-nt 'cygwin)
+   (setq use-package-always-ensure t)))
+
 ;;(require 'loadhist)
 ;;(file-dependents (feature-file 'cl))
 (setq byte-compile-warnings '(cl-functions))
