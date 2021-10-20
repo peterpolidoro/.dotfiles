@@ -5,6 +5,7 @@
    "make"
    "stow"
    "direnv"
+   "myrepos"
    
    ;; Settin gs Manager
    "xsettingsd"

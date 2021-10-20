@@ -16,6 +16,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "make"
 "stow"
 "direnv"
+"myrepos"
 
 #+end_src
 
