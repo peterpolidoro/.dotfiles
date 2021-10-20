@@ -17,6 +17,24 @@
   ((or 'gnu/linx 'gnu)
    (setq use-package-always-ensure nil))
   ((or 'darwin 'ms-dos 'windows-nt 'cygwin)
+   (require 'package)
+   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+														("melpa-stable" . "https://stable.melpa.org/packages/")
+														("org" . "https://orgmode.org/elpa/")
+														("elpa" . "https://elpa.gnu.org/packages/")))
+
+	 (package-initialize)
+	 (unless package-archive-contents
+		 (package-refresh-contents))
+
+	 (unless (package-installed-p 'use-package)
+		 (package-install 'use-package))
+
+	 (eval-when-compile
+		 (require 'use-package))
+	 (require 'bind-key)                ;; if you use any :bind variant
+
+	 (require 'use-package-ensure)
    (setq use-package-always-ensure t)))
 
 ;;(require 'loadhist)
