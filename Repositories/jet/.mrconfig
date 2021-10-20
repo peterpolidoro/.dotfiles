@@ -98,3 +98,10 @@ checkout =
 	cd y-arena
 	git remote add public https://github.com/janelia-experimental-technology/y-arena.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/y-arena.git
+
+[windows_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/windows_setup.git' 'windows_setup'
+	cd windows_setup
+	git remote add public https://github.com/janelia-experimental-technology/windows_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/windows_setup.git
