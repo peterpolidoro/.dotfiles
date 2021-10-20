@@ -48,7 +48,7 @@
 
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)
+;; (require 'diminish)
 (require 'bind-key)
 
 ;; Keep transient cruft out of ~/.emacs.d/
