@@ -15,10 +15,6 @@ CairoAntialiasingMode=0
 CanvasScale=0
 [EnvironmentVariables]
 KICAD_PTEMPLATES=/home/polidorop/.guix-extra-profiles/engineering/engineering/share/kicad/template
-KICAD_SYMBOL_DIR=/home/polidorop/.guix-extra-profiles/engineering/engineering/share/kicad/library
-KICAD_TEMPLATE_DIR=/home/polidorop/.guix-extra-profiles/engineering/engineering/share/kicad/template
 KICAD_USER_DIR=/home/polidorop/Repositories/kicad/kicad-libraries
 KICAD_USER_TEMPLATE_DIR=/home/polidorop/Repositories/kicad/kicad-libraries/template
-KISYS3DMOD=/home/polidorop/.guix-extra-profiles/engineering/engineering/share/kicad/packages3d
-KISYSMOD=/home/polidorop/.guix-extra-profiles/engineering/engineering/share/kicad/modules
 KIGITHUB=https://github.com/KiCad

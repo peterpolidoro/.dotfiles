@@ -139,15 +139,23 @@
    
    "emacs-rainbow-mode"
    
+   "emacs-eterm-256color"
+   
    "emacs-vterm"
    
-   "emacs-eshell-z"
+   ;; "emacs-eshell-z"
    
-   "emacs-esh-autosuggest"
+   "emacs-eshell-up"
    
-   "emacs-xterm-color"
+   "emacs-eshell-toggle"
    
-   "emacs-exec-path-from-shell"
+   "emacs-eshell-syntax-highlighting"
+   
+   "emacs-eshell-prompt-extras"
+   
+   "emacs-eshell-did-you-mean"
+   
+   "emacs-eshell-bookmark"
    
    "emacs-mu4e-alert"
    

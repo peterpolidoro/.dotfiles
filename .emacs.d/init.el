@@ -1015,17 +1015,42 @@
         eshell-hist-ignoredups t
         eshell-scroll-to-bottom-on-input t))
 
-;;(use-package eshell-git-prompt)
-
 (use-package eshell
-  :hook (eshell-first-time-mode . pjp/configure-eshell)
+  :hook ((eshell-first-time-mode . pjp/configure-eshell)))
+
+(use-package eshell-up)
+
+(use-package eshell-toggle
+  :custom
+  (eshell-toggle-size-fraction 4)
+  (eshell-toggle-run-command nil)
+  :bind
+  ("C-`" . eshell-toggle))
+
+(use-package eshell-syntax-highlighting
+  :after eshell-mode
   :config
+  ;; Enable in all Eshell buffers.
+  (eshell-syntax-highlighting-global-mode +1))
 
-  (with-eval-after-load 'esh-opt
-    (setq eshell-destroy-buffer-when-process-dies t)
-    (setq eshell-visual-commands '("htop")))
+(with-eval-after-load "esh-opt"
+  (autoload 'epe-theme-multiline-with-status "eshell-prompt-extras")
+  (setq eshell-highlight-prompt nil
+        eshell-prompt-function 'epe-theme-multiline-with-status))
 
-  (eshell-git-prompt-use-theme 'powerline))
+;; (with-eval-after-load "esh-opt"
+;;   (require 'virtualenvwrapper)
+;;   (venv-initialize-eshell)
+;;   (autoload 'epe-theme-lambda "eshell-prompt-extras")
+;;   (setq eshell-highlight-prompt nil
+;;         eshell-prompt-function 'epe-theme-lambda))
+
+(eshell-did-you-mean-setup)
+
+(use-package eshell-bookmark
+  :after eshell
+  :config
+  (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
 ;; Only fetch mail on knave
 ;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))

@@ -2368,6 +2368,14 @@ installed already so you may not have to do anything extra to use it.
 
 #+end_src
 
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-eterm-256color"
+
+#+end_src
+
 ** vterm
 
 [[https://github.com/akermu/emacs-libvterm/][vterm]] is an improved terminal emulator package which uses a compiled native
@@ -2425,37 +2433,9 @@ you press Enter.
 
   #+end_src
 
-** Eshell
+** eshell
 
-[[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html#Contributors-to-Eshell][Eshell]] is Emacs' own shell implementation written in Emacs Lisp. It provides
-you with a cross-platform implementation (even on Windows!) of the common GNU
-utilities you would find on Linux and macOS (=ls=, =rm=, =mv=, =grep=, etc).
-It also allows you to call Emacs Lisp functions directly from the shell and
-you can even set up aliases (like aliasing =vim= to =find-file=). Eshell is
-also an Emacs Lisp REPL which allows you to evaluate full expressions at the
-shell.
-
-The downsides to Eshell are that it can be harder to configure than other
-packages due to the particularity of where you need to set some options for
-them to go into effect, the lack of shell completions (by default) for some
-useful things like Git commands, and that REPL programs sometimes don't work
-as well. However, many of these limitations can be dealt with by good
-configuration and installing external packages, so don't let that discourage
-you from trying it!
-
-
-*Useful key bindings:*
-
-- =C-c C-p= / =C-c C-n= - go back and forward in the buffer's prompts (also =[[= and =]]= with evil-mode)
-- =M-p= / =M-n= - go back and forward in the input history
-- =C-c C-u= - delete the current input string backwards up to the cursor
-- =counsel-esh-history= - A searchable history of commands typed into Eshell
-
-  For more thoughts on Eshell, check out these articles by Pierre Neidhardt:
-  - https://ambrevar.xyz/emacs-eshell/index.html
-  - https://ambrevar.xyz/emacs-eshell-versus-shell/index.html
-
-    #+begin_src emacs-lisp
+#+begin_src emacs-lisp
 
 (defun pjp/configure-eshell ()
   ;; Save command history when commands are entered
@@ -2469,34 +2449,64 @@ you from trying it!
         eshell-hist-ignoredups t
         eshell-scroll-to-bottom-on-input t))
 
-;;(use-package eshell-git-prompt)
-
 (use-package eshell
-  :hook (eshell-first-time-mode . pjp/configure-eshell)
+  :hook ((eshell-first-time-mode . pjp/configure-eshell)))
+
+(use-package eshell-up)
+
+(use-package eshell-toggle
+  :custom
+  (eshell-toggle-size-fraction 4)
+  (eshell-toggle-run-command nil)
+  :bind
+  ("C-`" . eshell-toggle))
+
+(use-package eshell-syntax-highlighting
+  :after eshell-mode
   :config
+  ;; Enable in all Eshell buffers.
+  (eshell-syntax-highlighting-global-mode +1))
 
-  (with-eval-after-load 'esh-opt
-    (setq eshell-destroy-buffer-when-process-dies t)
-    (setq eshell-visual-commands '("htop")))
+(with-eval-after-load "esh-opt"
+  (autoload 'epe-theme-multiline-with-status "eshell-prompt-extras")
+  (setq eshell-highlight-prompt nil
+        eshell-prompt-function 'epe-theme-multiline-with-status))
 
-  (eshell-git-prompt-use-theme 'powerline))
+;; (with-eval-after-load "esh-opt"
+;;   (require 'virtualenvwrapper)
+;;   (venv-initialize-eshell)
+;;   (autoload 'epe-theme-lambda "eshell-prompt-extras")
+;;   (setq eshell-highlight-prompt nil
+;;         eshell-prompt-function 'epe-theme-lambda))
 
+(eshell-did-you-mean-setup)
 
-    #+end_src
+(use-package eshell-bookmark
+  :after eshell
+  :config
+  (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
-    *Guix Packages*
+#+end_src
 
-    #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+*Guix Packages*
 
-"emacs-eshell-z"
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-esh-autosuggest"
+;; "emacs-eshell-z"
 
-"emacs-xterm-color"
+"emacs-eshell-up"
 
-"emacs-exec-path-from-shell"
+"emacs-eshell-toggle"
 
-    #+end_src
+"emacs-eshell-syntax-highlighting"
+
+"emacs-eshell-prompt-extras"
+
+"emacs-eshell-did-you-mean"
+
+"emacs-eshell-bookmark"
+
+#+end_src
 
 * Applications
 ** Email

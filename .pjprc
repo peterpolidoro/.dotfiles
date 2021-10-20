@@ -1,13 +1,5 @@
 #! /bin/sh
 
-# Adjust the prompt depending on whether we're in 'guix environment'.
-if [ -n "$GUIX_ENVIRONMENT" ]
-then
-    export PS1='[env]\u@\h \w\$ '
-fi
-
-PS1='\[\e[0;95m\]\w\[\e[0;94m\]:\[\e[0;94m\]$(git branch 2>/dev/null | grep '"'"'^*'"'"' | colrm 1 2)\n\[\e[0;2m\]\u\[\e[0;2m\]@\[\e[0;2m\]\H\[\e[0;97m\]\$ \[\e[0m\]'
-
 # Load .bashrc-local to get local login environment
 [ -f ~/.bashrc-local ] && . ~/.bashrc-local
 
