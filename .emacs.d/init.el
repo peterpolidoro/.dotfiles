@@ -1106,4 +1106,5 @@
     (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
   (load-file "~/guix/etc/copyright.el"))
 
-(envrc-global-mode)
+(when pjp/is-gnu
+  (envrc-global-mode))
