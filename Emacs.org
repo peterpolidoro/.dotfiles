@@ -85,26 +85,30 @@ use a hook to measure Emacs startup time.
 Use =Guix= to install package repositories and load =use-package= to
 manage package configuration.
 
-** use-package
+** COMMENT use-package
 
 #+begin_src emacs-lisp
 
-(pcase system-type
-  ((or 'gnu/linx 'gnu)
-   (setq use-package-always-ensure nil))
-  ((or 'darwin 'ms-dos 'windows-nt 'cygwin)
-   (require 'package)
-   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-														("melpa-stable" . "https://stable.melpa.org/packages/")
-														("org" . "https://orgmode.org/elpa/")
-														("elpa" . "https://elpa.gnu.org/packages/")))
-	 (package-initialize)
-	 (unless package-archive-contents
-		 (package-refresh-contents))
-	 (unless (package-installed-p 'use-package)
-		 (package-install 'use-package))
-	 (require 'use-package-ensure)
-   (setq use-package-always-ensure t)))
+(setq pjp/is-gnu (or (eq system-type 'gnu/linux) (eq system-type 'gnu)))
+(setq pjp/is-guix-system (and pjp/is-gnu
+                              (require 'f)
+                              (string-equal (f-read "/etc/issue")
+                                            "\nThis is the GNU system.  Welcome.\n")))
+
+(if pjp/is-gnu
+    (setq use-package-always-ensure nil)
+  (require 'package)
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+												   ("melpa-stable" . "https://stable.melpa.org/packages/")
+												   ("org" . "https://orgmode.org/elpa/")
+												   ("elpa" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless package-archive-contents
+	  (package-refresh-contents))
+  (unless (package-installed-p 'use-package)
+	  (package-install 'use-package))
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t))
 
 (eval-when-compile
   (require 'use-package))
@@ -492,9 +496,10 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1))
+(if pjp/is-gnu
+    (use-package undo-tree
+      :init
+      (global-undo-tree-mode 1)))
 
 #+end_src
 
@@ -561,14 +566,15 @@ Fonts are installed from the "desktop" profile.
 
 #+begin_src emacs-lisp
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
+(when pjp/is-gnu
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
-;; Set the variable pitch face
-;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
+  ;; Set the variable pitch face
+  ;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular))
 
 #+end_src
 

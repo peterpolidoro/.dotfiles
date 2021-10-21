@@ -29,28 +29,6 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
-(pcase system-type
-  ((or 'gnu/linx 'gnu)
-   (setq use-package-always-ensure nil))
-  ((or 'darwin 'ms-dos 'windows-nt 'cygwin)
-   (require 'package)
-   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-														("melpa-stable" . "https://stable.melpa.org/packages/")
-														("org" . "https://orgmode.org/elpa/")
-														("elpa" . "https://elpa.gnu.org/packages/")))
-	 (package-initialize)
-	 (unless package-archive-contents
-		 (package-refresh-contents))
-	 (unless (package-installed-p 'use-package)
-		 (package-install 'use-package))
-	 (require 'use-package-ensure)
-   (setq use-package-always-ensure t)))
-
-(eval-when-compile
-  (require 'use-package))
-;; (require 'diminish)
-(require 'bind-key)
-
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
@@ -190,9 +168,10 @@
 (global-set-key (kbd "s-p")    'windmove-up)
 (global-set-key (kbd "s-n")  'windmove-down)
 
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1))
+(if pjp/is-gnu
+    (use-package undo-tree
+      :init
+      (global-undo-tree-mode 1)))
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -220,14 +199,15 @@
 (setq color-theme-is-global t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
+(when pjp/is-gnu
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
-;; Set the variable pitch face
-;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
+  ;; Set the variable pitch face
+  ;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular))
 
 (defun pjp/replace-unicode-font-mapping (block-name old-font new-font)
   (let* ((block-idx (cl-position-if
