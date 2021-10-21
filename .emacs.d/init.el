@@ -311,8 +311,8 @@
         ("Asia/Shanghai" "Shanghai")))
 (setq display-time-world-time-format "%a, %d %b %I:%M %p %Z")
 
-(if pjp/is-gnu
-    (setq epa-pinentry-mode 'loopback)
+(when pjp/is-gnu
+  (setq epa-pinentry-mode 'loopback)
   (pinentry-start))
 
 ;; Set default connection mode to SSH
