@@ -510,6 +510,7 @@
 
 (use-package dired
   :defer 1
+  :ensure nil
   :hook (dired-mode . dired-hide-details-mode)
   :bind (:map dired-mode-map
               ("C-b" . dired-single-up-directory)
@@ -531,8 +532,7 @@
                -not -path \"*.jpg\" \
                -not -path \"*.gif\" \
                -not -path \"*.exe\" \
-               -not -path \"*.odt\" \
-"))
+               -not -path \"*.odt\""))
 
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode)))
