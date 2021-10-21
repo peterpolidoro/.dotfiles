@@ -1099,10 +1099,11 @@
   :defer t
   :after docker)
 
-(with-eval-after-load 'geiser-guile
-  (add-to-list 'geiser-guile-load-path "~/guix"))
-(with-eval-after-load 'yasnippet
-  (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
-(load-file "~/guix/etc/copyright.el")
+(when pjp/is-gnu
+  (with-eval-after-load 'geiser-guile
+    (add-to-list 'geiser-guile-load-path "~/guix"))
+  (with-eval-after-load 'yasnippet
+    (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
+  (load-file "~/guix/etc/copyright.el"))
 
 (envrc-global-mode)
