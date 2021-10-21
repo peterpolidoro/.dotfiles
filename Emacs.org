@@ -85,7 +85,7 @@ use a hook to measure Emacs startup time.
 Use =Guix= to install package repositories and load =use-package= to
 manage package configuration.
 
-** COMMENT use-package
+** use-package
 
 #+begin_src emacs-lisp
 

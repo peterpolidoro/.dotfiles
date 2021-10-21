@@ -1,6 +1,8 @@
 (specifications->manifest
  '("emacs"
    
+   "emacs-use-package"
+   
    "emacs-guix"
    
    "guile"

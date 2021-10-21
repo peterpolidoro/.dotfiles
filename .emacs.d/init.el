@@ -29,6 +29,32 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
+(setq pjp/is-gnu (or (eq system-type 'gnu/linux) (eq system-type 'gnu)))
+(setq pjp/is-guix-system (and pjp/is-gnu
+                              (require 'f)
+                              (string-equal (f-read "/etc/issue")
+                                            "\nThis is the GNU system.  Welcome.\n")))
+
+(if pjp/is-gnu
+    (setq use-package-always-ensure nil)
+  (require 'package)
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+												   ("melpa-stable" . "https://stable.melpa.org/packages/")
+												   ("org" . "https://orgmode.org/elpa/")
+												   ("elpa" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless package-archive-contents
+	  (package-refresh-contents))
+  (unless (package-installed-p 'use-package)
+	  (package-install 'use-package))
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t))
+
+(eval-when-compile
+  (require 'use-package))
+;; (require 'diminish)
+(require 'bind-key)
+
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
