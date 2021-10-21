@@ -761,33 +761,38 @@
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook (lsp-mode . pjp/lsp-mode-setup)
-  :init
-  (setq lsp-keymap-prefix "s-l")  ;; Or 'C-l', 'C-c l'
-  :config
-  (lsp-enable-which-key-integration t))
+(when pjp/is-gnu
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :hook (lsp-mode . pjp/lsp-mode-setup)
+    :init
+    (setq lsp-keymap-prefix "s-l")  ;; Or 'C-l', 'C-c l'
+    :config
+    (lsp-enable-which-key-integration t)))
 
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
+(when pjp/is-gnu
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    (lsp-ui-doc-position 'bottom)))
 
-(use-package lsp-treemacs
-  :after lsp)
+(when pjp/is-gnu
+  (use-package lsp-treemacs
+    :after lsp))
 
-(use-package lsp-ivy
-  :commands lsp-ivy-workspace-symbol)
+(when pjp/is-gnu
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol))
 
-(use-package dap-mode
-  :commands dap-mode
-  :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
-  :config
-  (dap-mode 1)
-  (require 'dap-ui)
-  (dap-ui-mode 1)
-  (require 'dap-lldb))
+(when pjp/is-gnu
+  (use-package dap-mode
+    :commands dap-mode
+    :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
+    :config
+    (dap-mode 1)
+    (require 'dap-ui)
+    (dap-ui-mode 1)
+    (require 'dap-lldb)))
 
 (use-package company
   :defer t

@@ -1599,13 +1599,14 @@ so you should be able to learn a lot just by pressing =C-c l= in a
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook (lsp-mode . pjp/lsp-mode-setup)
-  :init
-  (setq lsp-keymap-prefix "s-l")  ;; Or 'C-l', 'C-c l'
-  :config
-  (lsp-enable-which-key-integration t))
+(when pjp/is-gnu
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :hook (lsp-mode . pjp/lsp-mode-setup)
+    :init
+    (setq lsp-keymap-prefix "s-l")  ;; Or 'C-l', 'C-c l'
+    :config
+    (lsp-enable-which-key-integration t)))
 
 #+end_src
 
@@ -1618,10 +1619,11 @@ what it can do.
 
 #+begin_src emacs-lisp
 
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
+(when pjp/is-gnu
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    (lsp-ui-doc-position 'bottom)))
 
 #+end_src
 
@@ -1643,8 +1645,9 @@ Try these commands with =M-x=:
 
   #+begin_src emacs-lisp
 
-(use-package lsp-treemacs
-  :after lsp)
+(when pjp/is-gnu
+  (use-package lsp-treemacs
+    :after lsp))
 
   #+end_src
 
@@ -1664,8 +1667,9 @@ Try these commands with =M-x=:
 
   #+begin_src emacs-lisp
 
-(use-package lsp-ivy
-  :commands lsp-ivy-workspace-symbol)
+(when pjp/is-gnu
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol))
 
   #+end_src
 
@@ -1692,14 +1696,16 @@ sure to check out the documentation for the debug adapter to see what
 configuration parameters are available to use for your debug templates!
 
 #+begin_src emacs-lisp
-(use-package dap-mode
-  :commands dap-mode
-  :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
-  :config
-  (dap-mode 1)
-  (require 'dap-ui)
-  (dap-ui-mode 1)
-  (require 'dap-lldb))
+
+(when pjp/is-gnu
+  (use-package dap-mode
+    :commands dap-mode
+    :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
+    :config
+    (dap-mode 1)
+    (require 'dap-ui)
+    (dap-ui-mode 1)
+    (require 'dap-lldb)))
 
 #+end_src
 
