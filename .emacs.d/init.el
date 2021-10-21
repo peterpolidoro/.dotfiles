@@ -311,8 +311,9 @@
         ("Asia/Shanghai" "Shanghai")))
 (setq display-time-world-time-format "%a, %d %b %I:%M %p %Z")
 
-(setq epa-pinentry-mode 'loopback)
-(pinentry-start)
+(if pjp/is-gnu
+    (setq epa-pinentry-mode 'loopback)
+  (pinentry-start))
 
 ;; Set default connection mode to SSH
 (setq tramp-default-method "ssh")

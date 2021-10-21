@@ -797,8 +797,9 @@ Emacs can be prompted for the PIN of GPG private keys, we just need to set
 
 #+begin_src emacs-lisp
 
-(setq epa-pinentry-mode 'loopback)
-(pinentry-start)
+(if pjp/is-gnu
+    (setq epa-pinentry-mode 'loopback)
+  (pinentry-start))
 
 #+end_src
 
