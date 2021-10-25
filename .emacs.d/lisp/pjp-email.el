@@ -123,6 +123,7 @@
 
   ;; Composing mail
   (setq mu4e-compose-dont-reply-to-self t)
+  (setq mu4e-compose-format-flowed t)
 
   ;; Use mu4e for sending e-mail
   (setq message-send-mail-function 'smtpmail-send-it)
