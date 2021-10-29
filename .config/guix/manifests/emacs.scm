@@ -57,6 +57,10 @@
    
    "emacs-expand-region"
    
+   "emacs-marginalia"
+   
+   "emacs-embark"
+   
    "emacs-parinfer-mode"
    
    "emacs-origami-el"
