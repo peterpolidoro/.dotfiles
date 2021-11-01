@@ -20,12 +20,12 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/generate_kicad_documentation.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/generate_kicad_documentation.git
 
-[FreeRouting]
+[FreeRoutingArchive]
 checkout =
-	git clone 'git@github.com:janelia-kicad/FreeRouting.git' 'FreeRouting'
-	cd FreeRouting
-	git remote add public https://github.com/janelia-kicad/FreeRouting.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/FreeRouting.git
+	git clone 'git@github.com:janelia-kicad/FreeRoutingArchive.git' 'FreeRoutingArchive'
+	cd FreeRoutingArchive
+	git remote add public https://github.com/janelia-kicad/FreeRoutingArchive.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/FreeRoutingArchive.git
 
 [mezzanine-community]
 checkout =
