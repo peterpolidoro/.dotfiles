@@ -12,6 +12,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
+"nss-certs"
 "glibc-locales"
 "make"
 "stow"

@@ -1,6 +1,7 @@
 (specifications->manifest
  '(
    
+   "nss-certs"
    "glibc-locales"
    "make"
    "stow"

@@ -77,9 +77,10 @@ alias mrstatus="mr -m run git status -s"
 # }
 
 # guix install nss-certs
-export SSL_CERT_DIR="$HOME/.guix-profile/etc/ssl/certs"
-export SSL_CERT_FILE="$HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt"
+export SSL_CERT_DIR="$HOME/.guix-extra-profiles/desktop/desktop/etc/ssl/certs"
+export SSL_CERT_FILE="$HOME/.guix-extra-profiles/desktop/desktop/etc/ssl/certs/ca-certificates.crt"
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
+export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
 # Load .bashrc to get login environment
 [ -f ~/.bashrc ] && . ~/.bashrc
