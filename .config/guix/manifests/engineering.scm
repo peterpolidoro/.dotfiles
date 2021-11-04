@@ -5,4 +5,5 @@
    "kicad-footprints"
    "kicad-packages3d"
    "kicad-templates"
+   "imagemagick"
    ))
