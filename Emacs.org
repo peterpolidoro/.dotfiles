@@ -2414,6 +2414,27 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 
 #+end_src
 
+** Editing
+*** CSV Files
+
+#+begin_src emacs-lisp
+
+(use-package csv)
+
+(use-package csv-mode)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-csv"
+
+"emacs-csv-mode"
+
+#+end_src
+
 * Terminals
 ** term-mode
 

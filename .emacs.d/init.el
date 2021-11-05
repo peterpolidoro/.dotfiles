@@ -1045,6 +1045,10 @@
            typescript-mode
            js2-mode)))
 
+(use-package csv)
+
+(use-package csv-mode)
+
 (use-package term
   :config
   (setq explicit-shell-file-name "bash") ;; Change this to zsh, etc

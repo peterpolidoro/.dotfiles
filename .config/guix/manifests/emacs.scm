@@ -143,6 +143,10 @@
    
    "emacs-rainbow-mode"
    
+   "emacs-csv"
+   
+   "emacs-csv-mode"
+   
    "emacs-eterm-256color"
    
    "emacs-vterm"
