@@ -118,3 +118,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+if [ -n "$GUIX_ENVIRONMENT" ]
+then
+    export PS1="\u@\h \w [guix]\$ "
+fi
