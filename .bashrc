@@ -123,3 +123,8 @@ if [ -n "$GUIX_ENVIRONMENT" ]
 then
     export PS1="\u@\h \w [guix]\$ "
 fi
+
+if [ -x "$(command -v direnv)" ]
+then
+  eval "$(direnv hook bash)"
+fi
