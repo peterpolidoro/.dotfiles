@@ -2734,8 +2734,8 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src emacs-lisp
 
-(when pjp/is-gnu
-  (envrc-global-mode))
+;; (when pjp/is-gnu
+;;   (envrc-global-mode))
 
 #+end_src
 
