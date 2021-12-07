@@ -767,3 +767,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/GenerateModularDeviceDocumentation.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/GenerateModularDeviceDocumentation.git
 
+[TMC2209]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TMC2209.git' 'TMC2209'
+	cd TMC2209
+	git remote add public https://github.com/janelia-arduino/TMC2209.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TMC2209.git
+

@@ -39,3 +39,6 @@ chain = true
 
 [embedded]
 chain = true
+
+[guix]
+chain = true

@@ -1,0 +1,6 @@
+[guix-janelia]
+checkout =
+	git clone 'git@github.com:guix-janelia/guix-janelia.git' 'guix-janelia'
+	cd guix-janelia
+	git remote add public https://github.com/guix-janelia/guix-janelia.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/guix-janelia.git
