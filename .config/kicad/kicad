@@ -7,11 +7,11 @@ KicadFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer
 KicadFrameMostRecentlyUsedPath=/home/polidorop/Repositories/kicad/mouse_reach_controller/
 LeftWinWidth=331
 file1=/home/polidorop/Repositories/kicad/mouse_reach_controller/mouse_reach_controller.pro
-file2=/home/polidorop/Repositories/kicad/lickport_array_module/lickport_array_module.pro
-file3=/home/polidorop/Repositories/kicad/lickport_array_module/lickport_interface.pro
-file4=/home/polidorop/Repositories/kicad/modular_device_base_3x2/modular_device_base_3x2.pro
-file5=/home/polidorop/Repositories/kicad/stepper_controller_5x3/stepper_controller_5x3.pro
-file6=/home/polidorop/Repositories/kicad/stepper_driver/stepper_driver.pro
+file2=/home/polidorop/Repositories/kicad/stepper_driver/stepper_driver.pro
+file3=/home/polidorop/Repositories/kicad/lickport_array_module/lickport_array_module.pro
+file4=/home/polidorop/Repositories/kicad/lickport_array_module/lickport_interface.pro
+file5=/home/polidorop/Repositories/kicad/modular_device_base_3x2/modular_device_base_3x2.pro
+file6=/home/polidorop/Repositories/kicad/stepper_controller_5x3/stepper_controller_5x3.pro
 file7=/home/external-drive/polidorop/Repositories/kicad/stepper_controller_3x2/stepper_controller_3x2.pro
 file8=/home/polidorop/git/kicad/pellet_dispenser_controller/pellet_dispenser_controller.pro
 file9=/home/polidorop/git/kicad/encoder_interface_simple_3x2/encoder_interface_simple_3x2.pro

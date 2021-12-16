@@ -4,8 +4,8 @@ GerberFramePos_y=25
 GerberFrameSize_x=1920
 GerberFrameSize_y=1144
 GerberFrameMaximized=1
-GerberFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=617;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=AuxToolbar;caption=;state=139644;dir=1;layer=4;row=0;pos=0;prop=100000;bestw=967;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=518;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=LayersManager;caption=Layers Manager;state=1532;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=170;besth=32;minw=170;minh=32;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=170;floath=32|name=DrawFrame;caption=;state=1022;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=384;besth=178;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrameGal;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=384;besth=178;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(1,4,0)=34|dock_size(3,6,0)=34|dock_size(4,3,0)=36|dock_size(2,3,0)=170|dock_size(5,0,0)=386|
-GerberFrameMostRecentlyUsedPath=/home/polidorop/Downloads/SK816A177631WF
+GerberFramePerspective=layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=617;besth=36;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=AuxToolbar;caption=;state=139644;dir=1;layer=4;row=0;pos=0;prop=100000;bestw=967;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=518;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=LayersManager;caption=Layers Manager;state=1532;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=327;besth=32;minw=327;minh=32;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=327;floath=32|name=DrawFrame;caption=;state=1022;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=384;besth=178;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrameGal;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=384;besth=178;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=36|dock_size(1,4,0)=34|dock_size(3,6,0)=34|dock_size(4,3,0)=36|dock_size(2,3,0)=366|dock_size(5,0,0)=386|
+GerberFrameMostRecentlyUsedPath=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers
 GerberFrameUnits=1
 GerberFrameShowGrid=1
 GerberFrameGridColor=rgb(132, 132, 132)
@@ -65,15 +65,15 @@ ShowNegativeObjectsOpt=0
 MousewheelPAN=0
 ZoomNoCenter=0
 AutoPAN=1
-file1=/home/polidorop/Downloads/SK816A177631WF/rout
-file2=/home/polidorop/Downloads/SK816A177631WF/gts
-file3=/home/polidorop/Downloads/SK816A177631WF/gtp
-file4=/home/polidorop/Downloads/SK816A177631WF/gto
-file5=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_SilkS.gto
-file6=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Paste.gtp
-file7=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Mask.gts
-file8=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Cu.gtl
-file9=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-Edge_Cuts.gm1
+file1=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_SilkS.gto
+file2=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Mask.gts
+file3=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Paste.gtp
+file4=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-F_Cu.gtl
+file5=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-Edge_Cuts.gm1
+file6=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-B_SilkS.gbo
+file7=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-B_Paste.gbp
+file8=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-B_Mask.gbs
+file9=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller-B_Cu.gbl
 [drl_files]
 file1=/home/polidorop/Repositories/kicad/mouse_reach_controller/gerbers/mouse_reach_controller.drl
 file2=/home/polidorop/git/kicad/backlight_controller_6x3/gerbers/backlight_controller_6x3.drl
