@@ -774,3 +774,25 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/TMC2209.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/TMC2209.git
 
+[MouseReachRotaryController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MouseReachRotaryController.git' 'MouseReachRotaryController'
+	cd MouseReachRotaryController
+	git remote add public https://github.com/janelia-arduino/MouseReachRotaryController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachRotaryController.git
+
+[MouseReachLinearController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MouseReachLinearController.git' 'MouseReachLinearController'
+	cd MouseReachLinearController
+	git remote add public https://github.com/janelia-arduino/MouseReachLinearController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachLinearController.git
+
+[MouseReachJoystickController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MouseReachJoystickController.git' 'MouseReachJoystickController'
+	cd MouseReachJoystickController
+	git remote add public https://github.com/janelia-arduino/MouseReachJoystickController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachJoystickController.git
+
+
