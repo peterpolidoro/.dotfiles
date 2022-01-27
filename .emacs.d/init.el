@@ -318,122 +318,16 @@
 ;; Set default connection mode to SSH
 (setq tramp-default-method "ssh")
 
-(use-package hydra
-  :defer 1)
-
 (defhydra hydra-zoom (global-map "C-=")
   "zoom"
   ("=" text-scale-increase "in")
   ("-" text-scale-decrease "out"))
 
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper))
-  :init
-  (ivy-mode 1)
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-wrap t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq enable-recursive-minibuffers t)
-
-  ;; Use different regex strategies per completion command
-  (push '(completion-at-point . ivy--regex-fuzzy) ivy-re-builders-alist) ;; This doesn't seem to work...
-  (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
-  (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist)
-
-  ;; Set minibuffer height for different commands
-  (setf (alist-get 'counsel-projectile-ag ivy-height-alist) 15)
-  (setf (alist-get 'counsel-projectile-rg ivy-height-alist) 15)
-  (setf (alist-get 'swiper ivy-height-alist) 15)
-  (setf (alist-get 'counsel-switch-buffer ivy-height-alist) 7))
-
-(use-package ivy-hydra
-  :defer t
-  :after hydra)
-
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1)
-  :after counsel
-  :config
-  (setq ivy-format-function #'ivy-format-function-line)
-  (setq ivy-rich-display-transformers-list
-        (plist-put ivy-rich-display-transformers-list
-                   'ivy-switch-buffer
-                   '(:columns
-                     ((ivy-rich-candidate (:width 40))
-                      (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right)); return the buffer indicators
-                      (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))          ; return the major mode info
-                      (ivy-rich-switch-buffer-project (:width 15 :face success))             ; return project name using `projectile'
-                      (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))  ; return file path relative to project root or `default-directory' if project is nil
-                     :predicate
-                     (lambda (cand)
-                       (if-let ((buffer (get-buffer cand)))
-                           ;; Don't mess with EXWM buffers
-                           (with-current-buffer buffer
-                             (not (derived-mode-p 'exwm-mode)))))))))
-
-(use-package counsel
-  :demand t
-  :bind (("M-x" . counsel-M-x)
-         ("C-x b" . counsel-ibuffer)
-         ("C-x C-f" . counsel-find-file)
-         ("C-M-l" . counsel-imenu)
-         ([remap describe-function] . counsel-describe-function)
-         ([remap describe-variable] . counsel-describe-variable)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
-  :custom
-  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-  :config
-  (setq ivy-initial-inputs-alist nil) ;; Don't start searches with ^
-  (counsel-mode 1))
-
-(use-package flx  ;; Improves sorting for fuzzy-matched results
-  :after ivy
-  :defer t
-  :init
-  (setq ivy-flx-limit 10000))
-
-(use-package smex ;; Adds M-x recent command sorting for counsel-M-x
-  :defer 1
-  :after counsel)
-
-(use-package wgrep)
-
-(use-package ivy-posframe
-  :disabled
-  :custom
-  (ivy-posframe-width      115)
-  (ivy-posframe-min-width  115)
-  (ivy-posframe-height     10)
-  (ivy-posframe-min-height 10)
-  :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (setq ivy-posframe-parameters '((parent-frame . nil)
-                                  (left-fringe . 8)
-                                  (right-fringe . 8)))
-  (ivy-posframe-mode 1))
-
-(use-package prescient
-  :after counsel
-  :config
-  (prescient-persist-mode 1))
-
-(use-package ivy-prescient
-  :after prescient
-  :config
-  (ivy-prescient-mode 1))
-
 (use-package helpful
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-function] . helpful-function)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key)
   ;;("C-." . helpful-at-point)
   ("C-h c". helpful-command))
@@ -448,24 +342,221 @@
                  ))
   (setq pjp/help-buffers (cdr pjp/help-buffers)))
 
-(use-package avy
-  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
+(use-package hydra
+  :defer 1)
 
-(use-package avy
-  :bind (("C-:" . avy-goto-char)
-         ("C-;" . avy-goto-char-2)
-         ("M-g f" . avy-goto-line)
-         ("M-g w" . avy-goto-word-1)
-         ("M-g e" . avy-goto-word-0)))
+(use-package vertico
+  :init
+  (vertico-mode)
 
-(use-package expand-region
-  :bind (("M-[" . er/expand-region)
-         ("M-]" . er/contract-region)
-         ("C-(" . er/mark-outside-pairs)
-         ("C-)" . er/mark-inside-pairs)))
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  ;; (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  (setq vertico-cycle t))
+
+(use-package emacs
+  :init
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; Alternatively try `consult-completing-read-multiple'.
+  (defun crm-indicator (args)
+    (cons (concat "[CRM] " (car args)) (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+  ;; Vertico commands are hidden in normal buffers.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable recursive minibuffers
+  (setq enable-recursive-minibuffers t)
+
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+
+  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+  ;; (setq read-extended-command-predicate
+  ;;       #'command-completion-default-include-p)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete))
+
+(use-package orderless
+  :init
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package corfu
+  ;; Optional customizations
+  ;; :custom
+  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  ;; (corfu-auto t)                 ;; Enable auto completion
+  ;; (corfu-commit-predicate nil)   ;; Do not commit selected candidates on next input
+  ;; (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  ;; (corfu-quit-no-match t)        ;; Automatically quit if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
+  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+
+  ;; You may want to enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since dabbrev can be used globally (M-/).
+  :init
+  (corfu-global-mode))
+
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (;; C-c bindings (mode-specific-map)
+         ("C-c h" . consult-history)
+         ("C-c m" . consult-mode-command)
+         ("C-c k" . consult-kmacro)
+         ;; C-x bindings (ctl-x-map)
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ;; Custom M-# bindings for fast register access
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
+         ;; Other custom bindings
+         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ("<help> a" . consult-apropos)            ;; orig. apropos-command
+         ;; M-g bindings (goto-map)
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings (search-map)
+         ("M-s d" . consult-find)
+         ("M-s D" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi))           ;; needed by consult-line to detect isearch
+
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI. You may want to also
+  ;; enable `consult-preview-at-point-mode` in Embark Collect buffers.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  ;; The :init configuration is always executed (Not lazy)
+  :init
+
+  ;; Optionally configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Optionally replace `completing-read-multiple' with an enhanced version.
+  (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
+  :config
+
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key (kbd "M-."))
+  ;; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme
+   :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+   :preview-key (kbd "M-."))
+
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; (kbd "C-+")
+
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+  ;; Optionally configure a function which returns the project root directory.
+  ;; There are multiple reasonable alternatives to chose from.
+  ;;;; 1. project.el (project-roots)
+  (setq consult-project-root-function
+        (lambda ()
+          (when-let (project (project-current))
+            (car (project-roots project)))))
+  ;;;; 2. projectile.el (projectile-project-root)
+  ;; (autoload 'projectile-project-root "projectile")
+  ;; (setq consult-project-root-function #'projectile-project-root)
+  ;;;; 3. vc.el (vc-root-dir)
+  ;; (setq consult-project-root-function #'vc-root-dir)
+  ;;;; 4. locate-dominating-file
+  ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
+)
 
 (use-package marginalia
-  :config
+  ;; Either bind `marginalia-cycle` globally or only in the minibuffer
+  :bind (("M-A" . marginalia-cycle)
+         :map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
+
+  ;; Must be in the :init section of use-package such that the mode gets
+  ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
 
 (use-package embark
@@ -488,15 +579,31 @@
                  (window-parameters (mode-line-format . none)))))
 
 ;; Consult users will also want the embark-consult package.
-;; (use-package embark-consult
-;;   :ensure t
-;;   :after (embark consult)
-;;   :demand t ; only necessary if you have the hook below
-;;   ;; if you want to have consult previews as you move around an
-;;   ;; auto-updating embark collect buffer
-;;   :hook
-;;   (embark-collect-mode . consult-preview-at-point-mode)
-;; )
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :demand t ; only necessary if you have the hook below
+  ;; if you want to have consult previews as you move around an
+  ;; auto-updating embark collect buffer
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
+)
+
+(use-package avy
+  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
+
+(use-package avy
+  :bind (("C-:" . avy-goto-char)
+         ("C-;" . avy-goto-char-2)
+         ("M-g f" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)
+         ("M-g e" . avy-goto-word-0)))
+
+(use-package expand-region
+  :bind (("M-[" . er/expand-region)
+         ("M-]" . er/contract-region)
+         ("C-(" . er/mark-outside-pairs)
+         ("C-)" . er/mark-inside-pairs)))
 
 (setq-default indent-tabs-mode nil)
 

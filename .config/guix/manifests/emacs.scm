@@ -35,31 +35,25 @@
    
    "pinentry-emacs"
    
-   "emacs-hydra"
-   
-   "emacs-ivy"
-   
-   "emacs-ivy-rich"
-   
-   "emacs-counsel"
-   
-   ;; "emacs-ivy-posframe"
-   
-   "emacs-prescient"
-   
-   "emacs-flx"
-   
-   "emacs-wgrep"
-   
    "emacs-helpful"
    
-   "emacs-avy"
+   "emacs-hydra"
    
-   "emacs-expand-region"
+   "emacs-vertico"
+   
+   "emacs-orderless"
+   
+   "emacs-corfu"
+   
+   "emacs-consult"
    
    "emacs-marginalia"
    
    "emacs-embark"
+   
+   "emacs-avy"
+   
+   "emacs-expand-region"
    
    "emacs-parinfer-mode"
    
