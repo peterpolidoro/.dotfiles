@@ -1,3 +1,4 @@
 (specifications->manifest
  '("gimp"
+   "inkscape"
    ))

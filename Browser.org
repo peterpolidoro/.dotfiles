@@ -1,4 +1,4 @@
-#+TITLE: Multimedia Configuration
+#+TITLE: Browser Configuration
 
 * Guix Packages
 
