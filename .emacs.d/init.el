@@ -345,54 +345,67 @@
 (use-package hydra
   :defer 1)
 
-(use-package vertico
-  :init
-  (vertico-mode)
+	(defun pjp/minibuffer-backward-kill (arg)
+		"When minibuffer is completing a file name delete up to parent
+		folder, otherwise delete a word"
+		(interactive "p")
+		(if minibuffer-completing-file-name
+				;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+				(if (string-match-p "/." (minibuffer-contents))
+						(zap-up-to-char (- arg) ?/)
+					(delete-minibuffer-contents))
+			(delete-word (- arg))))
 
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
+	(use-package vertico
+		:bind (:map minibuffer-local-map
+					 ("M-<backspace>" . pjp/minibuffer-backward-kill))
+		:init
+		(vertico-mode)
 
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
+		;; Different scroll margin
+		;; (setq vertico-scroll-margin 0)
 
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
+		;; Show more candidates
+		;; (setq vertico-count 20)
 
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  (setq vertico-cycle t))
+		;; Grow and shrink the Vertico minibuffer
+		;; (setq vertico-resize t)
 
-(use-package emacs
-  :init
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; Alternatively try `consult-completing-read-multiple'.
-  (defun crm-indicator (args)
-    (cons (concat "[CRM] " (car args)) (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+		;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+		(setq vertico-cycle t))
 
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+	(use-package emacs
+		:init
+		;; Add prompt indicator to `completing-read-multiple'.
+		;; Alternatively try `consult-completing-read-multiple'.
+		(defun crm-indicator (args)
+			(cons (concat "[CRM] " (car args)) (cdr args)))
+		(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+		;; Do not allow the cursor in the minibuffer prompt
+		(setq minibuffer-prompt-properties
+					'(read-only t cursor-intangible t face minibuffer-prompt))
+		(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t)
+		;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+		;; Vertico commands are hidden in normal buffers.
+		;; (setq read-extended-command-predicate
+		;;       #'command-completion-default-include-p)
 
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
+		;; Enable recursive minibuffers
+		(setq enable-recursive-minibuffers t)
 
-  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+		;; TAB cycle if there are only few candidates
+		(setq completion-cycle-threshold 3)
 
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete))
+		;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+		;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+		;; (setq read-extended-command-predicate
+		;;       #'command-completion-default-include-p)
+
+		;; Enable indentation+completion using the TAB key.
+		;; `completion-at-point' is often bound to M-TAB.
+		(setq tab-always-indent 'complete))
 
 (use-package orderless
   :init
