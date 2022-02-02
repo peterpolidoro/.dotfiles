@@ -203,23 +203,6 @@
 (setq uniquify-buffer-name-style 'forward)
 (setq-default frame-title-format "%b (%f)")
 
-(defun pjp/split-window-below-and-switch ()
-  "Split the window horizontally, then switch to the new pane."
-  (interactive)
-  (split-window-below)
-  (balance-windows)
-  (other-window 1))
-
-(defun pjp/split-window-right-and-switch ()
-  "Split the window vertically, then switch to the new pane."
-  (interactive)
-  (split-window-right)
-  (balance-windows)
-  (other-window 1))
-
-(global-set-key (kbd "C-x 2") 'pjp/split-window-below-and-switch)
-(global-set-key (kbd "C-x 3") 'pjp/split-window-right-and-switch)
-
 (load-theme 'euphoria t t)
 (enable-theme 'euphoria)
 (setq color-theme-is-global t)

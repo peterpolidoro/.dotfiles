@@ -524,9 +524,9 @@ based on the prefix keys you entered.
 *** Switch and rebalance windows when splitting
 
 When splitting a window, I invariably want to switch to the new window. This
-makes that automatic.
+makes that automatic. Disable for now.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 
 (defun pjp/split-window-below-and-switch ()
   "Split the window horizontally, then switch to the new pane."
