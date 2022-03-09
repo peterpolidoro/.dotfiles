@@ -105,3 +105,10 @@ checkout =
 	cd windows_setup
 	git remote add public https://github.com/janelia-experimental-technology/windows_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/windows_setup.git
+
+[mouse_reach_rigs]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/mouse_reach_rigs.git' 'mouse_reach_rigs'
+	cd mouse_reach_rigs
+	git remote add public https://github.com/janelia-experimental-technology/mouse_reach_rigs.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mouse_reach_rigs.git
