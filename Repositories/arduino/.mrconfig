@@ -795,4 +795,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/MouseReachJoystickController.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachJoystickController.git
 
+[MouseReachTestController]
+checkout =
+	git clone 'git@github.com:janelia-arduino/MouseReachTestController.git' 'MouseReachTestController'
+	cd MouseReachTestController
+	git remote add public https://github.com/janelia-arduino/MouseReachTestController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachTestController.git
 
