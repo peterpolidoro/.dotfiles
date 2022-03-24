@@ -4,3 +4,10 @@ checkout =
 	cd guix-janelia
 	git remote add public https://github.com/guix-janelia/guix-janelia.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/guix-janelia.git
+
+[guix-notes]
+checkout =
+	git clone 'git@github.com:guix-janelia/guix-notes.git' 'guix-notes'
+	cd guix-notes
+	git remote add public https://github.com/guix-janelia/guix-notes.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/guix-notes.git
