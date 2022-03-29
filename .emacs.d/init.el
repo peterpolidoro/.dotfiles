@@ -1258,7 +1258,7 @@
     (add-to-list 'geiser-guile-load-path "~/guix"))
   (with-eval-after-load 'yasnippet
     (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
-  (load-file "~/guix/etc/copyright.el"))
+  (load-file "~/.emacs.d/lisp/copyright.el"))
 
 ;; (when pjp/is-gnu
 ;;   (envrc-global-mode))
