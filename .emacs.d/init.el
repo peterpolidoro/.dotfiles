@@ -55,6 +55,8 @@
 ;; (require 'diminish)
 (require 'bind-key)
 
+(add-hook 'scheme-mode-hook 'guix-devel-mode)
+
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
@@ -1140,6 +1142,7 @@
   :hook (prog-mode . yas-minor-mode)
   :config
   (yas-reload-all))
+(yas-global-mode 1)
 
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))
