@@ -6,3 +6,14 @@
 [core]
 	editor = emacs
 	excludesFile = ~/.gitignore_global
+[sendemail]
+  from = peter@polidoro.io
+  smtpserver = smtp.dreamhost.com
+  smtpserverport = 465
+  smtpencryption = ssl
+  smtpuser = peter@polidoro.io
+	thread = no
+[credential "smtp://peter%40polidoro.io%40smtp.dreamhost.com%3a465"]
+	helper = !pass email/dreamhost.com/peter@polidoro.io
+[format]
+	thread = shallow
