@@ -7,6 +7,7 @@
    "stow"
    "direnv"
    "myrepos"
+   "gparted"
    
    ;; Settin gs Manager
    "xsettingsd"

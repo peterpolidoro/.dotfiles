@@ -18,6 +18,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "stow"
 "direnv"
 "myrepos"
+"gparted"
 
 #+end_src
 
