@@ -1585,9 +1585,10 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
+     (lisp . t)
      (shell . t)
      (python . t)
-     (ledger . t)))
+     (scheme . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
@@ -1797,6 +1798,15 @@ documentation page.
 ;;                                                                                                                                                              'org-babel-remove-result)))
 
 #+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-ox-gfm"
+
+#+end_src
+
 
 * Development
 

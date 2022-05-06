@@ -753,9 +753,10 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
+     (lisp . t)
      (shell . t)
      (python . t)
-     (ledger . t)))
+     (scheme . t)))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 

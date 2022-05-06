@@ -74,6 +74,8 @@
    
    "emacs-org-roam"
    
+   "emacs-ox-gfm"
+   
    "emacs-lsp-mode"
    
    "emacs-lsp-ui"
