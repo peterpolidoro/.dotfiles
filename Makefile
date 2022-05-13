@@ -1,3 +1,5 @@
+tangle:
+	emacs -Q --script ./.emacs.d/tangle-dotfiles.el
 simulate:
 	stow -v -R -n --no-folding -t ~ .
 install:
