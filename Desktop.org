@@ -19,6 +19,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "direnv"
 "myrepos"
 "gparted"
+"graphviz"
 
 #+end_src
 

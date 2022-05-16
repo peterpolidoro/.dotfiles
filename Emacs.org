@@ -1608,7 +1608,7 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
 
 Handy tip from [[https://leanpub.com/lit-config/read#leanpub-auto-configuring-emacs-and--org-mode-for-literate-programming][this book]] on literate programming.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 
 ;; Since we don't want to disable org-confirm-babel-evaluate all
 ;; of the time, do it around the after-save-hook

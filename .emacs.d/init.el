@@ -330,67 +330,67 @@
 (use-package hydra
   :defer 1)
 
-(defun pjp/minibuffer-backward-kill (arg)
-	"When minibuffer is completing a file name delete up to parent
-	folder, otherwise delete a word"
-	(interactive "p")
-	(if minibuffer-completing-file-name
-			;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-			(if (string-match-p "/." (minibuffer-contents))
-					(zap-up-to-char (- arg) ?/)
-				(delete-minibuffer-contents))
-		(delete-word (- arg))))
+	(defun pjp/minibuffer-backward-kill (arg)
+		"When minibuffer is completing a file name delete up to parent
+		folder, otherwise delete a word"
+		(interactive "p")
+		(if minibuffer-completing-file-name
+				;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+				(if (string-match-p "/." (minibuffer-contents))
+						(zap-up-to-char (- arg) ?/)
+					(delete-minibuffer-contents))
+			(delete-word (- arg))))
 
-(use-package vertico
-	:bind (:map minibuffer-local-map
-				 ("M-<backspace>" . pjp/minibuffer-backward-kill))
-	:init
-	(vertico-mode)
+	(use-package vertico
+		:bind (:map minibuffer-local-map
+					 ("M-<backspace>" . pjp/minibuffer-backward-kill))
+		:init
+		(vertico-mode)
 
-	;; Different scroll margin
-	;; (setq vertico-scroll-margin 0)
+		;; Different scroll margin
+		;; (setq vertico-scroll-margin 0)
 
-	;; Show more candidates
-	;; (setq vertico-count 20)
+		;; Show more candidates
+		;; (setq vertico-count 20)
 
-	;; Grow and shrink the Vertico minibuffer
-	;; (setq vertico-resize t)
+		;; Grow and shrink the Vertico minibuffer
+		;; (setq vertico-resize t)
 
-	;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-	(setq vertico-cycle t))
+		;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+		(setq vertico-cycle t))
 
-(use-package emacs
-	:init
-	;; Add prompt indicator to `completing-read-multiple'.
-	;; Alternatively try `consult-completing-read-multiple'.
-	(defun crm-indicator (args)
-		(cons (concat "[CRM] " (car args)) (cdr args)))
-	(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+	(use-package emacs
+		:init
+		;; Add prompt indicator to `completing-read-multiple'.
+		;; Alternatively try `consult-completing-read-multiple'.
+		(defun crm-indicator (args)
+			(cons (concat "[CRM] " (car args)) (cdr args)))
+		(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-	;; Do not allow the cursor in the minibuffer prompt
-	(setq minibuffer-prompt-properties
-				'(read-only t cursor-intangible t face minibuffer-prompt))
-	(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+		;; Do not allow the cursor in the minibuffer prompt
+		(setq minibuffer-prompt-properties
+					'(read-only t cursor-intangible t face minibuffer-prompt))
+		(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-	;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-	;; Vertico commands are hidden in normal buffers.
-	;; (setq read-extended-command-predicate
-	;;       #'command-completion-default-include-p)
+		;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+		;; Vertico commands are hidden in normal buffers.
+		;; (setq read-extended-command-predicate
+		;;       #'command-completion-default-include-p)
 
-	;; Enable recursive minibuffers
-	(setq enable-recursive-minibuffers t)
+		;; Enable recursive minibuffers
+		(setq enable-recursive-minibuffers t)
 
-	;; TAB cycle if there are only few candidates
-	(setq completion-cycle-threshold 3)
+		;; TAB cycle if there are only few candidates
+		(setq completion-cycle-threshold 3)
 
-	;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-	;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-	;; (setq read-extended-command-predicate
-	;;       #'command-completion-default-include-p)
+		;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+		;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+		;; (setq read-extended-command-predicate
+		;;       #'command-completion-default-include-p)
 
-	;; Enable indentation+completion using the TAB key.
-	;; `completion-at-point' is often bound to M-TAB.
-	(setq tab-always-indent 'complete))
+		;; Enable indentation+completion using the TAB key.
+		;; `completion-at-point' is often bound to M-TAB.
+		(setq tab-always-indent 'complete))
 
 (use-package orderless
   :init
@@ -761,6 +761,16 @@
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
   ;; NOTE: Subsequent sections are still part of this use-package block!
+
+;; Since we don't want to disable org-confirm-babel-evaluate all
+;; of the time, do it around the after-save-hook
+(defun pjp/org-babel-tangle-dont-ask ()
+  ;; Dynamic scoping to the rescue
+  (let ((org-confirm-babel-evaluate nil))
+    (org-babel-tangle)))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pjp/org-babel-tangle-dont-ask
+                                              'run-at-end 'only-in-org-mode)))
 
 (dolist (face '((org-level-1 . 1.2)
                 (org-level-2 . 1.1)

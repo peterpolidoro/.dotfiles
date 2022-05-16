@@ -8,6 +8,7 @@
    "direnv"
    "myrepos"
    "gparted"
+   "graphviz"
    
    ;; Settin gs Manager
    "xsettingsd"
