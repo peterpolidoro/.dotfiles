@@ -9,6 +9,7 @@
    "myrepos"
    "gparted"
    "graphviz"
+   "evince"
    
    ;; Settin gs Manager
    "xsettingsd"
