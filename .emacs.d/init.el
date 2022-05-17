@@ -156,6 +156,7 @@
 (delete-selection-mode t)
 
 (global-auto-revert-mode t)
+(setq global-auto-revert-non-file-buffers t)
 
 (setq mouse-yank-at-point t)
 
@@ -401,6 +402,7 @@
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+(setq history-length 25)
 (use-package savehist
   :init
   (savehist-mode))
@@ -1269,3 +1271,7 @@
 
 ;; (when pjp/is-gnu
 ;;   (envrc-global-mode))
+
+(recentf-mode 1)
+(save-place-mode 1)
+(setq use-dialog-box nil)

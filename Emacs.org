@@ -394,6 +394,7 @@ based on the prefix keys you entered.
 #+begin_src emacs-lisp
 
 (global-auto-revert-mode t)
+(setq global-auto-revert-non-file-buffers t)
 
 #+end_src
 
@@ -1003,6 +1004,7 @@ Emacs.
 
 #+begin_src emacs-lisp
 
+(setq history-length 25)
 (use-package savehist
   :init
   (savehist-mode))
@@ -1806,7 +1808,6 @@ documentation page.
 "emacs-ox-gfm"
 
 #+end_src
-
 
 * Development
 
@@ -2927,6 +2928,16 @@ require it here to have it loaded in the main Emacs configuration.
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
 "emacs-envrc"
+
+#+end_src
+
+* System Crafters Settings
+
+#+begin_src emacs-lisp
+
+(recentf-mode 1)
+(save-place-mode 1)
+(setq use-dialog-box nil)
 
 #+end_src
 
