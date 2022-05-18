@@ -181,3 +181,10 @@ checkout =
 	cd lickport_array_interface_python
 	git remote add public https://github.com/janelia-pypi/lickport_array_interface_python.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/lickport_array_interface_python.git
+
+[python_skeleton]
+checkout =
+	git clone 'git@github.com:janelia-pypi/python_skeleton.git' 'python_skeleton'
+	cd python_skeleton
+	git remote add public https://github.com/janelia-pypi/python_skeleton.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/python_skeleton.git
