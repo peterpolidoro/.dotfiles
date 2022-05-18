@@ -13,7 +13,8 @@
   smtpencryption = ssl
   smtpuser = peter@polidoro.io
 	thread = no
-[credential "smtp://peter%40polidoro.io%40smtp.dreamhost.com%3a465"]
-	helper = !pass email/dreamhost.com/peter@polidoro.io
+	confirm = never
+[credential]
+  helper = store
 [format]
 	thread = shallow
