@@ -228,3 +228,10 @@ checkout =
 	cd ros_setup
 	git remote add public https://github.com/janelia-ros/ros_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/ros_setup.git
+
+[led_system_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/led_system_ros.git' 'led_system_ros'
+	cd led_system_ros
+	git remote add public https://github.com/janelia-ros/led_system_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/led_system_ros.git
