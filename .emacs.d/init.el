@@ -1272,6 +1272,10 @@
 ;; (when pjp/is-gnu
 ;;   (envrc-global-mode))
 
+(use-package direnv
+ :config
+ (direnv-mode))
+
 (recentf-mode 1)
 (save-place-mode 1)
 (setq use-dialog-box nil)

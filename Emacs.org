@@ -2921,13 +2921,17 @@ require it here to have it loaded in the main Emacs configuration.
 ;; (when pjp/is-gnu
 ;;   (envrc-global-mode))
 
+(use-package direnv
+ :config
+ (direnv-mode))
+
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
-"emacs-envrc"
+"emacs-direnv"
 
 #+end_src
 
