@@ -558,8 +558,7 @@ makes that automatic. Disable for now.
 
 #+begin_src emacs-lisp
 
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
+(load-theme 'euphoria t)
 (setq color-theme-is-global t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 

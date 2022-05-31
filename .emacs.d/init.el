@@ -206,8 +206,7 @@
 (setq uniquify-buffer-name-style 'forward)
 (setq-default frame-title-format "%b (%f)")
 
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
+(load-theme 'euphoria t)
 (setq color-theme-is-global t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
