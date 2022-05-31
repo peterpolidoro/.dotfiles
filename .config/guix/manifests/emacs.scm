@@ -175,6 +175,6 @@
    
    ;; "emacs-dockerfile-mode"
    
-   "emacs-envrc"
+   "emacs-direnv"
    
    ))
