@@ -17,6 +17,8 @@
    
    "emacs-undo-tree"
    
+   "emacs-ahungry-theme"
+   
    "emacs-emojify"
    
    "emacs-all-the-icons"

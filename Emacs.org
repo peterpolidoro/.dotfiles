@@ -17,6 +17,7 @@ This file generates [[file:init.el][init.el]] which will be loaded by Emacs at s
 #+end_src
 
 * Setup
+
 ** Who am I?
 
 #+begin_src emacs-lisp
@@ -558,10 +559,17 @@ makes that automatic. Disable for now.
 
 #+begin_src emacs-lisp
 
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
+(load-theme 'ahungry t t)
 (setq color-theme-is-global t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-ahungry-theme"
 
 #+end_src
 
