@@ -1269,8 +1269,8 @@
     (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
   (load-file "~/.emacs.d/lisp/copyright.el"))
 
-;; (when pjp/is-gnu
-;;   (envrc-global-mode))
+(when pjp/is-gnu
+  (envrc-global-mode))
 
 (recentf-mode 1)
 (save-place-mode 1)

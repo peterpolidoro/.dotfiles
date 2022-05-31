@@ -124,14 +124,14 @@ then
     export PS1="\u@\h \w [guix]\$ "
 fi
 
-# if [ -x "$(command -v direnv)" ]
-# then
-#   eval "$(direnv hook bash)"
-#   show_virtual_env() {
-#       if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-#           echo "($(basename $VIRTUAL_ENV))"
-#       fi
-#   }
-#   export -f show_virtual_env
-#   PS1='$(show_virtual_env)'$PS1
-# fi
+if [ -x "$(command -v direnv)" ]
+then
+  eval "$(direnv hook bash)"
+  show_virtual_env() {
+      if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+          echo "($(basename $VIRTUAL_ENV))"
+      fi
+  }
+  export -f show_virtual_env
+  PS1='$(show_virtual_env)'$PS1
+fi
