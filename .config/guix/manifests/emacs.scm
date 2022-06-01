@@ -17,6 +17,8 @@
    
    "emacs-undo-tree"
    
+   "emacs-color-theme-modern"
+   
    "emacs-emojify"
    
    "emacs-all-the-icons"
