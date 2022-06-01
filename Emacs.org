@@ -2701,6 +2701,8 @@ you can use it successfully.
    'vterm-mode-hook
    (lambda() (setq show-trailing-whitespace nil))))
 
+(use-package multi-vterm)
+
 #+end_src
 
 *Guix Packages*
@@ -2708,6 +2710,10 @@ you can use it successfully.
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-vterm"
+
+"emacs-multi-vterm"
+
+"emacs-vterm-toggle"
 
 #+end_src
 

@@ -1187,6 +1187,8 @@
    'vterm-mode-hook
    (lambda() (setq show-trailing-whitespace nil))))
 
+(use-package multi-vterm)
+
 (when (eq system-type 'windows-nt)
   (setq explicit-shell-file-name "powershell.exe")
   (setq explicit-powershell.exe-args '()))

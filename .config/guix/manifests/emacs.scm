@@ -149,6 +149,10 @@
    
    "emacs-vterm"
    
+   "emacs-multi-vterm"
+   
+   "emacs-vterm-toggle"
+   
    ;; "emacs-eshell-z"
    
    "emacs-eshell-up"
