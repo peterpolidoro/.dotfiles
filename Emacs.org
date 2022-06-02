@@ -2893,12 +2893,15 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src emacs-lisp
 
-(use-package docker
-  :commands docker)
+;; (use-package docker
+;;   :commands docker)
 
-(use-package docker-tramp
-  :defer t
-  :after docker)
+;; (use-package docker-tramp
+;;   :defer t
+;;   :after docker)
+
+(require dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 #+end_src
 
@@ -2910,7 +2913,7 @@ require it here to have it loaded in the main Emacs configuration.
 
 ;; "emacs-docker-tramp"
 
-;; "emacs-dockerfile-mode"
+"emacs-dockerfile-mode"
 
 #+end_src
 

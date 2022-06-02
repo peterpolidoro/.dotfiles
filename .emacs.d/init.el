@@ -1257,12 +1257,15 @@
 (use-package daemons
   :commands daemons)
 
-(use-package docker
-  :commands docker)
+;; (use-package docker
+;;   :commands docker)
 
-(use-package docker-tramp
-  :defer t
-  :after docker)
+;; (use-package docker-tramp
+;;   :defer t
+;;   :after docker)
+
+(require dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 (when pjp/is-gnu
   (with-eval-after-load 'geiser-guile

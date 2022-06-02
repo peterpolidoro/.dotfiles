@@ -179,7 +179,7 @@
    
    ;; "emacs-docker-tramp"
    
-   ;; "emacs-dockerfile-mode"
+   "emacs-dockerfile-mode"
    
    "emacs-envrc"
    
