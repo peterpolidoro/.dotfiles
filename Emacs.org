@@ -2900,7 +2900,7 @@ require it here to have it loaded in the main Emacs configuration.
 ;;   :defer t
 ;;   :after docker)
 
-(require dockerfile-mode)
+(require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 #+end_src
