@@ -802,3 +802,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/MouseReachTestController.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/MouseReachTestController.git
 
+[micro_ros_arduino]
+checkout =
+	git clone 'git@github.com:janelia-arduino/micro_ros_arduino.git' 'micro_ros_arduino'
+	cd micro_ros_arduino
+	git remote add public https://github.com/janelia-arduino/micro_ros_arduino.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/micro_ros_arduino.git
+	git remote add source git@github.com:micro-ROS/micro_ros_arduino.git
