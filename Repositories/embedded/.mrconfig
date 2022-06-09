@@ -131,3 +131,10 @@ checkout =
 	git remote add public https://github.com/janelia-embedded/tytools.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/tytools.git
 	git remote add source git@github.com:Koromix/tytools.git
+
+[zephyr_setup]
+checkout =
+	git clone 'git@github.com:janelia-embedded/zephyr_setup.git' 'zephyr_setup'
+	cd zephyr_setup
+	git remote add public https://github.com/janelia-embedded/zephyr_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/zephyr_setup.git
