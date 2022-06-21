@@ -138,3 +138,10 @@ checkout =
 	cd zephyr_setup
 	git remote add public https://github.com/janelia-embedded/zephyr_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/zephyr_setup.git
+
+[synclight]
+checkout =
+	git clone 'git@github.com:janelia-embedded/synclight.git' 'synclight'
+	cd synclight
+	git remote add public https://github.com/janelia-embedded/synclight.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/synclight.git
