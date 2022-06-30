@@ -218,7 +218,6 @@
   (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
   ;; Set the variable pitch face
-  ;; (set-face-attribute 'variable-pitch nil :font "Cantarell" :height pjp/default-variable-font-size :weight 'regular)
   (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular))
 
 (defun pjp/replace-unicode-font-mapping (block-name old-font new-font)
@@ -782,7 +781,7 @@
                 (org-level-6 . 1.1)
                 (org-level-7 . 1.1)
                 (org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+  (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'regular :height (cdr face)))
 
 ;; Make sure org-indent face is available
 (require 'org-indent)
