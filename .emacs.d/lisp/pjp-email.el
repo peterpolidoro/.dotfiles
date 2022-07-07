@@ -8,6 +8,7 @@
   ;; (require git-email-mu4e)
 
   (setq mu4e-attachment-dir "~/Downloads")
+  (add-to-list 'mu4e-view-actions '("attachments" . mu4e-view-save-attachments) t)
 
   (require 'gnus-dired)
   ;; make the `gnus-dired-mail-buffers' function also work on
@@ -40,6 +41,8 @@
   ;; dreaded "UID is N beyond highest assigned" error.
   ;; See this link for more info: https://stackoverflow.com/a/43461973
   (setq mu4e-change-filenames-when-moving t)
+
+  (setq gnus-inhibit-mime-unbuttonizing t)
 
   (setq mu4e-headers-show-threads nil)
 
