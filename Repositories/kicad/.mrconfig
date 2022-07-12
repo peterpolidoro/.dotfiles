@@ -253,6 +253,13 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/light_sensor_boards.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/light_sensor_boards.git
 
+[light_sensor_opt101]
+checkout =
+	git clone 'git@github.com:janelia-kicad/light_sensor_opt101.git' 'light_sensor_opt101'
+	cd light_sensor_opt101
+	git remote add public https://github.com/janelia-kicad/light_sensor_opt101.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/light_sensor_opt101.git
+
 [modular_device_remote_switch]
 checkout =
 	git clone 'git@github.com:janelia-kicad/modular_device_remote_switch.git' 'modular_device_remote_switch'
