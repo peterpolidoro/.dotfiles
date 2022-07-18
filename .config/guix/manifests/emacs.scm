@@ -66,9 +66,12 @@
    "emacs-auth-source-pass"
    
    ;;"emacs-dired-single"
-   "emacs-dired-hacks"
    
-   "emacs-all-the-icons-dired"
+   ;;"emacs-dired-hacks"
+   
+   ;;"emacs-all-the-icons-dired"
+   
+   "emacs-dirvish"
    
    "emacs-openwith"
    

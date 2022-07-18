@@ -656,43 +656,10 @@
   :config
   (auth-source-pass-enable))
 
-(use-package dired
-  :defer 1
-  :ensure nil
-  :hook (dired-mode . dired-hide-details-mode)
-  :bind (:map dired-mode-map
-              ("C-b" . dired-single-up-directory)
-              ("C-f" . dired-single-buffer))
-  :commands (dired dired-jump)
-  :config
-  (setq dired-listing-switches "-agho --group-directories-first"
-        dired-omit-verbose nil)
-
-  (defun find-text-files ()
-    "Find all text files in path recursively, not in .git directory."
-    (interactive)
-    (find-dired default-directory
-                "-type f \
-               -not -path \"*/.git/*\" \
-               -not -path \"*.pdf\" \
-               -not -path \"*.zip\" \
-               -not -path \"*.png\" \
-               -not -path \"*.jpg\" \
-               -not -path \"*.gif\" \
-               -not -path \"*.exe\" \
-               -not -path \"*.odt\""))
-
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
-
-(use-package dired-subtree
-  :after dired
-  :bind (:map dired-mode-map
-              ("<tab>" . dired-subtree-cycle)))
-
-(use-package dired-collapse
-  :after dired
-  :hook (dired-mode . dired-collapse-mode))
+(use-package dirvish
+  :init
+  ;; Let Dirvish take over Dired globally
+  (dirvish-override-dired-mode))
 
 ;; (use-package openwith
 ;;   :config

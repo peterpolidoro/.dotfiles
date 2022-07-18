@@ -1433,9 +1433,10 @@ place.
 
 #+end_src
 * File Browsing
+
 ** Dired
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (use-package dired
   :defer 1
@@ -1487,7 +1488,7 @@ place.
 
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (use-package dired-subtree
   :after dired
@@ -1509,9 +1510,29 @@ place.
 #+end_src
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-"emacs-dired-hacks"
 
-"emacs-all-the-icons-dired"
+;;"emacs-dired-hacks"
+
+;;"emacs-all-the-icons-dired"
+
+#+end_src
+
+** Dirvish
+
+#+begin_src emacs-lisp
+
+(use-package dirvish
+  :init
+  ;; Let Dirvish take over Dired globally
+  (dirvish-override-dired-mode))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-dirvish"
 
 #+end_src
 
