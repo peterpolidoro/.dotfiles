@@ -21,6 +21,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "gparted"
 "graphviz"
 "evince"
+"syncthing"
 
 #+end_src
 

@@ -10,6 +10,7 @@
    "gparted"
    "graphviz"
    "evince"
+   "syncthing"
    
    ;; Settin gs Manager
    "xsettingsd"
