@@ -42,7 +42,13 @@
   ;; See this link for more info: https://stackoverflow.com/a/43461973
   (setq mu4e-change-filenames-when-moving t)
 
+  ;; All mime parts get buttons to make it easier to save inline images
   (setq gnus-inhibit-mime-unbuttonizing t)
+
+  ;; Ensure text/plain is preferred as a mime type
+  (with-eval-after-load "mm-decode"
+  (add-to-list 'mm-discouraged-alternatives "text/html")
+  (add-to-list 'mm-discouraged-alternatives "text/richtext"))
 
   (setq mu4e-headers-show-threads nil)
 
