@@ -11,6 +11,10 @@
    "graphviz"
    "evince"
    "syncthing"
+   "password-store"
+   "gnupg"
+   "paperkey"
+   "qrencode"
    
    ;; Settin gs Manager
    "xsettingsd"

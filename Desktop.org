@@ -22,6 +22,10 @@ This file contains configuration for my overall desktop environment.  My workflo
 "graphviz"
 "evince"
 "syncthing"
+"password-store"
+"gnupg"
+"paperkey"
+"qrencode"
 
 #+end_src
 
