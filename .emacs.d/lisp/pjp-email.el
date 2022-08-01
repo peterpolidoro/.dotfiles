@@ -47,8 +47,8 @@
 
   ;; Ensure text/plain is preferred as a mime type
   (with-eval-after-load "mm-decode"
-  (add-to-list 'mm-discouraged-alternatives "text/html")
-  (add-to-list 'mm-discouraged-alternatives "text/richtext"))
+    (add-to-list 'mm-discouraged-alternatives "text/html")
+    (add-to-list 'mm-discouraged-alternatives "text/richtext"))
 
   (setq mu4e-headers-show-threads nil)
 
@@ -159,10 +159,9 @@
   ;; behavior.)
 
   (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "All Inboxes"
-                :query "maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox"
-                :key ?i))
+               '(:name "All Inboxes"
+                 :query "maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox"
+                 :key ?i))
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
