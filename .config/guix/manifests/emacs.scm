@@ -171,6 +171,8 @@
    
    "emacs-org-mime"
    
+   "emacs-pdf-tools"
+   
    "emacs-guix"
    
    "emacs-daemons"

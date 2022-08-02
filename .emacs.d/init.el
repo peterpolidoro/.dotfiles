@@ -1261,6 +1261,8 @@
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 
+(pdf-loader-install)
+
 (use-package guix
   :defer t)
 

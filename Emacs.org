@@ -2841,6 +2841,7 @@ you press Enter.
 #+end_src
 
 * Applications
+
 ** Email
 
 My mail configuration is stored in [[file:Email.org][Email.org]]. We merely
@@ -2874,6 +2875,23 @@ require it here to have it loaded in the main Emacs configuration.
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 
 #+end_src
+
+** PDF
+
+#+begin_src emacs-lisp
+
+(pdf-loader-install)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-pdf-tools"
+
+#+end_src
+
 
 * System Utilities
 ** Guix
