@@ -183,6 +183,8 @@
    
    "emacs-dockerfile-mode"
    
+   "emacs-key-chord"
+   
    "emacs-envrc"
    
    ))

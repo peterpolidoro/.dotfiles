@@ -2956,6 +2956,29 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+end_src
 
+* Key-chord
+
+#+begin_src emacs-lisp
+
+(require 'key-chord)
+(key-chord-mode 1)
+
+(key-chord-define-global "sd" 'avy-goto-char-2)
+(key-chord-define-global "lk" 'avy-goto-line)
+
+(key-chord-define-global "io" 'scroll-down-command)
+(key-chord-define-global "m," 'scroll-up-command)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-key-chord"
+
+#+end_src
+
 * Guix Perfect Setup
 
 #+begin_src emacs-lisp
