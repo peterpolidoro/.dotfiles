@@ -1279,15 +1279,6 @@
 (require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
-(require 'key-chord)
-(key-chord-mode 1)
-
-(key-chord-define-global "sd" 'avy-goto-char-2)
-(key-chord-define-global "lk" 'avy-goto-line)
-
-(key-chord-define-global "io" 'scroll-down-command)
-(key-chord-define-global "m," 'scroll-up-command)
-
 (when pjp/is-gnu
   (with-eval-after-load 'geiser-guile
     (add-to-list 'geiser-guile-load-path "~/guix"))

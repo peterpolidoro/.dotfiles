@@ -2958,7 +2958,7 @@ require it here to have it loaded in the main Emacs configuration.
 
 * Key-chord
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (require 'key-chord)
 (key-chord-mode 1)
