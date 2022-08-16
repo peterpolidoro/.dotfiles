@@ -188,3 +188,10 @@ checkout =
 	cd python_skeleton
 	git remote add public https://github.com/janelia-pypi/python_skeleton.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/python_skeleton.git
+
+[loadstar_sensors_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-pypi/loadstar_sensors_interface_python.git' 'loadstar_sensors_interface_python'
+	cd loadstar_sensors_interface_python
+	git remote add public https://github.com/janelia-pypi/loadstar_sensors_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/loadstar_sensors_interface_python.git
