@@ -1436,11 +1436,17 @@ prevent Emacs from popping up new windows when you run commands.
 I use [[https://www.passwordstore.org/][pass]] to manage all of my passwords
 locally.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 
-(use-package password-store
-  :config
-  (setq password-store-password-length 12))
+(use-package pass)
+
+(setq auth-sources '(password-store))
+(setq auth-source-debug t)
+(setq auth-source-do-cache nil)
+(setq auth-source-pass-filename "~/.password-store")
+
+(use-package auth-source-pass
+  :init (auth-source-pass-enable))
 
 #+end_src
 
@@ -1448,9 +1454,9 @@ locally.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-;;"emacs-password-store"
+"emacs-pass"
 
-;;"emacs-auth-source-pass"
+"emacs-auth-source-pass"
 
 #+end_src
 

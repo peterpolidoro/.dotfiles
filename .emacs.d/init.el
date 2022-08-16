@@ -667,6 +667,16 @@
 ;; If a popup does happen, don't resize windows to be equal-sized
 (setq even-window-sizes nil)
 
+(use-package pass)
+
+(setq auth-sources '(password-store))
+(setq auth-source-debug t)
+(setq auth-source-do-cache nil)
+(setq auth-source-pass-filename "~/.password-store")
+
+(use-package auth-source-pass
+  :init (auth-source-pass-enable))
+
 (use-package dired
   :defer 1
   :ensure nil
