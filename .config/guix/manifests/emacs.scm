@@ -133,8 +133,6 @@
    
    "emacs-yasnippet-snippets"
    
-   ;; "emacs-ivy-yasnippet"  ;; Not in config yet
-   
    "emacs-smartparens"
    
    "emacs-rainbow-delimiters"

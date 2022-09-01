@@ -2550,10 +2550,9 @@ Configure TypeScript and JavaScript language modes
 
 #+begin_src emacs-lisp
 
-(use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        "~/.emacs.d/snippets/guix"))
 (yas-global-mode 1)
 
 #+end_src
@@ -2565,8 +2564,6 @@ Configure TypeScript and JavaScript language modes
 "emacs-yasnippet"
 
 "emacs-yasnippet-snippets"
-
-;; "emacs-ivy-yasnippet"  ;; Not in config yet
 
 #+end_src
 
@@ -2992,8 +2989,6 @@ require it here to have it loaded in the main Emacs configuration.
 (when pjp/is-gnu
   (with-eval-after-load 'geiser-guile
     (add-to-list 'geiser-guile-load-path "~/guix"))
-  (with-eval-after-load 'yasnippet
-    (add-to-list 'yas-snippet-dirs "~/guix/etc/snippets"))
   (load-file "~/.emacs.d/lisp/copyright.el"))
 
 #+end_src
