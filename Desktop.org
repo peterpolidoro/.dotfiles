@@ -16,7 +16,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 "glibc-locales"
 "make"
 "stow"
-"direnv"
 "myrepos"
 "gparted"
 "graphviz"

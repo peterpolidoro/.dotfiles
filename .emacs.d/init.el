@@ -1293,8 +1293,8 @@
     (add-to-list 'geiser-guile-load-path "~/guix"))
   (load-file "~/.emacs.d/lisp/copyright.el"))
 
-(when pjp/is-gnu
-  (envrc-global-mode))
+(require 'inheritenv)
+(add-hook 'hack-local-variables-hook 'buffer-env-update)
 
 (recentf-mode 1)
 (save-place-mode 1)

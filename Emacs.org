@@ -2995,12 +2995,12 @@ require it here to have it loaded in the main Emacs configuration.
 
 * Development Environment
 
-** direnv
+** buffer-env
 
 #+begin_src emacs-lisp
 
-(when pjp/is-gnu
-  (envrc-global-mode))
+(require 'inheritenv)
+(add-hook 'hack-local-variables-hook 'buffer-env-update)
 
 #+end_src
 
@@ -3008,7 +3008,8 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
 
-"emacs-envrc"
+"emacs-buffer-env"
+"emacs-inheritenv"
 
 #+end_src
 

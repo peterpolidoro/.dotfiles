@@ -5,7 +5,6 @@
    "glibc-locales"
    "make"
    "stow"
-   "direnv"
    "myrepos"
    "gparted"
    "graphviz"

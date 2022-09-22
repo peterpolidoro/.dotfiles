@@ -183,6 +183,7 @@
    
    "emacs-key-chord"
    
-   "emacs-envrc"
+   "emacs-buffer-env"
+   "emacs-inheritenv"
    
    ))
