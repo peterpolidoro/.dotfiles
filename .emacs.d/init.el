@@ -122,7 +122,6 @@
 (dolist (mode '(org-mode-hook
                 term-mode-hook
                 shell-mode-hook
-                treemacs-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -349,67 +348,67 @@
 (use-package hydra
   :defer 1)
 
-	(defun pjp/minibuffer-backward-kill (arg)
-		"When minibuffer is completing a file name delete up to parent
+(defun pjp/minibuffer-backward-kill (arg)
+	"When minibuffer is completing a file name delete up to parent
 		folder, otherwise delete a word"
-		(interactive "p")
-		(if minibuffer-completing-file-name
-				;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-				(if (string-match-p "/." (minibuffer-contents))
-						(zap-up-to-char (- arg) ?/)
-					(delete-minibuffer-contents))
-			(delete-word (- arg))))
+	(interactive "p")
+	(if minibuffer-completing-file-name
+			;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+			(if (string-match-p "/." (minibuffer-contents))
+					(zap-up-to-char (- arg) ?/)
+				(delete-minibuffer-contents))
+		(delete-word (- arg))))
 
-	(use-package vertico
-		:bind (:map minibuffer-local-map
-					 ("M-<backspace>" . pjp/minibuffer-backward-kill))
-		:init
-		(vertico-mode)
+(use-package vertico
+	:bind (:map minibuffer-local-map
+					    ("M-<backspace>" . pjp/minibuffer-backward-kill))
+	:init
+	(vertico-mode)
 
-		;; Different scroll margin
-		;; (setq vertico-scroll-margin 0)
+	;; Different scroll margin
+	;; (setq vertico-scroll-margin 0)
 
-		;; Show more candidates
-		;; (setq vertico-count 20)
+	;; Show more candidates
+	;; (setq vertico-count 20)
 
-		;; Grow and shrink the Vertico minibuffer
-		;; (setq vertico-resize t)
+	;; Grow and shrink the Vertico minibuffer
+	;; (setq vertico-resize t)
 
-		;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-		(setq vertico-cycle t))
+	;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+	(setq vertico-cycle t))
 
-	(use-package emacs
-		:init
-		;; Add prompt indicator to `completing-read-multiple'.
-		;; Alternatively try `consult-completing-read-multiple'.
-		(defun crm-indicator (args)
-			(cons (concat "[CRM] " (car args)) (cdr args)))
-		(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+(use-package emacs
+	:init
+	;; Add prompt indicator to `completing-read-multiple'.
+	;; Alternatively try `consult-completing-read-multiple'.
+	(defun crm-indicator (args)
+		(cons (concat "[CRM] " (car args)) (cdr args)))
+	(advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-		;; Do not allow the cursor in the minibuffer prompt
-		(setq minibuffer-prompt-properties
-					'(read-only t cursor-intangible t face minibuffer-prompt))
-		(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+	;; Do not allow the cursor in the minibuffer prompt
+	(setq minibuffer-prompt-properties
+				'(read-only t cursor-intangible t face minibuffer-prompt))
+	(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-		;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-		;; Vertico commands are hidden in normal buffers.
-		;; (setq read-extended-command-predicate
-		;;       #'command-completion-default-include-p)
+	;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+	;; Vertico commands are hidden in normal buffers.
+	;; (setq read-extended-command-predicate
+	;;       #'command-completion-default-include-p)
 
-		;; Enable recursive minibuffers
-		(setq enable-recursive-minibuffers t)
+	;; Enable recursive minibuffers
+	(setq enable-recursive-minibuffers t)
 
-		;; TAB cycle if there are only few candidates
-		(setq completion-cycle-threshold 3)
+	;; TAB cycle if there are only few candidates
+	(setq completion-cycle-threshold 3)
 
-		;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-		;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-		;; (setq read-extended-command-predicate
-		;;       #'command-completion-default-include-p)
+	;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+	;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+	;; (setq read-extended-command-predicate
+	;;       #'command-completion-default-include-p)
 
-		;; Enable indentation+completion using the TAB key.
-		;; `completion-at-point' is often bound to M-TAB.
-		(setq tab-always-indent 'complete))
+	;; Enable indentation+completion using the TAB key.
+	;; `completion-at-point' is often bound to M-TAB.
+	(setq tab-always-indent 'complete))
 
 (use-package orderless
   :init
@@ -570,7 +569,7 @@
   ;; (setq consult-project-root-function #'vc-root-dir)
   ;;;; 4. locate-dominating-file
   ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
-)
+  )
 
 (use-package marginalia
   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
@@ -613,7 +612,7 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
-)
+  )
 
 (use-package avy
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
@@ -927,42 +926,22 @@
 ;;                                                                                                                                                       (help/org-2every-src-block
 ;;                                                                                                                                                              'org-babel-remove-result)))
 
-(defun pjp/lsp-mode-setup ()
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp-deferred)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
 
-(when pjp/is-gnu
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :hook (lsp-mode . pjp/lsp-mode-setup)
-    :init
-    (setq lsp-keymap-prefix "s-l")  ;; Or 'C-l', 'C-c l'
-    :config
-    (lsp-enable-which-key-integration t)))
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
 
-(when pjp/is-gnu
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
-    :custom
-    (lsp-ui-doc-position 'bottom)))
 
-(when pjp/is-gnu
-  (use-package lsp-treemacs
-    :after lsp))
-
-(when pjp/is-gnu
-  (use-package lsp-ivy
-    :commands lsp-ivy-workspace-symbol))
-
-(when pjp/is-gnu
-  (use-package dap-mode
-    :commands dap-mode
-    :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
-    :config
-    (dap-mode 1)
-    (require 'dap-ui)
-    (dap-ui-mode 1)
-    (require 'dap-lldb)))
 
 (use-package company
   :defer t
@@ -1012,30 +991,6 @@
   (counsel-projectile-mode))
 
 
-
-(use-package nvm
-  :defer t)
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :config
-  (setq typescript-indent-level 2))
-
-(setq js-indent-level 2)
-(setq js2-basic-offset 2)
-(setq js2-mode-show-strict-warnings nil)
-
-(use-package js2-mode
-  :mode "\\.jsx?\\'"
-  :config
-  ;; Use js2-mode for Node scripts
-  (add-to-list 'magic-mode-alist '("#!/usr/bin/env node" . js2-mode)))
-
-(use-package prettier-js
-  :hook ((js2-mode . prettier-js-mode)
-         (typescript-mode . prettier-js-mode))
-  :config
-  (setq prettier-js-show-errors nil))
 
 (defun file-in-directory-list-p (file dirlist)
   "Returns true if the file specified is contained within one of

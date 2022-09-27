@@ -82,11 +82,11 @@
    
    "emacs-lsp-ui"
    
-   "emacs-ivy-xref"
-   
-   "emacs-lsp-ivy"
+   "emacs-consult-lsp"
    
    "emacs-dap-mode"
+   
+   "python-lsp-server"
    
    "git"
    "git:send-email"
@@ -106,14 +106,6 @@
    "ripgrep" ;; For counsel-projectile-rg
    
    "the-silver-searcher" ;; For counsel-projectile-ag
-   
-   "emacs-js2-mode"
-   
-   "emacs-typescript-mode"
-   
-   "emacs-apheleia"
-   
-   "emacs-prettier"
    
    "emacs-paredit"
    
