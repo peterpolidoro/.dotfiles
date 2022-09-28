@@ -941,8 +941,6 @@
   :custom
   (lsp-ui-doc-position 'bottom))
 
-
-
 (use-package company
   :defer t
   :init (global-company-mode)
@@ -991,6 +989,15 @@
   (counsel-projectile-mode))
 
 
+
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp-deferred))))
+
+;; Unfortunately many standard c++ header files have no file
+;; extension, and so will not typically be identified by emacs as c++
+;; files. The following code is intended to solve this problem.
+(require 'cl)
 
 (defun file-in-directory-list-p (file dirlist)
   "Returns true if the file specified is contained within one of

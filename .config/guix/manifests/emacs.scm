@@ -86,11 +86,6 @@
    
    "emacs-dap-mode"
    
-   "python-lsp-server"
-   
-   "git"
-   "git:send-email"
-   
    "emacs-company"
    
    "emacs-magit"
@@ -99,6 +94,9 @@
    
    "emacs-magit-todos"
    
+   "git"
+   "git:send-email"
+   
    "emacs-projectile"
    
    "emacs-counsel-projectile"
@@ -106,6 +104,10 @@
    "ripgrep" ;; For counsel-projectile-rg
    
    "the-silver-searcher" ;; For counsel-projectile-ag
+   
+   "ccls"
+   
+   "emacs-ccls"
    
    "emacs-paredit"
    
@@ -118,6 +120,8 @@
    "emacs-web-mode"
    
    "emacs-yaml-mode"
+   
+   "python-lsp-server"
    
    "emacs-flycheck"
    

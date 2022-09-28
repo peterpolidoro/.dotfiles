@@ -1848,7 +1848,7 @@ documentation page.
 
 Configuration for various programming languages and dev tools that I use.
 
-** Languages
+** LSP
 
 *** IDE Features with lsp-mode
 
@@ -1884,12 +1884,6 @@ what it can do.
 
 #+end_src
 
-**** consult-lsp
-
-#+begin_src emacs-lisp
-
-#+end_src
-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
@@ -1901,6 +1895,8 @@ what it can do.
 "emacs-consult-lsp"
 
 #+end_src
+
+** DAP
 
 *** Debugging with dap-mode
 
@@ -1930,43 +1926,6 @@ configuration parameters are available to use for your debug templates!
 
 #+end_src
 
-*** Python
-
-#+begin_src emacs-lisp :tangle no
-
-(use-package python-mode
-  :hook (python-mode . lsp-deferred)
-  :custom
-  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-  (python-shell-interpreter "python3")
-  (dap-python-executable "python3")
-  (dap-python-debugger 'debugpy)
-  :config
-  (require 'dap-python))
-
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-"python-lsp-server"
-
-#+end_src
-
-*** Send e-mail for Git patches
-
-OK, this isn't Emacs configuration, but it's relevant to development!
-
-*Guix Packages*
-
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
-
-"git"
-"git:send-email"
-
-#+end_src
 ** Company Mode
 
 [[http://company-mode.github.io/][Company Mode]] provides a nicer in-buffer completion interface than
@@ -2071,6 +2030,19 @@ files contained within the repo.  More information at the [[https://github.com/a
 
 #+end_src
 
+*** Send e-mail for Git patches
+
+OK, this isn't Emacs configuration, but it's relevant to development!
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"git"
+"git:send-email"
+
+#+end_src
+
 ** Projectile
 
 *** Initial Setup
@@ -2123,11 +2095,11 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 
 *** C/C++
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 
 (use-package ccls
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp))))
+         (lambda () (require 'ccls) (lsp-deferred))))
 
 ;; Unfortunately many standard c++ header files have no file
 ;; extension, and so will not typically be identified by emacs as c++
@@ -2136,6 +2108,15 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 
 #+end_src
 
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"ccls"
+
+"emacs-ccls"
+
+#+end_src
 
 #+begin_src emacs-lisp
 
@@ -2328,6 +2309,31 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-yaml-mode"
+
+#+end_src
+
+*** Python
+
+
+#+begin_src emacs-lisp :tangle no
+
+(use-package python-mode
+  :hook (python-mode . lsp-deferred)
+  :custom
+  ;; NOTE: Set these if Python 3 is called "python3" on your system!
+  (python-shell-interpreter "python3")
+  (dap-python-executable "python3")
+  (dap-python-debugger 'debugpy)
+  :config
+  (require 'dap-python))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"python-lsp-server"
 
 #+end_src
 
