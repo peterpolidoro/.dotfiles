@@ -10,117 +10,120 @@ I manage the various configuration files in this repo using [[https://www.gnu.or
 allows me to set up symlinks for all of my dotfiles using the commands:
 
 #+BEGIN_SRC sh
-	cd ~
-	rm .profile
-	rm .bashrc
-	GUIX_PROFILE="$HOME/.guix-profile"
-  . "$GUIX_PROFILE"/etc/profile
-	git clone git@github.com:peterpolidoro/.dotfiles.git
-	cd .dotfiles
-	# simulate installing links to show what install will do
-	make simulate
-	# install links
-	make install
-	# uninstall links
-	make clean
+cd ~
+rm .profile
+rm .bashrc
+GUIX_PROFILE="$HOME/.guix-profile"
+. "$GUIX_PROFILE"/etc/profile
+git clone git@github.com:peterpolidoro/.dotfiles.git
+cd .dotfiles
+# simulate installing links to show what install will do
+make simulate
+# install links
+make install
+# uninstall links
+make clean
 #+END_SRC
 
 * Principles
 
-	The configuration files in this repo crystallize a workflow that is increasingly
-	effective and satisfying for daily use. When choosing tools and putting them
-	together, I generally follow these principles:
+The configuration files in this repo crystallize a workflow that is increasingly
+effective and satisfying for daily use. When choosing tools and putting them
+together, I generally follow these principles:
 
 ** Keyboard Focused
 
-	 I prefer tools that enable me to control everything primarily with the keyboard.
-	 When you work with words and code all day, reaching for the mouse switches your
-	 input modality and slows you down. Using [[https://www.gnu.org/software/emacs/][GNU Emacs]] enables me to have
-	 consistent, convenient key bindings for just 80% of what I need to do on a daily
-	 basis. Another 15% is covered by using web sites and apps; the [[https://fanglingsu.github.io/vimb/][Vimb]] browser
-	 makes that experience a lot more keyboard friendly and seamlessly integrates
-	 with my Emacs workflow.
+I prefer tools that enable me to control everything primarily with the keyboard.
+When you work with words and code all day, reaching for the mouse switches your
+input modality and slows you down. Using [[https://www.gnu.org/software/emacs/][GNU Emacs]] enables me to have
+consistent, convenient key bindings for just 80% of what I need to do on a daily
+basis. Another 15% is covered by using web sites and apps; the [[https://fanglingsu.github.io/vimb/][Vimb]] browser
+makes that experience a lot more keyboard friendly and seamlessly integrates
+with my Emacs workflow.
 
 ** Minimal Distractions
 
-	 I don't want things on the screen that are unrelated to what I'm doing. My
-	 workflow focuses on a single main screen with an occasional secondary screen (my
-	 laptop) when docked. I very rarely display more than one buffer or window on the
-	 main screen at a time. Emacs makes it easy and fast to switch between open
-	 buffers (and workspaces in EXWM) so there's really no reason to have two
-	 unrelated things visible on the screen.
+I don't want things on the screen that are unrelated to what I'm doing. My
+workflow focuses on a single main screen with an occasional secondary screen (my
+laptop) when docked. I very rarely display more than one buffer or window on the
+main screen at a time. Emacs makes it easy and fast to switch between open
+buffers (and workspaces in EXWM) so there's really no reason to have two
+unrelated things visible on the screen.
 
-	 I display minimal information in my Emacs mode line (using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]) and I
-	 only display a small amount of computer status information in my panel (using
-	 [[https://polybar.github.io/][Polybar]]).
+I display minimal information in my Emacs mode line (using [[https://github.com/seagle0128/doom-modeline][doom-modeline]]) and I
+only display a small amount of computer status information in my panel (using
+[[https://polybar.github.io/][Polybar]]).
 
 ** Text-based Configuration
 
-	 I *really* don't want to use a program that doesn't support text-based
-	 configuration files. I also prefer tools that don't write out those
-	 configuration files on my behalf. This enables me to commit program
-	 configuration to source control (this repository) so that I can keep
-	 configurations in sync on every machine that I use.
+I *really* don't want to use a program that doesn't support text-based
+configuration files. I also prefer tools that don't write out those
+configuration files on my behalf. This enables me to commit program
+configuration to source control (this repository) so that I can keep
+configurations in sync on every machine that I use.
 
-	 Guix enables me to apply this principle to my /entire system configuration/,
-	 even sharing the same base configuration across multiple machines. This has
-	 provided me with a stable, consistent computing experience across the three
-	 machines I use on a regular basis.
+Guix enables me to apply this principle to my /entire system configuration/,
+even sharing the same base configuration across multiple machines. This has
+provided me with a stable, consistent computing experience across the three
+machines I use on a regular basis.
 
 ** Highly Customizable
 
-	 To perfect my computing workflow, I choose tools that allow me to customize them
-	 to fit in smoothly with everything else. Emacs is the most faithful adherent to
-	 this principle as it allows you to intercept or replace the code for just about
-	 anything it does. For other programs, I like to use tools that are either
-	 scriptable by some means or enable to you call out to another process (or shell
-	 script) to gather information. Vimb and Polybar both do this, so it's pretty
-	 easy to integrate them into the rest of my workflow.
+To perfect my computing workflow, I choose tools that allow me to customize them
+to fit in smoothly with everything else. Emacs is the most faithful adherent to
+this principle as it allows you to intercept or replace the code for just about
+anything it does. For other programs, I like to use tools that are either
+scriptable by some means or enable to you call out to another process (or shell
+script) to gather information. Vimb and Polybar both do this, so it's pretty
+easy to integrate them into the rest of my workflow.
 
 * Literate Configuration
 
-	I've started to migrate all of my important configuration files to a [[https://leanpub.com/lit-config/read][literate
-	configuration]] strategy using Emacs' Org Mode. This enables me to have a single
-	annotated file for a particular configuration area which automatically writes
-	out the actual configuration files involved when I save the .org file.
+I've started to migrate all of my important configuration files to a [[https://leanpub.com/lit-config/read][literate
+configuration]] strategy using Emacs' Org Mode. This enables me to have a single
+annotated file for a particular configuration area which automatically writes
+out the actual configuration files involved when I save the .org file.
 
-	- [[file:Emacs.org][Emacs]]
-	- [[file:Desktop.org][Desktop Environment]]
-	- [[file:Workflow.org][Productivity Workflow]]
-	- [[file:Systems.org][System Configurations via Guix]]
-	- [[file:Mail.org][Mail with mu4e and isync]]
+- [[file:Emacs.org][Emacs]]
+- [[file:Desktop.org][Desktop Environment]]
+- [[file:Workflow.org][Productivity Workflow]]
+- [[file:Systems.org][System Configurations via Guix]]
+- [[file:Mail.org][Mail with mu4e and isync]]
 
 ** Org Babel Tips
 
-	 When inside of an Org source block, you can use =org-babel-demarcate-block=
-	 (=C-c C-v d= by default) to split the block you're currently in so that you can
-	 insert an annotation.
+When inside of an Org source block, you can use =org-babel-demarcate-block=
+(=C-c C-v d= by default) to split the block you're currently in so that you can
+insert an annotation.
 
-	 =noweb= blocks are extremely useful for configuration organization and sharing
-	 configuration values across files. The [[https://orgmode.org/manual/Noweb-reference-syntax.html][org documentation]] on this topic is
-	 helpful in understanding the different ways you can reference another block in
-	 =noweb= style.
+=noweb= blocks are extremely useful for configuration organization and sharing
+configuration values across files. The [[https://orgmode.org/manual/Noweb-reference-syntax.html][org documentation]] on this topic is
+helpful in understanding the different ways you can reference another block in
+=noweb= style.
 
 * System Installation
 
-	Instructions for installing a system from a Guix configuration can be found in
-	the [[file:Systems.org::*System Installation][System Installation]] section of [[file:Systems.org][Systems.org]].
+Instructions for installing a system from a Guix configuration can be found in
+the [[file:Systems.org::*System Installation][System Installation]] section of [[file:Systems.org][Systems.org]].
 
 * Password Management
 
 #+BEGIN_SRC sh
 
-	guix install gnupg password-store
-	gpg --generate-key
-	gpg --list-key
-	gpg --export-secret-keys --armor <fingerprint> > privkey.asc
-	gpg --export --armor <fingerprint> > pubkey.asc
-	pass init <fingerprint>
-	pass git init
+guix install gnupg password-store
+gpg --generate-key
+gpg --list-key
+gpg --export-secret-keys --armor <fingerprint> > privkey.asc
+gpg --export --armor <fingerprint> > pubkey.asc
+pass init <fingerprint>
+pass git init
 
 #+END_SRC
-	
-* License
 
-	Released under the [[./LICENSE][GPL v3]] unless otherwise specified by license files in
-	subfolders.
+* rsync
+
+#+BEGIN_SRC sh
+
+rsync -avzhn /home/polidorop/ polidorop@athena:/home/polidorop
+
+#+END_SRC
