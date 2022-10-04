@@ -14,6 +14,7 @@
    "gnupg"
    "paperkey"
    "qrencode"
+   "curl"
    
    ;; Settin gs Manager
    "xsettingsd"

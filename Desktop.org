@@ -25,6 +25,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "gnupg"
 "paperkey"
 "qrencode"
+"curl"
 
 #+end_src
 
