@@ -1,0 +1,8 @@
+#!/bin/sh
+echo ".dotfiles"
+cd ~/.dotfiles
+git pull
+
+echo ".password-store"
+cd ~/.password-store
+git pull

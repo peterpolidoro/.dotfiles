@@ -1,3 +1,5 @@
 # Direnv files
 .direnv
 .envrc
+
+*cache*
