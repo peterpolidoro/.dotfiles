@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
+echo "mr status: ~/Repositories"
+cd ~/Repositories
+mr -m status 2>/dev/null
+
 echo "git status: ~/.dotfiles"
 cd ~/.dotfiles
 git status -s
@@ -7,5 +11,6 @@ echo "git status: ~/.password-store"
 cd ~/.password-store
 git status -s
 
-cd ~/Repositories
-mr -m status 2>/dev/null
+echo "git status: ~/guix"
+cd ~/guix
+git status -s

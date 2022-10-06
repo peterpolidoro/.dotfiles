@@ -5,9 +5,13 @@
 #+PROPERTY: header-args:sh :tangle-mode (identity #o555)
 
 * Channels
+
 * Systems
+
 ** Base Configuration
+
 ** Machines
+
 *** Per-System Settings
 
 Some settings need to be customized on a per-system basis without tweaking
@@ -38,7 +42,7 @@ these settings appropriately.
 
 *.bin/upgrade-system*
 
-#+begin_src sh :tangle .bin/upgrade-system :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/upgrade-system :shebang #!/usr/bin/env bash
 
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
@@ -56,7 +60,7 @@ fi
 
 *.bin/upgrade-packages*
 
-#+begin_src sh :tangle .bin/upgrade-packages :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/upgrade-packages :shebang #!/usr/bin/env bash
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
@@ -69,7 +73,11 @@ guix package -u
 
 *.bin/get-status*
 
-#+begin_src sh :tangle .bin/get-status :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/get-status :shebang #!/usr/bin/env bash
+
+echo "mr status: ~/Repositories"
+cd ~/Repositories
+mr -m status 2>/dev/null
 
 echo "git status: ~/.dotfiles"
 cd ~/.dotfiles
@@ -79,14 +87,15 @@ echo "git status: ~/.password-store"
 cd ~/.password-store
 git status -s
 
-cd ~/Repositories
-mr -m status 2>/dev/null
+echo "git status: ~/guix"
+cd ~/guix
+git status -s
 
 #+end_src
 
 *.bin/pull-repositories*
 
-#+begin_src sh :tangle .bin/pull-repositories :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/pull-repositories :shebang #!/usr/bin/env bash
 
 echo ".dotfiles"
 cd ~/.dotfiles
@@ -100,7 +109,7 @@ git pull
 
 *.bin/upgrade-all*
 
-#+begin_src sh :tangle .bin/upgrade-all :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
@@ -211,13 +220,14 @@ done
 #+end_src
 
 * Dotfiles Management
+
 ** Upgrading
 
 Upgrading my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
 
 *.bin/upgrade-dotfiles*
 
-#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/bin/sh
+#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/usr/bin/env bash
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
