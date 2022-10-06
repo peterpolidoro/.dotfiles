@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-echo ".dotfiles"
+sleep 1
+echo "git pull: ~/.dotfiles"
 cd ~/.dotfiles
 git pull
 
-echo ".password-store"
+sleep 1
+echo "git pull: ~/.password-store"
 cd ~/.password-store
 git pull
+
+echo "git pull: ~/Repositories"
+cd ~/Repositories
+mr run sleep 1 && git pull 2>/dev/null

@@ -77,7 +77,7 @@ guix package -u
 
 echo "mr status: ~/Repositories"
 cd ~/Repositories
-mr -m status 2>/dev/null
+mr -m status 2>/dev/null | sed '/^$/d'
 
 echo "git status: ~/.dotfiles"
 cd ~/.dotfiles
@@ -87,23 +87,25 @@ echo "git status: ~/.password-store"
 cd ~/.password-store
 git status -s
 
-echo "git status: ~/guix"
-cd ~/guix
-git status -s
-
 #+end_src
 
 *.bin/pull-repositories*
 
 #+begin_src sh :tangle .bin/pull-repositories :shebang #!/usr/bin/env bash
 
-echo ".dotfiles"
+sleep 1
+echo "git pull: ~/.dotfiles"
 cd ~/.dotfiles
 git pull
 
-echo ".password-store"
+sleep 1
+echo "git pull: ~/.password-store"
 cd ~/.password-store
 git pull
+
+echo "git pull: ~/Repositories"
+cd ~/Repositories
+mr run sleep 1 && git pull 2>/dev/null
 
 #+end_src
 
@@ -115,6 +117,7 @@ git pull
 cd $(dirname $(readlink -f $0))
 ./upgrade-system
 ./upgrade-packages
+./pull-repositories
 
 #+end_src
 
