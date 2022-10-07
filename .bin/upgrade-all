@@ -4,3 +4,4 @@ cd $(dirname $(readlink -f $0))
 ./upgrade-system
 ./upgrade-packages
 ./pull-repositories
+./sync-email

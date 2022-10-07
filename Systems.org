@@ -109,6 +109,16 @@ mr run sleep 1 && git pull 2>/dev/null
 
 #+end_src
 
+*.bin/sync-email*
+
+#+begin_src sh :tangle .bin/sync-email :shebang #!/usr/bin/env bash
+
+mbsync -a
+mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
+mu index
+
+#+end_src
+
 *.bin/upgrade-all*
 
 #+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
@@ -118,6 +128,7 @@ cd $(dirname $(readlink -f $0))
 ./upgrade-system
 ./upgrade-packages
 ./pull-repositories
+./sync-email
 
 #+end_src
 
