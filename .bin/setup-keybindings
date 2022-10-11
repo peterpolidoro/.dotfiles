@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# ubuntu
+sudo apt install python3-pip
+sudo pip3 install xkeysnail
+
+sudo cp ~/.dotfiles/.config/xkeysnail/xkeysnail.service /etc/systemd/system/
+sudo systemctl enable xkeysnail
+sudo systemctl start xkeysnail
+# In the Firefox location bar, go to about:config, search for ui.key.menuAccessKeyFocuses, and set the Value to false.

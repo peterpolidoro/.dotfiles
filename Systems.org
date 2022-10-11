@@ -119,6 +119,21 @@ mu index
 
 #+end_src
 
+*.bin/setup-keybindings*
+
+#+begin_src sh :tangle .bin/setup-keybindings :shebang #!/usr/bin/env bash
+
+# ubuntu
+sudo apt install python3-pip
+sudo pip3 install xkeysnail
+
+sudo cp ~/.dotfiles/.config/xkeysnail/xkeysnail.service /etc/systemd/system/
+sudo systemctl enable xkeysnail
+sudo systemctl start xkeysnail
+# In the Firefox location bar, go to about:config, search for ui.key.menuAccessKeyFocuses, and set the Value to false.
+
+#+end_src
+
 *.bin/upgrade-all*
 
 #+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
