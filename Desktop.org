@@ -26,6 +26,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "paperkey"
 "qrencode"
 "curl"
+"xkeysnail"
 
 #+end_src
 

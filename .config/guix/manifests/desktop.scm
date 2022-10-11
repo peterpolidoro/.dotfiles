@@ -15,6 +15,7 @@
    "paperkey"
    "qrencode"
    "curl"
+   "xkeysnail"
    
    ;; Settin gs Manager
    "xsettingsd"
