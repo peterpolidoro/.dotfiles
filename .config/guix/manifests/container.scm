@@ -1,5 +1,5 @@
-(specifications->manifest
- '("docker"
-   "docker-compose"
-   "docker-cli"
-   ))
+;; (specifications->manifest
+;;  '("docker"
+;;    "docker-compose"
+;;    "docker-cli"
+;;    ))

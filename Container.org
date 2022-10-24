@@ -4,10 +4,10 @@
 
 #+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/container.scm
 
-(specifications->manifest
- '("docker"
-   "docker-compose"
-   "docker-cli"
-   ))
+;; (specifications->manifest
+;;  '("docker"
+;;    "docker-compose"
+;;    "docker-cli"
+;;    ))
 
 #+end_src

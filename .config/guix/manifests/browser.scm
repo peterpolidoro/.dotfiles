@@ -1,3 +1,3 @@
-(specifications->manifest
- '("nyxt"
-   ))
+;; (specifications->manifest
+;;  '("nyxt"
+;;    ))

@@ -4,8 +4,8 @@
 
 #+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/browser.scm
 
-(specifications->manifest
- '("nyxt"
-   ))
+;; (specifications->manifest
+;;  '("nyxt"
+;;    ))
 
 #+end_src
