@@ -1,3 +1,2 @@
 ;; (specifications->manifest
-;;  '("nyxt"
-;;    ))
+;;  '("firefox"))
