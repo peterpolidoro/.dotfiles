@@ -349,7 +349,8 @@ IMAPAccount janelia
 Host outlook.office365.com
 Port 993
 User polidorop@hhmi.org
-PassCmd "pass email/office365.com/polidorop@hhmi.org"
+PassCmd oauth2ms
+AuthMechs XOAUTH2
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -410,6 +411,7 @@ SyncState *
 (specifications->manifest
  '("mu"
    "isync"
+   "oauth2ms"
    ))
 
 #+end_src
@@ -433,6 +435,62 @@ pass insert email/dreamhost.com/peter@polidoro.io
 #+END_SRC
 
 * Setup, Sync, Init, and Index
+
+** oauth2 for polidoro@janelia.hhmi.org
+
+*** Azure app setup
+
+1. Create an account on Microsoft Azure
+2. Login to https://portal.azure.com/#home
+3. Click on Azure active directory
+4. Click on App registration > New Registration
+5. Enter the app name: polidorop-email
+   - Accounts in this organizational directory only (Howard Hughes Medical
+     Institute only - Single tenant)
+   - Enter Web redirect URI as http://localhost:5000/getToken. The port number
+     and redirect path (“/getToken”) can be configured
+6. Click on the newly created App, select “Certificates and secrets” and create
+   a “New client secret”. Make sure the copy the secret from the value field
+   into password store now!
+7. Click on API permissions > Add a permission.
+   - Click Microsoft graph > Delegated permission
+   - Add the “IMAP.AccessAsUser.All” permission
+   - Add the “User.ReadBasic.All” permission
+   - Add the “SMTP.Send” permission
+
+*** config.json
+
+#+BEGIN_SRC javascript
+{
+	  "tenant_id": "TENANT_ID",
+	  "client_id": "CLIENT_ID",
+	  "client_secret": "CLIENT_SECRET",
+	  "redirect_host": "localhost",
+	  "redirect_port": "5000",
+	  "redirect_path": "/getToken/",
+	  "scopes": ["https://outlook.office.com/IMAP.AccessAsUser.All", "https://outlook.office.com/SMTP.Send"]
+}
+#+END_SRC
+
+The TENANT_ID and CLIENT_ID are available on the overview page of the app.
+CLIENT_SECRET is the one created in step 6. If you entered a different port and
+redirect path in step 5, modify accordingly.
+
+Add config.json to password store.
+
+Save config.json to $XDG_CONFIG_HOME/oauth2ms/config.json
+
+#+BEGIN_SRC sh
+chmod 400 $XDG_CONFIG_HOME/oauth2ms/config.json
+oauth2ms
+#+END_SRC
+
+*** mbsync configuration
+
+- install [[https://github.com/moriyoshi/cyrus-sasl-xoauth2]]
+
+
+** mbsync and mu
 
 #+BEGIN_SRC sh
 

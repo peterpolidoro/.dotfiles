@@ -71,7 +71,8 @@ IMAPAccount janelia
 Host outlook.office365.com
 Port 993
 User polidorop@hhmi.org
-PassCmd "pass email/office365.com/polidorop@hhmi.org"
+PassCmd oauth2ms
+AuthMechs XOAUTH2
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
