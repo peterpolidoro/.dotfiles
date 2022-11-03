@@ -493,7 +493,6 @@ oauth2ms
 ** mbsync and mu
 
 #+BEGIN_SRC sh
-
 mkdir -p ~/Email/Gmail ~/Email/Janelia ~/Email/Polidoro
 mbsync --list gmail
 mbsync --list janelia
