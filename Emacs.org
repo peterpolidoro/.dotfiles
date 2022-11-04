@@ -50,7 +50,15 @@ This file generates [[file:init.el][init.el]] which will be loaded by Emacs at s
 
 * Handle Warnings
 
-Package cl is deprecated, remove warning.
+** Set minimum warning level
+
+#+begin_src emacs-lisp
+
+(setq warning-minimum-level :error)
+
+#+end_src
+
+** Remove cl is deprecated warning
 
 #+begin_src emacs-lisp
 

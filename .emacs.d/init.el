@@ -13,6 +13,8 @@
 ;; Make frame transparency overridable
 (defvar pjp/frame-transparency '(95 . 95))
 
+(setq warning-minimum-level :error)
+
 ;;(require 'loadhist)
 ;;(file-dependents (feature-file 'cl))
 (setq byte-compile-warnings '(cl-functions))
