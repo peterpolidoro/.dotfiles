@@ -78,11 +78,9 @@
    
    "emacs-ox-gfm"
    
-   "emacs-lsp-mode"
+   "emacs-eglot"
    
-   "emacs-lsp-ui"
-   
-   "emacs-consult-lsp"
+   "emacs-consult-eglot"
    
    "emacs-dap-mode"
    

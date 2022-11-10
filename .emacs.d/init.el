@@ -928,20 +928,7 @@
 ;;                                                                                                                                                       (help/org-2every-src-block
 ;;                                                                                                                                                              'org-babel-remove-result)))
 
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (python-mode . lsp-deferred)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred))
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
+(use-package eglot)
 
 (use-package company
   :defer t
@@ -992,9 +979,7 @@
 
 
 
-(use-package ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp-deferred))))
+(use-package ccls)
 
 ;; Unfortunately many standard c++ header files have no file
 ;; extension, and so will not typically be identified by emacs as c++
@@ -1122,8 +1107,7 @@
   :mode "\\.ya?ml\\'")
 
 (use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode))
+  :defer t)
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"

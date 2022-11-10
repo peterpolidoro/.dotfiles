@@ -1858,37 +1858,11 @@ Configuration for various programming languages and dev tools that I use.
 
 ** LSP
 
-*** IDE Features with lsp-mode
-
-**** lsp-mode
+*** IDE Features with eglot
 
 #+begin_src emacs-lisp
 
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (python-mode . lsp-deferred)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred))
-
-#+end_src
-
-**** lsp-ui
-
-[[https://emacs-lsp.github.io/lsp-ui/][lsp-ui]] is a set of UI enhancements built on top of =lsp-mode= which make
-Emacs feel even more like an IDE. Check out the screenshots on the =lsp-ui=
-homepage (linked at the beginning of this paragraph) to see examples of
-what it can do.
-
-#+begin_src emacs-lisp
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-position 'bottom))
+(use-package eglot)
 
 #+end_src
 
@@ -1896,11 +1870,9 @@ what it can do.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-lsp-mode"
+"emacs-eglot"
 
-"emacs-lsp-ui"
-
-"emacs-consult-lsp"
+"emacs-consult-eglot"
 
 #+end_src
 
@@ -2105,9 +2077,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 
 #+begin_src emacs-lisp
 
-(use-package ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp-deferred))))
+(use-package ccls)
 
 ;; Unfortunately many standard c++ header files have no file
 ;; extension, and so will not typically be identified by emacs as c++
@@ -2326,7 +2296,6 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 #+begin_src emacs-lisp :tangle no
 
 (use-package python-mode
-  :hook (python-mode . lsp-deferred)
   :custom
   ;; NOTE: Set these if Python 3 is called "python3" on your system!
   (python-shell-interpreter "python3")
@@ -2364,8 +2333,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 #+begin_src emacs-lisp
 
 (use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode))
+  :defer t)
 
 #+end_src
 
