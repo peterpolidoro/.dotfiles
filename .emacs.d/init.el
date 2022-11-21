@@ -781,6 +781,8 @@
      (python . t)
      (scheme . t)))
 
+  (setq org-babel-python-command "python3")
+
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
   ;; NOTE: Subsequent sections are still part of this use-package block!
