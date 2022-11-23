@@ -89,18 +89,27 @@
   :config
   (setq which-key-idle-delay 0.3))
 
-;; Thanks, but no thanks
-(setq inhibit-startup-message t)
-
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
+
+; Making tooltips appear in the echo area
+(tooltip-mode -1)
+(setq tooltip-use-echo-area t)
+
 (set-fringe-mode 10)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
 ;; Set up the visible bell
 (setq visible-bell t)
+
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+(setq use-short-answers t)
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -162,8 +171,6 @@
 (setq mouse-yank-at-point t)
 
 (setq require-final-newline t)
-
-(fset 'yes-or-no-p 'y-or-n-p)
 
 (setq confirm-kill-emacs 'y-or-n-p)
 
@@ -737,6 +744,9 @@
 ;;                "zathura"
 ;;                '(file))))
 ;;   (openwith-mode 1))
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()

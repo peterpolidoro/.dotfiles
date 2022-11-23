@@ -248,18 +248,33 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-;; Thanks, but no thanks
-(setq inhibit-startup-message t)
-
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
+
+; Making tooltips appear in the echo area
+(tooltip-mode -1)
+(setq tooltip-use-echo-area t)
+
 (set-fringe-mode 10)        ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
 ;; Set up the visible bell
 (setq visible-bell t)
+
+#+end_src
+
+*** Modifying prompts
+
+#+begin_src emacs-lisp
+
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+(setq use-short-answers t)
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
 
 #+end_src
 
@@ -419,14 +434,6 @@ based on the prefix keys you entered.
 #+begin_src emacs-lisp
 
 (setq require-final-newline t)
-
-#+end_src
-
-*** Shorten yes or no
-
-#+begin_src emacs-lisp
-
-(fset 'yes-or-no-p 'y-or-n-p)
 
 #+end_src
 
@@ -1586,6 +1593,20 @@ locally.
 
 #+end_src
 
+* Web Browsing
+
+#+begin_src emacs-lisp
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+#+end_src
+
 * Org Mode
 
 Set up Org Mode with a baseline configuration.  The following sections will add more things to it.
@@ -2695,7 +2716,6 @@ require it here to have it loaded in the main Emacs configuration.
 "emacs-pdf-tools"
 
 #+end_src
-
 
 * System Utilities
 ** Guix
