@@ -1,3 +1,10 @@
+[janelia-kicad-library]
+checkout =
+	git clone 'git@github.com:janelia-kicad/janelia-kicad-library.git' 'janelia-kicad-library'
+	cd janelia-kicad-library
+	git remote add public https://github.com/janelia-kicad/janelia-kicad-library.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-kicad-library.git
+
 [kicad-libraries]
 checkout =
 	git clone 'git@github.com:janelia-kicad/kicad-libraries.git' 'kicad-libraries'
