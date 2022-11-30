@@ -5,20 +5,19 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/janelia-kicad-library.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-kicad-library.git
 
+[janelia-kicad-metadata]
+checkout =
+	git clone 'git@github.com:janelia-kicad/janelia-kicad-metadata.git' 'janelia-kicad-metadata'
+	cd janelia-kicad-metadata
+	git remote add public https://github.com/janelia-kicad/janelia-kicad-metadata.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-kicad-metadata.git
+
 [kicad-libraries]
 checkout =
 	git clone 'git@github.com:janelia-kicad/kicad-libraries.git' 'kicad-libraries'
 	cd kicad-libraries
 	git remote add public https://github.com/janelia-kicad/kicad-libraries.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/kicad-libraries.git
-
-[digikey-kicad-library]
-checkout =
-	git clone 'git@github.com:janelia-kicad/digikey-kicad-library.git' 'digikey-kicad-library'
-	cd digikey-kicad-library
-	git remote add public https://github.com/janelia-kicad/digikey-kicad-library.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/digikey-kicad-library.git
-	git remote add source git@github.com:digikey/digikey-kicad-library.git
 
 [generate_kicad_documentation]
 checkout =
