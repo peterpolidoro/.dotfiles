@@ -745,6 +745,9 @@
 ;;                '(file))))
 ;;   (openwith-mode 1))
 
+(require 'rg)
+(rg-enable-default-bindings)
+
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
 
