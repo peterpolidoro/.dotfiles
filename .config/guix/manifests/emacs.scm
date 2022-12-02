@@ -72,6 +72,8 @@
    
    "emacs-openwith"
    
+   "emacs-rg"
+   
    "emacs-org"
    
    "emacs-org-roam"
