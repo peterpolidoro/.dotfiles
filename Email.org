@@ -345,34 +345,34 @@ Channel gmail-sent
 Channel gmail-starred
 Channel gmail-trash
 
-IMAPAccount janelia
-Host outlook.office365.com
-Port 993
-User polidorop@hhmi.org
-PassCmd oauth2ms
-AuthMechs XOAUTH2
-SSLType IMAPS
-SSLVersions TLSv1.2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-Timeout 120
-PipelineDepth 50
+# IMAPAccount janelia
+# Host outlook.office365.com
+# Port 993
+# User polidorop@hhmi.org
+# PassCmd oauth2ms
+# AuthMechs XOAUTH2
+# SSLType IMAPS
+# SSLVersions TLSv1.2
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+# Timeout 120
+# PipelineDepth 50
 
-IMAPStore janelia-remote
-Account janelia
+# IMAPStore janelia-remote
+# Account janelia
 
-MaildirStore janelia-local
-Path ~/Email/Janelia/
-Inbox ~/Email/Janelia/Inbox
-SubFolders Verbatim
+# MaildirStore janelia-local
+# Path ~/Email/Janelia/
+# Inbox ~/Email/Janelia/Inbox
+# SubFolders Verbatim
 
-Channel janelia
-Far :janelia-remote:
-Near :janelia-local:
-Patterns *
-Expunge Both
-Sync All
-Create Both
-SyncState *
+# Channel janelia
+# Far :janelia-remote:
+# Near :janelia-local:
+# Patterns *
+# Expunge Both
+# Sync All
+# Create Both
+# SyncState *
 
 IMAPAccount polidoro
 Host imap.dreamhost.com
