@@ -501,3 +501,17 @@ mbsync -a
 mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
 #+END_SRC
+
+** thunderbird
+
+*** Install
+
+#+BEGIN_SRC sh
+flatpak install flathub org.mozilla.Thunderbird
+#+END_SRC
+
+*** Run
+
+#+BEGIN_SRC sh
+flatpak run org.mozilla.Thunderbird
+#+END_SRC

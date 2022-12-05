@@ -45,6 +45,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "qrencode"
 "curl"
 "xkeysnail"
+"flatpak"
 
 #+end_src
 

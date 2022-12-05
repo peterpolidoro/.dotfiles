@@ -16,6 +16,7 @@
    "qrencode"
    "curl"
    "xkeysnail"
+   "flatpak"
    
    ;; Settin gs Manager
    "xsettingsd"
