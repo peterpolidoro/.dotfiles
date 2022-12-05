@@ -144,6 +144,12 @@ I also have to do an extra step to make sure Emacs can find the font path from t
 
 #+end_src
 
+* Flatpak
+
+#+begin_src sh
+flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+#+end_src
+
 * Desktop Profile
 
 The =desktop.scm= manifest holds the list of packages that I use to configure my desktop environment.  The package names are pulled from the relevant sections titled *Guix Packages* in this file (=Desktop.org=).
@@ -158,4 +164,3 @@ The =desktop.scm= manifest holds the list of packages that I use to configure my
    ))
 
 #+end_src
-
