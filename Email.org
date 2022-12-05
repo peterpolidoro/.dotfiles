@@ -502,16 +502,6 @@ mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=pol
 mu index
 #+END_SRC
 
-** thunderbird
+** Janelia web email
 
-*** Install
-
-#+BEGIN_SRC sh
-flatpak install flathub org.mozilla.Thunderbird
-#+END_SRC
-
-*** Run
-
-#+BEGIN_SRC sh
-flatpak run org.mozilla.Thunderbird
-#+END_SRC
+[[https://outlook.office365.com/mail/]]
