@@ -1,3 +1,10 @@
+[janelia-python-metadata]
+checkout =
+	git clone 'git@github.com:janelia-pypi/janelia-python-metadata.git' 'janelia-python-metadata'
+	cd janelia-python-metadata
+	git remote add public https://github.com/janelia-pypi/janelia-python-metadata.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-python-metadata.git
+
 [bioshake_device_python]
 checkout =
 	git clone 'git@github.com:janelia-pypi/bioshake_device_python.git' 'bioshake_device_python'
