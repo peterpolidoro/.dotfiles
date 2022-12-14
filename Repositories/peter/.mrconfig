@@ -202,3 +202,10 @@ checkout =
 	cd blog
 	git remote add public https://github.com/peterpolidoro/blog.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/blog.git
+
+[zenoh-web]
+checkout =
+	git clone 'git@github.com:peterpolidoro/zenoh-web.git' 'zenoh-web'
+	cd zenoh-web
+	git remote add public https://github.com/peterpolidoro/zenoh-web.git
+	git remote add source https://github.com/atolab/zenoh-web

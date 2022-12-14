@@ -235,3 +235,10 @@ checkout =
 	cd led_system_ros
 	git remote add public https://github.com/janelia-ros/led_system_ros.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/led_system_ros.git
+
+[weigh_station_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/weigh_station_ros.git' 'weigh_station_ros'
+	cd weigh_station_ros
+	git remote add public https://github.com/janelia-ros/weigh_station_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/weigh_station_ros.git
