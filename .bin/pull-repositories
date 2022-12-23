@@ -11,4 +11,6 @@ git pull
 
 echo "git pull: ~/Repositories"
 cd ~/Repositories
+mr checkout
+mr run sleep 1 && git fetch --all 2>/dev/null
 mr run sleep 1 && git pull 2>/dev/null
