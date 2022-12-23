@@ -120,9 +120,9 @@ checkout =
 	git remote add public https://github.com/janelia-experimental-technology/synclight.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/synclight.git
 
-[weigher]
+[weigh-station]
 checkout =
-	git clone 'git@github.com:janelia-experimental-technology/weigher.git' 'weigher'
-	cd weigher
-	git remote add public https://github.com/janelia-experimental-technology/weigher.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/weigher.git
+	git clone 'git@github.com:janelia-experimental-technology/weigh-station.git' 'weigh-station'
+	cd weigh-station
+	git remote add public https://github.com/janelia-experimental-technology/weigh-station.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/weigh-station.git
