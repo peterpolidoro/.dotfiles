@@ -63,7 +63,9 @@ fi
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 
-guix pull && guix package -u && ./upgrade-profiles
+guix pull
+guix package -u
+./upgrade-profiles
 
 #+end_src
 
@@ -71,11 +73,17 @@ guix pull && guix package -u && ./upgrade-profiles
 
 #+begin_src sh :tangle .bin/get-status :shebang #!/usr/bin/env bash
 
-echo "mr status: ~/Repositories" && cd ~/Repositories && mr -m status 2>/dev/null | sed '/^$/d'
+echo "mr status: ~/Repositories"
+cd ~/Repositories
+mr -m status 2>/dev/null | sed '/^$/d'
 
-echo "git status: ~/.dotfiles" && cd ~/.dotfiles && git status -s
+echo "git status: ~/.dotfiles"
+cd ~/.dotfiles
+git status -s
 
-echo "git status: ~/.password-store" && cd ~/.password-store && git status -s
+echo "git status: ~/.password-store"
+cd ~/.password-store
+git status -s
 
 #+end_src
 
@@ -83,11 +91,19 @@ echo "git status: ~/.password-store" && cd ~/.password-store && git status -s
 
 #+begin_src sh :tangle .bin/pull-repositories :shebang #!/usr/bin/env bash
 
-sleep 1 && echo "git pull: ~/.dotfiles" && cd ~/.dotfiles && git pull
+sleep 1
+echo "git pull: ~/.dotfiles"
+cd ~/.dotfiles
+git pull
 
-sleep 1 && echo "git pull: ~/.password-store" && cd ~/.password-store && git pull
+sleep 1
+echo "git pull: ~/.password-store"
+cd ~/.password-store
+git pull
 
-echo "git pull: ~/Repositories" && cd ~/Repositories && mr checkout && mr run sleep 1 && git pull 2>/dev/null
+echo "git pull: ~/Repositories"
+cd ~/Repositories
+mr run sleep 1 && git pull 2>/dev/null
 
 #+end_src
 

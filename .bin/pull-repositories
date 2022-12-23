@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
-sleep 1 && echo "git pull: ~/.dotfiles" && cd ~/.dotfiles && git pull
+sleep 1
+echo "git pull: ~/.dotfiles"
+cd ~/.dotfiles
+git pull
 
-sleep 1 && echo "git pull: ~/.password-store" && cd ~/.password-store && git pull
+sleep 1
+echo "git pull: ~/.password-store"
+cd ~/.password-store
+git pull
 
-echo "git pull: ~/Repositories" && cd ~/Repositories && mr checkout && mr run sleep 1 && git pull 2>/dev/null
+echo "git pull: ~/Repositories"
+cd ~/Repositories
+mr run sleep 1 && git pull 2>/dev/null
