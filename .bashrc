@@ -135,3 +135,4 @@ then
   export -f show_virtual_env
   PS1='$(show_virtual_env)'$PS1
 fi
+source /opt/ros/humble/setup.bash
