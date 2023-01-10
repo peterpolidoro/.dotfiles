@@ -136,3 +136,6 @@ then
   PS1='$(show_virtual_env)'$PS1
 fi
 source /opt/ros/humble/setup.bash
+source /usr/share/colcon_cd/function/colcon_cd.sh
+export _colcon_cd_root=/opt/ros/humble/
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
