@@ -5,12 +5,12 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/janelia-kicad-library.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-kicad-library.git
 
-[janelia-kicad-metadata]
+[metadata-kicad]
 checkout =
-	git clone 'git@github.com:janelia-kicad/janelia-kicad-metadata.git' 'janelia-kicad-metadata'
-	cd janelia-kicad-metadata
-	git remote add public https://github.com/janelia-kicad/janelia-kicad-metadata.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/janelia-kicad-metadata.git
+	git clone 'git@github.com:janelia-kicad/metadata-kicad.git' 'metadata-kicad'
+	cd metadata-kicad
+	git remote add public https://github.com/janelia-kicad/metadata-kicad.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/metadata-kicad.git
 
 [kicad-libraries]
 checkout =
