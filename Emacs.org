@@ -1689,6 +1689,8 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
 
 "emacs-org"
 
+"imagemagick"
+
 #+end_src
 
 ** Automatically "Tangle" on Save

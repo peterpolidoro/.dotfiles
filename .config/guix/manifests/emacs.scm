@@ -76,6 +76,8 @@
    
    "emacs-org"
    
+   "imagemagick"
+   
    "emacs-org-roam"
    
    "emacs-ox-gfm"
