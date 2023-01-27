@@ -209,3 +209,10 @@ checkout =
 	cd zenoh-web
 	git remote add public https://github.com/peterpolidoro/zenoh-web.git
 	git remote add source https://github.com/atolab/zenoh-web
+
+[csic]
+checkout =
+	git clone 'git@github.com:peterpolidoro/csic.git' 'csic'
+	cd csic
+	git remote add public https://github.com/peterpolidoro/csic.git
+	git remote add source https://github.com/atolab/csic
