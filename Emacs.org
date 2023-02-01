@@ -1475,9 +1475,10 @@ locally.
 #+end_src
 
 * File Browsing
+
 ** Dired
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (use-package dired
   :defer 1
@@ -1529,7 +1530,7 @@ locally.
 
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (use-package dired-subtree
   :after dired
@@ -1551,13 +1552,29 @@ locally.
 #+end_src
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-"emacs-dired-hacks"
+;; "emacs-dired-hacks"
 
-"emacs-all-the-icons-dired"
+;; "emacs-all-the-icons-dired"
 
 #+end_src
 
-** Opening Files Externally
+** Dirvish
+
+#+begin_src emacs-lisp
+
+(dirvish-override-dired-mode)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-dirvish"
+
+#+end_src
+
+* Opening Files Externally
 
 #+begin_src emacs-lisp
 
