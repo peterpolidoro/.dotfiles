@@ -143,9 +143,7 @@
    
    "emacs-csv-mode"
    
-   ;; "ncurses"
-   
-   ;; "emacs-eterm-256color"
+   "emacs-multi-term"
    
    "emacs-vterm"
    
