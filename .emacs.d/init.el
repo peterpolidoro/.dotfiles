@@ -1158,6 +1158,7 @@
 (use-package csv-mode)
 
 (use-package multi-term)
+(global-set-key (kbd "C-c t") 'multi-term)
 
 (use-package vterm
   :commands vterm

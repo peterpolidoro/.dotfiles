@@ -2559,6 +2559,7 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 #+begin_src emacs-lisp
 
 (use-package multi-term)
+(global-set-key (kbd "C-c t") 'multi-term)
 
 #+end_src
 
