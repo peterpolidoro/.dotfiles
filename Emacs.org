@@ -2594,8 +2594,8 @@ installed already so you may not have to do anything extra to use it.
 
 #+begin_src emacs-lisp
 
-(use-package eterm-256color
-  :hook (term-mode . eterm-256color-mode))
+;; (use-package eterm-256color
+;;   :hook (term-mode . eterm-256color-mode))
 
 #+end_src
 
@@ -2603,7 +2603,9 @@ installed already so you may not have to do anything extra to use it.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-eterm-256color"
+;; "ncurses"
+
+;; "emacs-eterm-256color"
 
 #+end_src
 

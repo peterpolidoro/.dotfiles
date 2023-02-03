@@ -1165,8 +1165,8 @@
   ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
 
-(use-package eterm-256color
-  :hook (term-mode . eterm-256color-mode))
+;; (use-package eterm-256color
+;;   :hook (term-mode . eterm-256color-mode))
 
 (use-package vterm
   :commands vterm
