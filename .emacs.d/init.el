@@ -1158,7 +1158,6 @@
 (use-package csv-mode)
 
 (use-package multi-term)
-(global-set-key (kbd "C-c t") 'multi-term)
 
 (use-package vterm
   :commands vterm
@@ -1168,9 +1167,14 @@
   (setq vterm-max-scrollback 10000)
   (add-hook
    'vterm-mode-hook
-   (lambda() (setq show-trailing-whitespace nil))))
+   (lambda() (setq show-trailing-whitespace nil)))
+  :bind (:map vterm-mode-map
+              ("M-n" . multi-vterm-next)
+              ("M-p" . multi-vterm-prev)))
 
 (use-package multi-vterm)
+(global-set-key (kbd "C-c v") 'multi-vterm)
+(global-set-key (kbd "C-c d") 'multi-vterm-dedicated-toggle)
 
 (when (eq system-type 'windows-nt)
   (setq explicit-shell-file-name "powershell.exe")

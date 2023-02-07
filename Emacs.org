@@ -2559,7 +2559,6 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 #+begin_src emacs-lisp
 
 (use-package multi-term)
-(global-set-key (kbd "C-c t") 'multi-term)
 
 #+end_src
 
@@ -2592,9 +2591,14 @@ you can use it successfully.
   (setq vterm-max-scrollback 10000)
   (add-hook
    'vterm-mode-hook
-   (lambda() (setq show-trailing-whitespace nil))))
+   (lambda() (setq show-trailing-whitespace nil)))
+  :bind (:map vterm-mode-map
+              ("M-n" . multi-vterm-next)
+              ("M-p" . multi-vterm-prev)))
 
 (use-package multi-vterm)
+(global-set-key (kbd "C-c v") 'multi-vterm)
+(global-set-key (kbd "C-c d") 'multi-vterm-dedicated-toggle)
 
 #+end_src
 
