@@ -1176,6 +1176,34 @@
 (global-set-key (kbd "C-c v") 'multi-vterm)
 (global-set-key (kbd "C-c d") 'multi-vterm-dedicated-toggle)
 
+(defun pjp/vterm-execute-region-or-current-line ()
+  "Insert text of current line in vterm and execute."
+  (interactive)
+  (require 'vterm)
+  (eval-when-compile (require 'subr-x))
+  (let ((command (if (region-active-p)
+                     (string-trim (buffer-substring
+                                   (save-excursion (region-beginning))
+                                   (save-excursion (region-end))))
+                   (string-trim (buffer-substring (save-excursion
+                                                    (beginning-of-line)
+                                                    (point))
+                                                  (save-excursion
+                                                    (end-of-line)
+                                                    (point)))))))
+    (let ((buf (current-buffer)))
+      (unless (get-buffer vterm-buffer-name)
+        (vterm))
+      (display-buffer vterm-buffer-name t)
+      (switch-to-buffer-other-window vterm-buffer-name)
+      (vterm--goto-line -1)
+      (message command)
+      (vterm-send-string command)
+      (vterm-send-return)
+      (switch-to-buffer-other-window buf)
+      )))
+(global-set-key (kbd "C-c x") 'pjp/vterm-execute-region-or-current-line)
+
 (when (eq system-type 'windows-nt)
   (setq explicit-shell-file-name "powershell.exe")
   (setq explicit-powershell.exe-args '()))
