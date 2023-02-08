@@ -121,6 +121,8 @@
    
    "emacs-markdown-mode"
    
+   "emacs-markdown-preview-mode"
+   
    "emacs-web-mode"
    
    "emacs-yaml-mode"

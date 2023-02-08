@@ -2350,6 +2350,8 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 
 "emacs-markdown-mode"
 
+"emacs-markdown-preview-mode"
+
 #+end_src
 
 *** HTML
