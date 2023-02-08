@@ -971,7 +971,7 @@
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :diminish magit-auto-revert-mode
-  :bind (("C-x g" . magit-status))
+  :bind (("C-c g" . magit-status))
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
@@ -1202,7 +1202,7 @@
   (eshell-toggle-size-fraction 4)
   (eshell-toggle-run-command nil)
   :bind
-  ("C-`" . eshell-toggle))
+  ("C-c l" . eshell-toggle))
 
 (use-package eshell-syntax-highlighting
   :after eshell-mode
@@ -1234,7 +1234,7 @@
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
-(global-set-key (kbd "C-x e") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
+(global-set-key (kbd "C-c e") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 
