@@ -106,6 +106,44 @@ helpful in understanding the different ways you can reference another block in
 Instructions for installing a system from a Guix configuration can be found in
 the [[file:Systems.org::*System Installation][System Installation]] section of [[file:Systems.org][Systems.org]].
 
+** Foreign Distro
+
+*** Debian
+
+**** Install
+
+***** Download
+
+****** All processor architectures
+[[https://www.debian.org/distrib/netinst]]
+
+****** amd64
+
+[[https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso]]
+
+***** Write to thumb drive
+
+#+BEGIN_SRC sh
+lsblk
+sudo umount /dev/sdc*
+sudo dd if=~/Downloads/debian-11.6.0-amd64-netinst.iso of=/dev/sdc bs=1M status=progress
+#+END_SRC
+
+***** Install with graphical installer
+
+- btrfs file system for debian root and guix store files
+- Xfce
+- SSH server
+- standard system utilities
+
+
+**** Setup
+
+- login with Xfce Session
+- set panel preferences
+- set terminal preferences
+  - Run command as login shell
+
 * Password Management
 
 #+BEGIN_SRC sh

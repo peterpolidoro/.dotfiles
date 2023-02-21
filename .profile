@@ -21,7 +21,9 @@ fi
 # sourced the last. Thus the latest guix (fetched by guix pull) will have a
 # priority.
 GUIX_PROFILE="$HOME/.config/guix/current"
-. "$GUIX_PROFILE/etc/profile"
+if [ -d "$GUIX_PROFILE" ] ; then
+  . "$GUIX_PROFILE"/etc/profile
+fi
 
 # Export the path to IcedTea so that tools pick it up correctly
 # export JAVA_HOME=$(dirname $(dirname $(readlink $(which java))))
