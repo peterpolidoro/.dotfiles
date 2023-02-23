@@ -121,6 +121,8 @@
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(setq switch-to-buffer-obey-display-actions t)
+
 (column-number-mode)
 
 ;; Enable line numbers for some modes
