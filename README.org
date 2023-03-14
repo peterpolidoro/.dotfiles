@@ -214,7 +214,7 @@ Install passff firefox add-on
 
 #+BEGIN_SRC sh
 curl -sSL github.com/passff/passff-host/releases/latest/download/install_host_app.sh | bash -s -- firefox
-sudo apt install pinentry-qt
+sudo apt install pinentry-qt -y
 #+END_SRC
 
 * rsync
