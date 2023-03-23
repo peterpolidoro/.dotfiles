@@ -216,3 +216,10 @@ checkout =
 	cd csic
 	git remote add public https://github.com/peterpolidoro/csic.git
 	git remote add source https://github.com/atolab/csic
+
+[biym-board]
+checkout =
+	git clone 'git@github.com:peterpolidoro/biym-board.git' 'biym-board'
+	cd biym-board
+	git remote add public https://github.com/peterpolidoro/biym-board.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/biym-board.git

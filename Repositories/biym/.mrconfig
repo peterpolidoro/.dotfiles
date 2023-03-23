@@ -1,6 +1,0 @@
-[biym-board]
-checkout =
-	git clone 'git@github.com:biym/biym-board.git' 'biym-board'
-	cd biym-board
-	git remote add public https://github.com/biym/biym-board.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/biym-board.git
