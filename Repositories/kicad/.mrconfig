@@ -391,3 +391,10 @@ checkout =
 	cd trinamic_wiring
 	git remote add public https://github.com/janelia-kicad/trinamic_wiring.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/trinamic_wiring.git
+
+[mouse_joystick_controller]
+checkout =
+	git clone 'git@github.com:janelia-kicad/mouse_joystick_controller.git' 'mouse_joystick_controller'
+	cd mouse_joystick_controller
+	git remote add public https://github.com/janelia-kicad/mouse_joystick_controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mouse_joystick_controller.git
