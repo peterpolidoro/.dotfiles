@@ -1234,7 +1234,7 @@
   (eshell-toggle-size-fraction 4)
   (eshell-toggle-run-command nil)
   :bind
-  ("C-c l" . eshell-toggle))
+  ("C-c s" . eshell-toggle))
 
 (use-package eshell-syntax-highlighting
   :after eshell-mode
