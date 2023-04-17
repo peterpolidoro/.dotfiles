@@ -1699,6 +1699,25 @@ locally.
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 #+end_src
 
+* Dictionary
+
+#+begin_src emacs-lisp
+
+(global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
+
+#+end_src
+
+#+BEGIN_SRC sh :tangle no
+
+sudo apt-get install dictd dict dict-{wn,vera,jargon,devil,gcide,foldoc} && sudo systemctl enable dictd
+
+#+END_SRC
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+#+end_src
+
 * Org Mode
 
 Set up Org Mode with a baseline configuration.  The following sections will add more things to it.

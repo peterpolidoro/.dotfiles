@@ -762,6 +762,8 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
 
+(global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
+
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
   (org-indent-mode)
