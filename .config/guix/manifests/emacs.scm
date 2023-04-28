@@ -72,6 +72,18 @@
    
    "emacs-dirvish"
    
+   "fd"
+   
+   "poppler"
+   
+   "ffmpegthumbnailer"
+   
+   "mediainfo"
+   
+   "unzip"
+   
+   "tar"
+   
    "emacs-openwith"
    
    "emacs-rg"

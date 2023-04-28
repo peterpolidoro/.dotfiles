@@ -1628,6 +1628,18 @@ locally.
 
 "emacs-dirvish"
 
+"fd"
+
+"poppler"
+
+"ffmpegthumbnailer"
+
+"mediainfo"
+
+"unzip"
+
+"tar"
+
 #+end_src
 
 * Opening Files Externally
