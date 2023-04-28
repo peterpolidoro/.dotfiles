@@ -72,7 +72,7 @@
    
    "emacs-dirvish"
    
-   "fd"
+   "emacs-fd"
    
    "poppler"
    
