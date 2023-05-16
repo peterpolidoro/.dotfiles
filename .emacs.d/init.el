@@ -1096,10 +1096,8 @@
   :config
   ;; (setq geiser-default-implementation 'gambit)
   (setq geiser-default-implementation 'guile)
-  (setq geiser-active-implementations '(gambit guile))
-  (setq geiser-repl-default-port 44555) ; For Gambit Scheme
-  (setq geiser-implementations-alist '(((regexp "\\.scm$") gambit)
-                                       ((regexp "\\.sld") gambit))))
+  (setq geiser-active-implementations '(guile))
+  (setq geiser-implementations-alist '(((regexp "\\.scm$") guile))))
 
 (use-package markdown-mode
   :mode "\\.md\\'"
