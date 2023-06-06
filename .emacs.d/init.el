@@ -710,7 +710,7 @@
        ("p" "~/Repositories/pypi" "Pypi")
        ("r" "~/Repositories/ros" "Ros")
        ))
-    ;; :config
+    :config
     ;; (dirvish-peek-mode) ; Preview files in minibuffer
     ;; (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
     ;; (setq dirvish-mode-line-format
@@ -718,8 +718,8 @@
     ;; (setq dirvish-attributes
     ;;       '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
     ;; (setq delete-by-moving-to-trash t)
-    ;; (setq dired-listing-switches
-    ;;       "-l --almost-all --human-readable --group-directories-first --no-group")
+    (setq dired-listing-switches
+          "-l --almost-all --human-readable --group-directories-first --no-group")
     :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
     (("C-c f" . dirvish-fd)
      :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
