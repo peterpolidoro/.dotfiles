@@ -179,6 +179,9 @@ repo so I move them all to another location.
         (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
 (load custom-file t)
 
+;; I use version control instead of backup files
+(setq make-backup-files nil)
+
 #+end_src
 
 *Guix Packages*
@@ -391,6 +394,14 @@ based on the prefix keys you entered.
 #+begin_src emacs-lisp
 
 (setq sentence-end-double-space nil)
+
+#+end_src
+
+*** Visual Line Mode
+
+#+begin_src emacs-lisp
+
+(global-visual-line-mode t)
 
 #+end_src
 
@@ -838,7 +849,7 @@ package code.
 (use-package paren
   :config
   (set-face-attribute 'show-paren-match-expression nil :background "#363e4a")
-  (show-paren-mode 1))
+  (show-paren-mode))
 
 #+end_src
 
@@ -1317,6 +1328,14 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-embark"
+
+#+end_src
+
+** Completion Ignored Extensions
+
+#+begin_src emacs-lisp
+
+(add-to-list 'completion-ignored-extensions ".go")
 
 #+end_src
 

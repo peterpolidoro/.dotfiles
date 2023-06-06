@@ -77,6 +77,9 @@
         (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
 (load custom-file t)
 
+;; I use version control instead of backup files
+(setq make-backup-files nil)
+
 ;; Add my library path to load-path
 (push "~/.dotfiles/.emacs.d/lisp" load-path)
 
@@ -155,6 +158,8 @@
           'executable-make-buffer-file-executable-if-script-p)
 
 (setq sentence-end-double-space nil)
+
+(global-visual-line-mode t)
 
 (add-hook 'before-save-hook
           (lambda ()
@@ -316,7 +321,7 @@
 (use-package paren
   :config
   (set-face-attribute 'show-paren-match-expression nil :background "#363e4a")
-  (show-paren-mode 1))
+  (show-paren-mode))
 
 (setq display-time-world-list
       '(("America/Los_Angeles" "California")
@@ -625,6 +630,8 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
   )
+
+(add-to-list 'completion-ignored-extensions ".go")
 
 (use-package avy
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
