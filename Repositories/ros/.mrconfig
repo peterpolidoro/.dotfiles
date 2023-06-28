@@ -243,3 +243,10 @@ checkout =
 	git remote add public https://github.com/janelia-ros/weigher_ros.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/weigher_ros.git
 	git remote add rat git@github.com:RatCity-Habitat/weigher_ros.git
+
+[glass_to_glass_ros]
+checkout =
+	git clone 'git@github.com:janelia-ros/glass_to_glass_ros.git' 'glass_to_glass_ros'
+	cd glass_to_glass_ros
+	git remote add public https://github.com/janelia-ros/glass_to_glass_ros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/glass_to_glass_ros.git
