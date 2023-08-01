@@ -23,7 +23,7 @@
    "arc-icon-theme"
    "matcha-theme"
    "hicolor-icon-theme"
-   "gnome-icon-theme"
+   "adwaita-icon-theme"
    "gnome-backgrounds"
    "papirus-icon-theme"
    "breeze-icons"
@@ -40,6 +40,6 @@
    "font-liberation"
    "font-awesome"
    "font-google-material-design-icons"
-   "gs-fonts"
+   "font-ghostscript"
    
    ))
