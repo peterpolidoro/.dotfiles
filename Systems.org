@@ -134,6 +134,16 @@ sudo systemctl start xkeysnail
 
 #+end_src
 
+*.bin/upgrade-guix*
+
+#+begin_src sh :tangle .bin/upgrade-guix :shebang #!/usr/bin/env bash
+
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+./upgrade-system
+./upgrade-packages
+#+end_src
+
 *.bin/upgrade-all*
 
 #+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
@@ -144,7 +154,6 @@ cd $(dirname $(readlink -f $0))
 ./upgrade-packages
 ./pull-repositories
 ./sync-email
-
 #+end_src
 
 * Profile Management
