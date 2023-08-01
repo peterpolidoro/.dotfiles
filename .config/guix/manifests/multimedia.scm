@@ -1,4 +1,2 @@
-(specifications->manifest
- '("gimp"
-   "inkscape"
-   ))
+;; (specifications->manifest
+;;  '("gimp"))

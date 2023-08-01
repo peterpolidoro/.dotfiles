@@ -156,8 +156,7 @@ usermod -aG sudo username
   - Run command as login shell
 - Install guix on a foreign distro
 - setup ~/.dotfiles
-- run ~/.bin/upgrade-system
-- run ~/.bin/upgrade-packages
+- run ~/.bin/guix
 
 ***** ssh agent
 

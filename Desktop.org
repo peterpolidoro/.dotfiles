@@ -37,8 +37,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 "myrepos"
 "gparted"
 "graphviz"
-"evince"
-"syncthing"
 "password-store"
 "gnupg"
 "paperkey"

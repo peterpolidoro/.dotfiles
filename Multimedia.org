@@ -4,9 +4,7 @@
 
 #+begin_src scheme :scheme guile :session guile :tangle .config/guix/manifests/multimedia.scm
 
-(specifications->manifest
- '("gimp"
-   "inkscape"
-   ))
+;; (specifications->manifest
+;;  '("gimp"))
 
 #+end_src

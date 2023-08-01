@@ -8,8 +8,6 @@
    "myrepos"
    "gparted"
    "graphviz"
-   "evince"
-   "syncthing"
    "password-store"
    "gnupg"
    "paperkey"
