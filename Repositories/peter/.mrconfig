@@ -242,3 +242,10 @@ checkout =
 	cd  Modular-LED-Display
 	git remote add peterpolidoro git@github.com:peterpolidoro/Modular-LED-Display.git
 	git remote add source git@github.com:reiserlab/Modular-LED-Display.git
+
+[LED-Display_G4_Firmware]
+checkout =
+	git clone 'git@github.com:peterpolidoro/LED-Display_G4_Firmware.git' 'LED-Display_G4_Firmware'
+	cd  LED-Display_G4_Firmware
+	git remote add peterpolidoro git@github.com:peterpolidoro/LED-Display_G4_Firmware.git
+	git remote add source git@github.com:floesche/LED-Display_G4_Firmware.git
