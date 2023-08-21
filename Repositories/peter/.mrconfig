@@ -249,3 +249,9 @@ checkout =
 	cd  LED-Display_G4_Firmware
 	git remote add peterpolidoro git@github.com:peterpolidoro/LED-Display_G4_Firmware.git
 	git remote add source git@github.com:floesche/LED-Display_G4_Firmware.git
+
+[panels-documentation]
+checkout =
+	git clone 'git@github.com:peterpolidoro/panels-documentation.git' 'panels-documentation'
+	cd  panels-documentation
+	git remote add peterpolidoro git@github.com:peterpolidoro/panels-documentation.git
