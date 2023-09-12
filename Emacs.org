@@ -1719,6 +1719,8 @@ locally.
 
 * Web Browsing
 
+** firefox
+
 #+begin_src emacs-lisp
 
 (setq browse-url-browser-function 'browse-url-generic
@@ -1729,6 +1731,37 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+#+end_src
+
+** Edit with Emacs
+
+#+begin_src emacs-lisp
+
+(use-package edit-server
+  :ensure t
+  :commands edit-server-start
+  :init (if after-init-time
+              (edit-server-start)
+            (add-hook 'after-init-hook
+                      #'(lambda() (edit-server-start))))
+  :config (setq edit-server-new-frame-alist
+                '((name . "Edit with Emacs FRAME")
+                  (top . 200)
+                  (left . 200)
+                  (width . 80)
+                  (height . 25)
+                  (minibuffer . t)
+                  (menu-bar-lines . t)
+                  (window-system . x))))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-edit-server"
+
 #+end_src
 
 * Dictionary

@@ -88,6 +88,8 @@
    
    "emacs-rg"
    
+   "emacs-edit-server"
+   
    "emacs-org"
    
    "imagemagick"

@@ -137,11 +137,7 @@ sudo systemctl start xkeysnail
 *.bin/upgrade-guix*
 
 #+begin_src sh :tangle .bin/upgrade-guix :shebang #!/usr/bin/env bash
-
-# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
-cd $(dirname $(readlink -f $0))
-./upgrade-system
-./upgrade-packages
+cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
 #+end_src
 
 *.bin/upgrade-all*
@@ -154,6 +150,7 @@ cd $(dirname $(readlink -f $0))
 ./upgrade-packages
 ./pull-repositories
 ./sync-email
+./upgrade-guix
 #+end_src
 
 * Profile Management
