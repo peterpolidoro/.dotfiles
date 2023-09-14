@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+./upgrade-guix-system
+./upgrade-guix-user

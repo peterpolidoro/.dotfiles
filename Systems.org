@@ -38,9 +38,9 @@ these settings appropriately.
 
 ** Upgrading
 
-*.bin/upgrade-system*
+*.bin/upgrade-guix-system*
 
-#+begin_src sh :tangle .bin/upgrade-system :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix-system :shebang #!/usr/bin/env bash
 
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
@@ -56,9 +56,9 @@ fi
 
 #+end_src
 
-*.bin/upgrade-packages*
+*.bin/upgrade-guix-user*
 
-#+begin_src sh :tangle .bin/upgrade-packages :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix-user :shebang #!/usr/bin/env bash
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
@@ -134,10 +134,19 @@ sudo systemctl start xkeysnail
 
 #+end_src
 
+*.bin/upgrade-guix-repository*
+
+#+begin_src sh :tangle .bin/upgrade-guix-repository :shebang #!/usr/bin/env bash
+cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
+#+end_src
+
 *.bin/upgrade-guix*
 
 #+begin_src sh :tangle .bin/upgrade-guix :shebang #!/usr/bin/env bash
-cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
+# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+cd $(dirname $(readlink -f $0))
+./upgrade-guix-system
+./upgrade-guix-user
 #+end_src
 
 *.bin/upgrade-all*
@@ -146,11 +155,11 @@ cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
-./upgrade-system
-./upgrade-packages
+./upgrade-guix-system
+./upgrade-guix-user
 ./pull-repositories
 ./sync-email
-./upgrade-guix
+./upgrade-guix-repository
 #+end_src
 
 * Profile Management
