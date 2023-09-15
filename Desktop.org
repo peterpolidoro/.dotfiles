@@ -9,7 +9,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 * Channels
 
 #+begin_src scheme :tangle .config/guix/channels.scm
-
 (use-modules (guix ci))
 
 (list (channel-with-substitutes-available
@@ -21,7 +20,6 @@ This file contains configuration for my overall desktop environment.  My workflo
         (url "https://github.com/guix-janelia/guix-janelia.git")
         (branch "main"))
        %default-channels)
-
 #+end_src
 
 * System Packages
@@ -29,7 +27,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "nss-certs"
 "glibc-locales"
 "make"
@@ -44,7 +41,8 @@ This file contains configuration for my overall desktop environment.  My workflo
 "curl"
 "xkeysnail"
 "flatpak"
-
+"nfs-utils"
+"cifs-utils"
 #+end_src
 
 * System Settings
@@ -68,7 +66,6 @@ I use [[https://github.com/derat/xsettingsd][xsettingsd]] as a minimal settings 
 *.config/xsettingsd/xsettingsd.conf:*
 
 #+begin_src conf :tangle .config/xsettingsd/xsettingsd.conf :noweb yes
-
 Net/ThemeName "Matcha-dark-azul"
 Net/IconThemeName "Papirus-Dark"
 Gtk/DecorationLayout "menu:minimize,maximize,close"
@@ -79,7 +76,6 @@ Xft/Antialias 1
 Xft/Hinting 0
 Xft/HintStyle "hintnone"
 Xft/DPI <<dpi()>> # 1024 * DPI
-
 #+end_src
 
 I also have to do an extra step to make sure Emacs can find the font path from the "desktop" profile.
@@ -87,7 +83,6 @@ I also have to do an extra step to make sure Emacs can find the font path from t
 *.config/fontconfig/fonts.conf:*
 
 #+begin_src xml :tangle .config/fontconfig/fonts.conf
-
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -100,7 +95,6 @@ I also have to do an extra step to make sure Emacs can find the font path from t
     </prefer>
   </alias>
 </fontconfig>
-
 #+end_src
 
 *DPI*
@@ -113,7 +107,6 @@ I also have to do an extra step to make sure Emacs can find the font path from t
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 ;; Settin gs Manager
 "xsettingsd"
 
@@ -139,7 +132,6 @@ I also have to do an extra step to make sure Emacs can find the font path from t
 "font-awesome"
 "font-google-material-design-icons"
 "font-ghostscript"
-
 #+end_src
 
 * Flatpak
@@ -155,10 +147,8 @@ The =desktop.scm= manifest holds the list of packages that I use to configure my
 *.config/guix/manifests/desktop.scm:*
 
 #+begin_src scheme :tangle .config/guix/manifests/desktop.scm :noweb yes
-
 (specifications->manifest
  '(
    <<packages>>
    ))
-
 #+end_src

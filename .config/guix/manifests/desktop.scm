@@ -1,6 +1,5 @@
 (specifications->manifest
  '(
-   
    "nss-certs"
    "glibc-locales"
    "make"
@@ -15,8 +14,8 @@
    "curl"
    "xkeysnail"
    "flatpak"
-   
-   ;; Settin gs Manager
+   "nfs-utils"
+   "cifs-utils";; Settin gs Manager
    "xsettingsd"
    
    ;; GTK Themes
@@ -41,5 +40,4 @@
    "font-awesome"
    "font-google-material-design-icons"
    "font-ghostscript"
-   
    ))

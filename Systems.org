@@ -21,7 +21,6 @@ I also define a function called =pjp/system-settings-get= which can retrieve
 these settings appropriately.
 
 #+begin_src emacs-lisp :tangle .emacs.d/per-system-settings.el :noweb yes
-
 (require 'map) ;; Needed for map-merge
 
 (setq pjp/system-settings
@@ -33,7 +32,6 @@ these settings appropriately.
          (emacs/fixed-face-size . 200)
          )))
        ;; <<system-settings>>))
-
 #+end_src
 
 ** Upgrading
@@ -41,7 +39,6 @@ these settings appropriately.
 *.bin/upgrade-guix-system*
 
 #+begin_src sh :tangle .bin/upgrade-guix-system :shebang #!/usr/bin/env bash
-
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
     echo "Upgrading Guix System..."
@@ -53,26 +50,22 @@ else
     sudo -i guix pull
     sudo systemctl restart guix-daemon.service
 fi
-
 #+end_src
 
 *.bin/upgrade-guix-user*
 
 #+begin_src sh :tangle .bin/upgrade-guix-user :shebang #!/usr/bin/env bash
-
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 
 guix pull
 guix package -u
 ./upgrade-profiles
-
 #+end_src
 
 *.bin/get-status*
 
 #+begin_src sh :tangle .bin/get-status :shebang #!/usr/bin/env bash
-
 echo "mr status: ~/Repositories"
 cd ~/Repositories
 mr -m status 2>/dev/null | sed '/^$/d'
@@ -84,13 +77,11 @@ git status -s
 echo "git status: ~/.password-store"
 cd ~/.password-store
 git status -s
-
 #+end_src
 
 *.bin/pull-repositories*
 
 #+begin_src sh :tangle .bin/pull-repositories :shebang #!/usr/bin/env bash
-
 sleep 1
 echo "git pull: ~/.dotfiles"
 cd ~/.dotfiles
@@ -106,23 +97,19 @@ cd ~/Repositories
 mr checkout
 mr run sleep 1 && git fetch --all 2>/dev/null
 mr run sleep 1 && git pull 2>/dev/null
-
 #+end_src
 
 *.bin/sync-email*
 
 #+begin_src sh :tangle .bin/sync-email :shebang #!/usr/bin/env bash
-
 mbsync -a
 mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
-
 #+end_src
 
 *.bin/setup-keybindings*
 
 #+begin_src sh :tangle .bin/setup-keybindings :shebang #!/usr/bin/env bash
-
 # ubuntu
 sudo apt install python3-pip
 sudo pip3 install xkeysnail
@@ -131,7 +118,6 @@ sudo cp ~/.dotfiles/.config/xkeysnail/xkeysnail.service /etc/systemd/system/
 sudo systemctl enable xkeysnail
 sudo systemctl start xkeysnail
 # In the Firefox location bar, go to about:config, search for ui.key.menuAccessKeyFocuses, and set the Value to false.
-
 #+end_src
 
 *.bin/upgrade-guix-repository*
@@ -152,7 +138,6 @@ cd $(dirname $(readlink -f $0))
 *.bin/upgrade-all*
 
 #+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
-
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 ./upgrade-guix-system
@@ -160,6 +145,12 @@ cd $(dirname $(readlink -f $0))
 ./pull-repositories
 ./sync-email
 ./upgrade-guix-repository
+#+end_src
+
+*.bin/mount-janelia-misc*
+
+#+begin_src sh :tangle .bin/mount-janelia-misc :shebang #!/usr/bin/env bash
+sudo mkdir -p /janelia/misc && sudo mount -o rw,hard,bg,nolock,nfsvers=4.1,sec=krb5 http://prfs.hhmi.org:/misc /janelia/misc || echo "Failed to mount /janelia/misc";
 #+end_src
 
 * Profile Management
