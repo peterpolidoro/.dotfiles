@@ -833,3 +833,10 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/ILI9341_t3n.git
 	git remote add source git@github.com:KurtE/ILI9341_t3n.git
 
+[cores]
+checkout =
+	git clone 'git@github.com:janelia-arduino/cores.git' 'cores'
+	cd cores
+	git remote add public https://github.com/janelia-arduino/cores.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/cores.git
+	git remote add source git@github.com:PaulStoffregen/cores.git
