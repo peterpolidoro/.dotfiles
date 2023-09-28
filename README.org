@@ -207,6 +207,10 @@ pass git init
 
 ** firefox
 
+#+BEGIN_SRC sh
+flatpak install flathub org.mozilla.firefox
+#+END_SRC
+
 *** PassFF
 
 Install passff firefox add-on
