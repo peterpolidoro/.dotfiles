@@ -840,3 +840,11 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/cores.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/cores.git
 	git remote add source git@github.com:PaulStoffregen/cores.git
+
+[SdFat]
+checkout =
+	git clone 'git@github.com:janelia-arduino/SdFat.git' 'SdFat'
+	cd SdFat
+	git remote add public https://github.com/janelia-arduino/SdFat.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/SdFat.git
+	git remote add source git@github.com:PaulStoffregen/SdFat.git
