@@ -209,8 +209,16 @@ pass git init
 
 *** flatpak
 
+**** install
+
 #+BEGIN_SRC sh
 flatpak install flathub org.mozilla.firefox
+#+END_SRC
+
+**** run
+
+#+BEGIN_SRC sh
+flatpak run org.mozilla.firefox
 #+END_SRC
 
 *** firefox-esr
