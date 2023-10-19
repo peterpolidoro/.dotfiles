@@ -2890,6 +2890,23 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+end_src
 
+** plantuml
+
+#+begin_src emacs-lisp
+
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"plantuml"
+
+"emacs-plantuml-mode"
+
+#+end_src
+
 * System Utilities
 ** Guix
 

@@ -187,6 +187,10 @@
    
    "emacs-pdf-tools"
    
+   "plantuml"
+   
+   "emacs-plantuml-mode"
+   
    "emacs-guix"
    
    "emacs-daemons"
