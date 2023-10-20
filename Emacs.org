@@ -2894,7 +2894,10 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src emacs-lisp
 
-
+(setq plantuml-default-exec-mode 'executable)
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list
+  'org-src-lang-modes '("plantuml" . plantuml))
 #+end_src
 
 *Guix Packages*

@@ -1295,7 +1295,10 @@
 
 (pdf-loader-install)
 
-
+(setq plantuml-default-exec-mode 'executable)
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list
+  'org-src-lang-modes '("plantuml" . plantuml))
 
 (use-package guix
   :defer t)
