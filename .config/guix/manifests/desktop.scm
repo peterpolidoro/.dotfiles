@@ -2,8 +2,6 @@
  '(
    "nss-certs"
    "glibc-locales"
-   "make"
-   "stow"
    "myrepos"
    "gparted"
    "graphviz"
