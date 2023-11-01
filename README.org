@@ -15,8 +15,9 @@ guix install git make stow
 # debian
 sudo apt install git make stow
 cd ~
-rm .profile
-rm .bashrc
+rm ~/.profile
+rm ~/.bashrc
+rm ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
 GUIX_PROFILE="$HOME/.guix-profile"
 . "$GUIX_PROFILE"/etc/profile
 git clone https://github.com:peterpolidoro/.dotfiles
