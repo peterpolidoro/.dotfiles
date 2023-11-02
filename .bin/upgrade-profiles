@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
 
 GREEN='\033[1;32m'
