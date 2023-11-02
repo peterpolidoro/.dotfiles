@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/bin/sh
 sudo mkdir -p /janelia/misc && sudo mount -o rw,hard,bg,nolock,nfsvers=4.1,sec=krb5 http://prfs.hhmi.org:/misc /janelia/misc || echo "Failed to mount /janelia/misc";

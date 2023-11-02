@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 echo "mr status: ~/Repositories"
 cd ~/Repositories
 mr -m status 2>/dev/null | sed '/^$/d'

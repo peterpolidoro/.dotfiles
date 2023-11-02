@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
     echo "Upgrading Guix System..."

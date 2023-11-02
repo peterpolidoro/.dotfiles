@@ -38,7 +38,7 @@ these settings appropriately.
 
 *.bin/upgrade-guix-system*
 
-#+begin_src sh :tangle .bin/upgrade-guix-system :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix-system :shebang #!/bin/sh
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
     echo "Upgrading Guix System..."
@@ -54,7 +54,7 @@ fi
 
 *.bin/upgrade-guix-user*
 
-#+begin_src sh :tangle .bin/upgrade-guix-user :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix-user :shebang #!/bin/sh
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 
@@ -65,7 +65,7 @@ guix package -u
 
 *.bin/get-status*
 
-#+begin_src sh :tangle .bin/get-status :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/get-status :shebang #!/bin/sh
 echo "mr status: ~/Repositories"
 cd ~/Repositories
 mr -m status 2>/dev/null | sed '/^$/d'
@@ -81,7 +81,7 @@ git status -s
 
 *.bin/pull-repositories*
 
-#+begin_src sh :tangle .bin/pull-repositories :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/pull-repositories :shebang #!/bin/sh
 sleep 1
 echo "git pull: ~/.dotfiles"
 cd ~/.dotfiles
@@ -101,7 +101,7 @@ mr run sleep 1 && git pull 2>/dev/null
 
 *.bin/sync-email*
 
-#+begin_src sh :tangle .bin/sync-email :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/sync-email :shebang #!/bin/sh
 mbsync -a
 mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
@@ -109,7 +109,7 @@ mu index
 
 *.bin/setup-keybindings*
 
-#+begin_src sh :tangle .bin/setup-keybindings :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/setup-keybindings :shebang #!/bin/sh
 # ubuntu
 sudo apt install python3-pip
 sudo pip3 install xkeysnail
@@ -122,13 +122,13 @@ sudo systemctl start xkeysnail
 
 *.bin/upgrade-guix-repository*
 
-#+begin_src sh :tangle .bin/upgrade-guix-repository :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix-repository :shebang #!/bin/sh
 cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
 #+end_src
 
 *.bin/upgrade-guix*
 
-#+begin_src sh :tangle .bin/upgrade-guix :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-guix :shebang #!/bin/sh
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 ./upgrade-guix-system
@@ -137,7 +137,7 @@ cd $(dirname $(readlink -f $0))
 
 *.bin/upgrade-all*
 
-#+begin_src sh :tangle .bin/upgrade-all :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-all :shebang #!/bin/sh
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))
 ./upgrade-guix-system
@@ -149,7 +149,7 @@ cd $(dirname $(readlink -f $0))
 
 *.bin/mount-janelia-misc*
 
-#+begin_src sh :tangle .bin/mount-janelia-misc :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/mount-janelia-misc :shebang #!/bin/sh
 sudo mkdir -p /janelia/misc && sudo mount -o rw,hard,bg,nolock,nfsvers=4.1,sec=krb5 http://prfs.hhmi.org:/misc /janelia/misc || echo "Failed to mount /janelia/misc";
 #+end_src
 
@@ -262,7 +262,7 @@ Upgrading my dotfiles requires running a script in Emacs to loop over all of my 
 
 *.bin/upgrade-dotfiles*
 
-#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/usr/bin/env bash
+#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/bin/sh
 
 # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
 cd $(dirname $(readlink -f $0))

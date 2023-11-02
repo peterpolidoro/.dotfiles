@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # ubuntu
 sudo apt install python3-pip
 sudo pip3 install xkeysnail

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 mbsync -a
 mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
