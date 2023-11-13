@@ -182,10 +182,7 @@ RED='\033[1;30m'
 NC='\033[0m'
 GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
 
-profiles=$*
-if [[ $# -eq 0 ]]; then
-    profiles="$HOME/.config/guix/manifests/*.scm";
-fi
+profiles="$HOME/.config/guix/manifests/*.scm";
 
 for profile in $profiles; do
     # Remove the path and file extension, if any
@@ -236,10 +233,7 @@ GREEN='\033[1;32m'
 NC='\033[0m'
 GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
 
-profiles=$*
-if [[ $# -eq 0 ]]; then
-    profiles="$GUIX_EXTRA_PROFILES/*";
-fi
+profiles="$GUIX_EXTRA_PROFILES/*";
 
 for profile in $profiles; do
     profileName=$(basename $profile)
