@@ -1830,9 +1830,11 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
      (lisp . t)
      (shell . t)
      (python . t)
-     (scheme . t)))
+     (scheme . t)
+     (plantuml . t)))
 
   (setq org-babel-python-command "python3")
+  (setq js-indent-level 2)
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
@@ -2893,7 +2895,6 @@ require it here to have it loaded in the main Emacs configuration.
 ** plantuml
 
 #+begin_src emacs-lisp
-
 (setq plantuml-default-exec-mode 'executable)
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 (add-to-list

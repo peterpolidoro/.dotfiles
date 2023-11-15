@@ -830,9 +830,11 @@
      (lisp . t)
      (shell . t)
      (python . t)
-     (scheme . t)))
+     (scheme . t)
+     (plantuml . t)))
 
   (setq org-babel-python-command "python3")
+  (setq js-indent-level 2)
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
