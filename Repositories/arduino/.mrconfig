@@ -826,12 +826,12 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/WingbeatDetectorInterface.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/WingbeatDetectorInterface.git
 
-[PanelsController]
+[ArenaController]
 checkout =
-	git clone 'git@github.com:janelia-arduino/PanelsController.git' 'PanelsController'
-	cd PanelsController
-	git remote add public https://github.com/janelia-arduino/PanelsController.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/PanelsController.git
+	git clone 'git@github.com:janelia-arduino/ArenaController.git' 'ArenaController'
+	cd ArenaController
+	git remote add public https://github.com/janelia-arduino/ArenaController.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ArenaController.git
 
 [ILI9341_t3n]
 checkout =
