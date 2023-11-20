@@ -204,9 +204,9 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/loadstar_sensors_interface_python.git
 	git remote add rat git@github.com:RatCity-Habitat/loadstar_sensors_interface_python.git
 
-[panels_controller_client_python]
+[arena_host_python]
 checkout =
-	git clone 'git@github.com:janelia-pypi/panels_controller_client_python.git' 'panels_controller_client_python'
-	cd panels_controller_client_python
-	git remote add public https://github.com/janelia-pypi/panels_controller_client_python.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/panels_controller_client_python.git
+	git clone 'git@github.com:janelia-pypi/arena_host_python.git' 'arena_host_python'
+	cd arena_host_python
+	git remote add public https://github.com/janelia-pypi/arena_host_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arena_host_python.git
