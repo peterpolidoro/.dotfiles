@@ -33,3 +33,16 @@ checkout =
 	git remote add public https://github.com/janelia-experimental-technology/weigher.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/weigher.git
 
+[raspberrypi_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/raspberrypi_setup.git' 'raspberrypi_setup'
+	cd raspberrypi_setup
+	git remote add public https://github.com/janelia-experimental-technology/raspberrypi_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/raspberrypi_setup.git
+
+[docker_setup]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/docker_setup.git' 'docker_setup'
+	cd docker_setup
+	git remote add public https://github.com/janelia-experimental-technology/docker_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/docker_setup.git
