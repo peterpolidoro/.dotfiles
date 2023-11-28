@@ -150,7 +150,14 @@
 
 (setq kill-whole-line t)
 
-(setq-default fill-column 80)
+(setq-default fill-column 78)
+
+(defun no-junk-please-were-unixish ()
+  (let ((coding-str (symbol-name buffer-file-coding-system)))
+    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+      (set-buffer-file-coding-system 'unix))))
+
+(add-hook 'find-file-hooks 'no-junk-please-were-unixish)
 
 (add-hook 'prog-mode-hook 'subword-mode)
 
