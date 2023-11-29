@@ -30,6 +30,14 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/qtools.git
 	git remote add source git@github.com:QuantumLeaps/qtools.git
 
+[embedded-coding-style]
+checkout =
+	git clone 'git@github.com:janelia-embedded/embedded-coding-style.git' 'embedded-coding-style'
+	cd embedded-coding-style
+	git remote add public https://github.com/janelia-embedded/embedded-coding-style.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/embedded-coding-style.git
+	git remote add source git@github.com:QuantumLeaps/embedded-coding-style.git
+
 [dds_xrce_setup]
 checkout =
 	git clone 'git@github.com:janelia-embedded/dds_xrce_setup.git' 'dds_xrce_setup'
