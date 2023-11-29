@@ -14,14 +14,6 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/qpcpp.git
 	git remote add source git@github.com:QuantumLeaps/qpcpp.git
 
-[qpn]
-checkout =
-	git clone 'git@github.com:janelia-embedded/qpn.git' 'qpn'
-	cd qpn
-	git remote add public https://github.com/janelia-embedded/qpn.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/qpn.git
-	git remote add source git@github.com:QuantumLeaps/qpn.git
-
 [qm]
 checkout =
 	git clone 'git@github.com:janelia-embedded/qm.git' 'qm'
@@ -51,50 +43,6 @@ checkout =
 	cd nvidia_jetson_setup
 	git remote add public https://github.com/janelia-embedded/nvidia_jetson_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/nvidia_jetson_setup.git
-
-[nuttx]
-checkout =
-	git clone 'git@github.com:janelia-embedded/nuttx.git' 'nuttx'
-	cd nuttx
-	git remote add public https://github.com/janelia-embedded/nuttx.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx.git
-	git remote add source git@github.com:microROS/NuttX.git
-	git remote add nuttx git@bitbucket.org:nuttx/nuttx.git
-	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx.git
-
-[nuttx_apps]
-checkout =
-	git clone 'git@github.com:janelia-embedded/nuttx_apps.git' 'nuttx_apps'
-	cd nuttx_apps
-	git remote add public https://github.com/janelia-embedded/nuttx_apps.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_apps.git
-	git remote add source git@github.com:microROS/apps.git
-	git remote add nuttx git@bitbucket.org:nuttx/apps.git
-
-[nuttx_tools]
-checkout =
-	git clone 'git@github.com:janelia-embedded/nuttx_tools.git' 'nuttx_tools'
-	cd nuttx_tools
-	git remote add public https://github.com/janelia-embedded/nuttx_tools.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_tools.git
-	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx_tools.git
-	git remote add source git@bitbucket.org:nuttx/tools.git
-
-[nuttx_uclibc]
-checkout =
-	git clone 'git@github.com:janelia-embedded/nuttx_uclibc.git' 'nuttx_uclibc'
-	cd nuttx_uclibc
-	git remote add public https://github.com/janelia-embedded/nuttx_uclibc.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_uclibc.git
-	git remote add bitbucket git@bitbucket.org:peterpolidoro/nuttx_uclibc.git
-	git remote add source git@bitbucket.org:nuttx/uclibc.git
-
-[nuttx_setup]
-checkout =
-	git clone 'git@github.com:janelia-embedded/nuttx_setup.git' 'nuttx_setup'
-	cd nuttx_setup
-	git remote add public https://github.com/janelia-embedded/nuttx_setup.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/nuttx_setup.git
 
 [platformio_setup]
 checkout =
