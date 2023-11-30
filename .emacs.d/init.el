@@ -150,7 +150,7 @@
 
 (setq kill-whole-line t)
 
-(setq-default fill-column 78)
+(setq-default fill-column 80)
 
 (defun no-junk-please-were-unixish ()
   (let ((coding-str (symbol-name buffer-file-coding-system)))

@@ -369,7 +369,7 @@ based on the prefix keys you entered.
 *** Fill-column
 
 #+BEGIN_SRC emacs-lisp
-(setq-default fill-column 78)
+(setq-default fill-column 80)
 #+END_SRC
 
 *** Automatically convert line endings to unix
