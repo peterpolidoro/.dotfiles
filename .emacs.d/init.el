@@ -369,6 +369,8 @@
                  ))
   (setq pjp/help-buffers (cdr pjp/help-buffers)))
 
+(solaire-global-mode +1)
+
 (use-package hydra
   :defer 1)
 
@@ -763,6 +765,12 @@
      ("M-e" . dirvish-emerge-menu)
      ("M-j" . dirvish-fd-jump))
     )
+
+(use-package treemacs
+  :bind ("<f5>" . treemacs)
+  :custom
+  (treemacs-is-never-other-window t)
+  :hook(treemacs-mode . treemacs-project-follow-mode))
 
 ;; (use-package openwith
 ;;   :config

@@ -39,6 +39,8 @@
    
    "emacs-helpful"
    
+   "emacs-solaire-mode"
+   
    "emacs-hydra"
    
    "emacs-vertico"
@@ -83,6 +85,8 @@
    "unzip"
    
    "tar"
+   
+   "emacs-treemacs"
    
    "emacs-openwith"
    

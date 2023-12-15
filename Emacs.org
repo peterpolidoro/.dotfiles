@@ -968,6 +968,22 @@ Emacs.
 
 #+end_src
 
+** Solaire
+
+#+begin_src emacs-lisp
+
+(solaire-global-mode +1)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-solaire-mode"
+
+#+end_src
+
 * Stateful Keymaps with Hydra
 
 #+begin_src emacs-lisp
@@ -1682,6 +1698,26 @@ locally.
 "unzip"
 
 "tar"
+
+#+end_src
+
+** Treemacs
+
+#+begin_src emacs-lisp
+
+(use-package treemacs
+  :bind ("<f5>" . treemacs)
+  :custom
+  (treemacs-is-never-other-window t)
+  :hook(treemacs-mode . treemacs-project-follow-mode))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-treemacs"
 
 #+end_src
 
