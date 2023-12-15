@@ -41,6 +41,8 @@ This file contains configuration for my overall desktop environment.  My workflo
 "flatpak"
 "nfs-utils"
 "cifs-utils"
+"exa"
+"bat"
 #+end_src
 
 * System Settings

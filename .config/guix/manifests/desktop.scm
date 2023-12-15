@@ -13,7 +13,9 @@
    "xkeysnail"
    "flatpak"
    "nfs-utils"
-   "cifs-utils";; Settin gs Manager
+   "cifs-utils"
+   "exa"
+   "bat";; Settin gs Manager
    "xsettingsd"
    
    ;; GTK Themes
