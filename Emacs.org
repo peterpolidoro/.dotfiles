@@ -3097,7 +3097,7 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 
 (setq erc-server "irc.libera.chat"
       erc-nick "peterpolidoro"    ; Change this!

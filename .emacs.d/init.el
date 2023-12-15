@@ -1351,3 +1351,11 @@
 (recentf-mode 1)
 (save-place-mode 1)
 (setq use-dialog-box nil)
+
+(setq erc-server "irc.libera.chat"
+      erc-nick "peterpolidoro"    ; Change this!
+      erc-user-full-name "Peter Polidoro"  ; And this!
+      erc-track-shorten-start 8
+      erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#emacs" "#guix"))
+      erc-kill-buffer-on-part t
+      erc-auto-query 'bury)
