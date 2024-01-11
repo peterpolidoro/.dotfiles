@@ -93,7 +93,7 @@
    "emacs-rg"
    
    "emacs-edit-server"
-   
+   "emacs-hyperbole"
    "emacs-org"
    
    "imagemagick"

@@ -1842,6 +1842,20 @@ sudo apt-get install dictd dict dict-{wn,vera,jargon,devil,gcide,foldoc} && sudo
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 #+end_src
 
+* Hyperbole
+
+#+begin_src emacs-lisp
+
+(hyperbole-mode 1)
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+"emacs-hyperbole"
+#+end_src
+
 * Org Mode
 
 Set up Org Mode with a baseline configuration.  The following sections will add more things to it.

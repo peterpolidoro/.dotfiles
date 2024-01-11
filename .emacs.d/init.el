@@ -819,6 +819,8 @@
 
 (global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
 
+(hyperbole-mode 1)
+
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
   (org-indent-mode)
