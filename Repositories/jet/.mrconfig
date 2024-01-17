@@ -46,3 +46,11 @@ checkout =
 	cd docker_setup
 	git remote add public https://github.com/janelia-experimental-technology/docker_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/docker_setup.git
+
+[hex-maze]
+checkout =
+	git clone 'git@github.com:janelia-experimental-technology/hex-maze.git' 'hex-maze'
+	cd hex-maze
+	git remote add public https://github.com/janelia-experimental-technology/hex-maze.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hex-maze.git
+
