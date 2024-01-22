@@ -603,6 +603,21 @@ makes that automatic. Disable for now.
 
 #+END_SRC
 
+*** Golden ratio
+
+
+#+BEGIN_SRC emacs-lisp
+
+(golden-ratio-mode 1)
+
+#+END_SRC
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-golden-ratio"
+
+#+end_src
+
 *** Kill buffer diff
 
 Custom kill command that provides the option to diff a modified buffer with the

@@ -17,6 +17,8 @@
    
    "emacs-undo-tree"
    
+   "emacs-golden-ratio"
+   
    "emacs-color-theme-modern"
    
    "emacs-emojify"

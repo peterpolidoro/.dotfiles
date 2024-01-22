@@ -229,6 +229,8 @@
 (setq uniquify-buffer-name-style 'forward)
 (setq-default frame-title-format "%b (%f)")
 
+(golden-ratio-mode 1)
+
 (defun pjp/kill-buffer ()
   (interactive)
   (catch 'quit
