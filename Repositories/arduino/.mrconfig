@@ -790,12 +790,12 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/TMC2209.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/TMC2209.git
 
-[TMC5130]
+[TMC51X0]
 checkout =
-	git clone 'git@github.com:janelia-arduino/TMC5130.git' 'TMC5130'
-	cd TMC5130
-	git remote add public https://github.com/janelia-arduino/TMC5130.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/TMC5130.git
+	git clone 'git@github.com:janelia-arduino/TMC51X0.git' 'TMC51X0'
+	cd TMC51X0
+	git remote add public https://github.com/janelia-arduino/TMC51X0.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TMC51X0.git
 
 [MouseReachRotaryController]
 checkout =
