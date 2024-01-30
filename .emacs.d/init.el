@@ -231,6 +231,8 @@
 
 (golden-ratio-mode 1)
 
+(repeat-mode 1)
+
 (defun pjp/kill-buffer ()
   (interactive)
   (catch 'quit

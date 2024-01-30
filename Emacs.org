@@ -605,7 +605,6 @@ makes that automatic. Disable for now.
 
 *** Golden ratio
 
-
 #+BEGIN_SRC emacs-lisp
 
 (golden-ratio-mode 1)
@@ -617,6 +616,14 @@ makes that automatic. Disable for now.
 "emacs-golden-ratio"
 
 #+end_src
+
+*** Repeat Mode
+
+#+BEGIN_SRC emacs-lisp
+
+(repeat-mode 1)
+
+#+END_SRC
 
 *** Kill buffer diff
 
