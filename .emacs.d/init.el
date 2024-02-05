@@ -1198,9 +1198,10 @@
 (use-package flycheck
   :defer t)
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"
-        "~/.emacs.d/snippets/guix"))
+(add-to-list 'yas-snippet-dirs
+             "~/.emacs.d/snippets/guix")
+(add-to-list 'yas-snippet-dirs
+             "~/.emacs.d/snippets")
 (yas-global-mode 1)
 
 (use-package smartparens
