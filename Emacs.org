@@ -2150,6 +2150,39 @@ documentation page.
 
 #+end_src
 
+** Latex
+
+#+begin_src emacs-lisp
+
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-auctex"
+
+"emacs-company-auctex"
+
+"emacs-cdlatex"
+
+"texlive-base"
+
+"texlive-wrapfig"
+
+"texlive-ulem"
+
+"texlive-capt-of"
+
+"texlive-caption"
+
+"texlive-advdate"
+
+"texlive-beamer"
+
+#+end_src
+
 * Development
 
 Configuration for various programming languages and dev tools that I use.

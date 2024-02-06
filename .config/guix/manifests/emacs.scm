@@ -104,6 +104,26 @@
    
    "emacs-ox-gfm"
    
+   "emacs-auctex"
+   
+   "emacs-company-auctex"
+   
+   "emacs-cdlatex"
+   
+   "texlive-base"
+   
+   "texlive-wrapfig"
+   
+   "texlive-ulem"
+   
+   "texlive-capt-of"
+   
+   "texlive-caption"
+   
+   "texlive-advdate"
+   
+   "texlive-beamer"
+   
    "emacs-eglot"
    
    "emacs-consult-eglot"
