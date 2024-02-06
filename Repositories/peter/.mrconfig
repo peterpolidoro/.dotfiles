@@ -363,3 +363,10 @@ checkout =
 	cd first-page-sage
 	git remote add public https://github.com/peterpolidoro/first-page-sage.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/first-page-sage.git
+
+[wingbeat_detector]
+checkout =
+	git clone 'git@github.com:peterpolidoro/wingbeat_detector.git' 'wingbeat_detector'
+	cd wingbeat_detector
+	git remote add public https://github.com/peterpolidoro/wingbeat_detector.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/wingbeat_detector.git
