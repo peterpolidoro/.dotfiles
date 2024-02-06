@@ -124,6 +124,8 @@
    
    "texlive-beamer"
    
+   "texlive-adjustbox"
+   
    "emacs-eglot"
    
    "emacs-consult-eglot"

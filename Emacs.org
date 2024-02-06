@@ -2181,6 +2181,8 @@ documentation page.
 
 "texlive-beamer"
 
+"texlive-adjustbox"
+
 #+end_src
 
 * Development
