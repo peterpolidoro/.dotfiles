@@ -2183,6 +2183,8 @@ documentation page.
 
 "texlive-adjustbox"
 
+"texlive-geometry"
+
 #+end_src
 
 * Development

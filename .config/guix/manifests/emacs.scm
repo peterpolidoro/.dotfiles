@@ -126,6 +126,8 @@
    
    "texlive-adjustbox"
    
+   "texlive-geometry"
+   
    "emacs-eglot"
    
    "emacs-consult-eglot"
