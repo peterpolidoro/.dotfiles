@@ -110,7 +110,17 @@
    
    "emacs-cdlatex"
    
-   "texlive-base"
+   "texlive-scheme-basic"
+   
+   "texlive-adjustbox"
+   
+   "texlive-booktabs"
+   
+   "texlive-siunitx"
+   
+   "texlive-geometry"
+   
+   "texlive-graphicx"
    
    "texlive-wrapfig"
    
@@ -123,10 +133,6 @@
    "texlive-advdate"
    
    "texlive-beamer"
-   
-   "texlive-adjustbox"
-   
-   "texlive-geometry"
    
    "emacs-eglot"
    
