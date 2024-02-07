@@ -120,7 +120,7 @@
    
    "texlive-geometry"
    
-   "texlive-graphicx"
+   "texlive-graphics"
    
    "texlive-wrapfig"
    
