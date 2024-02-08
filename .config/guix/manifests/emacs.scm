@@ -112,6 +112,8 @@
    
    "texlive-scheme-basic"
    
+   "texlive-texinfo"
+   
    "texlive-adjustbox"
    
    "texlive-booktabs"
