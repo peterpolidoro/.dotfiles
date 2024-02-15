@@ -378,3 +378,10 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/org-html-themes.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/org-html-themes.git
 	git remote add source git@github.com:fniessen/org-html-themes.git
+
+[filter42]
+checkout =
+	git clone 'git@github.com:peterpolidoro/filter42.git' 'filter42'
+	cd filter42
+	git remote add public https://github.com/peterpolidoro/filter42.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/filter42.git
