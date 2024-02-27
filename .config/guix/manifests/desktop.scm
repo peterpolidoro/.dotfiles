@@ -2,6 +2,8 @@
  '(
    "nss-certs"
    "glibc-locales"
+   "git"
+   "stow"
    "myrepos"
    "gparted"
    "graphviz"
