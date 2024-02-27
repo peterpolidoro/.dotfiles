@@ -1,0 +1,6 @@
+[branding]
+checkout =
+	git clone 'git@github.com:mechatronicmagic/branding.git' 'branding'
+	cd branding
+	git remote add public https://github.com/mechatronicmagic/branding.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mechatronicmagicbranding.git
