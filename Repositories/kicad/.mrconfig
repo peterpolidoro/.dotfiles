@@ -415,3 +415,8 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/tmc5160_featherwing.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5160_featherwing.git
 
+[SwitchBlox]
+checkout =
+	git clone 'git@github.com:janelia-kicad/SwitchBlox.git' 'SwitchBlox'
+	cd SwitchBlox
+	git remote add public https://github.com/janelia-kicad/SwitchBlox.git
