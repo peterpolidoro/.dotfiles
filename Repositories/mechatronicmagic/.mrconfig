@@ -3,4 +3,10 @@ checkout =
 	git clone 'git@github.com:mechatronicmagic/branding.git' 'branding'
 	cd branding
 	git remote add public https://github.com/mechatronicmagic/branding.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/mechatronicmagicbranding.git
+
+[farseer]
+checkout =
+	git clone 'git@github.com:mechatronicmagic/farseer.git' 'farseer'
+	cd farseer
+	git remote add public https://github.com/mechatronicmagic/farseer.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/farseer.git
