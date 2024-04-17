@@ -408,12 +408,12 @@ checkout =
 	git remote add peterpolidoro git@github.com:peterpolidoro/LED-Display_G4_Hardware_Arena.git
 	git remote add source git@github.com:floesche/LED-Display_G4_Hardware_Arena.git
 
-[pico-hat-stepper]
+[stepper-controller]
 checkout =
-	git clone 'git@github.com:janelia-kicad/pico-hat-stepper.git' 'pico-hat-stepper'
-	cd pico-hat-stepper
-	git remote add public https://github.com/janelia-kicad/pico-hat-stepper.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/pico-hat-stepper.git
+	git clone 'git@github.com:janelia-kicad/stepper-controller.git' 'stepper-controller'
+	cd stepper-controller
+	git remote add public https://github.com/janelia-kicad/stepper-controller.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/stepper-controller.git
 
 [SwitchBlox]
 checkout =
