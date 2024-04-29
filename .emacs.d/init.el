@@ -831,6 +831,7 @@
   (diminish org-indent-mode)
   (variable-pitch-mode 1)
   (auto-fill-mode 0)
+  (setq org-src-window-setup 'current-window)
   )
 
 (use-package org
