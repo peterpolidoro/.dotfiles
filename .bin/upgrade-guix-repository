@@ -1,2 +1,2 @@
 #!/bin/sh
-cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D -C guix --pure -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
+cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix -C -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
