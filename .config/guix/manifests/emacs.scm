@@ -88,6 +88,8 @@
    
    "tar"
    
+   "zip"
+   
    "emacs-treemacs"
    
    "emacs-openwith"

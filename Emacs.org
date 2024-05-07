@@ -1721,6 +1721,8 @@ locally.
 
 "tar"
 
+"zip"
+
 #+end_src
 
 ** Treemacs
