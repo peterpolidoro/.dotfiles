@@ -385,3 +385,10 @@ checkout =
 	cd filter42
 	git remote add public https://github.com/peterpolidoro/filter42.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/filter42.git
+
+[guile-beginners]
+checkout =
+	git clone 'git@github.com:peterpolidoro/guile-beginners.git' 'guile-beginners'
+	cd guile-beginners
+	git remote add public https://github.com/peterpolidoro/guile-beginners.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/guile-beginners.git
