@@ -407,6 +407,7 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/LED-Display_G4_Hardware_Arena.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/LED-Display_G4_Hardware_Arena.git
 	git remote add source git@github.com:floesche/LED-Display_G4_Hardware_Arena.git
+	git remote add iorodeo git@github.com:iorodeo/LED-Display_G4_Hardware_Arena.git
 
 [stepper-interface]
 checkout =
