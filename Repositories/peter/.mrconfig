@@ -392,3 +392,10 @@ checkout =
 	cd guile-beginners
 	git remote add public https://github.com/peterpolidoro/guile-beginners.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/guile-beginners.git
+
+[arena-pattern]
+checkout =
+	git clone 'git@github.com:peterpolidoro/arena-pattern.git' 'arena-pattern'
+	cd arena-pattern
+	git remote add public https://github.com/peterpolidoro/arena-pattern.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arena-pattern.git
