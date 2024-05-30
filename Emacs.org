@@ -2303,7 +2303,6 @@ https://magit.vc/manual/magit/
   :bind (("C-c g" . magit-status))
   :config
   (progn
-    (setq magit-completing-read-function 'ivy-completing-read)
     (setq magit-item-highlight-face 'bold))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
@@ -2385,12 +2384,6 @@ OK, this isn't Emacs configuration, but it's relevant to development!
     (setq projectile-project-search-path '("~/git")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-(use-package counsel-projectile
-  :disabled
-  :after projectile
-  :config
-  (counsel-projectile-mode))
-
 #+end_src
 
 *Guix Packages*
@@ -2399,11 +2392,9 @@ OK, this isn't Emacs configuration, but it's relevant to development!
 
 "emacs-projectile"
 
-"emacs-counsel-projectile"
+"ripgrep"
 
-"ripgrep" ;; For counsel-projectile-rg
-
-"the-silver-searcher" ;; For counsel-projectile-ag
+"the-silver-searcher"
 
 #+end_src
 

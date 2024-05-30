@@ -157,11 +157,9 @@
    
    "emacs-projectile"
    
-   "emacs-counsel-projectile"
+   "ripgrep"
    
-   "ripgrep" ;; For counsel-projectile-rg
-   
-   "the-silver-searcher" ;; For counsel-projectile-ag
+   "the-silver-searcher"
    
    "ccls"
    
