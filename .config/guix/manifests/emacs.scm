@@ -157,6 +157,10 @@
    
    "emacs-projectile"
    
+   "emacs-ggtags"
+   
+   "universal-ctags"
+   
    "ripgrep"
    
    "the-silver-searcher"

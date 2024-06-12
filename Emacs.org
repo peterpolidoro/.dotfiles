@@ -2392,6 +2392,10 @@ OK, this isn't Emacs configuration, but it's relevant to development!
 
 "emacs-projectile"
 
+"emacs-ggtags"
+
+"universal-ctags"
+
 "ripgrep"
 
 "the-silver-searcher"
