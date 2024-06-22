@@ -224,6 +224,13 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/biym-board.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/biym-board.git
 
+[biym]
+checkout =
+	git clone 'git@github.com:peterpolidoro/biym.git' 'biym'
+	cd biym
+	git remote add public https://github.com/peterpolidoro/biym.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/biym.git
+
 [BIASJAABA]
 checkout =
 	git clone 'git@github.com:kristinbranson/BIASJAABA.git' 'BIASJAABA'
