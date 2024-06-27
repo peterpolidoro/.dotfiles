@@ -409,13 +409,6 @@ checkout =
 	git remote add source git@github.com:floesche/LED-Display_G4_Hardware_Arena.git
 	git remote add iorodeo git@github.com:iorodeo/LED-Display_G4_Hardware_Arena.git
 
-[stepper-interface]
-checkout =
-	git clone 'git@github.com:janelia-kicad/stepper-interface.git' 'stepper-interface'
-	cd stepper-interface
-	git remote add public https://github.com/janelia-kicad/stepper-interface.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/stepper-interface.git
-
 [SwitchBlox]
 checkout =
 	git clone 'git@github.com:janelia-kicad/SwitchBlox.git' 'SwitchBlox'
@@ -428,4 +421,18 @@ checkout =
 	cd RP2040_minimal
 	git remote add public https://github.com/janelia-kicad/RP2040_minimal.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/RP2040_minimal.git
+
+[tmc5160-usb]
+checkout =
+	git clone 'git@github.com:janelia-kicad/tmc5160-usb.git' 'tmc5160-usb'
+	cd tmc5160-usb
+	git remote add public https://github.com/janelia-kicad/tmc5160-usb.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5160-usb.git
+
+[tmc5130-uart]
+checkout =
+	git clone 'git@github.com:janelia-kicad/tmc5130-uart.git' 'tmc5130-uart'
+	cd tmc5130-uart
+	git remote add public https://github.com/janelia-kicad/tmc5130-uart.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5130-uart.git
 
