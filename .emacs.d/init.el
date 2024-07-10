@@ -661,15 +661,9 @@
 
 (add-to-list 'completion-ignored-extensions ".go")
 
-(use-package avy
-  :commands (avy-goto-char avy-goto-word-0 avy-goto-line))
-
-(use-package avy
-  :bind (("C-:" . avy-goto-char)
-         ("C-;" . avy-goto-char-2)
-         ("M-g f" . avy-goto-line)
-         ("M-g w" . avy-goto-word-1)
-         ("M-g e" . avy-goto-word-0)))
+(use-package casual-avy
+  :ensure t
+  :bind ("C-;" . casual-avy-tmenu))
 
 (use-package expand-region
   :bind (("M-[" . er/expand-region)

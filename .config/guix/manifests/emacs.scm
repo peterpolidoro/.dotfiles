@@ -57,7 +57,7 @@
    
    "emacs-embark"
    
-   "emacs-avy"
+   "emacs-casual-avy"
    
    "emacs-expand-region"
    

@@ -436,3 +436,10 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/tmc5130-uart.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5130-uart.git
 
+[tmc51x0-multiplexer-uart]
+checkout =
+	git clone 'git@github.com:janelia-kicad/tmc51x0-multiplexer-uart.git' 'tmc51x0-multiplexer-uart'
+	cd tmc51x0-multiplexer-uart
+	git remote add public https://github.com/janelia-kicad/tmc51x0-multiplexer-uart.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tmc51x0-multiplexer-uart.git
+
