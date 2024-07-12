@@ -429,17 +429,17 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/tmc5160-usb.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5160-usb.git
 
-[tmc5130-uart]
+[prism-pcb]
 checkout =
-	git clone 'git@github.com:janelia-kicad/tmc5130-uart.git' 'tmc5130-uart'
-	cd tmc5130-uart
-	git remote add public https://github.com/janelia-kicad/tmc5130-uart.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5130-uart.git
+	git clone 'git@github.com:janelia-kicad/prism-pcb.git' 'prism-pcb'
+	cd prism-pcb
+	git remote add public https://github.com/janelia-kicad/prism-pcb.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/prism-pcb.git
 
-[tmc5130-uart-multiplexer]
+[honeycomb-pcb]
 checkout =
-	git clone 'git@github.com:janelia-kicad/tmc5130-uart-multiplexer.git' 'tmc5130-uart-multiplexer'
-	cd tmc5130-uart-multiplexer
-	git remote add public https://github.com/janelia-kicad/tmc5130-uart-multiplexer.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/tmc5130-uart-multiplexer.git
+	git clone 'git@github.com:janelia-kicad/honeycomb-pcb.git' 'honeycomb-pcb'
+	cd honeycomb-pcb
+	git remote add public https://github.com/janelia-kicad/honeycomb-pcb.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/honeycomb-pcb.git
 
