@@ -436,10 +436,10 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/prism-pcb.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/prism-pcb.git
 
-[honeycomb-pcb]
+[cluster-pcb]
 checkout =
-	git clone 'git@github.com:janelia-kicad/honeycomb-pcb.git' 'honeycomb-pcb'
-	cd honeycomb-pcb
-	git remote add public https://github.com/janelia-kicad/honeycomb-pcb.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/honeycomb-pcb.git
+	git clone 'git@github.com:janelia-kicad/cluster-pcb.git' 'cluster-pcb'
+	cd cluster-pcb
+	git remote add public https://github.com/janelia-kicad/cluster-pcb.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/cluster-pcb.git
 
