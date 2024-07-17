@@ -357,12 +357,12 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/docker_setup.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/docker_setup.git
 
-[wrist-exoskeleton]
+[wrex]
 checkout =
-	git clone 'git@github.com:peterpolidoro/wrist-exoskeleton.git' 'wrist-exoskeleton'
-	cd wrist-exoskeleton
-	git remote add public https://github.com/peterpolidoro/wrist-exoskeleton.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/wrist-exoskeleton.git
+	git clone 'git@github.com:peterpolidoro/wrex.git' 'wrex'
+	cd wrex
+	git remote add public https://github.com/peterpolidoro/wrex.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/wrex.git
 
 [first-page-sage]
 checkout =
