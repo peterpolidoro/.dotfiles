@@ -59,6 +59,8 @@
    
    "emacs-casual-avy"
    
+   "emacs-casual-calc"
+   
    "emacs-expand-region"
    
    "emacs-parinfer-mode"

@@ -665,6 +665,9 @@
   :ensure t
   :bind ("C-;" . casual-avy-tmenu))
 
+(use-package casual-calc
+  :bind (:map calc-mode-map ("C-o" . #'casual-calc-tmenu)))
+
 (use-package expand-region
   :bind (("M-[" . er/expand-region)
          ("M-]" . er/contract-region)

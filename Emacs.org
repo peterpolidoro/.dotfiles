@@ -1418,6 +1418,23 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+end_src
 
+* Calc
+
+#+begin_src emacs-lisp
+
+(use-package casual-calc
+  :bind (:map calc-mode-map ("C-o" . #'casual-calc-tmenu)))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-casual-calc"
+
+#+end_src
+
 * Expand Region
 
 This module is absolutely necessary for working inside of Emacs Lisp files,
