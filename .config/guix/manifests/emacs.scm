@@ -71,6 +71,12 @@
    
    "emacs-auth-source-pass"
    
+   "emacs-casual-dired"
+   
+   ;;"emacs-dired-single"
+   
+   ;; "emacs-dired-hacks"
+   
    "emacs-fd"
    
    "poppler"
@@ -85,13 +91,7 @@
    
    "zip"
    
-   "emacs-casual-dired"
-   
-   ;;"emacs-dired-single"
-   
-   ;; "emacs-dired-hacks"
-   
-   ;; "emacs-all-the-icons-dired"
+   "emacs-all-the-icons-dired"
    
    "emacs-dirvish"
    
