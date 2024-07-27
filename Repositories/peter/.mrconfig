@@ -364,6 +364,13 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/wrex.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/wrex.git
 
+[wrex-pcb]
+checkout =
+	git clone 'git@github.com:peterpolidoro/wrex-pcb.git' 'wrex-pcb'
+	cd wrex-pcb
+	git remote add public https://github.com/peterpolidoro/wrex-pcb.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/wrex-pcb.git
+
 [first-page-sage]
 checkout =
 	git clone 'git@github.com:peterpolidoro/first-page-sage.git' 'first-page-sage'
