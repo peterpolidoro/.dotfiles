@@ -1581,6 +1581,16 @@ locally.
 
 ** Dired
 
+#+begin_src emacs-lisp
+
+(use-package casual-dired
+  :ensure t
+  :bind (:map dired-mode-map
+              ("C-o" . #'casual-dired-tmenu)
+              ("s" . #'casual-dired-sort-by-tmenu)))
+
+#+end_src
+
 #+begin_src emacs-lisp :tangle no
 
 (use-package dired
@@ -1650,11 +1660,24 @@ locally.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
+"emacs-fd"
+
+"poppler"
+
+"ffmpegthumbnailer"
+
+"mediainfo"
+
+"unzip"
+
+"tar"
+
+"zip"
+
+"emacs-casual-dired"
+
 ;;"emacs-dired-single"
 
-#+end_src
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 ;; "emacs-dired-hacks"
 
 ;; "emacs-all-the-icons-dired"
@@ -1663,7 +1686,7 @@ locally.
 
 ** Dirvish
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
   (use-package dirvish
     :init
@@ -1716,23 +1739,9 @@ locally.
 
 *Guix Packages*
 
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep "" :tangle no
 
 "emacs-dirvish"
-
-"emacs-fd"
-
-"poppler"
-
-"ffmpegthumbnailer"
-
-"mediainfo"
-
-"unzip"
-
-"tar"
-
-"zip"
 
 #+end_src
 
