@@ -386,12 +386,12 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/stepper_driver.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/stepper_driver.git
 
-[trinamic_wiring]
+[trinamic-wiring]
 checkout =
-	git clone 'git@github.com:janelia-kicad/trinamic_wiring.git' 'trinamic_wiring'
-	cd trinamic_wiring
-	git remote add public https://github.com/janelia-kicad/trinamic_wiring.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/trinamic_wiring.git
+	git clone 'git@github.com:janelia-kicad/trinamic-wiring.git' 'trinamic-wiring'
+	cd trinamic-wiring
+	git remote add public https://github.com/janelia-kicad/trinamic-wiring.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/trinamic-wiring.git
 
 [mouse_joystick_controller]
 checkout =
