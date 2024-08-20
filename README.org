@@ -120,6 +120,14 @@ lspci -nn | egrep -i "3d|display|vga"
 sudo apt install nvidia-driver firmware-misc-nonfree
 #+END_SRC
 
+***** Swap Caps Lock to Control
+
+#+BEGIN_SRC sh
+emacs
+C-x C-f /sudo::/etc/default/keyboard
+XKBOPTIONS="ctrl:nocaps"
+#+END_SRC
+
 * Password Management
 
 #+BEGIN_SRC sh
