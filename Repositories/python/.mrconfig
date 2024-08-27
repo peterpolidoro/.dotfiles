@@ -1,0 +1,212 @@
+[metadata-python]
+checkout =
+	git clone 'git@github.com:janelia-python/metadata-python.git' 'metadata-python'
+	cd metadata-python
+	git remote add public https://github.com/janelia-python/metadata-python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/metadata-python.git
+
+[bioshake_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/bioshake_device_python.git' 'bioshake_device_python'
+	cd bioshake_device_python
+	git remote add public https://github.com/janelia-python/bioshake_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/bioshake_device_python.git
+
+[hybridizer_python]
+checkout =
+	git clone 'git@github.com:janelia-python/hybridizer_python.git' 'hybridizer_python'
+	cd hybridizer_python
+	git remote add public https://github.com/janelia-python/hybridizer_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hybridizer_python.git
+
+[serial_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/serial_device_python.git' 'serial_device_python'
+	cd serial_device_python
+	git remote add public https://github.com/janelia-python/serial_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/serial_device_python.git
+
+[mettler_toledo_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/mettler_toledo_device_python.git' 'mettler_toledo_device_python'
+	cd mettler_toledo_device_python
+	git remote add public https://github.com/janelia-python/mettler_toledo_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mettler_toledo_device_python.git
+
+[zaber_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/zaber_device_python.git' 'zaber_device_python'
+	cd zaber_device_python
+	git remote add public https://github.com/janelia-python/zaber_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/zaber_device_python.git
+
+[kicad_netlist_reader]
+checkout =
+	git clone 'git@github.com:janelia-python/kicad_netlist_reader.git' 'kicad_netlist_reader'
+	cd kicad_netlist_reader
+	git remote add public https://github.com/janelia-python/kicad_netlist_reader.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/kicad_netlist_reader.git
+
+[kicad_bom]
+checkout =
+	git clone 'git@github.com:janelia-python/kicad_bom.git' 'kicad_bom'
+	cd kicad_bom
+	git remote add public https://github.com/janelia-python/kicad_bom.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/kicad_bom.git
+
+[modular_client_python]
+checkout =
+	git clone 'git@github.com:janelia-python/modular_client_python.git' 'modular_client_python'
+	cd modular_client_python
+	git remote add public https://github.com/janelia-python/modular_client_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_client_python.git
+
+[elf_commander_python]
+checkout =
+	git clone 'git@github.com:janelia-python/elf_commander_python.git' 'elf_commander_python'
+	cd elf_commander_python
+	git remote add public https://github.com/janelia-python/elf_commander_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/elf_commander_python.git
+
+[mightex_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/mightex_device_python.git' 'mightex_device_python'
+	cd mightex_device_python
+	git remote add public https://github.com/janelia-python/mightex_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mightex_device_python.git
+
+[python_setup]
+checkout =
+	git clone 'git@github.com:janelia-python/python_setup.git' 'python_setup'
+	cd python_setup
+	git remote add public https://github.com/janelia-python/python_setup.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/python_setup.git
+
+[modular_server_python]
+checkout =
+	git clone 'git@github.com:janelia-python/modular_server_python.git' 'modular_server_python'
+	cd modular_server_python
+	git remote add public https://github.com/janelia-python/modular_server_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/modular_server_python.git
+
+[diskwalk_python]
+checkout =
+	git clone 'git@github.com:janelia-python/diskwalk_python.git' 'diskwalk_python'
+	cd diskwalk_python
+	git remote add public https://github.com/janelia-python/diskwalk_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/diskwalk_python.git
+
+[vix_servo_device_python]
+checkout =
+	git clone 'git@github.com:janelia-python/vix_servo_device_python.git' 'vix_servo_device_python'
+	cd vix_servo_device_python
+	git remote add public https://github.com/janelia-python/vix_servo_device_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/vix_servo_device_python.git
+
+[serial_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/serial_interface_python.git' 'serial_interface_python'
+	cd serial_interface_python
+	git remote add public https://github.com/janelia-python/serial_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/serial_interface_python.git
+
+[serial_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/serial_interface_python.git' 'serial_interface_python'
+	cd serial_interface_python
+	git remote add public https://github.com/janelia-python/serial_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/serial_interface_python.git
+
+[mouse_joystick_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/mouse_joystick_interface_python.git' 'mouse_joystick_interface_python'
+	cd mouse_joystick_interface_python
+	git remote add public https://github.com/janelia-python/mouse_joystick_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mouse_joystick_interface_python.git
+
+[head_fixation_controller_python]
+checkout =
+	git clone 'git@github.com:janelia-python/head_fixation_controller_python.git' 'head_fixation_controller_python'
+	cd head_fixation_controller_python
+	git remote add public https://github.com/janelia-python/head_fixation_controller_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/head_fixation_controller_python.git
+
+[phidget_hello_world_python]
+checkout =
+	git clone 'git@github.com:janelia-python/phidget_hello_world_python.git' 'phidget_hello_world_python'
+	cd phidget_hello_world_python
+	git remote add public https://github.com/janelia-python/phidget_hello_world_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/phidget_hello_world_python.git
+
+[hplc_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/hplc_interface_python.git' 'hplc_interface_python'
+	cd hplc_interface_python
+	git remote add public https://github.com/janelia-python/hplc_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/hplc_interface_python.git
+
+[sleep_assay_testing_python]
+checkout =
+	git clone 'git@github.com:janelia-python/sleep_assay_testing_python.git' 'sleep_assay_testing_python'
+	cd sleep_assay_testing_python
+	git remote add public https://github.com/janelia-python/sleep_assay_testing_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/sleep_assay_testing_python.git
+
+[skidl]
+checkout =
+	git clone 'git@github.com:janelia-python/skidl.git' 'skidl'
+	cd skidl
+	git remote add public https://github.com/janelia-python/skidl.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/skidl.git
+	git remote add source git@github.com:xesscorp/skidl.git
+
+[firmware_uploader_python]
+checkout =
+	git clone 'git@github.com:janelia-python/firmware_uploader_python.git' 'firmware_uploader_python'
+	cd firmware_uploader_python
+	git remote add public https://github.com/janelia-python/firmware_uploader_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/firmware_uploader_python.git
+
+[pyty]
+checkout =
+	git clone 'git@github.com:janelia-python/pyty.git' 'pyty'
+	cd pyty
+	git remote add public https://github.com/janelia-python/pyty.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/pyty.git
+
+[rocker]
+checkout =
+	git clone 'git@github.com:janelia-python/rocker.git' 'rocker'
+	cd rocker
+	git remote add public https://github.com/janelia-python/rocker.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/rocker.git
+	git remote add source git@github.com:osrf/rocker.git
+
+[lickport_array_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/lickport_array_interface_python.git' 'lickport_array_interface_python'
+	cd lickport_array_interface_python
+	git remote add public https://github.com/janelia-python/lickport_array_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/lickport_array_interface_python.git
+
+[python_skeleton]
+checkout =
+	git clone 'git@github.com:janelia-python/python_skeleton.git' 'python_skeleton'
+	cd python_skeleton
+	git remote add public https://github.com/janelia-python/python_skeleton.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/python_skeleton.git
+
+[loadstar_sensors_interface_python]
+checkout =
+	git clone 'git@github.com:janelia-python/loadstar_sensors_interface_python.git' 'loadstar_sensors_interface_python'
+	cd loadstar_sensors_interface_python
+	git remote add public https://github.com/janelia-python/loadstar_sensors_interface_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/loadstar_sensors_interface_python.git
+	git remote add rat git@github.com:RatCity-Habitat/loadstar_sensors_interface_python.git
+
+[arena_host_python]
+checkout =
+	git clone 'git@github.com:janelia-python/arena_host_python.git' 'arena_host_python'
+	cd arena_host_python
+	git remote add public https://github.com/janelia-python/arena_host_python.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/arena_host_python.git

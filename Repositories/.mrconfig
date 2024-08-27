@@ -22,7 +22,7 @@ chain = true
 [peter]
 chain = true
 
-[pypi]
+[python]
 chain = true
 
 [ros]
