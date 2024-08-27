@@ -178,3 +178,9 @@ sudo apt install pinentry-qt -y
 #+BEGIN_SRC sh
 rsync -avzhn /home/polidorop/ polidorop@athena:/home/polidorop
 #+END_SRC
+
+* Run Commands in Every Directory
+
+#+BEGIN_SRC sh
+ls -d */ | xargs -I {} bash -c "cd '{}' && git push origin && sleep 1"
+#+END_SRC
