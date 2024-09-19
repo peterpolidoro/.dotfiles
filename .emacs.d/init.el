@@ -843,7 +843,8 @@
         org-src-preserve-indentation t
         org-startup-folded 'content
         org-descriptive-links nil
-        org-cycle-separator-lines 2)
+        org-cycle-separator-lines 2
+        org-duration-format (quote h:mm))
 
   (setq org-modules
         '(org-crypt

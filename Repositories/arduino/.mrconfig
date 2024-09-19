@@ -885,3 +885,10 @@ checkout =
 	cd ClusterController
 	git remote add public https://github.com/janelia-arduino/ClusterController.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/ClusterController.git
+
+[TCA6408]
+checkout =
+	git clone 'git@github.com:janelia-arduino/TCA6408.git' 'TCA6408'
+	cd TCA6408
+	git remote add public https://github.com/janelia-arduino/TCA6408.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/TCA6408.git
