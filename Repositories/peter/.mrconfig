@@ -420,3 +420,17 @@ checkout =
 	cd arena-pattern
 	git remote add public https://github.com/peterpolidoro/arena-pattern.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/arena-pattern.git
+
+[asc-key-to-qr-code]
+checkout =
+	git clone 'git@github.com:peterpolidoro/asc-key-to-qr-code.git' 'asc-key-to-qr-code'
+	cd asc-key-to-qr-code
+	git remote add public https://github.com/peterpolidoro/asc-key-to-qr-code.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/asc-key-to-qr-code.git
+
+[.qr]
+checkout =
+	git clone 'git@github.com:peterpolidoro/.qr.git' '.qr'
+	cd .qr
+	git remote add public https://github.com/peterpolidoro/.qr.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/.qr.git
