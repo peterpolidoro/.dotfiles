@@ -892,3 +892,11 @@ checkout =
 	cd TCA6408
 	git remote add public https://github.com/janelia-arduino/TCA6408.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/TCA6408.git
+
+[QNEthernet]
+checkout =
+	git clone 'git@github.com:janelia-arduino/QNEthernet.git' 'QNEthernet'
+	cd QNEthernet
+	git remote add public https://github.com/janelia-arduino/QNEthernet.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/QNEthernet.git
+	git remote add source git@github.com:ssilverman/QNEthernet.git
