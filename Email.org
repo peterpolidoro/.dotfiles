@@ -497,7 +497,7 @@ mbsync --list gmail
 mbsync --list janelia
 mbsync --list polidoro
 mbsync -a
-mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
+mu init --maildir=$HOME/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
 #+END_SRC
 
