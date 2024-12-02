@@ -412,7 +412,7 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-(global-visual-line-mode t)
+;; (global-visual-line-mode nil)
 
 #+end_src
 

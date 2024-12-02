@@ -166,7 +166,7 @@
 
 (setq sentence-end-double-space nil)
 
-(global-visual-line-mode t)
+;; (global-visual-line-mode nil)
 
 (add-hook 'before-save-hook
           (lambda ()
