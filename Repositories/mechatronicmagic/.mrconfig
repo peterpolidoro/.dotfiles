@@ -2,7 +2,11 @@
 checkout =
 	git clone 'git@github.com:mechatronicmagic/branding.git' 'branding'
 	cd branding
-	git remote add public https://github.com/mechatronicmagic/branding.git
+
+[mechatronicmagic-org]
+checkout =
+	git clone 'git@github.com:mechatronicmagic/mechatronicmagic-org.git' 'mechatronicmagic-org'
+	cd mechatronicmagic-org
 
 [farseer-pcb]
 checkout =
