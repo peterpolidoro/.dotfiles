@@ -14,3 +14,9 @@ checkout =
 	cd farseer-pcb
 	git remote add public https://github.com/mechatronicmagic/farseer-pcb.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/farseer-pcb.git
+
+[thruster]
+checkout =
+	git clone 'git@github.com:mechatronicmagic/thruster.git' 'thruster'
+	cd thruster
+	git remote add public https://github.com/mechatronicmagic/thruster.git
