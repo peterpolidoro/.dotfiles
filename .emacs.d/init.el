@@ -666,7 +666,7 @@
   :bind ("C-;" . casual-avy-tmenu))
 
 (use-package casual-calc
-  :bind (:map calc-mode-map ("C-o" . #'casual-calc-tmenu)))
+  :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
 
 (use-package expand-region
   :bind (("M-[" . er/expand-region)
@@ -1322,7 +1322,10 @@
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
-(global-set-key (kbd "C-c e") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
+(defun pjp/email ()
+  (interactive)
+  (load "~/.emacs.d/lisp/pjp-email.el"))
+(global-set-key (kbd "C-c e") 'pjp/email)
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 

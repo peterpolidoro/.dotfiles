@@ -1423,7 +1423,7 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 #+begin_src emacs-lisp
 
 (use-package casual-calc
-  :bind (:map calc-mode-map ("C-o" . #'casual-calc-tmenu)))
+  :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
 
 #+end_src
 
@@ -1586,7 +1586,7 @@ locally.
 (use-package casual-dired
   :ensure t
   :bind (:map dired-mode-map
-              ("C-o" . #'casual-dired-tmenu)
+              ("C-c c" . #'casual-dired-tmenu)
               ("s" . #'casual-dired-sort-by-tmenu)))
 
 #+end_src
@@ -3017,7 +3017,10 @@ require it here to have it loaded in the main Emacs configuration.
 ;; (setq pjp/mu4e-inbox-query nil)
 ;; (when pjp/mail-enabled
 ;;   (require 'pjp-email))
-(global-set-key (kbd "C-c e") (lambda() (interactive) (load "~/.emacs.d/lisp/pjp-email.el")))
+(defun pjp/email ()
+  (interactive)
+  (load "~/.emacs.d/lisp/pjp-email.el"))
+(global-set-key (kbd "C-c e") 'pjp/email)
 
 #+end_src
 
