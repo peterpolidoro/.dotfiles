@@ -1,7 +1,7 @@
-[branding]
+[mechatronicmagic-logo]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/branding.git' 'branding'
-	cd branding
+	git clone 'git@github.com:mechatronicmagic/mechatronicmagic-logo.git' 'mechatronicmagic-logo'
+	cd mechatronicmagic-logo
 
 [mechatronicmagic-org]
 checkout =
