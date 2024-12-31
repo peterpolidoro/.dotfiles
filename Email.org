@@ -196,14 +196,14 @@ Useful mu4e manual pages:
 
   (add-to-list 'mu4e-bookmarks
                '(:name "All Inboxes"
-                 :query "maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox"
+                 :query "maildir:/Gmail/Inbox OR maildir:/MechatronicMagic/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox"
                  :key ?i))
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
 
   (setq pjp/mu4e-inbox-query
-        "(maildir:/Gmail/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox) AND flag:unread")
+        "(maildir:/Gmail/Inbox OR maildir:/MechatronicMagic/Inbox OR maildir:/Janelia/Inbox OR maildir:/Polidoro/Inbox) AND flag:unread")
 
   (setq mu4e-maildir-shortcuts
         '(("/Gmail/Inbox" . ?g)
