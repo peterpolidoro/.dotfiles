@@ -89,6 +89,22 @@
                   (mu4e-sent-messages-behavior . sent)
                   ))
          (make-mu4e-context
+          :name "mechatronicmagic"
+          :match-func (lambda (msg)
+                        (when msg
+                          (string-prefix-p "/MechatronicMagic" (mu4e-message-field msg :maildir))))
+          :vars '((user-full-name . "Mechatronic Magic")
+                  (user-mail-address . "mechatronicmagic@gmail.com")
+                  (smtpmail-smtp-user  . "mechatronicmagic@gmail.com")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 465)
+                  (smtpmail-stream-type  . ssl)
+                  (mu4e-drafts-folder . "/MechatronicMagic/Drafts")
+                  (mu4e-sent-folder . "/MechatronicMagic/Sent")
+                  (mu4e-trash-folder . "/MechatronicMagic/Trash")
+                  (mu4e-sent-messages-behavior . sent)
+                  ))
+         (make-mu4e-context
           :name "janelia"
           :match-func (lambda (msg)
                         (when msg
@@ -171,6 +187,7 @@
 
   (setq mu4e-maildir-shortcuts
         '(("/Gmail/Inbox" . ?g)
+          ("/MechatronicMagic/Inbox" . ?m)
           ("/Janelia/Inbox" . ?j)
           ("/Polidoro/Inbox" . ?p)
           ))
