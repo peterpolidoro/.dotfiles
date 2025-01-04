@@ -20,3 +20,9 @@ checkout =
 	git clone 'git@github.com:mechatronicmagic/thruster-mech.git' 'thruster-mech'
 	cd thruster-mech
 	git remote add public https://github.com/mechatronicmagic/thruster-mech.git
+
+[thruster-pcb]
+checkout =
+	git clone 'git@github.com:mechatronicmagic/thruster-pcb.git' 'thruster-pcb'
+	cd thruster-pcb
+	git remote add public https://github.com/mechatronicmagic/thruster-pcb.git
