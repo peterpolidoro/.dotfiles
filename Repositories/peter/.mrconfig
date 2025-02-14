@@ -435,9 +435,9 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/.qr.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/.qr.git
 
-[shittification-presentation]
+[open-software-open-science-presentation]
 checkout =
-	git clone 'git@github.com:peterpolidoro/shittification-presentation.git' 'shittification-presentation'
-	cd shittification-presentation
-	git remote add public https://github.com/peterpolidoro/shittification-presentation.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/shittification-presentation.git
+	git clone 'git@github.com:peterpolidoro/open-software-open-science-presentation.git' 'open-software-open-science-presentation'
+	cd open-software-open-science-presentation
+	git remote add public https://github.com/peterpolidoro/open-software-open-science-presentation.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/open-software-open-science-presentation.git
