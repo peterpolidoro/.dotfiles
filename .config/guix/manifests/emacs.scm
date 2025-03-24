@@ -149,7 +149,7 @@
    
    "emacs-dap-mode"
    
-   "emacs-company"
+   ;; "emacs-company"
    
    "emacs-magit"
    
