@@ -125,3 +125,11 @@ checkout =
 	cd zenoh-pico
 	git remote add public https://github.com/janelia-embedded/zenoh-pico.git
 	git remote add source git@github.com:eclipse-zenoh/zenoh-pico.git
+
+[mongoose]
+checkout =
+	git clone 'git@github.com:janelia-embedded/mongoose.git' 'mongoose'
+	cd mongoose
+	git remote add public https://github.com/janelia-embedded/mongoose.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mongoose.git
+	git remote add source git@github.com:cesanta/mongoose.git
