@@ -51,6 +51,8 @@
    
    "emacs-corfu"
    
+   "emacs-cape"
+   
    "emacs-consult"
    
    "emacs-marginalia"
@@ -113,7 +115,7 @@
    
    "emacs-auctex"
    
-   "emacs-company-auctex"
+   ;"emacs-company-auctex"
    
    "emacs-cdlatex"
    
