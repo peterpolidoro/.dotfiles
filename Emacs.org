@@ -657,18 +657,21 @@ file it is visiting.
 
 #+begin_src emacs-lisp
 
-(load-theme 'euphoria t t)
-(enable-theme 'euphoria)
-(setq color-theme-is-global t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+  (load-theme 'euphoria t t)
+  (enable-theme 'euphoria)
+  (setq color-theme-is-global t)
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+  ;; (require 'modus-themes)
+  ;; (load-theme 'modus-vivendi :no-confirm)
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-color-theme-modern"
+  "emacs-color-theme-modern"
+  "emacs-modus-themes"
 
 #+end_src
 
@@ -1150,12 +1153,15 @@ Emacs.
   ;; Optional customizations
   :custom
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-quit-at-boundary 'separator)
+  (corfu-echo-documentation 0.25)
+  (corfu-preview-current 'insert)
+  (corfu-preselect-first nil)
   ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  (corfu-preselect 'prompt)      ;; Preselect the prompt
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
 
@@ -1164,23 +1170,29 @@ Emacs.
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
 
-  ;; Enable auto completion and configure quitting
-  (setq corfu-auto t
-        corfu-quit-no-match 'separator)
-
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
   (:map corfu-map
+        ("M-SPC" . corfu-insert-separator)
+        ;;("RET" . nil)
         ("TAB" . corfu-next)
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
-        ([backtab] . corfu-previous))
+        ([backtab] . corfu-previous)
+        ("S-<return>" . corfu-insert))
 
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable
   ;; `global-corfu-modes' to exclude certain modes.
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  (corfu-history-mode)
+  :config
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq-local corfu-quit-at-boundary t
+                                   corfu-quit-no-match t
+                                   corfu-auto nil)
+              (corfu-mode))))
 #+end_src
 
 *Guix Packages*

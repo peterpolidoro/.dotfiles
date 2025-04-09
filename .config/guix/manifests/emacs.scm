@@ -20,6 +20,7 @@
    "emacs-golden-ratio"
    
    "emacs-color-theme-modern"
+   "emacs-modus-themes"
    
    "emacs-emojify"
    
