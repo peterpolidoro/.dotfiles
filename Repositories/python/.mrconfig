@@ -217,3 +217,11 @@ checkout =
 	cd hex_maze_interface_python
 	git remote add public https://github.com/janelia-python/hex_maze_interface_python.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/hex_maze_interface_python.git
+
+[miros]
+checkout =
+	git clone 'git@github.com:janelia-python/miros.git' 'miros'
+	cd miros
+	git remote add public https://github.com/janelia-python/miros.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/miros.git
+	git remote add source git@github.com:aleph2c/miros.git
