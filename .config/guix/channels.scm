@@ -2,7 +2,7 @@
 
 (list (channel-with-substitutes-available
        %default-guix-channel
-       "https://ci.guix.gnu.org"))
+       "https://codeberg.org/guix/guix.git"))
 
 (cons* (channel
         (name 'guix-janelia)
