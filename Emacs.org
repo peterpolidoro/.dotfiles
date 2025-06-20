@@ -1459,9 +1459,9 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+begin_src emacs-lisp
 
-(use-package casual-avy
-  :ensure t
-  :bind ("C-;" . casual-avy-tmenu))
+;; (use-package casual-avy
+;;   :ensure t
+;;   :bind ("C-;" . casual-avy-tmenu))
 
 #+end_src
 
@@ -1469,7 +1469,7 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-casual-avy"
+;; "emacs-casual-avy"
 
 #+end_src
 
@@ -1477,8 +1477,8 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+begin_src emacs-lisp
 
-(use-package casual-calc
-  :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
+;; (use-package casual-calc
+;;   :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
 
 #+end_src
 
@@ -1486,7 +1486,7 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-"emacs-casual-calc"
+;; "emacs-casual-calc"
 
 #+end_src
 
@@ -1638,11 +1638,11 @@ locally.
 
 #+begin_src emacs-lisp :tangle no
 
-(use-package casual-dired
-  :ensure t
-  :bind (:map dired-mode-map
-              ("C-c c" . #'casual-dired-tmenu)
-              ("s" . #'casual-dired-sort-by-tmenu)))
+;; (use-package casual-dired
+;;   :ensure t
+;;   :bind (:map dired-mode-map
+;;               ("C-c c" . #'casual-dired-tmenu)
+;;               ("s" . #'casual-dired-sort-by-tmenu)))
 
 #+end_src
 
@@ -1715,7 +1715,7 @@ locally.
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep "" :tangle no
 
-"emacs-casual-dired"
+;; "emacs-casual-dired"
 
 ;;"emacs-dired-single"
 

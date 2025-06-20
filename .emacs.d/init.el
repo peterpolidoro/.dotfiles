@@ -704,12 +704,12 @@
 
 (add-to-list 'completion-ignored-extensions ".go")
 
-(use-package casual-avy
-  :ensure t
-  :bind ("C-;" . casual-avy-tmenu))
+;; (use-package casual-avy
+;;   :ensure t
+;;   :bind ("C-;" . casual-avy-tmenu))
 
-(use-package casual-calc
-  :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
+;; (use-package casual-calc
+;;   :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
 
 (use-package expand-region
   :bind (("M-[" . er/expand-region)
