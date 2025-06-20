@@ -904,7 +904,8 @@
 
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t)
+   '((org . t)
+     (emacs-lisp . t)
      (lisp . t)
      (shell . t)
      (python . t)
