@@ -326,7 +326,7 @@ checkout =
 	cd SD
 	git remote add public https://github.com/janelia-arduino/SD.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/SD.git
-	git remote add source git@github.com:arduino-libraries/SD.git
+	git remote add source git@github.com:PaulStoffregen/SD.git
 
 [SPI]
 checkout =
