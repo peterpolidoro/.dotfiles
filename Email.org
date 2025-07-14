@@ -114,9 +114,9 @@ Useful mu4e manual pages:
                         (when msg
                           (string-prefix-p "/MechatronicMagic" (mu4e-message-field msg :maildir))))
           :vars '((user-full-name . "Mechatronic Magic")
-                  (user-mail-address . "mechatronicmagic@gmail.com")
-                  (smtpmail-smtp-user  . "mechatronicmagic@gmail.com")
-                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (user-mail-address . "io@mechatronicmagic.io")
+                  (smtpmail-smtp-user  . "io@mechatronicmagic.io")
+                  (smtpmail-smtp-server  . "smtp.dreamhost.com")
                   (smtpmail-smtp-service . 465)
                   (smtpmail-stream-type  . ssl)
                   (mu4e-drafts-folder . "/MechatronicMagic/Drafts")
@@ -362,74 +362,6 @@ Channel gmail-sent
 Channel gmail-starred
 Channel gmail-trash
 
-IMAPAccount mechatronicmagic
-Host imap.gmail.com
-Port 993
-User mechatronicmagic@gmail.com
-PassCmd "pass email/gmail.com/mechatronicmagic@gmail.com"
-TLSType IMAPS
-TLSVersions +1.3
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-# Throttle mbsync so we don't go over gmail's quota: OVERQUOTA error would
-# eventually be returned otherwise. For more details see:
-# https://sourceforge.net/p/isync/mailman/message/35458365/
-Timeout 120
-PipelineDepth 50
-
-# Define the remote from which mail will be synced
-IMAPStore mechatronicmagic-remote
-Account mechatronicmagic
-
-# Define where mail will be stored
-MaildirStore mechatronicmagic-local
-Path ~/Email/MechatronicMagic/
-Inbox ~/Email/MechatronicMagic/Inbox
-# REQUIRED ONLY IF YOU WANT TO DOWNLOAD ALL SUBFOLDERS; SYNCING SLOWS DOWN
-SubFolders Verbatim
-
-Channel mechatronicmagic-inbox
-Far :mechatronicmagic-remote:
-Near :mechatronicmagic-local:
-Patterns "INBOX" "Arch*"
-Create Near
-Expunge Both
-SyncState *
-
-Channel mechatronicmagic-drafts
-Far :mechatronicmagic-remote:"[MechatronicMagic]/Drafts"
-Near :mechatronicmagic-local:Drafts
-Create Near
-Expunge Both
-SyncState *
-
-Channel mechatronicmagic-sent
-Far :mechatronicmagic-remote:"[MechatronicMagic]/Sent Mail"
-Near :mechatronicmagic-local:Sent
-Create Near
-Expunge Both
-SyncState *
-
-Channel mechatronicmagic-starred
-Far :mechatronicmagic-remote:"[MechatronicMagic]/Starred"
-Near :mechatronicmagic-local:Starred
-Create Near
-Expunge Both
-SyncState *
-
-Channel mechatronicmagic-trash
-Far :mechatronicmagic-remote:"[MechatronicMagic]/Trash"
-Near :mechatronicmagic-local:Trash
-Create Near
-Expunge Both
-SyncState *
-
-# Get all the channels together into a group.
-Group mechatronicmagic
-Channel mechatronicmagic-inbox
-Channel mechatronicmagic-drafts
-Channel mechatronicmagic-sent
-Channel mechatronicmagic-starred
-Channel mechatronicmagic-trash
 
 # IMAPAccount janelia
 # Host outlook.office365.com
@@ -488,6 +420,34 @@ Sync All
 Create Both
 SyncState *
 
+IMAPAccount mechatronicmagic
+Host imap.dreamhost.com
+Port 993
+User io@mechatronicmagic.io
+PassCmd "pass email/dreamhost.com/io@mechatronicmagic.io"
+TLSType IMAPS
+TLSVersions +1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Timeout 120
+PipelineDepth 50
+
+IMAPStore mechatronicmagic-remote
+Account mechatronicmagic
+
+MaildirStore mechatronicmagic-local
+Path ~/Email/MechatronicMagic/
+Inbox ~/Email/MechatronicMagic/Inbox
+SubFolders Verbatim
+
+Channel mechatronicmagic
+Far :mechatronicmagic-remote:
+Near :mechatronicmagic-local:
+Patterns *
+Expunge Both
+Sync All
+Create Both
+SyncState *
+
 #+end_src
 
 * Dependencies
@@ -514,9 +474,9 @@ gpg --full-generate-key
 # Comments: Peter Polidoro GPG Key
 pass init peter@polidoro.io
 pass insert email/gmail.com/peterpolidoro@gmail.com
-pass insert email/gmail.com/mechatronicmagic@gmail.com
 pass insert email/office365.com/polidorop@hhmi.org
 pass insert email/dreamhost.com/peter@polidoro.io
+pass insert email/dreamhost.com/io@mechatronicmagic.io
 
 #+END_SRC
 
@@ -585,7 +545,7 @@ mbsync --list mechatronicmagic
 mbsync --list janelia
 mbsync --list polidoro
 mbsync -a
-mu init --maildir=$HOME/Email/ --my-address=peterpolidoro@gmail.com --my-address=mechatronicmagic@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
+mu init --maildir=$HOME/Email/ --my-address=peterpolidoro@gmail.com --my-address=io@mechatronicmagic.io --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
 #+END_SRC
 

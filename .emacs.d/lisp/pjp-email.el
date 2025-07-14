@@ -94,9 +94,9 @@
                         (when msg
                           (string-prefix-p "/MechatronicMagic" (mu4e-message-field msg :maildir))))
           :vars '((user-full-name . "Mechatronic Magic")
-                  (user-mail-address . "mechatronicmagic@gmail.com")
-                  (smtpmail-smtp-user  . "mechatronicmagic@gmail.com")
-                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (user-mail-address . "io@mechatronicmagic.io")
+                  (smtpmail-smtp-user  . "io@mechatronicmagic.io")
+                  (smtpmail-smtp-server  . "smtp.dreamhost.com")
                   (smtpmail-smtp-service . 465)
                   (smtpmail-stream-type  . ssl)
                   (mu4e-drafts-folder . "/MechatronicMagic/Drafts")
