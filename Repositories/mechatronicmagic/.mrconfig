@@ -1,34 +1,41 @@
-[mechatronicmagic-logo]
-checkout =
-	git clone 'git@github.com:mechatronicmagic/mechatronicmagic-logo.git' 'mechatronicmagic-logo'
-	cd mechatronicmagic-logo
-
 [mechatronicmagic-org]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/mechatronicmagic-org.git' 'mechatronicmagic-org'
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-org.git' 'mechatronicmagic-org'
 	cd mechatronicmagic-org
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-org.git
+	git remote add github git@github.com:mechatronicmagic/mechatronicmagic-org.git
 
-[farseer-pcb]
+[mechatronicmagic-logo]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/farseer-pcb.git' 'farseer-pcb'
-	cd farseer-pcb
-	git remote add public https://github.com/mechatronicmagic/farseer-pcb.git
-	git remote add peterpolidoro git@github.com:peterpolidoro/farseer-pcb.git
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-logo.git' 'mechatronicmagic-logo'
+	cd mechatronicmagic-logo
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-logo.git
+	git remote add github git@github.com:mechatronicmagic/mechatronicmagic-logo.git
 
 [thruster-mech]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/thruster-mech.git' 'thruster-mech'
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/thruster-mech.git' 'thruster-mech'
 	cd thruster-mech
-	git remote add public https://github.com/mechatronicmagic/thruster-mech.git
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/thruster-mech.git
+	git remote add github git@github.com:mechatronicmagic/thruster-mech.git
 
 [thruster-pcb]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/thruster-pcb.git' 'thruster-pcb'
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/thruster-pcb.git' 'thruster-pcb'
 	cd thruster-pcb
-	git remote add public https://github.com/mechatronicmagic/thruster-pcb.git
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/thruster-pcb.git
+	git remote add github git@github.com:mechatronicmagic/thruster-pcb.git
 
 [thruster-firmware]
 checkout =
-	git clone 'git@github.com:mechatronicmagic/thruster-firmware.git' 'thruster-firmware'
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/thruster-firmware.git' 'thruster-firmware'
 	cd thruster-firmware
-	git remote add public https://github.com/mechatronicmagic/thruster-firmware.git
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/thruster-firmware.git
+	git remote add github git@github.com:mechatronicmagic/thruster-firmware.git
+
+[farseer-pcb]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/farseer-pcb.git' 'farseer-pcb'
+	cd farseer-pcb
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/farseer-pcb.git
+	git remote add github git@github.com:mechatronicmagic/farseer-pcb.git
