@@ -12,6 +12,12 @@ checkout =
 	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-logo.git
 	git remote add github git@github.com:mechatronicmagic/mechatronicmagic-logo.git
 
+[mechatronicmagic-kicad-library]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-kicad-library.git' 'mechatronicmagic-kicad-library'
+	cd mechatronicmagic-kicad-library
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/mechatronicmagic-kicad-library.git
+
 [thruster-mech]
 checkout =
 	git clone 'ssh://git@codeberg.org/mechatronicmagic/thruster-mech.git' 'thruster-mech'
