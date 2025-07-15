@@ -1674,6 +1674,11 @@ locally.
                -not -path \"*.exe\" \
                -not -path \"*.odt\""))
 
+  (defun open-dired-from-env (env-var)
+  "Open Dired in the directory specified by ENV-VAR."
+  (interactive "sEnter environment variable name: ")
+  (dired (getenv env-var)))
+
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode)))
 
