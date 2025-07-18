@@ -22,5 +22,5 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias qm='~/qp/qm-5.1.3/bin/qm.sh'
+alias qm='~/qp/qm-5.2.3/bin/qm.sh'
 alias qspy='~/qp/qtools-6.9.3/bin/qspy'
