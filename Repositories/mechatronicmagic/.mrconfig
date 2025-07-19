@@ -46,6 +46,12 @@ checkout =
 	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/farseer-pcb.git
 	git remote add github git@github.com:mechatronicmagic/farseer-pcb.git
 
+[farseer-mech]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/farseer-mech.git' 'farseer-mech'
+	cd farseer-mech
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/farseer-mech.git
+
 [usb-bnc-pcb]
 checkout =
 	git clone 'ssh://git@codeberg.org/mechatronicmagic/usb-bnc-pcb.git' 'usb-bnc-pcb'
