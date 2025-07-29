@@ -57,3 +57,9 @@ checkout =
 	git clone 'ssh://git@codeberg.org/mechatronicmagic/usb-bnc-pcb.git' 'usb-bnc-pcb'
 	cd usb-bnc-pcb
 	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/usb-bnc-pcb.git
+
+[usb-bnc-mech]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/usb-bnc-mech.git' 'usb-bnc-mech'
+	cd usb-bnc-mech
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/usb-bnc-mech.git
