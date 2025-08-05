@@ -60,9 +60,7 @@
    
    "emacs-embark"
    
-   ;; "emacs-casual-avy"
-   
-   ;; "emacs-casual-calc"
+   "emacs-casual"
    
    "emacs-expand-region"
    
@@ -73,8 +71,6 @@
    "emacs-pass"
    
    "emacs-auth-source-pass"
-   
-   ;; "emacs-casual-dired"
    
    ;;"emacs-dired-single"
    

@@ -1455,38 +1455,193 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 
 #+end_src
 
-* Jumping with Avy
+* Casual
+** Agenda
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set org-agenda-mode-map "C-o" #'casual-agenda-tmenu)
+; bindings to make jumping consistent between Org Agenda and Casual Agenda
+(keymap-set org-agenda-mode-map "M-j" #'org-agenda-clock-goto)
+(keymap-set org-agenda-mode-map "J" #'bookmark-jump)
+#+end_src
+
+** Bookmarks
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set bookmark-bmenu-mode-map "C-o" #'casual-bookmarks-tmenu)
+(keymap-set bookmark-bmenu-mode-map "J" #'bookmark-jump)
+(require 'hl-line)
+(add-hook 'bookmark-bmenu-mode-hook #'hl-line-mode)
+#+end_src
+
+** Calc
 
 #+begin_src emacs-lisp
+(use-package calc
+  :bind (:map calc-mode-map
+              ("C-o" . casual-calc-tmenu)))
+#+end_src
 
-;; (use-package casual-avy
-;;   :ensure t
-;;   :bind ("C-;" . casual-avy-tmenu))
+** Calendar
 
+#+begin_src emacs-lisp :tangle no
+(keymap-set calendar-mode-map "C-o" #'casual-calendar)
+#+end_src
+
+** Compile (Grep)
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set compilation-mode-map "C-o" #'casual-compile-tmenu)
+(keymap-set grep-mode-map "C-o" #'casual-compile-tmenu)
+#+end_src
+
+** Dired
+
+#+begin_src emacs-lisp :tangle no
+  (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+  (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu)
+  (keymap-set dired-mode-map "/" #'casual-dired-search-replace-tmenu)
+  (require 'dired)
+  (require 'dired-x)
+  (require 'wdired)
+  (require 'hl-line)
+  (require 'mouse)
+  (require 'image-dired)
+  (require 'image-dired-dired)
+  (require 'casual-dired)
+
+  (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+  (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu)
+  (keymap-set dired-mode-map "/" #'casual-dired-search-replace-tmenu)
+
+  (add-hook 'dired-mode-hook 'hl-line-mode)
+  (add-hook 'dired-mode-hook 'context-menu-mode)
+  (add-hook 'dired-mode-hook 'dired-async-mode)
+  (add-hook
+   'dired-mode-hook
+   (lambda ()
+     (setq-local mouse-1-click-follows-link 'double)))
+
+  (keymap-set dired-mode-map "M-o" #'dired-omit-mode)
+  (keymap-set dired-mode-map "E" #'wdired-change-to-wdired-mode)
+  (keymap-set dired-mode-map "M-n" #'dired-next-dirline)
+  (keymap-set dired-mode-map "M-p" #'dired-prev-dirline)
+  (keymap-set dired-mode-map "]" #'dired-next-subdir)
+  (keymap-set dired-mode-map "[" #'dired-prev-subdir)
+  (keymap-set dired-mode-map "A-M-<mouse-1>" #'browse-url-of-dired-file)
+  (keymap-set dired-mode-map "<backtab>" #'dired-prev-subdir)
+  (keymap-set dired-mode-map "TAB" #'dired-next-subdir)
+  (keymap-set dired-mode-map "M-j" #'dired-goto-subdir)
+  (keymap-set dired-mode-map ";" #'image-dired-dired-toggle-marked-thumbs)
+
+  (keymap-set image-dired-thumbnail-mode-map "n" #'image-dired-display-next)
+  (keymap-set image-dired-thumbnail-mode-map "p" #'image-dired-display-previous)
+#+end_src
+
+** EditKit
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-o" #'casual-editkit-main-tmen)
+#+end_src
+
+** Elisp
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set emacs-lisp-mode-map "M-m" #'casual-elisp-tmenu)
+#+end_src
+
+** Eshell
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set eshell-mode-map "C-o" #'casual-eshell-tmenu)
+#+end_src
+
+** Help
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set help-mode-map "C-o" #'casual-help-tmenu)
+#+end_src
+
+** IBuffer
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set ibuffer-mode-map "C-o" #'casual-ibuffer-tmenu)
+(keymap-set ibuffer-mode-map "F" #'casual-ibuffer-filter-tmenu)
+(keymap-set ibuffer-mode-map "s" #'casual-ibuffer-sortby-tmenu)
+(keymap-set ibuffer-mode-map "{" #'ibuffer-backwards-next-marked)
+(keymap-set ibuffer-mode-map "}" #'ibuffer-forward-next-marked)
+(keymap-set ibuffer-mode-map "[" #'ibuffer-backward-filter-group)
+(keymap-set ibuffer-mode-map "]" #'ibuffer-forward-filter-group)
+(keymap-set ibuffer-mode-map "$" #'ibuffer-toggle-filter-group)
+#+end_src
+
+** Image
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set image-mode-map "C-o" #'casual-image-tmenu)
+#+end_src
+
+** Info
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set Info-mode-map "C-o" #'casual-info-tmenu)
+;; # Info
+;; Use web-browser history navigation bindings
+(keymap-set Info-mode-map "M-[" #'Info-history-back)
+(keymap-set Info-mode-map "M-]" #'Info-history-forward)
+;; Bind p and n to paragraph navigation
+(keymap-set Info-mode-map "p" #'casual-info-browse-backward-paragraph)
+(keymap-set Info-mode-map "n" #'casual-info-browse-forward-paragraph)
+;; Bind h and l to navigate to previous and next nodes
+;; Bind j and k to navigate to next and previous references
+(keymap-set Info-mode-map "h" #'Info-prev)
+(keymap-set Info-mode-map "j" #'Info-next-reference)
+(keymap-set Info-mode-map "k" #'Info-prev-reference)
+(keymap-set Info-mode-map "l" #'Info-next)
+;; Bind / to search
+(keymap-set Info-mode-map "/" #'Info-search)
+;; Set Bookmark
+(keymap-set Info-mode-map "B" #'bookmark-set)
+
+(add-hook 'Info-mode-hook #'hl-line-mode)
+(add-hook 'Info-mode-hook #'scroll-lock-mode)
+#+end_src
+
+** I-Search
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set isearch-mode-map "C-o" #'casual-isearch-tmenu)
+#+end_src
+
+** Make
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set makefile-mode-map "M-m" #'casual-make-tmenu)
+#+end_src
+
+** Man
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set Man-mode-map "C-o" #'casual-man-tmenu)
+#+end_src
+
+** Re-Builder
+
+#+begin_src emacs-lisp :tangle no
+(keymap-set reb-mode-map "C-o" #'casual-re-builder-tmenu)
+(keymap-set reb-lisp-mode-map "C-o" #'casual-re-builder-tmenu)
+#+end_src
+
+** Timezone
+
+#+begin_src emacs-lisp :tangle no
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
-;; "emacs-casual-avy"
-
-#+end_src
-
-* Calc
-
-#+begin_src emacs-lisp
-
-;; (use-package casual-calc
-;;   :bind (:map calc-mode-map ("C-c c" . #'casual-calc-tmenu)))
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-;; "emacs-casual-calc"
+"emacs-casual"
 
 #+end_src
 
@@ -1638,16 +1793,6 @@ locally.
 
 #+begin_src emacs-lisp :tangle no
 
-;; (use-package casual-dired
-;;   :ensure t
-;;   :bind (:map dired-mode-map
-;;               ("C-c c" . #'casual-dired-tmenu)
-;;               ("s" . #'casual-dired-sort-by-tmenu)))
-
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-
 (use-package dired
   :defer 1
   :ensure nil
@@ -1719,8 +1864,6 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep "" :tangle no
-
-;; "emacs-casual-dired"
 
 ;;"emacs-dired-single"
 
