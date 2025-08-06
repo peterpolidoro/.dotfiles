@@ -708,7 +708,64 @@
   :bind (:map calc-mode-map
               ("C-o" . casual-calc-tmenu)))
 
-(keymap-global-set "C-o" #'casual-editkit-main-tmen)
+(use-package compile
+  :bind (:map compilation-mode-map
+              ("C-o" . casual-calc-tmenu)))
+(use-package grep
+  :bind (:map grep-mode-map
+              ("C-o" . casual-calc-tmenu)))
+;(keymap-set compilation-mode-map "C-o" #'casual-compile-tmenu)
+;(keymap-set grep-mode-map "C-o" #'casual-compile-tmenu)
+
+(use-package dired
+  :defer 1
+  :ensure nil
+  :hook ((dired-mode . dired-hide-details-mode)
+         (dired-mode . hl-line-mode)
+         (dired-mode . context-menu-mode)
+         (dired-mode . dired-async-mode))
+  :bind (:map dired-mode-map
+              ("C-o" . casual-dired-tmenu)
+              ("s" . casual-dired-sort-by-tmenu)
+              ("/" . casual-dired-search-replace-tmenu)
+              ("M-o" . dired-omit-mode)
+              ("E" . wdired-change-to-wdired-mode)
+              ("M-n" . dired-next-dirline)
+              ("M-p" . dired-prev-dirline)
+              ("]" . dired-next-subdir)
+              ("[" . dired-prev-subdir)
+              ("A-M-<mouse-1>" . browse-url-of-dired-file)
+              ("<backtab>" . dired-prev-subdir)
+              ("TAB" . dired-next-subdir)
+              ("M-j" . dired-goto-subdir)
+              (";" . image-dired-dired-toggle-marked-thumbs))
+  :config
+  (setq dired-listing-switches "-agho --group-directories-first"
+        dired-omit-verbose nil)
+
+  (defun find-text-files ()
+    "Find all text files in path recursively, not in .git directory."
+    (interactive)
+    (find-dired default-directory
+                "-type f \
+               -not -path \"*/.git/*\" \
+               -not -path \"*.pdf\" \
+               -not -path \"*.zip\" \
+               -not -path \"*.png\" \
+               -not -path \"*.jpg\" \
+               -not -path \"*.gif\" \
+               -not -path \"*.exe\" \
+               -not -path \"*.odt\""))
+
+  (defun open-dired-from-env (env-var)
+    "Open Dired in the directory specified by ENV-VAR."
+    (interactive "sEnter environment variable name: ")
+    (dired (getenv env-var))))
+
+;; (keymap-set image-dired-thumbnail-mode-map "n" #'image-dired-display-next)
+;; (keymap-set image-dired-thumbnail-mode-map "p" #'image-dired-display-previous)
+
+(keymap-global-set "C-o" #'casual-editkit-main-tmenu)
 
 (use-package expand-region
   :bind (("M-[" . er/expand-region)
@@ -761,53 +818,6 @@
 
 (use-package auth-source-pass
   :init (auth-source-pass-enable))
-
-  (use-package dirvish
-    :init
-    (dirvish-override-dired-mode)
-    :custom
-    (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
-     '(("h" "~/" "Home")
-       ("d" "~/Downloads/" "Downloads")
-       ("." "~/.dotfiles/" "Dotfiles")
-       ("a" "~/Repositories/arduino" "Arduino")
-       ("g" "~/Repositories/guix" "Guix")
-       ("k" "~/Repositories/kicad" "Kicad")
-       ("o" "~/Repositories/peter/org" "Org")
-       ("p" "~/Repositories/pypi" "Pypi")
-       ("r" "~/Repositories/ros" "Ros")
-       ))
-    :config
-    ;; (dirvish-peek-mode) ; Preview files in minibuffer
-    ;; (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
-    ;; (setq dirvish-mode-line-format
-    ;;       '(:left (sort symlink) :right (omit yank index)))
-    ;; (setq dirvish-attributes
-    ;;       '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
-    ;; (setq delete-by-moving-to-trash t)
-    (setq dired-listing-switches
-          "-l --almost-all --human-readable --group-directories-first --no-group")
-    :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-    (("C-c f" . dirvish-fd)
-     :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
-     ("a"   . dirvish-quick-access)
-     ("f"   . dirvish-file-info-menu)
-     ("y"   . dirvish-yank-menu)
-     ("N"   . dirvish-narrow)
-     ;; ("^"   . dirvish-history-last)
-     ("h"   . dirvish-history-jump) ; remapped `describe-mode'
-     ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
-     ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
-     ("TAB" . dirvish-subtree-toggle)
-     ("M-f" . dirvish-history-go-forward)
-     ("M-b" . dirvish-history-go-backward)
-     ("M-l" . dirvish-ls-switches-menu)
-     ("M-m" . dirvish-mark-menu)
-     ("M-t" . dirvish-layout-toggle)
-     ("M-s" . dirvish-setup-menu)
-     ("M-e" . dirvish-emerge-menu)
-     ("M-j" . dirvish-fd-jump))
-    )
 
 (use-package treemacs
   :bind ("<f5>" . treemacs)
