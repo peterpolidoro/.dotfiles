@@ -63,3 +63,10 @@ checkout =
 	git clone 'ssh://git@codeberg.org/mechatronicmagic/usb-bnc-mech.git' 'usb-bnc-mech'
 	cd usb-bnc-mech
 	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/usb-bnc-mech.git
+
+[farseer]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/farseer.git' 'farseer'
+	cd farseer
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/farseer.git
+
