@@ -42,6 +42,8 @@
    
    "emacs-helpful"
    
+   "emacs-popper"
+   
    "emacs-solaire-mode"
    
    "emacs-hydra"
