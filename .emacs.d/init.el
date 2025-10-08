@@ -366,30 +366,6 @@
   ;;("C-." . helpful-at-point)
   ("C-h c". helpful-command))
 
-(use-package popper
-  :ensure t ; or :straight t
-  :bind (("C-`"   . popper-toggle)
-         ("M-`"   . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :init
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode))
-  ;; Match eshell, shell, term and/or vterm buffers
-  (setq popper-reference-buffers
-        (append popper-reference-buffers
-                '("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
-                  "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
-                  "^\\*term.*\\*$"   term-mode   ;term as a popup
-                  ;; "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
-                  )))
-  ;; (setq popper-group-function #'popper-group-by-projectile) ; projectile projects
-  (popper-mode +1)
-  (popper-echo-mode +1))
-
 (solaire-global-mode +1)
 
 (use-package hydra
@@ -814,14 +790,6 @@
 
 (use-package origami
   :hook (yaml-mode . origami-mode))
-
-(setq display-buffer-base-action
-      '(display-buffer-reuse-mode-window
-        display-buffer-reuse-window
-        display-buffer-same-window))
-
-;; If a popup does happen, don't resize windows to be equal-sized
-(setq even-window-sizes nil)
 
 (use-package pass)
 
@@ -1283,6 +1251,41 @@
 (use-package csv)
 
 (use-package csv-mode)
+
+(use-package popper
+  :ensure t ; or :straight t
+  :bind (("C-`"   . popper-toggle)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  ;; Match eshell, shell, term and/or vterm buffers
+  (setq popper-reference-buffers
+        (append popper-reference-buffers
+                '("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
+                  "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
+                  "^\\*term.*\\*$"   term-mode   ;term as a popup
+                  ;; "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
+                  )))
+  (popper-mode +1)
+  (popper-echo-mode +1)
+  :config
+  ;; (setq popper-group-function #'popper-group-by-projectile) ; projectile projects
+  (setq popper-group-function #'popper-group-by-directory)
+)
+
+(setq display-buffer-base-action
+      '(display-buffer-reuse-mode-window
+        display-buffer-reuse-window
+        display-buffer-same-window))
+
+;; If a popup does happen, don't resize windows to be equal-sized
+(setq even-window-sizes nil)
 
 (use-package multi-term)
 

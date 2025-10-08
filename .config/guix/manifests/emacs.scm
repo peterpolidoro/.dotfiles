@@ -42,8 +42,6 @@
    
    "emacs-helpful"
    
-   "emacs-popper"
-   
    "emacs-solaire-mode"
    
    "emacs-hydra"
@@ -206,6 +204,8 @@
    "emacs-csv"
    
    "emacs-csv-mode"
+   
+   "emacs-popper"
    
    "emacs-multi-term"
    
