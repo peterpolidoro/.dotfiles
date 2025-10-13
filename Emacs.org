@@ -2073,7 +2073,9 @@ sudo apt-get install dictd dict dict-{wn,vera,jargon,devil,gcide,foldoc} && sudo
 
 #+begin_src emacs-lisp
 
-(hyperbole-mode 1)
+(use-package hyperbole
+  :config
+  (hyperbole-mode 1))
 
 #+end_src
 
@@ -3029,6 +3031,7 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
           "\\*Async Shell Command\\*"
           "\\*ChatGPT\\*"
           help-mode
+          helpful-mode
           compilation-mode))
   ;; Match eshell, shell, term and/or vterm buffers
   (setq popper-reference-buffers
@@ -3523,6 +3526,10 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+begin_src emacs-lisp
 (use-package gptel
+  :bind
+  (("C-c a g" . gptel)
+   ("C-c a RET" . gptel-send)
+   ("C-c a r" . gptel-rewrite))
   :config
   (setq gptel-api-key-function
         (lambda (backend)
@@ -3537,8 +3544,11 @@ require it here to have it loaded in the main Emacs configuration.
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   )
-(global-set-key (kbd "C-c a") 'gptel)
-(global-set-key (kbd "C-c RET") 'gptel-send)
+
+(use-package gptel-quick
+  :ensure t
+  :bind
+  ("C-c q" . gptel-quick))
 #+end_src
 
 *Guix Packages*
@@ -3548,6 +3558,7 @@ require it here to have it loaded in the main Emacs configuration.
 "emacs-gptel"
 "emacs-ob-gptel"
 "emacs-gptel-prompts"
+"emacs-gptel-quick"
 
 #+end_src
 

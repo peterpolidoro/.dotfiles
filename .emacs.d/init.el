@@ -854,7 +854,9 @@
 
 (global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
 
-(hyperbole-mode 1)
+(use-package hyperbole
+  :config
+  (hyperbole-mode 1))
 
 ;; Turn on indentation and auto-fill mode for Org files
 (defun pjp/org-mode-setup ()
@@ -1265,6 +1267,7 @@
           "\\*Async Shell Command\\*"
           "\\*ChatGPT\\*"
           help-mode
+          helpful-mode
           compilation-mode))
   ;; Match eshell, shell, term and/or vterm buffers
   (setq popper-reference-buffers
@@ -1445,6 +1448,10 @@
       erc-auto-query 'bury)
 
 (use-package gptel
+  :bind
+  (("C-c a g" . gptel)
+   ("C-c a RET" . gptel-send)
+   ("C-c a r" . gptel-rewrite))
   :config
   (setq gptel-api-key-function
         (lambda (backend)
@@ -1459,5 +1466,8 @@
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   )
-(global-set-key (kbd "C-c a") 'gptel)
-(global-set-key (kbd "C-c RET") 'gptel-send)
+
+(use-package gptel-quick
+  :ensure t
+  :bind
+  ("C-c q" . gptel-quick))

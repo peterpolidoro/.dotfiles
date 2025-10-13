@@ -257,5 +257,6 @@
    "emacs-gptel"
    "emacs-ob-gptel"
    "emacs-gptel-prompts"
+   "emacs-gptel-quick"
    
    ))
