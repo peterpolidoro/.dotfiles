@@ -2134,7 +2134,8 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
      (shell . t)
      (python . t)
      (scheme . t)
-     (plantuml . t)))
+     (plantuml . t)
+     (gptel . t)))
 
   (setq org-babel-python-command "python3")
   (setq js-indent-level 2)
@@ -3018,14 +3019,15 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 #+begin_src emacs-lisp
 (use-package popper
   :ensure t ; or :straight t
-  :bind (("C-`"   . popper-toggle)
-         ("M-`"   . popper-cycle)
+  :bind (("M-`"   . popper-toggle)
+         ("C-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
+          "\\*ChatGPT\\*"
           help-mode
           compilation-mode))
   ;; Match eshell, shell, term and/or vterm buffers
@@ -3514,6 +3516,38 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+#+end_src
+
+* Gptel
+
+#+begin_src emacs-lisp
+(use-package gptel
+  :config
+  (setq gptel-api-key-function
+        (lambda (backend)
+          (let* ((host (cond
+                        ((string-prefix-p "openai" (symbol-name backend)) "api.openai.com")
+                        ;; Add other backend hosts as needed
+                        (t (error "Unknown backend for API key retrieval"))))
+                 (key-path (format "api/%s" (car (split-string host "\\.")))))
+            (password-store-get key-path))))
+  ;; Other gptel configurations
+  (setq gptel-default-mode 'org-mode)
+  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  )
+(global-set-key (kbd "C-c a") 'gptel)
+(global-set-key (kbd "C-c RET") 'gptel-send)
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"emacs-gptel"
+"emacs-ob-gptel"
+"emacs-gptel-prompts"
 
 #+end_src
 

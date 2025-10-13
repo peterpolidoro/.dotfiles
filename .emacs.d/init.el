@@ -901,7 +901,8 @@
      (shell . t)
      (python . t)
      (scheme . t)
-     (plantuml . t)))
+     (plantuml . t)
+     (gptel . t)))
 
   (setq org-babel-python-command "python3")
   (setq js-indent-level 2)
@@ -1254,14 +1255,15 @@
 
 (use-package popper
   :ensure t ; or :straight t
-  :bind (("C-`"   . popper-toggle)
-         ("M-`"   . popper-cycle)
+  :bind (("M-`"   . popper-toggle)
+         ("C-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
+          "\\*ChatGPT\\*"
           help-mode
           compilation-mode))
   ;; Match eshell, shell, term and/or vterm buffers
@@ -1441,3 +1443,21 @@
       erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#emacs" "#guix"))
       erc-kill-buffer-on-part t
       erc-auto-query 'bury)
+
+(use-package gptel
+  :config
+  (setq gptel-api-key-function
+        (lambda (backend)
+          (let* ((host (cond
+                        ((string-prefix-p "openai" (symbol-name backend)) "api.openai.com")
+                        ;; Add other backend hosts as needed
+                        (t (error "Unknown backend for API key retrieval"))))
+                 (key-path (format "api/%s" (car (split-string host "\\.")))))
+            (password-store-get key-path))))
+  ;; Other gptel configurations
+  (setq gptel-default-mode 'org-mode)
+  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  )
+(global-set-key (kbd "C-c a") 'gptel)
+(global-set-key (kbd "C-c RET") 'gptel-send)

@@ -254,4 +254,8 @@
    "emacs-buffer-env"
    "emacs-inheritenv"
    
+   "emacs-gptel"
+   "emacs-ob-gptel"
+   "emacs-gptel-prompts"
+   
    ))
