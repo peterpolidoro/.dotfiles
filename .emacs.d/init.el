@@ -1412,6 +1412,7 @@
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 (add-to-list
   'org-src-lang-modes '("plantuml" . plantuml))
+(setq plantuml-indent-level 2)
 
 (use-package guix
   :defer t)
