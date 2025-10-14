@@ -1408,11 +1408,20 @@
 
 (pdf-loader-install)
 
-(setq plantuml-default-exec-mode 'executable)
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(add-to-list
-  'org-src-lang-modes '("plantuml" . plantuml))
-(setq plantuml-indent-level 2)
+(use-package plantuml-mode
+  :config
+  ;; Set plantuml-jar-path here, if not already set by another means
+  ;; For example:
+  (setq plantuml-default-exec-mode 'executable)
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+  (add-to-list
+   'org-src-lang-modes '("plantuml" . plantuml))
+  (setq plantuml-indent-level 2)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq org-plantuml-jar-path plantuml-jar-path)))
+
+  )
 
 (use-package guix
   :defer t)

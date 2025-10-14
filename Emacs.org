@@ -3327,11 +3327,20 @@ require it here to have it loaded in the main Emacs configuration.
 ** plantuml
 
 #+begin_src emacs-lisp
-(setq plantuml-default-exec-mode 'executable)
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(add-to-list
-  'org-src-lang-modes '("plantuml" . plantuml))
-(setq plantuml-indent-level 2)
+(use-package plantuml-mode
+  :config
+  ;; Set plantuml-jar-path here, if not already set by another means
+  ;; For example:
+  (setq plantuml-default-exec-mode 'executable)
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+  (add-to-list
+   'org-src-lang-modes '("plantuml" . plantuml))
+  (setq plantuml-indent-level 2)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq org-plantuml-jar-path plantuml-jar-path)))
+
+  )
 #+end_src
 
 *Guix Packages*
