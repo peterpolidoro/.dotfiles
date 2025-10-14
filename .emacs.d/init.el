@@ -1412,14 +1412,17 @@
   :config
   ;; Set plantuml-jar-path here, if not already set by another means
   ;; For example:
-  (setq plantuml-default-exec-mode 'executable)
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
   (add-to-list
    'org-src-lang-modes '("plantuml" . plantuml))
   (setq plantuml-indent-level 2)
+  (setq plantuml-output-type "svg")
+  ;; (setq plantuml-default-exec-mode 'executable)
+  (setq plantuml-default-exec-mode 'jar)
   (add-hook 'org-mode-hook
             (lambda ()
-              (setq org-plantuml-jar-path plantuml-jar-path)))
+              (setq org-plantuml-jar-path plantuml-jar-path)
+              (setq org-plantuml-executable-path plantuml-executable-path)))
 
   )
 
