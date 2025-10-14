@@ -3,3 +3,5 @@
 .envrc
 
 *cache*
+.opi-transient
+*.backup

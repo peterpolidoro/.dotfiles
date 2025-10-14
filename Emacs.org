@@ -3029,7 +3029,9 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
-          "\\*ChatGPT\\*"
+          ".*ChatGPT\\*"
+          ".*GPTel\\*"
+          "^magit:"
           help-mode
           helpful-mode
           compilation-mode))
@@ -3522,6 +3524,30 @@ require it here to have it loaded in the main Emacs configuration.
 
 #+end_src
 
+* Pandoc
+
+#+begin_src emacs-lisp
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(eval-after-load "org"
+  '(require 'ox-pandoc nil t))
+(require 'org-pandoc-import)
+(setq org-pandoc-import-options '((from . "markdown")
+                                  (to . "org")))
+;; (setq opi-transient-directory "/tmp")
+;; (org-pandoc-import-transient-mode 1)
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"pandoc"
+"emacs-ox-pandoc"
+"emacs-pandoc-mode"
+"emacs-org-pandoc-import"
+
+#+end_src
+
 * Gptel
 
 #+begin_src emacs-lisp
@@ -3541,8 +3567,22 @@ require it here to have it loaded in the main Emacs configuration.
             (password-store-get key-path))))
   ;; Other gptel configurations
   (setq gptel-default-mode 'org-mode)
-  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
-  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  ;;   "Create dedicated output buffer for GPTel."
+  ;;   (interactive)
+  ;;   (get-buffer-create gptel-output-buffer)
+  ;;   (switch-to-buffer gptel-output-buffer))
+  ;; (my-gptel-create-output-buffer)
+
+  ;; (setq gptel-default-mode 'org-mode
+  ;;       gptel-expert-commands t
+  ;;       gptel-track-media t
+  ;;       gptel-include-reasoning 'ignore
+  ;;       gptel-model 'gpt-4o
+  ;;       gptel-log-level 'info
+  ;;       gptel--debug nil)
+  ;; (add-to-list 'gptel-prompt-prefix-alist `(org-mode . ,(concat "*** pjp " (format-time-string "[%Y-%m-%d]") "\n")))
+  ;; (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  ;; (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   )
 
 (use-package gptel-quick

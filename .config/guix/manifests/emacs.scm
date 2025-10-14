@@ -254,6 +254,11 @@
    "emacs-buffer-env"
    "emacs-inheritenv"
    
+   "pandoc"
+   "emacs-ox-pandoc"
+   "emacs-pandoc-mode"
+   "emacs-org-pandoc-import"
+   
    "emacs-gptel"
    "emacs-ob-gptel"
    "emacs-gptel-prompts"

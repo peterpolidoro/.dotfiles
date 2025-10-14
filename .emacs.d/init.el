@@ -1265,7 +1265,9 @@
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
-          "\\*ChatGPT\\*"
+          ".*ChatGPT\\*"
+          ".*GPTel\\*"
+          "^magit:"
           help-mode
           helpful-mode
           compilation-mode))
@@ -1447,6 +1449,15 @@
       erc-kill-buffer-on-part t
       erc-auto-query 'bury)
 
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(eval-after-load "org"
+  '(require 'ox-pandoc nil t))
+(require 'org-pandoc-import)
+(setq org-pandoc-import-options '((from . "markdown")
+                                  (to . "org")))
+;; (setq opi-transient-directory "/tmp")
+;; (org-pandoc-import-transient-mode 1)
+
 (use-package gptel
   :bind
   (("C-c a g" . gptel)
@@ -1463,8 +1474,22 @@
             (password-store-get key-path))))
   ;; Other gptel configurations
   (setq gptel-default-mode 'org-mode)
-  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
-  (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+  ;;   "Create dedicated output buffer for GPTel."
+  ;;   (interactive)
+  ;;   (get-buffer-create gptel-output-buffer)
+  ;;   (switch-to-buffer gptel-output-buffer))
+  ;; (my-gptel-create-output-buffer)
+
+  ;; (setq gptel-default-mode 'org-mode
+  ;;       gptel-expert-commands t
+  ;;       gptel-track-media t
+  ;;       gptel-include-reasoning 'ignore
+  ;;       gptel-model 'gpt-4o
+  ;;       gptel-log-level 'info
+  ;;       gptel--debug nil)
+  ;; (add-to-list 'gptel-prompt-prefix-alist `(org-mode . ,(concat "*** pjp " (format-time-string "[%Y-%m-%d]") "\n")))
+  ;; (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  ;; (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
   )
 
 (use-package gptel-quick
