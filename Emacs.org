@@ -2156,6 +2156,8 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
 
 "imagemagick"
 
+"openjdk"
+
 #+end_src
 
 ** Automatically "Tangle" on Save
@@ -2996,6 +2998,29 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 "emacs-csv"
 
 "emacs-csv-mode"
+
+#+end_src
+
+** Code Formatting
+*** string inflection
+
+#+begin_src emacs-lisp
+
+(use-package string-inflection
+  :bind (("C-c c s"   . string-inflection-snake-case-function)
+         ("C-c c p"   . string-inflection-pascal-case-function)
+         ("C-c c c"   . string-inflection-camel-case-function)
+         ("C-c c u"   . string-inflection-upcase-function)
+         ("C-c c k"   . string-inflection-kebab-case-function)
+         ("C-c c _"   . string-inflection-capital-snake-case-function)))
+
+#+end_src
+
+*Guix Packages*
+
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+
+"emacs-string-inflection"
 
 #+end_src
 

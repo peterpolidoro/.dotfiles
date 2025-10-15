@@ -106,6 +106,8 @@
    
    "imagemagick"
    
+   "openjdk"
+   
    "emacs-org-roam"
    
    "emacs-ox-gfm"
@@ -204,6 +206,8 @@
    "emacs-csv"
    
    "emacs-csv-mode"
+   
+   "emacs-string-inflection"
    
    "emacs-popper"
    
