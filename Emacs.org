@@ -387,7 +387,7 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-(add-hook 'prog-mode-hook 'subword-mode)
+(add-hook 'after-change-major-mode-hook 'subword-mode)
 
 #+end_src
 

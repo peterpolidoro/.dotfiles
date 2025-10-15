@@ -159,7 +159,7 @@
 
 (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
 
-(add-hook 'prog-mode-hook 'subword-mode)
+(add-hook 'after-change-major-mode-hook 'subword-mode)
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
