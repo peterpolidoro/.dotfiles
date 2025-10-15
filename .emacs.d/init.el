@@ -1256,12 +1256,12 @@
 (use-package csv-mode)
 
 (use-package string-inflection
-  :bind (("C-c c s"   . string-inflection-snake-case-function)
-         ("C-c c p"   . string-inflection-pascal-case-function)
-         ("C-c c c"   . string-inflection-camel-case-function)
-         ("C-c c u"   . string-inflection-upcase-function)
-         ("C-c c k"   . string-inflection-kebab-case-function)
-         ("C-c c _"   . string-inflection-capital-snake-case-function)))
+  :bind (("C-c c s"   . string-inflection-snake-case)
+         ("C-c c p"   . string-inflection-pascal-case)
+         ("C-c c c"   . string-inflection-camel-case)
+         ("C-c c u"   . string-inflection-upcase)
+         ("C-c c k"   . string-inflection-kebab-case)
+         ("C-c c _"   . string-inflection-capital-snake-case)))
 
 (use-package popper
   :ensure t ; or :straight t
