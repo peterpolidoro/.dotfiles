@@ -501,7 +501,14 @@
             (lambda () (setq-local corfu-quit-at-boundary t
                                    corfu-quit-no-match t
                                    corfu-auto nil)
-              (corfu-mode))))
+              (corfu-mode)))
+  :hook
+  (org-edit-special-mode . corfu-mode) ; Enable corfu-mode in org-edit-special-mode
+  (org-src-mode . (lambda ()
+                    (corfu-mode -1)))  ; Disable corfu-mode in org-src-mode
+  (org-src-exit . (lambda ()
+                    (corfu-mode 1)))    ; Enable corfu-mode after exiting org-src
+  )
 
 (use-package cape
   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
@@ -1402,6 +1409,22 @@
   :config
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
+;; (defun emacspeak-zoxide (q)
+;;   "Query zoxide  and launch dired.
+;; Shell Utility zoxide --- implemented in Rust --- lets you jump to
+;; directories that are used often.
+;; This command does for Emacs, what zoxide does at the  shell."
+;;   (interactive "sZoxide:")
+;;   (if-let
+;;       ((zoxide (executable-find "zoxide"))
+;;        (target
+;;         (with-temp-buffer
+;;           (if (= 0 (call-process zoxide nil t nil "query" q))
+;;               (string-trim (buffer-string))))))
+;;       (funcall-interactively #'dired  target)
+;;     (unless zoxide (error "Install zoxide"))
+;;     (unless target (error "No Match"))))
+
 ;; Only fetch mail on knave
 ;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))
 ;; (setq pjp/mu4e-inbox-query nil)
@@ -1433,6 +1456,21 @@
               (setq org-plantuml-executable-path plantuml-executable-path)))
 
   )
+;; (defun plantuml-preview-custom (bg-color)
+;;   "Preview PlantUML in a new buffer with a specified background color."
+;;   (interactive "sEnter background color (e.g., white, black): ")
+;;   (let ((img (plantuml-preview)))
+;;     (with-current-buffer (get-buffer-create "*PlantUML Preview*")
+;;       (erase-buffer)
+;;       (insert-image img)
+;;       (setq-local background-color bg-color)
+;;       (setq-local default-frame-alist `((background-color . ,bg-color)))
+;;       (display-buffer (current-buffer)))))
+;; (defun plantuml-preview-dual ()
+;;   "Preview PlantUML in two buffers with different background colors."
+;;   (interactive)
+;;   (plantuml-preview-custom "white")
+;;   (plantuml-preview-custom "black"))
 
 (use-package guix
   :defer t)

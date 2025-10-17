@@ -233,6 +233,9 @@
    
    "emacs-eshell-bookmark"
    
+   "zoxide"
+   "emacs-zoxide"
+   
    "emacs-mu4e-alert"
    
    "emacs-org-mime"
