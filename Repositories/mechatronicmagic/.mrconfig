@@ -70,3 +70,9 @@ checkout =
 	cd farseer
 	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/farseer.git
 
+[qweave]
+checkout =
+	git clone 'ssh://git@codeberg.org/mechatronicmagic/qweave.git' 'qweave'
+	cd qweave
+	git remote add codeberg ssh://git@codeberg.org/mechatronicmagic/qweave.git
+
