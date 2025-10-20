@@ -48,3 +48,6 @@ chain = true
 
 [mechatronicmagic]
 chain = true
+
+[orb-weaver]
+chain = true

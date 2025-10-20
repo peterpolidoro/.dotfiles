@@ -1,0 +1,61 @@
+[orb-weaver]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver.git' 'orb-weaver'
+	cd orb-weaver
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver.git
+
+[orb-weaver-art]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-art.git' 'orb-weaver-art'
+	cd orb-weaver-art
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-art.git
+
+[qtools]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qtools.git' 'qtools'
+	cd qtools
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qtools.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qtools.git
+
+[qpcpp]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qpcpp.git' 'qpcpp'
+	cd qpcpp
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qpcpp.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qpcpp.git
+
+[qpcpp-examples]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qpcpp-examples.git' 'qpcpp-examples'
+	cd qpcpp-examples
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qpcpp-examples.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qpcpp-examples.git
+
+[qpc]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qpc.git' 'qpc'
+	cd qpc
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qpc.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qpc.git
+
+[qpc-examples]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qpc-examples.git' 'qpc-examples'
+	cd qpc-examples
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qpc-examples.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qpc-examples.git
+
+[qp-arduino]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qp-arduino.git' 'qp-arduino'
+	cd qp-arduino
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qp-arduino.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qp-arduino.git
+
+[qp-arduino-example]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qp-arduino-example.git' 'qp-arduino-example'
+	cd qp-arduino-example
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qp-arduino-example.git
+	git remote add source ssh://git@github.com/QuantumLeaps/qp-arduino-example.git
+
