@@ -12,9 +12,9 @@ checkout =
 
 [fly-n-shoot-game-orb]
 checkout =
-	git clone 'ssh://git@codeberg.org/fly-n-shoot-game-orb/fly-n-shoot-game-orb.git' 'fly-n-shoot-game-orb'
+	git clone 'ssh://git@codeberg.org/orb-weaver/fly-n-shoot-game-orb.git' 'fly-n-shoot-game-orb'
 	cd fly-n-shoot-game-orb
-	git remote add codeberg ssh://git@codeberg.org/fly-n-shoot-game-orb/fly-n-shoot-game-orb.git
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/fly-n-shoot-game-orb.git
 
 [qtools]
 checkout =
