@@ -10,6 +10,18 @@ checkout =
 	cd orb-weaver-art
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-art.git
 
+[orb-weaver-ai]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-ai.git' 'orb-weaver-ai'
+	cd orb-weaver-ai
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-ai.git
+
+[qweave-docs]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qweave-docs.git' 'qweave-docs'
+	cd qweave-docs
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qweave-docs.git
+
 [fly-n-shoot-game-orb]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/fly-n-shoot-game-orb.git' 'fly-n-shoot-game-orb'
