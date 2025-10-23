@@ -1,8 +1,50 @@
-[orb-weaver]
+[orb-weaver-colony]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver.git' 'orb-weaver'
-	cd orb-weaver
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-colony.git' 'orb-weaver-colony'
+	cd orb-weaver-colony
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-colony.git
+
+[weave]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/weave.git' 'weave'
+	cd weave
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/weave.git
+
+[weave-python]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/weave-python.git' 'weave-python'
+	cd weave-python
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/weave-python.git
+
+[weaver-qdsl-docs]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/weaver-qdsl-docs.git' 'weaver-qdsl-docs'
+	cd weaver-qdsl-docs
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/weaver-qdsl-docs.git
+
+[weaver-qdsl-python]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/weaver-qdsl-python.git' 'weaver-qdsl-python'
+	cd weaver-qdsl-python
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/weaver-qdsl-python.git
+
+[orb-docs]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-docs.git' 'orb-docs'
+	cd orb-docs
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-docs.git
+
+[orb-channel]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-channel.git' 'orb-channel'
+	cd orb-channel
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-channel.git
+
+[orb-weaver-meta]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-meta.git' 'orb-weaver-meta'
+	cd orb-weaver-meta
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-meta.git
 
 [orb-weaver-art]
 checkout =
@@ -16,17 +58,47 @@ checkout =
 	cd orb-weaver-ai
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-ai.git
 
-[qweave-docs]
+[orb-template]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/qweave-docs.git' 'qweave-docs'
-	cd qweave-docs
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qweave-docs.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-template.git' 'orb-template'
+	cd orb-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-template.git
 
-[fly-n-shoot-game-orb]
+[colony-template]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/fly-n-shoot-game-orb.git' 'fly-n-shoot-game-orb'
-	cd fly-n-shoot-game-orb
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/fly-n-shoot-game-orb.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/colony-template.git' 'colony-template'
+	cd colony-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/colony-template.git
+
+[qdsl-orb-template]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qdsl-orb-template.git' 'qdsl-orb-template'
+	cd qdsl-orb-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qdsl-orb-template.git
+
+[pcb-orb-template]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/pcb-orb-template.git' 'pcb-orb-template'
+	cd pcb-orb-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/pcb-orb-template.git
+
+[mech-orb-template]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mech-orb-template.git' 'mech-orb-template'
+	cd mech-orb-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mech-orb-template.git
+
+[python-orb-template]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/python-orb-template.git' 'python-orb-template'
+	cd python-orb-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/python-orb-template.git
+
+[fly-n-shoot-firmware]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/fly-n-shoot-firmware.git' 'fly-n-shoot-firmware'
+	cd fly-n-shoot-firmware
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/fly-n-shoot-firmware.git
 
 [qtools]
 checkout =
