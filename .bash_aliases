@@ -24,3 +24,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias qm='~/qp/qm-5.2.3/bin/qm.sh'
 alias qspy='~/qp/qtools-6.9.3/bin/qspy'
+
+alias orb-update='guix pull --channels="$HOME/.config/guix/orb-channel.scm" && guix describe'
+alias orb-shell='guix shell --pure weave orb-template colony-template'
+
