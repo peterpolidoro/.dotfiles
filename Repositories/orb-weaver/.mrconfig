@@ -1,8 +1,8 @@
-[orb-weaver-colony]
+[orb-weaver]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-colony.git' 'orb-weaver-colony'
-	cd orb-weaver-colony
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-colony.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver.git' 'orb-weaver'
+	cd orb-weaver
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver.git
 
 [weave]
 checkout =
