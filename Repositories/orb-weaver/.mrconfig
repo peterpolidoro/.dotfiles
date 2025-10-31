@@ -89,9 +89,9 @@ checkout =
 	cd indra-orb-weaver-core
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/indra-orb-weaver-core.git
 
-[creator-orb-weaver-vault]
+[peter-orb-vault]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/creator-orb-weaver-vault.git' 'creator-orb-weaver-vault'
-	cd creator-orb-weaver-vault
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/creator-orb-weaver-vault.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/peter-orb-vault.git' 'peter-orb-vault'
+	cd peter-orb-vault
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/peter-orb-vault.git
 
