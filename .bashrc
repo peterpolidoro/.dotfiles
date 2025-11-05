@@ -111,4 +111,3 @@ then
   export -f show_virtual_env
   PS1='$(show_virtual_env)'$PS1
 fi
-eval "$(zoxide init bash)"
