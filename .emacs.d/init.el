@@ -764,85 +764,97 @@
 
 ;;; dired-send-to.el --- Copy/Move marked files to another open Dired buffer -*- lexical-binding: t; -*-
 
-(require 'cl-lib)
-(require 'dired)
-(require 'dired-aux)
+;; (require 'cl-lib)
+;; (require 'dired)
+;; (require 'dired-aux)
 
-(defun my/dired--other-dired-buffers ()
-  "Return a list of live Dired buffers other than the current one."
-  (cl-remove-if
-   (lambda (b)
-     (or (eq b (current-buffer))
-         (not (buffer-live-p b))
-         (with-current-buffer b (not (derived-mode-p 'dired-mode)))))
-   (buffer-list)))
+;; (defun my/dired--other-dired-buffers ()
+;;   "Return a list of live Dired buffers other than the current one."
+;;   (cl-remove-if
+;;    (lambda (b)
+;;      (or (eq b (current-buffer))
+;;          (not (buffer-live-p b))
+;;          (with-current-buffer b (not (derived-mode-p 'dired-mode)))))
+;;    (buffer-list)))
 
-(defun my/dired--pick-destination-buffer ()
-  "Prompt to choose another open Dired buffer and return (BUFFER . DIR)."
-  (let* ((candidates
-          (mapcar
-           (lambda (b)
-             (cons (format "%s — %s"
-                           (buffer-name b)
-                           (with-current-buffer b
-                             (abbreviate-file-name (dired-current-directory))))
-                   b))
-           (my/dired--other-dired-buffers))))
-    (when (null candidates)
-      (user-error "No other Dired buffers are open"))
-    (let* ((choice (completing-read "Destination Dired buffer: "
-                                    (mapcar #'car candidates) nil t))
-           (buf    (cdr (assoc choice candidates)))
-           (dir    (with-current-buffer buf (dired-current-directory))))
-      (cons buf dir))))
+;; (defun my/dired--pick-destination-buffer ()
+;;   "Prompt to choose another open Dired buffer and return (BUFFER . DIR)."
+;;   (let* ((candidates
+;;           (mapcar
+;;            (lambda (b)
+;;              (cons (format "%s — %s"
+;;                            (buffer-name b)
+;;                            (with-current-buffer b
+;;                              (abbreviate-file-name (dired-current-directory))))
+;;                    b))
+;;            (my/dired--other-dired-buffers))))
+;;     (when (null candidates)
+;;       (user-error "No other Dired buffers are open"))
+;;     (let* ((choice (completing-read "Destination Dired buffer: "
+;;                                     (mapcar #'car candidates) nil t))
+;;            (buf    (cdr (assoc choice candidates)))
+;;            (dir    (with-current-buffer buf (dired-current-directory))))
+;;       (cons buf dir))))
 
-(defun my/dired--send-to (op)
-  "Internal helper to copy/move marked files to another Dired buffer's directory.
-OP is the symbol 'copy or 'move."
-  (unless (derived-mode-p 'dired-mode)
-    (user-error "Run this from a Dired buffer"))
-  (let* ((files (dired-get-marked-files nil nil #'file-exists-p))
-         (dest   (my/dired--pick-destination-buffer))
-         (dest-buf (car dest))
-         (dest-dir (cdr dest))
-         (src-dir (dired-current-directory)))
-    (when (null files)
-      (user-error "No marked files"))
-    (when (file-equal-p src-dir dest-dir)
-      (user-error "Source and destination are the same directory"))
-    (let ((dired-recursive-copies 'always) ; copy/move directories recursively
-          (dired-recursive-deletes 'top))  ; prompt once for dir moves
-      (dolist (f files)
-        (let ((target (expand-file-name (file-name-nondirectory f) dest-dir)))
-          (pcase op
-            ('copy (dired-copy-file   f target nil)) ; 3rd arg controls overwrite
-            ('move (dired-rename-file f target nil))
-            (_     (user-error "Unknown operation: %S" op))))))
-    (revert-buffer)                ; refresh source
-    (with-current-buffer dest-buf  ; refresh destination
-      (revert-buffer))
-    (message "Done: %s %d item(s) to %s"
-             (symbol-name op) (length files) (abbreviate-file-name dest-dir))))
+;; (defun my/dired--send-to (op)
+;;   "Internal helper to copy/move marked files to another Dired buffer's directory.
+;; OP is the symbol 'copy or 'move."
+;;   (unless (derived-mode-p 'dired-mode)
+;;     (user-error "Run this from a Dired buffer"))
+;;   (let* ((files (dired-get-marked-files nil nil #'file-exists-p))
+;;          (dest   (my/dired--pick-destination-buffer))
+;;          (dest-buf (car dest))
+;;          (dest-dir (cdr dest))
+;;          (src-dir (dired-current-directory)))
+;;     (when (null files)
+;;       (user-error "No marked files"))
+;;     (when (file-equal-p src-dir dest-dir)
+;;       (user-error "Source and destination are the same directory"))
+;;     (let ((dired-recursive-copies 'always) ; copy/move directories recursively
+;;           (dired-recursive-deletes 'top))  ; prompt once for dir moves
+;;       (dolist (f files)
+;;         (let ((target (expand-file-name (file-name-nondirectory f) dest-dir)))
+;;           (pcase op
+;;             ('copy (dired-copy-file   f target nil)) ; 3rd arg controls overwrite
+;;             ('move (dired-rename-file f target nil))
+;;             (_     (user-error "Unknown operation: %S" op))))))
+;;     (revert-buffer)                ; refresh source
+;;     (with-current-buffer dest-buf  ; refresh destination
+;;       (revert-buffer))
+;;     (message "Done: %s %d item(s) to %s"
+;;              (symbol-name op) (length files) (abbreviate-file-name dest-dir))))
 
-;;;###autoload
-(defun my/dired-copy-to-other-dired ()
-  "Copy marked files to another open Dired buffer's directory."
+;; ;;;###autoload
+;; (defun my/dired-copy-to-other-dired ()
+;;   "Copy marked files to another open Dired buffer's directory."
+;;   (interactive)
+;;   (my/dired--send-to 'copy))
+
+;; ;;;###autoload
+;; (defun my/dired-move-to-other-dired ()
+;;   "Move marked files to another open Dired buffer's directory."
+;;   (interactive)
+;;   (my/dired--send-to 'move))
+
+;; ;; Keybindings in Dired:
+;; (with-eval-after-load 'dired
+;;   (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-to-other-dired)
+;;   (define-key dired-mode-map (kbd "C-c R") #'my/dired-move-to-other-dired))
+
+;; (provide 'dired-send-to)
+;;; dired-send-to.el ends here
+
+(defun my/dired-copy-directory-path ()
+  "Copy the current Dired buffer's directory path to the kill ring."
   (interactive)
-  (my/dired--send-to 'copy))
-
-;;;###autoload
-(defun my/dired-move-to-other-dired ()
-  "Move marked files to another open Dired buffer's directory."
-  (interactive)
-  (my/dired--send-to 'move))
-
+  (if (eq major-mode 'dired-mode)
+      (let ((dir (dired-current-directory)))
+        (kill-new dir)
+        (message "Copied directory path: %s" dir))
+    (message "Not in a Dired buffer.")))
 ;; Keybindings in Dired:
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-to-other-dired)
-  (define-key dired-mode-map (kbd "C-c R") #'my/dired-move-to-other-dired))
-
-(provide 'dired-send-to)
-;;; dired-send-to.el ends here
+  (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-directory-path))
 
 (keymap-global-set "C-o" #'casual-editkit-main-tmenu)
 
