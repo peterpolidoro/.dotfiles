@@ -1,8 +1,14 @@
-[orb-weaver]
+[codex]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver.git' 'orb-weaver'
-	cd orb-weaver
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/codex.git' 'codex'
+	cd codex
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/codex.git
+
+[indras-context]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/indras-context.git' 'indras-context'
+	cd indras-context
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/indras-context.git
 
 [weave]
 checkout =
@@ -82,12 +88,6 @@ checkout =
 	cd qp-arduino-example
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qp-arduino-example.git
 	git remote add source ssh://git@github.com/QuantumLeaps/qp-arduino-example.git
-
-[indra-orb-weaver-core]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/indra-orb-weaver-core.git' 'indra-orb-weaver-core'
-	cd indra-orb-weaver-core
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/indra-orb-weaver-core.git
 
 [peter-orb-vault]
 checkout =
