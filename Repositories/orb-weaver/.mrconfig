@@ -10,11 +10,11 @@ checkout =
 	cd indras-context
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/indras-context.git
 
-[weave]
+[loom]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/weave.git' 'weave'
-	cd weave
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/weave.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/loom.git' 'loom'
+	cd loom
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/loom.git
 
 [orb-weaver-specs]
 checkout =
