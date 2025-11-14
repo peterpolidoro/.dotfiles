@@ -17,7 +17,8 @@
    "nfs-utils"
    "cifs-utils"
    "exa"
-   "bat";; Settin gs Manager
+   "bat"
+   "guile-hall";; Settin gs Manager
    "xsettingsd"
    
    ;; GTK Themes

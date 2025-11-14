@@ -45,6 +45,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "cifs-utils"
 "exa"
 "bat"
+"guile-hall"
 #+end_src
 
 * System Settings
