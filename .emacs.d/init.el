@@ -17,7 +17,7 @@
       gc-cons-percentage 0.6)
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (setq gc-cons-threshold (* 64 1000 1000)
+            (setq gc-cons-threshold (* 64 1024 1024)
                   gc-cons-percentage 0.1)))
 
 ;; Quiet native-comp warnings; native-compile packages when available.
@@ -48,13 +48,6 @@
 ;; Better y/n prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Modeline
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
-  :custom
-  ;; Only draw icons in GUI frames to avoid latency on TTY/remote.
-  (doom-modeline-icon (display-graphic-p)))
-
 (setq user-full-name "Peter Polidoro"
       user-mail-address "peter@polidoro.io")
 (setq copyright-names-regexp
@@ -77,10 +70,8 @@
 ;; Keep transient cruft out of ~/.emacs.d/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
-      undo-tree-history-directory-alist `(("." . ,(expand-file-name "undo" user-emacs-directory)))
       url-history-file (expand-file-name "url/history" user-emacs-directory)
-      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-emacs-directory)
-      projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-emacs-directory))
+      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-emacs-directory))
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering)
@@ -98,9 +89,7 @@
 ;; Add my library path to load-path
 (push "~/.dotfiles/.emacs.d/lisp" load-path)
 
-;; (server-start)
-
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(keymap-global-set "<escape>" #'keyboard-escape-quit)
 
 (use-package which-key
   :init (which-key-mode)
@@ -235,9 +224,7 @@
 (global-set-key (kbd "s-p")    'windmove-up)
 (global-set-key (kbd "s-n")  'windmove-down)
 
-  (use-package undo-tree
-    :init
-    (global-undo-tree-mode 1))
+(use-package vundo :commands vundo)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -328,6 +315,7 @@
   (doom-modeline-github nil)
   (doom-modeline-mu4e nil)
   (doom-modeline-irc t)
+  (doom-modeline-icon (display-graphic-p))
   (doom-modeline-minor-modes t)
   (doom-modeline-persp-name nil)
   (doom-modeline-buffer-file-name-style 'truncate-except-project)
@@ -388,7 +376,6 @@
 		folder, otherwise delete a word"
 	(interactive "p")
 	(if minibuffer-completing-file-name
-			;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
 			(if (string-match-p "/." (minibuffer-contents))
 					(zap-up-to-char (- arg) ?/)
 				(delete-minibuffer-contents))
@@ -466,9 +453,7 @@
         completion-category-overrides '((file (styles partial-completion)))))
 
 (setq history-length 25)
-(use-package savehist
-  :init
-  (savehist-mode))
+(use-package savehist :init (savehist-mode 1))
 
 (use-package corfu
   ;; Optional customizations
@@ -661,9 +646,6 @@
   ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
   ;;;; 3. locate-dominating-file
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-  ;;;; 4. projectile.el (projectile-project-root)
-  ;; (autoload 'projectile-project-root "projectile")
-  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
   )
@@ -702,7 +684,6 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
-  :ensure t
   :after (embark consult)
   :demand t ; only necessary if you have the hook below
   ;; if you want to have consult previews as you move around an
@@ -817,12 +798,6 @@
      ("M-s" . dirvish-setup-menu)
      ("M-e" . dirvish-emerge-menu)))
 
-(use-package treemacs
-  :bind ("<f5>" . treemacs)
-  :custom
-  (treemacs-is-never-other-window t)
-  :hook(treemacs-mode . treemacs-project-follow-mode))
-
 ;; (use-package openwith
 ;;   :config
 ;;   (setq openwith-associations
@@ -852,7 +827,6 @@
       browse-url-generic-program "firefox")
 
 (use-package edit-server
-  :ensure t
   :commands edit-server-start
   :init (if after-init-time
               (edit-server-start)
@@ -1074,21 +1048,19 @@
 
 
 
-(use-package eglot)
+;; Prefer Tree-sitter modes when available
+(setq major-mode-remap-alist
+      '((python-mode . python-ts-mode)
+        (c-mode     . c-ts-mode)
+        (c++-mode   . c++-ts-mode)
+        (json-mode  . json-ts-mode)
+        (css-mode   . css-ts-mode)
+        (js-mode    . js-ts-mode)
+        (js-json-mode . json-ts-mode)
+        (sh-mode    . bash-ts-mode)))
 
-;; (use-package company
-;;   :defer t
-;;   :init (global-company-mode)
-;;   :config
-;;   (progn
-;;     ;; Use Company for completion
-;;     (bind-key [remap completion-at-point] #'company-complete company-mode-map)
-
-;;     (setq company-tooltip-align-annotations t
-;;           ;; Easy navigation to candidates with M-<n>
-;;           company-show-numbers t)
-;;     (setq company-dabbrev-downcase nil))
-;;   :diminish company-mode)
+;; Better syntax highlighting & indentation with treesit
+(setq treesit-font-lock-level 4)
 
 (use-package magit
   :commands (magit-status magit-get-current-branch)
@@ -1106,24 +1078,12 @@
 (use-package magit-todos
   :defer t)
 
-(use-package projectile
-  :diminish projectile-mode
-  :config (projectile-mode)
+(use-package project
   :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  (when (file-directory-p "~/git")
-    (setq projectile-project-search-path '("~/git")))
-  (setq projectile-switch-project-action #'projectile-dired))
+  ("C-c p" . project-prefix-map)
+  ("C-c p a" . ff-find-other-file))
 
 
-
-(use-package ccls)
-
-;; Unfortunately many standard c++ header files have no file
-;; extension, and so will not typically be identified by emacs as c++
-;; files. The following code is intended to solve this problem.
-(require 'cl)
 
 (defun file-in-directory-list-p (file dirlist)
   "Returns true if the file specified is contained within one of
@@ -1186,8 +1146,6 @@
   (c-set-offset 'template-args-cont '+))
 (add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
 
-(add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
-
 (use-package paredit
   :config
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
@@ -1243,9 +1201,6 @@
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
 
-(use-package flycheck
-  :defer t)
-
 (add-to-list 'yas-snippet-dirs
              "~/.emacs.d/snippets/guix")
 (add-to-list 'yas-snippet-dirs
@@ -1276,7 +1231,6 @@
          ("C-c c _"   . string-inflection-capital-snake-case)))
 
 (use-package popper
-  :ensure t ; or :straight t
   :bind (("M-`"   . popper-toggle)
          ("C-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -1302,7 +1256,6 @@
   (popper-mode +1)
   (popper-echo-mode +1)
   :config
-  ;; (setq popper-group-function #'popper-group-by-projectile) ; projectile projects
   (setq popper-group-function #'popper-group-by-directory)
 )
 
@@ -1313,8 +1266,6 @@
 
 ;; If a popup does happen, don't resize windows to be equal-sized
 (setq even-window-sizes nil)
-
-(use-package multi-term)
 
 (use-package vterm
   :commands vterm
@@ -1360,10 +1311,6 @@
       (switch-to-buffer-other-window buf)
       )))
 (global-set-key (kbd "C-c x") 'pjp/vterm-execute-region-or-current-line)
-
-(when (eq system-type 'windows-nt)
-  (setq explicit-shell-file-name "powershell.exe")
-  (setq explicit-powershell.exe-args '()))
 
 (defun pjp/configure-eshell ()
   ;; Save command history when commands are entered
@@ -1413,22 +1360,6 @@
   :after eshell
   :config
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
-
-;; (defun emacspeak-zoxide (q)
-;;   "Query zoxide  and launch dired.
-;; Shell Utility zoxide --- implemented in Rust --- lets you jump to
-;; directories that are used often.
-;; This command does for Emacs, what zoxide does at the  shell."
-;;   (interactive "sZoxide:")
-;;   (if-let
-;;       ((zoxide (executable-find "zoxide"))
-;;        (target
-;;         (with-temp-buffer
-;;           (if (= 0 (call-process zoxide nil t nil "query" q))
-;;               (string-trim (buffer-string))))))
-;;       (funcall-interactively #'dired  target)
-;;     (unless zoxide (error "Install zoxide"))
-;;     (unless target (error "No Match"))))
 
 ;; Only fetch mail on knave
 ;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))
@@ -1497,14 +1428,6 @@
 (save-place-mode 1)
 (setq use-dialog-box nil)
 
-(setq erc-server "irc.libera.chat"
-      erc-nick "peterpolidoro"    ; Change this!
-      erc-user-full-name "Peter Polidoro"  ; And this!
-      erc-track-shorten-start 8
-      erc-autojoin-channels-alist '(("irc.libera.chat" "#systemcrafters" "#emacs" "#guix"))
-      erc-kill-buffer-on-part t
-      erc-auto-query 'bury)
-
 (add-hook 'markdown-mode-hook 'pandoc-mode)
 (eval-after-load "org"
   '(require 'ox-pandoc nil t))
@@ -1549,6 +1472,5 @@
   )
 
 (use-package gptel-quick
-  :ensure t
   :bind
   ("C-c q" . gptel-quick))

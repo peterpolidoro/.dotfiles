@@ -2,13 +2,7 @@
  '("emacs"
    "emacs-use-package""emacs-guix"
    "guile"
-   "guix"
-   "emacs-no-littering"
-   
-   "emacs-which-key"
-   "emacs-smartparens"
-   "emacs-undo-tree"
-   
+   "guix""emacs-no-littering""emacs-which-key""emacs-smartparens""emacs-vundo
    "emacs-golden-ratio"
    
      "emacs-color-theme-modern"
@@ -25,8 +19,6 @@
    "emacs-diminish"
    
    "emacs-alert"
-   
-   ;;"emacs-super-save"
    
    "emacs-pinentry"
    
@@ -82,8 +74,6 @@
    
    "emacs-dirvish"
    
-   "emacs-treemacs"
-   
    "emacs-openwith"
    
    "emacs-rg"
@@ -132,14 +122,6 @@
    
    "texlive-beamer"
    
-   "emacs-eglot"
-   
-   "emacs-consult-eglot"
-   
-   "emacs-dap-mode"
-   
-   ;; "emacs-company"
-   
    "emacs-magit"
    
    ;;"emacs-forge"
@@ -149,8 +131,6 @@
    "git"
    "git:send-email"
    
-   "emacs-projectile"
-   
    "emacs-ggtags"
    
    "universal-ctags"
@@ -158,10 +138,6 @@
    "ripgrep"
    
    "the-silver-searcher"
-   
-   "ccls"
-   
-   "emacs-ccls"
    
    "emacs-paredit"
    
@@ -176,10 +152,6 @@
    "emacs-web-mode"
    
    "emacs-yaml-mode"
-   
-   "python-lsp-server"
-   
-   "emacs-flycheck"
    
    "emacs-yasnippet"
    
@@ -196,8 +168,6 @@
    "emacs-string-inflection"
    
    "emacs-popper"
-   
-   "emacs-multi-term"
    
    "emacs-vterm"
    
@@ -219,9 +189,6 @@
    
    "emacs-eshell-bookmark"
    
-   "zoxide"
-   "emacs-zoxide"
-   
    "emacs-mu4e-alert"
    
    "emacs-org-mime"
@@ -239,8 +206,6 @@
    ;; "emacs-docker-tramp"
    
    "emacs-dockerfile-mode"
-   
-   "emacs-key-chord"
    
    "emacs-buffer-env"
    "emacs-inheritenv"
