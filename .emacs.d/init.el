@@ -1,5 +1,59 @@
-;; NOTE: init.el is generated from Emacs.org.  Please edit that file
-;;       in Emacs and init.el will be generated automatically!
+;;; init.el --- Main configuration -*- lexical-binding: t; -*-
+;; NOTE: This file is generated from Emacs.org.  Please edit that file
+;;       in Emacs and this file will be generated automatically!
+
+;; Don’t let package.el mess with Guix-managed packages.
+(setq package-enable-at-startup nil)
+
+;; use-package: installed via Guix as `emacs-use-package`
+(eval-when-compile
+  (require 'use-package))
+(setq use-package-always-ensure nil
+      use-package-expand-minimally t
+      use-package-compute-statistics t)
+
+;; Big GC threshold during init; restore after startup.
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 64 1000 1000)
+                  gc-cons-percentage 0.1)))
+
+;; Quiet native-comp warnings; native-compile packages when available.
+(when (boundp 'native-comp-async-report-warnings-errors)
+  (setq native-comp-async-report-warnings-errors 'silent))
+(setq package-native-compile t)
+
+;; Smooth, precise scrolling (Emacs 29+).
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode 1))
+
+;; Minimal distractions; these were already suppressed in early-init.
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Sensible defaults
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
+      ring-bell-function #'ignore
+      confirm-kill-emacs #'y-or-n-p)
+
+;; Show line/column numbers when useful
+(setq display-line-numbers-type 'relative)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(setq column-number-mode t)
+
+;; Better y/n prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Modeline
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  ;; Only draw icons in GUI frames to avoid latency on TTY/remote.
+  (doom-modeline-icon (display-graphic-p)))
 
 (setq user-full-name "Peter Polidoro"
       user-mail-address "peter@polidoro.io")
@@ -10,53 +64,14 @@
 (defvar pjp/default-font-size 120)
 (defvar pjp/default-variable-font-size 120)
 
-;; Make frame transparency overridable
-(defvar pjp/frame-transparency '(95 . 95))
-
 (setq warning-minimum-level :error)
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq package-native-compile t) ; native-compile packages when available
 
-;;(require 'loadhist)
-;;(file-dependents (feature-file 'cl))
 (setq byte-compile-warnings '(cl-functions))
 
-;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
-
-;; Profile emacs startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
-
-(setq pjp/is-gnu (or (eq system-type 'gnu/linux) (eq system-type 'gnu)))
-(setq pjp/is-guix-system (and pjp/is-gnu
-                              (require 'f)
-                              (string-equal (f-read "/etc/issue")
-                                            "\nThis is the GNU system.  Welcome.\n")))
-
-(if pjp/is-gnu
-    (setq use-package-always-ensure nil)
-  (require 'package)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-												   ("melpa-stable" . "https://stable.melpa.org/packages/")
-												   ("org" . "https://orgmode.org/elpa/")
-												   ("elpa" . "https://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (unless package-archive-contents
-	  (package-refresh-contents))
-  (unless (package-installed-p 'use-package)
-	  (package-install 'use-package))
-  (require 'use-package-ensure)
-  (setq use-package-always-ensure t))
-
-(eval-when-compile
-  (require 'use-package))
-;; (require 'diminish)
-(require 'bind-key)
-
+(use-package guix
+  :defer t)
 (add-hook 'scheme-mode-hook 'guix-devel-mode)
 
 ;; Keep transient cruft out of ~/.emacs.d/
@@ -120,8 +135,6 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1)
 
-(set-frame-parameter (selected-frame) 'alpha pjp/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,pjp/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -202,13 +215,15 @@
 ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
+(electric-pair-mode 1)
 (use-package smartparens
   :config
   (smartparens-global-mode t)
 
   (sp-pair "'" nil :actions :rem)
   (sp-pair "`" nil :actions :rem)
-  (setq sp-highlight-pair-overlay nil))
+  (setq sp-highlight-pair-overlay nil)
+  :hook (prog-mode . smartparens-mode))
 
 (set-default 'truncate-lines t)
 (setq truncate-partial-width-windows t)
@@ -220,10 +235,9 @@
 (global-set-key (kbd "s-p")    'windmove-up)
 (global-set-key (kbd "s-n")  'windmove-down)
 
-(if pjp/is-gnu
-    (use-package undo-tree
-      :init
-      (global-undo-tree-mode 1)))
+  (use-package undo-tree
+    :init
+    (global-undo-tree-mode 1))
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -260,14 +274,13 @@
   ;; (require 'modus-themes)
   ;; (load-theme 'modus-vivendi :no-confirm)
 
-(when pjp/is-gnu
   (set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
 
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
   ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular))
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
 
 (defun pjp/replace-unicode-font-mapping (block-name old-font new-font)
   (let* ((block-idx (cl-position-if
@@ -345,9 +358,8 @@
         ("Asia/Shanghai" "Shanghai")))
 (setq display-time-world-time-format "%a, %d %b %I:%M %p %Z")
 
-(when pjp/is-gnu
   (setq epa-pinentry-mode 'loopback)
-  (pinentry-start))
+  (pinentry-start)
 
 ;; Set default connection mode to SSH
 (setq tramp-default-method "ssh")
@@ -714,148 +726,6 @@
 ;(keymap-set compilation-mode-map "C-o" #'casual-compile-tmenu)
 ;(keymap-set grep-mode-map "C-o" #'casual-compile-tmenu)
 
-(use-package dired
-  :defer 1
-  :ensure nil
-  :hook ((dired-mode . dired-hide-details-mode)
-         (dired-mode . hl-line-mode)
-         (dired-mode . context-menu-mode)
-         (dired-mode . dired-async-mode))
-  :bind (:map dired-mode-map
-              ("C-o" . casual-dired-tmenu)
-              ("s" . casual-dired-sort-by-tmenu)
-              ("/" . casual-dired-search-replace-tmenu)
-              ("M-o" . dired-omit-mode)
-              ("E" . wdired-change-to-wdired-mode)
-              ("M-n" . dired-next-dirline)
-              ("M-p" . dired-prev-dirline)
-              ("]" . dired-next-subdir)
-              ("[" . dired-prev-subdir)
-              ("A-M-<mouse-1>" . browse-url-of-dired-file)
-              ("<backtab>" . dired-prev-subdir)
-              ("TAB" . dired-next-subdir)
-              ("M-j" . dired-goto-subdir)
-              (";" . image-dired-dired-toggle-marked-thumbs))
-  :config
-  (setq dired-listing-switches "-agho --group-directories-first"
-        dired-omit-verbose nil)
-
-  (defun find-text-files ()
-    "Find all text files in path recursively, not in .git directory."
-    (interactive)
-    (find-dired default-directory
-                "-type f \
-               -not -path \"*/.git/*\" \
-               -not -path \"*.pdf\" \
-               -not -path \"*.zip\" \
-               -not -path \"*.png\" \
-               -not -path \"*.jpg\" \
-               -not -path \"*.gif\" \
-               -not -path \"*.exe\" \
-               -not -path \"*.odt\""))
-
-  (defun open-dired-from-env (env-var)
-    "Open Dired in the directory specified by ENV-VAR."
-    (interactive "sEnter environment variable name: ")
-    (dired (getenv env-var))))
-
-;; (keymap-set image-dired-thumbnail-mode-map "n" #'image-dired-display-next)
-;; (keymap-set image-dired-thumbnail-mode-map "p" #'image-dired-display-previous)
-
-;;; dired-send-to.el --- Copy/Move marked files to another open Dired buffer -*- lexical-binding: t; -*-
-
-;; (require 'cl-lib)
-;; (require 'dired)
-;; (require 'dired-aux)
-
-;; (defun my/dired--other-dired-buffers ()
-;;   "Return a list of live Dired buffers other than the current one."
-;;   (cl-remove-if
-;;    (lambda (b)
-;;      (or (eq b (current-buffer))
-;;          (not (buffer-live-p b))
-;;          (with-current-buffer b (not (derived-mode-p 'dired-mode)))))
-;;    (buffer-list)))
-
-;; (defun my/dired--pick-destination-buffer ()
-;;   "Prompt to choose another open Dired buffer and return (BUFFER . DIR)."
-;;   (let* ((candidates
-;;           (mapcar
-;;            (lambda (b)
-;;              (cons (format "%s — %s"
-;;                            (buffer-name b)
-;;                            (with-current-buffer b
-;;                              (abbreviate-file-name (dired-current-directory))))
-;;                    b))
-;;            (my/dired--other-dired-buffers))))
-;;     (when (null candidates)
-;;       (user-error "No other Dired buffers are open"))
-;;     (let* ((choice (completing-read "Destination Dired buffer: "
-;;                                     (mapcar #'car candidates) nil t))
-;;            (buf    (cdr (assoc choice candidates)))
-;;            (dir    (with-current-buffer buf (dired-current-directory))))
-;;       (cons buf dir))))
-
-;; (defun my/dired--send-to (op)
-;;   "Internal helper to copy/move marked files to another Dired buffer's directory.
-;; OP is the symbol 'copy or 'move."
-;;   (unless (derived-mode-p 'dired-mode)
-;;     (user-error "Run this from a Dired buffer"))
-;;   (let* ((files (dired-get-marked-files nil nil #'file-exists-p))
-;;          (dest   (my/dired--pick-destination-buffer))
-;;          (dest-buf (car dest))
-;;          (dest-dir (cdr dest))
-;;          (src-dir (dired-current-directory)))
-;;     (when (null files)
-;;       (user-error "No marked files"))
-;;     (when (file-equal-p src-dir dest-dir)
-;;       (user-error "Source and destination are the same directory"))
-;;     (let ((dired-recursive-copies 'always) ; copy/move directories recursively
-;;           (dired-recursive-deletes 'top))  ; prompt once for dir moves
-;;       (dolist (f files)
-;;         (let ((target (expand-file-name (file-name-nondirectory f) dest-dir)))
-;;           (pcase op
-;;             ('copy (dired-copy-file   f target nil)) ; 3rd arg controls overwrite
-;;             ('move (dired-rename-file f target nil))
-;;             (_     (user-error "Unknown operation: %S" op))))))
-;;     (revert-buffer)                ; refresh source
-;;     (with-current-buffer dest-buf  ; refresh destination
-;;       (revert-buffer))
-;;     (message "Done: %s %d item(s) to %s"
-;;              (symbol-name op) (length files) (abbreviate-file-name dest-dir))))
-
-;; ;;;###autoload
-;; (defun my/dired-copy-to-other-dired ()
-;;   "Copy marked files to another open Dired buffer's directory."
-;;   (interactive)
-;;   (my/dired--send-to 'copy))
-
-;; ;;;###autoload
-;; (defun my/dired-move-to-other-dired ()
-;;   "Move marked files to another open Dired buffer's directory."
-;;   (interactive)
-;;   (my/dired--send-to 'move))
-
-;; ;; Keybindings in Dired:
-;; (with-eval-after-load 'dired
-;;   (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-to-other-dired)
-;;   (define-key dired-mode-map (kbd "C-c R") #'my/dired-move-to-other-dired))
-
-;; (provide 'dired-send-to)
-;;; dired-send-to.el ends here
-
-(defun my/dired-copy-directory-path ()
-  "Copy the current Dired buffer's directory path to the kill ring."
-  (interactive)
-  (if (eq major-mode 'dired-mode)
-      (let ((dir (dired-current-directory)))
-        (kill-new dir)
-        (message "Copied directory path: %s" dir))
-    (message "Not in a Dired buffer.")))
-;; Keybindings in Dired:
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-directory-path))
-
 (keymap-global-set "C-o" #'casual-editkit-main-tmenu)
 
 (use-package expand-region
@@ -901,6 +771,51 @@
 
 (use-package auth-source-pass
   :init (auth-source-pass-enable))
+
+  (use-package dirvish
+    :init
+    (dirvish-override-dired-mode)
+    :custom
+    (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
+     '(("h" "~/" "Home")
+       ("d" "~/Downloads/" "Downloads")
+       ("." "~/.dotfiles/" "Dotfiles")
+       ("a" "~/Repositories/arduino" "Arduino")
+       ("g" "~/Repositories/guix" "Guix")
+       ("k" "~/Repositories/kicad" "Kicad")
+       ("o" "~/Repositories/peter/org" "Org")
+       ("p" "~/Repositories/pypi" "Pypi")
+       ("r" "~/Repositories/ros" "Ros")
+       ))
+    :config
+    ;; (dirvish-peek-mode) ; Preview files in minibuffer
+    ;; (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
+    ;; (setq dirvish-mode-line-format
+    ;;       '(:left (sort symlink) :right (omit yank index)))
+    ;; (setq dirvish-attributes
+    ;;       '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
+    ;; (setq delete-by-moving-to-trash t)
+    (setq dired-listing-switches
+          "-l --almost-all --human-readable --group-directories-first --no-group")
+    :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
+    (("C-c f" . dirvish-fd)
+     :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
+     ("a"   . dirvish-quick-access)
+     ("f"   . dirvish-file-info-menu)
+     ("y"   . dirvish-yank-menu)
+     ("N"   . dirvish-narrow)
+     ;; ("^"   . dirvish-history-last)
+     ("h"   . dirvish-history-jump) ; remapped `describe-mode'
+     ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
+     ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
+     ("TAB" . dirvish-subtree-toggle)
+     ("M-f" . dirvish-history-go-forward)
+     ("M-b" . dirvish-history-go-backward)
+     ("M-l" . dirvish-ls-switches-menu)
+     ("M-m" . dirvish-mark-menu)
+     ("M-t" . dirvish-layout-toggle)
+     ("M-s" . dirvish-setup-menu)
+     ("M-e" . dirvish-emerge-menu)))
 
 (use-package treemacs
   :bind ("<f5>" . treemacs)
@@ -1337,20 +1252,16 @@
              "~/.emacs.d/snippets")
 (yas-global-mode 1)
 
-(use-package smartparens
-  :hook (prog-mode . smartparens-mode))
-
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(when pjp/is-gnu
   (use-package rainbow-mode
     :defer t
     :hook (org-mode
            emacs-lisp-mode
            web-mode
            typescript-mode
-           js2-mode)))
+           js2-mode))
 
 (use-package csv)
 
@@ -1566,9 +1477,6 @@
 ;;   (plantuml-preview-custom "white")
 ;;   (plantuml-preview-custom "black"))
 
-(use-package guix
-  :defer t)
-
 (use-package daemons
   :commands daemons)
 
@@ -1581,11 +1489,6 @@
 
 (require 'dockerfile-mode)
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-
-(when pjp/is-gnu
-  (with-eval-after-load 'geiser-guile
-    (add-to-list 'geiser-guile-load-path "~/guix"))
-  (load-file "~/.emacs.d/lisp/copyright.el"))
 
 (require 'inheritenv)
 (add-hook 'hack-local-variables-hook 'buffer-env-update)

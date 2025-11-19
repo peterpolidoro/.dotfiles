@@ -1,157 +1,169 @@
 #+title: Peter Polidoro Emacs Configuration
 #+AUTHOR: Peter Polidoro
 #+EMAIL: peter@polidoro.io
-#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
+#+LANGUAGE: en
+#+OPTIONS: toc:2 num:nil ^:nil
+#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el :mkdirp yes :results silent
+#+PROPERTY: header-args:shell :results verbatim :exports both
+#+STARTUP: fold
 
 * Introduction
 
-This initialization file is based on David Wilson's awesome Emacs configuration: https://github.com/daviwil
+This is a reproducible, literate configuration for **GNU Emacs 30.2** managed by
+**GNU Guix**. It tangles three files:
 
-This file generates [[file:init.el][init.el]] which will be loaded by Emacs at startup.
+- =.emacs.d/early-init.el=  (pre-GUI/startup tuning)
+- =.emacs.d/init.el=        (main configuration)
+- =./emacs.scm=             (Guix manifest containing Emacs packages + tools + Tree‑sitter grammars)
+
+To tangle everything: =C-c C-v t= (or =M-x org-babel-tangle=) from this buffer.
+
+* early-init.el  (tangled to =.emacs.d/early-init.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./.emacs.d/early-init.el :mkdirp yes :results silent
+:END:
 
 #+begin_src emacs-lisp
+;;; early-init.el --- Early startup tweaks -*- lexical-binding: t; -*-
+;; NOTE: This file is generated from Emacs.org.  Please edit that file
+;;       in Emacs and this file will be generated automatically!
 
-;; NOTE: init.el is generated from Emacs.org.  Please edit that file
-;;       in Emacs and init.el will be generated automatically!
+;; We use Guix profiles for packages; don't let package.el initialize.
+(setq package-enable-at-startup nil)
 
+;; Avoid frame flicker / resizing during init.
+(setq frame-inhibit-implied-resize t)
+
+;; Hide UI chrome as early as possible (we can re-enable in init if desired).
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+
+;; Speed up startup by deferring file-name handlers; restore after init.
+(let ((old file-name-handler-alist))
+  (setq file-name-handler-alist nil)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq file-name-handler-alist old))))
 #+end_src
 
-* Setup
+* Core: package discipline, performance, UI
 
-** Who am I?
+** Package discipline (Guix‑first)
+We assume you install Emacs packages via Guix. We still use =use-package= for
+declarative setup, but without network installs.
 
 #+begin_src emacs-lisp
+;;; init.el --- Main configuration -*- lexical-binding: t; -*-
+;; NOTE: This file is generated from Emacs.org.  Please edit that file
+;;       in Emacs and this file will be generated automatically!
 
+;; Don’t let package.el mess with Guix-managed packages.
+(setq package-enable-at-startup nil)
+
+;; use-package: installed via Guix as `emacs-use-package`
+(eval-when-compile
+  (require 'use-package))
+(setq use-package-always-ensure nil
+      use-package-expand-minimally t
+      use-package-compute-statistics t)
+#+end_src
+
+** Performance: GC + native-comp + scrolling
+#+begin_src emacs-lisp
+;; Big GC threshold during init; restore after startup.
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 64 1000 1000)
+                  gc-cons-percentage 0.1)))
+
+;; Quiet native-comp warnings; native-compile packages when available.
+(when (boundp 'native-comp-async-report-warnings-errors)
+  (setq native-comp-async-report-warnings-errors 'silent))
+(setq package-native-compile t)
+
+;; Smooth, precise scrolling (Emacs 29+).
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode 1))
+#+end_src
+
+** Basic UI
+#+begin_src emacs-lisp
+;; Minimal distractions; these were already suppressed in early-init.
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; Sensible defaults
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
+      ring-bell-function #'ignore
+      confirm-kill-emacs #'y-or-n-p)
+
+;; Show line/column numbers when useful
+(setq display-line-numbers-type 'relative)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(setq column-number-mode t)
+
+;; Better y/n prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Modeline
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :custom
+  ;; Only draw icons in GUI frames to avoid latency on TTY/remote.
+  (doom-modeline-icon (display-graphic-p)))
+#+end_src
+
+** Who am I?
+#+begin_src emacs-lisp
 (setq user-full-name "Peter Polidoro"
       user-mail-address "peter@polidoro.io")
 (setq copyright-names-regexp
       (format "%s <%s>" user-full-name user-mail-address))
-
 #+end_src
 
 ** Font Size
-
 #+begin_src emacs-lisp
-
 ;; Adjust this font size for each system
 (defvar pjp/default-font-size 120)
 (defvar pjp/default-variable-font-size 120)
-
 #+end_src
 
-** Frame transparency
-
+** Handle Warnings
+*** Set minimum warning level
 #+begin_src emacs-lisp
-
-;; Make frame transparency overridable
-(defvar pjp/frame-transparency '(95 . 95))
-
-#+end_src
-
-* Handle Warnings
-
-** Set minimum warning level
-
-#+begin_src emacs-lisp
-
 (setq warning-minimum-level :error)
-
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq package-native-compile t) ; native-compile packages when available
 #+end_src
 
-** Remove cl is deprecated warning
-
+*** Remove cl is deprecated warning
 #+begin_src emacs-lisp
-
-;;(require 'loadhist)
-;;(file-dependents (feature-file 'cl))
 (setq byte-compile-warnings '(cl-functions))
-
 #+end_src
 
-* Startup Performance
-
-Make startup faster by reducing the frequency of garbage collection and then
-use a hook to measure Emacs startup time.
-
-#+begin_src emacs-lisp
-
-;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
-
-;; Profile emacs startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
-
-#+end_src
-
-* Package Management
-
-Use =Guix= to install package repositories and load =use-package= to
-manage package configuration.
-
-** use-package
-
-#+begin_src emacs-lisp
-
-(setq pjp/is-gnu (or (eq system-type 'gnu/linux) (eq system-type 'gnu)))
-(setq pjp/is-guix-system (and pjp/is-gnu
-                              (require 'f)
-                              (string-equal (f-read "/etc/issue")
-                                            "\nThis is the GNU system.  Welcome.\n")))
-
-(if pjp/is-gnu
-    (setq use-package-always-ensure nil)
-  (require 'package)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-												   ("melpa-stable" . "https://stable.melpa.org/packages/")
-												   ("org" . "https://orgmode.org/elpa/")
-												   ("elpa" . "https://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (unless package-archive-contents
-	  (package-refresh-contents))
-  (unless (package-installed-p 'use-package)
-	  (package-install 'use-package))
-  (require 'use-package-ensure)
-  (setq use-package-always-ensure t))
-
-(eval-when-compile
-  (require 'use-package))
-;; (require 'diminish)
-(require 'bind-key)
-
-#+end_src
-
-*Guix Packages*
-
+** Guix Packages
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-use-package"
-
 #+end_src
 
-** Guix
+* Guix
 
 #+begin_src emacs-lisp
-
+(use-package guix
+  :defer t)
 (add-hook 'scheme-mode-hook 'guix-devel-mode)
-
 #+end_src
 
-*Guix Packages*
+** Guix Packages
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-guix"
-
 "guile"
-
 "guix"
-
 #+end_src
 
 * Keep .emacs.d Clean
@@ -298,8 +310,6 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-(set-frame-parameter (selected-frame) 'alpha pjp/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,pjp/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -501,23 +511,21 @@ based on the prefix keys you entered.
 *** Use smartparens
 
 #+begin_src emacs-lisp
-
+(electric-pair-mode 1)
 (use-package smartparens
   :config
   (smartparens-global-mode t)
 
   (sp-pair "'" nil :actions :rem)
   (sp-pair "`" nil :actions :rem)
-  (setq sp-highlight-pair-overlay nil))
-
+  (setq sp-highlight-pair-overlay nil)
+  :hook (prog-mode . smartparens-mode))
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-smartparens"
-
 #+end_src
 
 *** Truncate lines
@@ -552,10 +560,9 @@ based on the prefix keys you entered.
 
 #+begin_src emacs-lisp
 
-(if pjp/is-gnu
-    (use-package undo-tree
-      :init
-      (global-undo-tree-mode 1)))
+  (use-package undo-tree
+    :init
+    (global-undo-tree-mode 1))
 
 #+end_src
 
@@ -683,14 +690,13 @@ Fonts are installed from the "desktop" profile.
 
 #+begin_src emacs-lisp
 
-(when pjp/is-gnu
   (set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
 
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height pjp/default-font-size)
 
   ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular))
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height pjp/default-variable-font-size :weight 'regular)
 
 #+end_src
 
@@ -913,9 +919,8 @@ Emacs can be prompted for the PIN of GPG private keys, we just need to set
 
 #+begin_src emacs-lisp
 
-(when pjp/is-gnu
   (setq epa-pinentry-mode 'loopback)
-  (pinentry-start))
+  (pinentry-start)
 
 #+end_src
 
@@ -1493,153 +1498,6 @@ Consult provides a lot of useful completion commands similar to Ivy's Counsel.
 ;(keymap-set grep-mode-map "C-o" #'casual-compile-tmenu)
 #+end_src
 
-** Dired
-
-#+begin_src emacs-lisp
-(use-package dired
-  :defer 1
-  :ensure nil
-  :hook ((dired-mode . dired-hide-details-mode)
-         (dired-mode . hl-line-mode)
-         (dired-mode . context-menu-mode)
-         (dired-mode . dired-async-mode))
-  :bind (:map dired-mode-map
-              ("C-o" . casual-dired-tmenu)
-              ("s" . casual-dired-sort-by-tmenu)
-              ("/" . casual-dired-search-replace-tmenu)
-              ("M-o" . dired-omit-mode)
-              ("E" . wdired-change-to-wdired-mode)
-              ("M-n" . dired-next-dirline)
-              ("M-p" . dired-prev-dirline)
-              ("]" . dired-next-subdir)
-              ("[" . dired-prev-subdir)
-              ("A-M-<mouse-1>" . browse-url-of-dired-file)
-              ("<backtab>" . dired-prev-subdir)
-              ("TAB" . dired-next-subdir)
-              ("M-j" . dired-goto-subdir)
-              (";" . image-dired-dired-toggle-marked-thumbs))
-  :config
-  (setq dired-listing-switches "-agho --group-directories-first"
-        dired-omit-verbose nil)
-
-  (defun find-text-files ()
-    "Find all text files in path recursively, not in .git directory."
-    (interactive)
-    (find-dired default-directory
-                "-type f \
-               -not -path \"*/.git/*\" \
-               -not -path \"*.pdf\" \
-               -not -path \"*.zip\" \
-               -not -path \"*.png\" \
-               -not -path \"*.jpg\" \
-               -not -path \"*.gif\" \
-               -not -path \"*.exe\" \
-               -not -path \"*.odt\""))
-
-  (defun open-dired-from-env (env-var)
-    "Open Dired in the directory specified by ENV-VAR."
-    (interactive "sEnter environment variable name: ")
-    (dired (getenv env-var))))
-
-;; (keymap-set image-dired-thumbnail-mode-map "n" #'image-dired-display-next)
-;; (keymap-set image-dired-thumbnail-mode-map "p" #'image-dired-display-previous)
-
-;;; dired-send-to.el --- Copy/Move marked files to another open Dired buffer -*- lexical-binding: t; -*-
-
-;; (require 'cl-lib)
-;; (require 'dired)
-;; (require 'dired-aux)
-
-;; (defun my/dired--other-dired-buffers ()
-;;   "Return a list of live Dired buffers other than the current one."
-;;   (cl-remove-if
-;;    (lambda (b)
-;;      (or (eq b (current-buffer))
-;;          (not (buffer-live-p b))
-;;          (with-current-buffer b (not (derived-mode-p 'dired-mode)))))
-;;    (buffer-list)))
-
-;; (defun my/dired--pick-destination-buffer ()
-;;   "Prompt to choose another open Dired buffer and return (BUFFER . DIR)."
-;;   (let* ((candidates
-;;           (mapcar
-;;            (lambda (b)
-;;              (cons (format "%s — %s"
-;;                            (buffer-name b)
-;;                            (with-current-buffer b
-;;                              (abbreviate-file-name (dired-current-directory))))
-;;                    b))
-;;            (my/dired--other-dired-buffers))))
-;;     (when (null candidates)
-;;       (user-error "No other Dired buffers are open"))
-;;     (let* ((choice (completing-read "Destination Dired buffer: "
-;;                                     (mapcar #'car candidates) nil t))
-;;            (buf    (cdr (assoc choice candidates)))
-;;            (dir    (with-current-buffer buf (dired-current-directory))))
-;;       (cons buf dir))))
-
-;; (defun my/dired--send-to (op)
-;;   "Internal helper to copy/move marked files to another Dired buffer's directory.
-;; OP is the symbol 'copy or 'move."
-;;   (unless (derived-mode-p 'dired-mode)
-;;     (user-error "Run this from a Dired buffer"))
-;;   (let* ((files (dired-get-marked-files nil nil #'file-exists-p))
-;;          (dest   (my/dired--pick-destination-buffer))
-;;          (dest-buf (car dest))
-;;          (dest-dir (cdr dest))
-;;          (src-dir (dired-current-directory)))
-;;     (when (null files)
-;;       (user-error "No marked files"))
-;;     (when (file-equal-p src-dir dest-dir)
-;;       (user-error "Source and destination are the same directory"))
-;;     (let ((dired-recursive-copies 'always) ; copy/move directories recursively
-;;           (dired-recursive-deletes 'top))  ; prompt once for dir moves
-;;       (dolist (f files)
-;;         (let ((target (expand-file-name (file-name-nondirectory f) dest-dir)))
-;;           (pcase op
-;;             ('copy (dired-copy-file   f target nil)) ; 3rd arg controls overwrite
-;;             ('move (dired-rename-file f target nil))
-;;             (_     (user-error "Unknown operation: %S" op))))))
-;;     (revert-buffer)                ; refresh source
-;;     (with-current-buffer dest-buf  ; refresh destination
-;;       (revert-buffer))
-;;     (message "Done: %s %d item(s) to %s"
-;;              (symbol-name op) (length files) (abbreviate-file-name dest-dir))))
-
-;; ;;;###autoload
-;; (defun my/dired-copy-to-other-dired ()
-;;   "Copy marked files to another open Dired buffer's directory."
-;;   (interactive)
-;;   (my/dired--send-to 'copy))
-
-;; ;;;###autoload
-;; (defun my/dired-move-to-other-dired ()
-;;   "Move marked files to another open Dired buffer's directory."
-;;   (interactive)
-;;   (my/dired--send-to 'move))
-
-;; ;; Keybindings in Dired:
-;; (with-eval-after-load 'dired
-;;   (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-to-other-dired)
-;;   (define-key dired-mode-map (kbd "C-c R") #'my/dired-move-to-other-dired))
-
-;; (provide 'dired-send-to)
-;;; dired-send-to.el ends here
-
-(defun my/dired-copy-directory-path ()
-  "Copy the current Dired buffer's directory path to the kill ring."
-  (interactive)
-  (if (eq major-mode 'dired-mode)
-      (let ((dir (dired-current-directory)))
-        (kill-new dir)
-        (message "Copied directory path: %s" dir))
-    (message "Not in a Dired buffer.")))
-;; Keybindings in Dired:
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "C-c C") #'my/dired-copy-directory-path))
-
-#+end_src
-
 ** EditKit
 
 #+begin_src emacs-lisp
@@ -1871,91 +1729,9 @@ locally.
 
 * File Browsing
 
-** Dired
-
-#+begin_src emacs-lisp :tangle no
-
-(use-package dired
-  :defer 1
-  :ensure nil
-  :hook (dired-mode . dired-hide-details-mode)
-  :bind (:map dired-mode-map
-              ("C-b" . dired-single-up-directory)
-              ("C-f" . dired-single-buffer))
-  :commands (dired dired-jump)
-  :config
-  (setq dired-listing-switches "-agho --group-directories-first"
-        dired-omit-verbose nil)
-
-  (defun find-text-files ()
-    "Find all text files in path recursively, not in .git directory."
-    (interactive)
-    (find-dired default-directory
-                "-type f \
-               -not -path \"*/.git/*\" \
-               -not -path \"*.pdf\" \
-               -not -path \"*.zip\" \
-               -not -path \"*.png\" \
-               -not -path \"*.jpg\" \
-               -not -path \"*.gif\" \
-               -not -path \"*.exe\" \
-               -not -path \"*.odt\""))
-
-  (defun open-dired-from-env (env-var)
-  "Open Dired in the directory specified by ENV-VAR."
-  (interactive "sEnter environment variable name: ")
-  (dired (getenv env-var)))
-
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode)))
-
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
-  :bind (:map dired-mode-map
-              ("." . dired-hide-dotfiles-mode)))
-
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-
-(use-package dired-single
-  :after dired
-  :bind (:map dired-mode-map
-              ("C-b" . dired-single-up-directory)
-              ("C-f" . dired-single-buffer)))
-
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-
-(use-package dired-subtree
-  :after dired
-  :bind (:map dired-mode-map
-              ("<tab>" . dired-subtree-cycle)))
-
-(use-package dired-collapse
-  :after dired
-  :hook (dired-mode . dired-collapse-mode))
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep "" :tangle no
-
-;;"emacs-dired-single"
-
-;; "emacs-dired-hacks"
-
-#+end_src
-
 ** Dirvish
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 
   (use-package dirvish
     :init
@@ -2000,9 +1776,7 @@ locally.
      ("M-m" . dirvish-mark-menu)
      ("M-t" . dirvish-layout-toggle)
      ("M-s" . dirvish-setup-menu)
-     ("M-e" . dirvish-emerge-menu)
-     ("M-j" . dirvish-fd-jump))
-    )
+     ("M-e" . dirvish-emerge-menu)))
 
 #+end_src
 
@@ -2546,7 +2320,6 @@ configuration parameters are available to use for your debug templates!
 
 #+begin_src emacs-lisp :tangle no
 
-(when pjp/is-gnu
   (use-package dap-mode
     :commands dap-mode
     :hook (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
@@ -2554,7 +2327,7 @@ configuration parameters are available to use for your debug templates!
     (dap-mode 1)
     (require 'dap-ui)
     (dap-ui-mode 1)
-    (require 'dap-lldb)))
+    (require 'dap-lldb))
 
 #+end_src
 
@@ -3023,23 +2796,6 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 
 #+end_src
 
-*** Smart Parens
-
-#+begin_src emacs-lisp
-
-(use-package smartparens
-  :hook (prog-mode . smartparens-mode))
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-"emacs-smartparens"
-
-#+end_src
-
 *** Rainbow Delimiters
 
 #+begin_src emacs-lisp
@@ -3063,14 +2819,13 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 
 #+begin_src emacs-lisp
 
-(when pjp/is-gnu
   (use-package rainbow-mode
     :defer t
     :hook (org-mode
            emacs-lisp-mode
            web-mode
            typescript-mode
-           js2-mode)))
+           js2-mode))
 
 #+end_src
 
@@ -3530,23 +3285,6 @@ require it here to have it loaded in the main Emacs configuration.
 #+end_src
 
 * System Utilities
-** Guix
-
-#+begin_src emacs-lisp
-
-(use-package guix
-  :defer t)
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :noweb-ref packages :noweb-sep ""
-
-"emacs-guix"
-
-#+end_src
-
 ** Daemons
 
 #+begin_src emacs-lisp
@@ -3612,17 +3350,6 @@ require it here to have it loaded in the main Emacs configuration.
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
 
 "emacs-key-chord"
-
-#+end_src
-
-* Guix Perfect Setup
-
-#+begin_src emacs-lisp
-
-(when pjp/is-gnu
-  (with-eval-after-load 'geiser-guile
-    (add-to-list 'geiser-guile-load-path "~/guix"))
-  (load-file "~/.emacs.d/lisp/copyright.el"))
 
 #+end_src
 

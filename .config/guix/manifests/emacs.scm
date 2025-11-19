@@ -1,20 +1,12 @@
 (specifications->manifest
  '("emacs"
-   
-   "emacs-use-package"
-   
-   "emacs-guix"
-   
+   "emacs-use-package""emacs-guix"
    "guile"
-   
    "guix"
-   
    "emacs-no-littering"
    
    "emacs-which-key"
-   
    "emacs-smartparens"
-   
    "emacs-undo-tree"
    
    "emacs-golden-ratio"
@@ -71,10 +63,6 @@
    "emacs-pass"
    
    "emacs-auth-source-pass"
-   
-   ;;"emacs-dired-single"
-   
-   ;; "emacs-dired-hacks"
    
    "emacs-fd"
    
@@ -197,8 +185,6 @@
    
    "emacs-yasnippet-snippets"
    
-   "emacs-smartparens"
-   
    "emacs-rainbow-delimiters"
    
    "emacs-rainbow-mode"
@@ -245,8 +231,6 @@
    "plantuml"
    
    "emacs-plantuml-mode"
-   
-   "emacs-guix"
    
    "emacs-daemons"
    
