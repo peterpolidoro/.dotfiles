@@ -204,16 +204,6 @@
 ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
-(electric-pair-mode 1)
-(use-package smartparens
-  :config
-  (smartparens-global-mode t)
-
-  (sp-pair "'" nil :actions :rem)
-  (sp-pair "`" nil :actions :rem)
-  (setq sp-highlight-pair-overlay nil)
-  :hook (prog-mode . smartparens-mode))
-
 (set-default 'truncate-lines t)
 (setq truncate-partial-width-windows t)
 
@@ -253,13 +243,7 @@
 
 (global-set-key [remap kill-buffer] 'pjp/kill-buffer)
 
-  (load-theme 'euphoria t t)
-  (enable-theme 'euphoria)
-  (setq color-theme-is-global t)
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-  ;; (require 'modus-themes)
-  ;; (load-theme 'modus-vivendi :no-confirm)
+(load-theme 'ef-dark t)
 
   (set-face-attribute 'default nil :font "Fira Code Retina" :height pjp/default-font-size)
 
@@ -365,8 +349,6 @@
   ([remap describe-key] . helpful-key)
   ;;("C-." . helpful-at-point)
   ("C-h c". helpful-command))
-
-(solaire-global-mode +1)
 
 (use-package hydra
   :defer 1)
@@ -798,28 +780,6 @@
      ("M-s" . dirvish-setup-menu)
      ("M-e" . dirvish-emerge-menu)))
 
-;; (use-package openwith
-;;   :config
-;;   (setq openwith-associations
-;;         (list
-;;          (list (openwith-make-extension-regexp
-;;                 '("mpg" "mpeg" "mp3" "mp4"
-;;                   "avi" "wmv" "wav" "mov" "flv"
-;;                   "ogm" "ogg" "mkv"))
-;;                "mpv"
-;;                '(file))
-;;          (list (openwith-make-extension-regexp
-;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
-;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
-;;                ;; causing feh to be opened...
-;;                "feh"
-;;                '(file))
-;;          (list (openwith-make-extension-regexp
-;;                 '("pdf"))
-;;                "zathura"
-;;                '(file))))
-;;   (openwith-mode 1))
-
 (require 'rg)
 (rg-enable-default-bindings)
 
@@ -875,9 +835,7 @@
   (setq org-modules
         '(org-crypt
           org-habit
-          org-bookmark
-          org-eshell
-          org-irc))
+          org-bookmark))
 
   (setq org-refile-targets '((nil :maxlevel . 1)
                              (org-agenda-files :maxlevel . 1)))
@@ -903,15 +861,7 @@
 
   ;; NOTE: Subsequent sections are still part of this use-package block!
 
-;; Since we don't want to disable org-confirm-babel-evaluate all
-;; of the time, do it around the after-save-hook
-(defun pjp/org-babel-tangle-dont-ask ()
-  ;; Dynamic scoping to the rescue
-  (let ((org-confirm-babel-evaluate nil))
-    (org-babel-tangle)))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pjp/org-babel-tangle-dont-ask
-                                              'run-at-end 'only-in-org-mode)))
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
 (dolist (face '((org-level-1 . 1.2)
                 (org-level-2 . 1.1)
@@ -1072,16 +1022,12 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package forge
-  :disabled)
-
 (use-package magit-todos
   :defer t)
 
 (use-package project
   :bind-keymap
-  ("C-c p" . project-prefix-map)
-  ("C-c p a" . ff-find-other-file))
+  ("C-c p" . project-prefix-map))
 
 
 
@@ -1146,6 +1092,7 @@
   (c-set-offset 'template-args-cont '+))
 (add-hook 'c-mode-common-hook 'ROS-c-mode-hook)
 
+(electric-pair-mode 1)
 (use-package paredit
   :config
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)

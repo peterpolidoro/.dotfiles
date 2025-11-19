@@ -6,6 +6,7 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el :mkdirp yes :results silent
 #+PROPERTY: header-args:shell :results verbatim :exports both
 #+STARTUP: fold
+#+auto_tangle: t
 
 * Introduction
 
@@ -453,26 +454,6 @@ based on the prefix keys you entered.
 
 #+end_src
 
-*** Use smartparens
-
-#+begin_src emacs-lisp
-(electric-pair-mode 1)
-(use-package smartparens
-  :config
-  (smartparens-global-mode t)
-
-  (sp-pair "'" nil :actions :rem)
-  (sp-pair "`" nil :actions :rem)
-  (setq sp-highlight-pair-overlay nil)
-  :hook (prog-mode . smartparens-mode))
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-"emacs-smartparens"
-#+end_src
-
 *** Truncate lines
 
 #+begin_src emacs-lisp
@@ -510,7 +491,7 @@ based on the prefix keys you entered.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-"emacs-vundo
+"emacs-vundo"
 #+end_src
 
 *** Uniquify
@@ -532,9 +513,7 @@ based on the prefix keys you entered.
 #+END_SRC
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-golden-ratio"
-
 #+end_src
 
 *** Repeat Mode
@@ -576,23 +555,13 @@ file it is visiting.
 ** Theme
 
 #+begin_src emacs-lisp
-
-  (load-theme 'euphoria t t)
-  (enable-theme 'euphoria)
-  (setq color-theme-is-global t)
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-  ;; (require 'modus-themes)
-  ;; (load-theme 'modus-vivendi :no-confirm)
+(load-theme 'ef-dark t)
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-  "emacs-color-theme-modern"
-  "emacs-modus-themes"
-
+"emacs-ef-themes"
 #+end_src
 
 ** Font
@@ -656,9 +625,7 @@ Fonts are installed from the "desktop" profile.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-emojify"
-
 #+end_src
 
 *** All the icons
@@ -674,9 +641,7 @@ Fonts are installed from the "desktop" profile.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-all-the-icons"
-
 #+end_src
 
 ** Mode Line
@@ -712,11 +677,8 @@ Fonts are installed from the "desktop" profile.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-minions"
-
 "emacs-doom-modeline"
-
 #+end_src
 
 *** Basic Customization
@@ -741,9 +703,7 @@ The [[https://github.com/myrjola/diminish.el][diminish]] package hides pesky min
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-diminish"
-
 #+end_src
 
 ** Notifications
@@ -764,9 +724,7 @@ package code.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-alert"
-
 #+end_src
 
 ** Auto-Reverting Changed Files
@@ -820,12 +778,10 @@ Emacs can be prompted for the PIN of GPG private keys, we just need to set
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-pinentry"
-
 "pinentry-emacs"
-
 #+end_src
+
 ** TRAMP
 
 #+begin_src emacs-lisp
@@ -871,25 +827,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-helpful"
-
-#+end_src
-
-* Solaire
-
-#+begin_src emacs-lisp
-
-(solaire-global-mode +1)
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-"emacs-solaire-mode"
-
 #+end_src
 
 * Stateful Keymaps with Hydra
@@ -904,9 +842,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-hydra"
-
 #+end_src
 
 * Completion System
@@ -989,9 +925,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-vertico"
-
 #+end_src
 
 ** Orderless
@@ -1012,9 +946,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-orderless"
-
 #+end_src
 
 ** Savehist
@@ -1083,9 +1015,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-corfu"
-
 #+end_src
 
 ** Cape
@@ -1118,9 +1048,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-cape"
-
 #+end_src
 
 ** Consult
@@ -1251,9 +1179,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-consult"
-
 #+end_src
 
 ** Marginalia
@@ -1278,10 +1204,9 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-marginalia"
-
 #+end_src
+
 ** Embark
 
 #+begin_src emacs-lisp
@@ -1320,9 +1245,7 @@ Emacs.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-embark"
-
 #+end_src
 
 ** Completion Ignored Extensions
@@ -1362,9 +1285,7 @@ Emacs.
 #+end_src
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-casual"
-
 #+end_src
 
 * Expand Region
@@ -1386,9 +1307,7 @@ tweaking Org agenda views much less annoying.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-expand-region"
-
 #+end_src
 
 * Editing Configuration
@@ -1438,9 +1357,7 @@ tweaking Org agenda views much less annoying.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-parinfer-mode"
-
 #+end_src
 
 ** Origami.el for Folding
@@ -1455,9 +1372,7 @@ tweaking Org agenda views much less annoying.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-origami-el"
-
 #+end_src
 
 * Credential Management
@@ -1482,11 +1397,8 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-pass"
-
 "emacs-auth-source-pass"
-
 #+end_src
 
 * File Browsing
@@ -1545,61 +1457,15 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-fd"
-
 "poppler"
-
 "ffmpegthumbnailer"
-
 "mediainfo"
-
 "unzip"
-
 "tar"
-
 "zip"
-
 "emacs-all-the-icons-dired"
-
 "emacs-dirvish"
-
-#+end_src
-
-* Opening Files Externally
-
-#+begin_src emacs-lisp
-
-;; (use-package openwith
-;;   :config
-;;   (setq openwith-associations
-;;         (list
-;;          (list (openwith-make-extension-regexp
-;;                 '("mpg" "mpeg" "mp3" "mp4"
-;;                   "avi" "wmv" "wav" "mov" "flv"
-;;                   "ogm" "ogg" "mkv"))
-;;                "mpv"
-;;                '(file))
-;;          (list (openwith-make-extension-regexp
-;;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
-;;                   "png" "gif" "bmp" "tif" "jpeg")) ;; Removed jpg because Telega was
-;;                ;; causing feh to be opened...
-;;                "feh"
-;;                '(file))
-;;          (list (openwith-make-extension-regexp
-;;                 '("pdf"))
-;;                "zathura"
-;;                '(file))))
-;;   (openwith-mode 1))
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-"emacs-openwith"
-
 #+end_src
 
 * Search
@@ -1616,9 +1482,7 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-rg"
-
 #+end_src
 
 * Web Browsing
@@ -1662,17 +1526,12 @@ locally.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-edit-server"
-
 #+end_src
 
 * Dictionary
-
 #+begin_src emacs-lisp
-
 (global-set-key (kbd "C-c l") #'dictionary-lookup-definition)
-
 #+end_src
 
 * Hyperbole
@@ -1721,13 +1580,6 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
         org-cycle-separator-lines 2
         org-duration-format (quote h:mm))
 
-  (setq org-modules
-        '(org-crypt
-          org-habit
-          org-bookmark
-          org-eshell
-          org-irc))
-
   (setq org-refile-targets '((nil :maxlevel . 1)
                              (org-agenda-files :maxlevel . 1)))
 
@@ -1757,31 +1609,20 @@ Set up Org Mode with a baseline configuration.  The following sections will add 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-org"
-
 "imagemagick"
-
 "openjdk"
-
 #+end_src
 
 ** Automatically "Tangle" on Save
-
-Handy tip from [[https://leanpub.com/lit-config/read#leanpub-auto-configuring-emacs-and--org-mode-for-literate-programming][this book]] on literate programming.
-
 #+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+#+end_src
 
-;; Since we don't want to disable org-confirm-babel-evaluate all
-;; of the time, do it around the after-save-hook
-(defun pjp/org-babel-tangle-dont-ask ()
-  ;; Dynamic scoping to the rescue
-  (let ((org-confirm-babel-evaluate nil))
-    (org-babel-tangle)))
+*Guix Packages*
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'pjp/org-babel-tangle-dont-ask
-                                              'run-at-end 'only-in-org-mode)))
-
+#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
+"emacs-org-auto-tangle"
 #+end_src
 
 ** Fonts and Bullets
@@ -1865,9 +1706,7 @@ documentation page.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-org-roam"
-
 #+end_src
 
 ** End =use-package org-mode=
@@ -1964,9 +1803,7 @@ documentation page.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-ox-gfm"
-
 #+end_src
 
 ** Latex
@@ -1979,39 +1816,21 @@ documentation page.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-auctex"
-
-;"emacs-company-auctex"
-
 "emacs-cdlatex"
-
 "texlive-scheme-basic"
-
 "texlive-texinfo"
-
 "texlive-adjustbox"
-
 "texlive-booktabs"
-
 "texlive-siunitx"
-
 "texlive-geometry"
-
 "texlive-graphics"
-
 "texlive-wrapfig"
-
 "texlive-ulem"
-
 "texlive-capt-of"
-
 "texlive-caption"
-
 "texlive-advdate"
-
 "texlive-beamer"
-
 #+end_src
 
 * Development
@@ -2057,26 +1876,7 @@ https://magit.vc/manual/magit/
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-magit"
-
-#+end_src
-
-*** Forge
-
-#+begin_src emacs-lisp
-
-(use-package forge
-  :disabled)
-
-#+end_src
-
-*Guix Packages*
-
-#+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-;;"emacs-forge"
-
 #+end_src
 
 *** magit-todos
@@ -2095,9 +1895,7 @@ files contained within the repo.  More information at the [[https://github.com/a
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-magit-todos"
-
 #+end_src
 
 *** Send e-mail for Git patches
@@ -2107,32 +1905,24 @@ OK, this isn't Emacs configuration, but it's relevant to development!
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "git"
 "git:send-email"
-
 #+end_src
 
 ** Project
 #+begin_src emacs-lisp
 (use-package project
   :bind-keymap
-  ("C-c p" . project-prefix-map)
-  ("C-c p a" . ff-find-other-file))
+  ("C-c p" . project-prefix-map))
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-ggtags"
-
 "universal-ctags"
-
 "ripgrep"
-
 "the-silver-searcher"
-
 #+end_src
 
 *** Project Configurations
@@ -2216,7 +2006,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *** Emacs Lisp
 
 #+begin_src emacs-lisp
-
+(electric-pair-mode 1)
 (use-package paredit
   :config
   (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
@@ -2227,15 +2017,12 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
   (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
   (add-hook 'scheme-mode-hook #'enable-paredit-mode)
   )
-
 #+end_src
 
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-paredit"
-
 #+end_src
 
 *** Scheme
@@ -2258,11 +2045,8 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-geiser"
-
 "emacs-geiser-guile"
-
 #+end_src
 *** Markdown
 
@@ -2290,11 +2074,8 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-markdown-mode"
-
 "emacs-markdown-preview-mode"
-
 #+end_src
 
 *** HTML
@@ -2319,9 +2100,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-web-mode"
-
 #+end_src
 
 *** YAML
@@ -2336,9 +2115,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-yaml-mode"
-
 #+end_src
 
 ** Productivity
@@ -2361,11 +2138,8 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-yasnippet"
-
 "emacs-yasnippet-snippets"
-
 #+end_src
 
 *** Rainbow Delimiters
@@ -2380,9 +2154,7 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-rainbow-delimiters"
-
 #+end_src
 
 *** Rainbow Mode
@@ -2404,9 +2176,7 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-rainbow-mode"
-
 #+end_src
 
 ** Editing
@@ -2423,11 +2193,8 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-csv"
-
 "emacs-csv-mode"
-
 #+end_src
 
 ** Code Formatting
@@ -2448,9 +2215,7 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-string-inflection"
-
 #+end_src
 
 * Window Management
@@ -2490,9 +2255,7 @@ Sets the background of HTML color strings in buffers to be the color mentioned.
 **Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-popper"
-
 #+end_src
 
 ** Control Buffer Placement
@@ -2578,13 +2341,9 @@ you can use it successfully.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-vterm"
-
 "emacs-multi-vterm"
-
 "emacs-vterm-toggle"
-
 #+end_src
 
 ** eshell
@@ -2645,21 +2404,12 @@ you can use it successfully.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
-;; "emacs-eshell-z"
-
 "emacs-eshell-up"
-
 "emacs-eshell-toggle"
-
 "emacs-eshell-syntax-highlighting"
-
 "emacs-eshell-prompt-extras"
-
 "emacs-eshell-did-you-mean"
-
 "emacs-eshell-bookmark"
-
 #+end_src
 
 * Applications
@@ -2686,11 +2436,8 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-mu4e-alert"
-
 "emacs-org-mime"
-
 #+end_src
 
 ** Arduino
@@ -2712,9 +2459,7 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "emacs-pdf-tools"
-
 #+end_src
 
 ** plantuml
@@ -2757,11 +2502,8 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :scheme guile :session guile :noweb-ref packages :noweb-sep ""
-
 "plantuml"
-
 "emacs-plantuml-mode"
-
 #+end_src
 
 * System Utilities
@@ -2777,9 +2519,7 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-daemons"
-
 #+end_src
 
 ** Docker
@@ -2801,13 +2541,7 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
-;; "emacs-docker"
-
-;; "emacs-docker-tramp"
-
 "emacs-dockerfile-mode"
-
 #+end_src
 
 * Development Environment
@@ -2824,10 +2558,8 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-buffer-env"
 "emacs-inheritenv"
-
 #+end_src
 
 * System Crafters Settings
@@ -2856,12 +2588,10 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "pandoc"
 "emacs-ox-pandoc"
 "emacs-pandoc-mode"
 "emacs-org-pandoc-import"
-
 #+end_src
 
 * Gptel
@@ -2909,12 +2639,10 @@ require it here to have it loaded in the main Emacs configuration.
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-
 "emacs-gptel"
 "emacs-ob-gptel"
 "emacs-gptel-prompts"
 "emacs-gptel-quick"
-
 #+end_src
 
 * Emacs Profile
