@@ -58,10 +58,10 @@
 (defvar pjp/default-variable-font-size 120)
 
 (setq warning-minimum-level :error)
-(setq native-comp-async-report-warnings-errors 'silent)
+(when (boundp 'native-comp-async-report-warnings-errors)
+  (setq native-comp-async-report-warnings-errors 'silent))
 (setq package-native-compile t) ; native-compile packages when available
-
-(setq byte-compile-warnings '(cl-functions))
+(require 'cl-lib)               ; use cl-lib symbols explicitly
 
 (use-package guix
   :defer t)
@@ -77,17 +77,15 @@
 (use-package no-littering)
 
 ;; Keep customization settings in a temporary file
-(setq custom-file
-      (if (boundp 'server-socket-dir)
-          (expand-file-name "custom.el" server-socket-dir)
-        (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory)))
-(load custom-file t)
+(setq custom-file (expand-file-name "~/.config/emacs/custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file 'noerror))
 
 ;; I use version control instead of backup files
 (setq make-backup-files nil)
 
 ;; Add my library path to load-path
-(push "~/.dotfiles/.emacs.d/lisp" load-path)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (keymap-global-set "<escape>" #'keyboard-escape-quit)
 
@@ -349,6 +347,14 @@
   ([remap describe-key] . helpful-key)
   ;;("C-." . helpful-at-point)
   ("C-h c". helpful-command))
+
+(savehist-mode 1)
+(save-place-mode 1)
+(global-auto-revert-mode 1)
+(repeat-mode 1)
+(column-number-mode 1)
+;; Optional: auto-pairing
+(electric-pair-mode 1)
 
 (use-package hydra
   :defer 1)
@@ -832,11 +838,6 @@
         org-cycle-separator-lines 2
         org-duration-format (quote h:mm))
 
-  (setq org-modules
-        '(org-crypt
-          org-habit
-          org-bookmark))
-
   (setq org-refile-targets '((nil :maxlevel . 1)
                              (org-agenda-files :maxlevel . 1)))
 
@@ -1008,6 +1009,16 @@
         (js-mode    . js-ts-mode)
         (js-json-mode . json-ts-mode)
         (sh-mode    . bash-ts-mode)))
+
+;; Find Guix-provided grammars; never download at runtime.
+(require 'seq)  ;; for seq-filter
+(let* ((profiles (seq-filter #'identity
+                             (list (getenv "GUIX_PROFILE")
+                                   (expand-file-name "~/.guix-profile")
+                                   (getenv "GUIX_ENVIRONMENT"))))
+       (ts-dirs (mapcar (lambda (p) (expand-file-name "lib/tree-sitter" p)) profiles))
+       (existing (seq-filter #'file-directory-p ts-dirs)))
+  (setq treesit-extra-load-path (append existing treesit-extra-load-path)))
 
 ;; Better syntax highlighting & indentation with treesit
 (setq treesit-font-lock-level 4)
@@ -1308,15 +1319,14 @@
   :config
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
-;; Only fetch mail on knave
-;; (setq pjp/mail-enabled (member system-name '("knave" "precision")))
-;; (setq pjp/mu4e-inbox-query nil)
-;; (when pjp/mail-enabled
-;;   (require 'pjp-email))
 (defun pjp/email ()
+  "Load private mail config if present."
   (interactive)
-  (load "~/.emacs.d/lisp/pjp-email.el"))
-(global-set-key (kbd "C-c e") 'pjp/email)
+  (let ((mail-el (expand-file-name "lisp/pjp-email.el" user-emacs-directory)))
+    (if (file-readable-p mail-el)
+        (load mail-el)
+      (user-error "No private mail config found: %s" mail-el))))
+;; Optional key binding can live in private.el
 
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . c++-mode) auto-mode-alist))
 
