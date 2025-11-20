@@ -457,3 +457,10 @@ checkout =
 	git remote add public https://github.com/janelia-kicad/valve-switchboard-pcb.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/valve-switchboard-pcb.git
 
+[valve-switchboard-old]
+checkout =
+	git clone 'git@github.com:janelia-kicad/valve-switchboard-old.git' 'valve-switchboard-old'
+	cd valve-switchboard-old
+	git remote add public https://github.com/janelia-kicad/valve-switchboard-old.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/valve-switchboard-old.git
+
