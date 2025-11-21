@@ -441,3 +441,10 @@ checkout =
 	cd open-source-open-science-presentation
 	git remote add public https://github.com/peterpolidoro/open-source-open-science-presentation.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/open-source-open-science-presentation.git
+
+[ef-euphoria-theme]
+checkout =
+	git clone 'git@github.com:peterpolidoro/ef-euphoria-theme.git' 'ef-euphoria-theme'
+	cd ef-euphoria-theme
+	git remote add public https://github.com/peterpolidoro/ef-euphoria-theme.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/ef-euphoria-theme.git
