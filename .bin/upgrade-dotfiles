@@ -4,10 +4,7 @@ cd $(dirname $(readlink -f $0))
 cd ..
 
 # The heavy lifting is done by an Emacs script
-emacs -Q --script ./.emacs.d/tangle-dotfiles.el
-
-# Make sure any running Emacs instance gets upgraded settings
-emacsclient -e '(load-file "~/.emacs.d/per-system-settings.el")' -a "echo 'Emacs is not currently running'"
+emacs -Q --script ./tangle-dotfiles.el
 
 # Upgrade configuration symlinks
 make install

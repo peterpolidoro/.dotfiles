@@ -1,6 +1,6 @@
 #+TITLE: Email Configuration
 #+PROPERTY: header-args :mkdirp yes
-#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/lisp/pjp-email.el
+#+PROPERTY: header-args:emacs-lisp :tangle ./.config/emacs/private/pjp-email.el
 
 * Email in Emacs
 

@@ -13,7 +13,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 
 (list (channel-with-substitutes-available
        %default-guix-channel
-       "https://ci.guix.gnu.org"))
+       "https://codeberg.org/guix/guix.git"))
 
 (cons* (channel
         (name 'guix-janelia)
@@ -48,20 +48,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 "guile-hall"
 #+end_src
 
-* System Settings
-
-Load system-specific settings from =.emacs.d/per-system-settings.el= and unpack relevant values into blocks so that they can be used in configuration file blocks.  These settings are configured in [[file:Systems.org::*Per-System Settings][Systems.org]].
-
-#+NAME: system-settings
-#+begin_src emacs-lisp :session system-settings
-(load-file ".emacs.d/per-system-settings.el")
-#+end_src
-
-#+NAME: get-setting
-#+begin_src emacs-lisp :var name="nil" :session system-settings
-(pjp/system-settings-get (intern name))
-#+end_src
-
 * Fonts and Themes
 
 I use [[https://github.com/derat/xsettingsd][xsettingsd]] as a minimal settings daemon for Xorg applications.  It replaces similar daemons from desktop environments like GNOME and XFCE and enables me to use a simple configuration file like the following:
@@ -78,7 +64,6 @@ Gtk/CursorThemeName "Adwaita"
 Xft/Antialias 1
 Xft/Hinting 0
 Xft/HintStyle "hintnone"
-Xft/DPI <<dpi()>> # 1024 * DPI
 #+end_src
 
 I also have to do an extra step to make sure Emacs can find the font path from the "desktop" profile.
@@ -98,13 +83,6 @@ I also have to do an extra step to make sure Emacs can find the font path from t
     </prefer>
   </alias>
 </fontconfig>
-#+end_src
-
-*DPI*
-
-#+NAME: dpi
-#+begin_src emacs-lisp :session=system-settings :var settings=system-settings
-(* 1024 (alist-get 'desktop/dpi pjp/system-settings))
 #+end_src
 
 *Guix Packages*

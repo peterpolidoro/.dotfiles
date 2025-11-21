@@ -6,34 +6,6 @@
 
 * Systems
 
-** Base Configuration
-
-** Machines
-
-*** Per-System Settings
-
-Some settings need to be customized on a per-system basis without tweaking
-individual configuration files. Thanks to org-mode's =noweb= functionality, I
-can define a set of variables that can be tweaked for each system and applied
-across these configuration files when they get generated.
-
-I also define a function called =pjp/system-settings-get= which can retrieve
-these settings appropriately.
-
-#+begin_src emacs-lisp :tangle .emacs.d/per-system-settings.el :noweb yes
-(require 'map) ;; Needed for map-merge
-
-(setq pjp/system-settings
-      (map-merge
-       'list
-       '((desktop/dpi . 180)
-         (emacs/default-face-size . 220)
-         (emacs/variable-face-size . 245)
-         (emacs/fixed-face-size . 200)
-         )))
-       ;; <<system-settings>>))
-#+end_src
-
 ** Upgrading
 
 *.bin/upgrade-guix-system*
@@ -103,7 +75,7 @@ mr run sleep 1 && git pull 2>/dev/null
 
 #+begin_src sh :tangle .bin/sync-email :shebang #!/bin/sh
 mbsync -a
-mu init --maildir=~/Email/ --my-address=peterpolidoro@gmail.com --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
+mu init --maildir=$HOME/Email/ --my-address=peterpolidoro@gmail.com --my-address=io@mechatronicmagic.io --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
 #+end_src
 
@@ -263,23 +235,18 @@ cd $(dirname $(readlink -f $0))
 cd ..
 
 # The heavy lifting is done by an Emacs script
-emacs -Q --script ./.emacs.d/tangle-dotfiles.el
-
-# Make sure any running Emacs instance gets upgraded settings
-emacsclient -e '(load-file "~/.emacs.d/per-system-settings.el")' -a "echo 'Emacs is not currently running'"
+emacs -Q --script ./tangle-dotfiles.el
 
 # Upgrade configuration symlinks
 make install
 
 #+end_src
 
-*.emacs.d/tangle-dotfiles.el*
+*tangle-dotfiles.el*
 
-#+begin_src emacs-lisp :tangle .emacs.d/tangle-dotfiles.el
+#+begin_src emacs-lisp :tangle tangle-dotfiles.el
 
 (require 'org)
-(load-file "~/.dotfiles/.emacs.d/lisp/pjp-settings.el")
-
 ;; Don't ask when evaluating code blocks
 (setq org-confirm-babel-evaluate nil)
 
