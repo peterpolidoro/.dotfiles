@@ -2453,14 +2453,24 @@ you can use it successfully.
 ** Email
 
 #+begin_src emacs-lisp
+;; Email entry point: load private config from a stable path, then open Mu4e.
 (defun pjp/email ()
-  "Load private mail config if present."
   (interactive)
-  (let ((mail-el (expand-file-name "lisp/pjp-email.el" user-emacs-directory)))
-    (if (file-readable-p mail-el)
-        (load mail-el)
-      (user-error "No private mail config found: %s" mail-el))))
-;; Optional key binding can live in private.el
+  (let* ((home (or (getenv "HOME") (expand-file-name "~")))
+         (xdg  (or (getenv "XDG_CONFIG_HOME")
+                   (expand-file-name ".config" home)))
+         (candidates (list
+                      (expand-file-name "emacs/private/pjp-email.el" xdg)
+                      (expand-file-name ".emacs.d/lisp/pjp-email.el" home)))
+         (file (catch 'found
+                 (dolist (f candidates)
+                   (when (file-readable-p f) (throw 'found f)))
+                 nil)))
+    (unless file
+      (user-error "Missing pjp-email.el (looked in %S)" candidates))
+    (load file nil 'nomessage)
+    (if (fboundp 'mu4e) (mu4e) (user-error "Mu4e not available; install Mu via Guix"))))
+(keymap-global-set "C-c e" #'pjp/email)
 #+end_src
 
 *Guix Packages*
