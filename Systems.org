@@ -8,9 +8,9 @@
 
 ** Upgrading
 
-*.bin/upgrade-guix-system*
+*.local/bin/upgrade-guix-system*
 
-#+begin_src sh :tangle .bin/upgrade-guix-system :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/upgrade-guix-system :shebang #!/bin/sh
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
     echo "Upgrading Guix System..."
@@ -24,10 +24,10 @@ else
 fi
 #+end_src
 
-*.bin/upgrade-guix-user*
+*.local/bin/upgrade-guix-user*
 
-#+begin_src sh :tangle .bin/upgrade-guix-user :shebang #!/bin/sh
-# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+#+begin_src sh :tangle .local/bin/upgrade-guix-user :shebang #!/bin/sh
+# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
 cd $(dirname $(readlink -f $0))
 
 guix pull
@@ -35,9 +35,9 @@ guix package -u
 ./upgrade-profiles
 #+end_src
 
-*.bin/get-status*
+*.local/bin/get-status*
 
-#+begin_src sh :tangle .bin/get-status :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/get-status :shebang #!/bin/sh
 echo "mr status: ~/Repositories"
 cd ~/Repositories
 mr -m status 2>/dev/null | sed '/^$/d'
@@ -51,9 +51,9 @@ cd ~/.password-store
 git status -s
 #+end_src
 
-*.bin/pull-repositories*
+*.local/bin/pull-repositories*
 
-#+begin_src sh :tangle .bin/pull-repositories :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/pull-repositories :shebang #!/bin/sh
 sleep 1
 echo "git pull: ~/.dotfiles"
 cd ~/.dotfiles
@@ -71,17 +71,17 @@ mr run sleep 1 && git fetch --all 2>/dev/null
 mr run sleep 1 && git pull 2>/dev/null
 #+end_src
 
-*.bin/sync-email*
+*.local/bin/sync-email*
 
-#+begin_src sh :tangle .bin/sync-email :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/sync-email :shebang #!/bin/sh
 mbsync -a
 mu init --maildir=$HOME/Email/ --my-address=peterpolidoro@gmail.com --my-address=io@mechatronicmagic.io --my-address=polidorop@janelia.hhmi.org --my-address=peter@polidoro.io
 mu index
 #+end_src
 
-*.bin/setup-keybindings*
+*.local/bin/setup-keybindings*
 
-#+begin_src sh :tangle .bin/setup-keybindings :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/setup-keybindings :shebang #!/bin/sh
 # ubuntu
 sudo apt install python3-pip
 sudo pip3 install xkeysnail
@@ -92,25 +92,25 @@ sudo systemctl start xkeysnail
 # In the Firefox location bar, go to about:config, search for ui.key.menuAccessKeyFocuses, and set the Value to false.
 #+end_src
 
-*.bin/upgrade-guix-repository*
+*.local/bin/upgrade-guix-repository*
 
-#+begin_src sh :tangle .bin/upgrade-guix-repository :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/upgrade-guix-repository :shebang #!/bin/sh
 cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull && guix shell -D guix -C -- sh -c "./bootstrap && ./configure --localstatedir=/var && make -j$(nproc)"
 #+end_src
 
-*.bin/upgrade-guix*
+*.local/bin/upgrade-guix*
 
-#+begin_src sh :tangle .bin/upgrade-guix :shebang #!/bin/sh
-# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+#+begin_src sh :tangle .local/bin/upgrade-guix :shebang #!/bin/sh
+# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
 cd $(dirname $(readlink -f $0))
 ./upgrade-guix-system
 ./upgrade-guix-user
 #+end_src
 
-*.bin/upgrade-all*
+*.local/bin/upgrade-all*
 
-#+begin_src sh :tangle .bin/upgrade-all :shebang #!/bin/sh
-# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+#+begin_src sh :tangle .local/bin/upgrade-all :shebang #!/bin/sh
+# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
 cd $(dirname $(readlink -f $0))
 ./upgrade-guix-system
 ./upgrade-guix-user
@@ -119,9 +119,9 @@ cd $(dirname $(readlink -f $0))
 ./upgrade-guix-repository
 #+end_src
 
-*.bin/mount-janelia-misc*
+*.local/bin/mount-janelia-misc*
 
-#+begin_src sh :tangle .bin/mount-janelia-misc :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/mount-janelia-misc :shebang #!/bin/sh
 sudo mkdir -p /janelia/misc && sudo mount -o rw,hard,bg,nolock,nfsvers=4.1,sec=krb5 http://prfs.hhmi.org:/misc /janelia/misc || echo "Failed to mount /janelia/misc";
 #+end_src
 
@@ -143,9 +143,9 @@ activate-profiles desktop emacs music
 
 #+end_src
 
-*.bin/activate-profiles:*
+*.local/bin/activate-profiles:*
 
-#+begin_src sh :tangle .bin/activate-profiles :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/activate-profiles :shebang #!/bin/sh
 
 # NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
 
@@ -195,9 +195,9 @@ upgrade-profiles emacs
 
 #+end_src
 
-*.bin/upgrade-profiles:*
+*.local/bin/upgrade-profiles:*
 
-#+begin_src sh :tangle .bin/upgrade-profiles :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/upgrade-profiles :shebang #!/bin/sh
 
 # NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
 
@@ -226,11 +226,11 @@ done
 
 Upgrading my dotfiles requires running a script in Emacs to loop over all of my literate configuration =.org= files and run =org-babel-tangle-file= to make sure all of my configuration files are up to date.
 
-*.bin/upgrade-dotfiles*
+*.local/bin/upgrade-dotfiles*
 
-#+begin_src sh :tangle .bin/upgrade-dotfiles :shebang #!/bin/sh
+#+begin_src sh :tangle .local/bin/upgrade-dotfiles :shebang #!/bin/sh
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
 cd $(dirname $(readlink -f $0))
 cd ..
 

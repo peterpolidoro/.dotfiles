@@ -3,7 +3,7 @@
 #+EMAIL: peter@polidoro.io
 #+LANGUAGE: en
 #+OPTIONS: toc:2 num:nil ^:nil
-#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el :mkdirp yes :results silent
+#+PROPERTY: header-args:emacs-lisp :tangle ./.config/emacs/init.el :mkdirp yes :results silent
 #+PROPERTY: header-args:shell :results verbatim :exports both
 #+STARTUP: fold
 #+auto_tangle: t
@@ -13,16 +13,16 @@
 This is a reproducible, literate configuration for **GNU Emacs 30.2** managed by
 **GNU Guix**. It tangles four files:
 
-- =.emacs.d/early-init.el=      (pre-GUI/startup tuning)
-- =.emacs.d/init.el=            (main configuration)
+- =.config/emacs/early-init.el=      (pre-GUI/startup tuning)
+- =.config/emacs/init.el=            (main configuration)
 - =.config/guix/manifests/emacs.scm=  (Guix manifest containing Emacs packages + tools + Tree‑sitter grammars)
 - =.config/emacs/custom.el=     (Custom variables written by Customize; empty stub here)
 
 To tangle everything: =C-c C-v t= (or =M-x org-babel-tangle=) from this buffer.
 
-* early-init.el  (tangled to =.emacs.d/early-init.el=)
+* early-init.el  (tangled to =.config/emacs/early-init.el=)
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ./.emacs.d/early-init.el :mkdirp yes :results silent
+:header-args:emacs-lisp: :tangle ./.config/emacs/early-init.el :mkdirp yes :results silent
 :END:
 
 #+begin_src emacs-lisp
@@ -157,12 +157,12 @@ declarative setup, but without network installs.
 "guix"
 #+end_src
 
-* Keep .emacs.d Clean
+* Keep .config/emacs Clean
 I don't want a bunch of transient files showing up as untracked in the Git
 repo so I move them all to another location.
 
 #+begin_src emacs-lisp
-;; Keep transient cruft out of ~/.emacs.d/
+;; Keep transient cruft out of ~/.config/emacs/
 (setq user-emacs-directory "~/.cache/emacs/"
       backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
       url-history-file (expand-file-name "url/history" user-emacs-directory)
@@ -2161,9 +2161,9 @@ the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-
 #+begin_src emacs-lisp
 
 (add-to-list 'yas-snippet-dirs
-             "~/.emacs.d/snippets/guix")
+             "~/.config/emacs/snippets/guix")
 (add-to-list 'yas-snippet-dirs
-             "~/.emacs.d/snippets")
+             "~/.config/emacs/snippets")
 (yas-global-mode 1)
 
 #+end_src
@@ -2461,7 +2461,7 @@ you can use it successfully.
                    (expand-file-name ".config" home)))
          (candidates (list
                       (expand-file-name "emacs/private/pjp-email.el" xdg)
-                      (expand-file-name ".emacs.d/lisp/pjp-email.el" home)))
+                      (expand-file-name ".config/emacs/lisp/pjp-email.el" home)))
          (file (catch 'found
                  (dolist (f candidates)
                    (when (file-readable-p f) (throw 'found f)))

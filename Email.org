@@ -291,7 +291,7 @@ Provide the =pjp-email= package so that it can be =require='d:
 
 Configuration docs: https://manpages.debian.org/unstable/isync/mbsync.1.en.html
 
-#+begin_src conf :tangle .mbsyncrc
+#+begin_src conf :tangle .config/isyncrc
 
 IMAPAccount gmail
 Host imap.gmail.com
