@@ -67,23 +67,6 @@
   :defer t)
 (add-hook 'scheme-mode-hook 'guix-devel-mode)
 
-;; Keep transient cruft out of ~/.config/emacs/
-(setq user-emacs-directory "~/.cache/emacs/"
-      backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
-      url-history-file (expand-file-name "url/history" user-emacs-directory)
-      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-emacs-directory))
-
-;; Use no-littering to automatically set common paths to the new user-emacs-directory
-(use-package no-littering)
-
-;; Keep customization settings in a temporary file
-(setq custom-file (expand-file-name "~/.config/emacs/custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file 'noerror))
-
-;; I use version control instead of backup files
-(setq make-backup-files nil)
-
 ;; Add my library path to load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
