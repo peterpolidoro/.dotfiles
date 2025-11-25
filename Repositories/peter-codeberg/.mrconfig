@@ -1,0 +1,5 @@
+[spritely-papers]
+checkout =
+	git clone 'ssh://git@codeberg.org/peterpolidoro/spritely-papers.git' 'spritely-papers'
+	cd spritely-papers
+	git remote add source ssh://git@codeberg.org/spritely/papers.git
