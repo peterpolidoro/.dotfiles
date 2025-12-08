@@ -4,6 +4,6 @@ checkout =
 	cd spritely-papers
 	git remote add source ssh://git@codeberg.org/spritely/papers.git
 
-[emacs-config]
+[emacs-config-peter]
 checkout =
-	git clone 'ssh://git@codeberg.org/peterpolidoro/emacs-config.git' 'emacs-config'
+	git clone 'ssh://git@codeberg.org/peterpolidoro/emacs-config-peter.git' 'emacs-config-peter'
