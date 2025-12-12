@@ -4,6 +4,12 @@ checkout =
 	cd codex
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/codex.git
 
+[emacs-config]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/emacs-config.git' 'emacs-config'
+	cd emacs-config
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/emacs-config.git
+
 [indras-context]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/indras-context.git' 'indras-context'
