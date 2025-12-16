@@ -19,10 +19,10 @@ chain = true
 [modular-devices]
 chain = true
 
-[peter-github]
+[github]
 chain = true
 
-[peter-codeberg]
+[codeberg]
 chain = true
 
 [python]
