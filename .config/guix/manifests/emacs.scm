@@ -1,0 +1,9 @@
+(specifications->manifest
+ '(
+   "emacs-config-minimal"
+   "emacs-config-base"
+   "emacs-config-docs"
+   "emacs-config-peter-public"
+   "emacs-config-peter-personal"
+   "emacs-config-peter-email"
+   ))

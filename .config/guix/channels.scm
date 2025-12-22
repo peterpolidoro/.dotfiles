@@ -1,9 +1,3 @@
-(use-modules (guix ci))
-
-(list (channel-with-substitutes-available
-       %default-guix-channel
-       "https://ci.guix.gnu.org"))
-
 ;; This repository contains setup and management instructions for a Guix North American Build Farm.
 
 ;; Using Substitutes from cuirass.genenetwork.org
@@ -42,3 +36,19 @@
 ;; Details the initial setup of a genenetwork.org sponsored, single node build farm.
 ;; Administration of cuirass.genenetwork.org
 ;; details maintenance and administration of cuirass.genenetwork.org
+
+(use-modules (guix ci))
+
+(list (channel-with-substitutes-available
+       %default-guix-channel
+       "https://ci.guix.gnu.org"))
+
+(cons* (channel
+         (name 'emacs-config)
+         (url "https://codeberg.org/orb-weaver/emacs-config.git")
+         (branch "main"))
+       (channel
+         (name 'emacs-config-peter)
+         (url "https://codeberg.org/peterpolidoro/emacs-config-peter.git")
+         (branch "main"))
+       %default-channels)
