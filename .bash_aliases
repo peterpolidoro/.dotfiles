@@ -24,4 +24,5 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias qm='~/qp/qm-5.2.3/bin/qm.sh'
 alias qspy='~/qp/qtools-6.9.3/bin/qspy'
-
+alias e=emacs-config-peter-personal
+alias ee=emacs-config-peter-email
