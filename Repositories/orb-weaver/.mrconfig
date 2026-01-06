@@ -101,3 +101,9 @@ checkout =
 	cd peter-orb-vault
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/peter-orb-vault.git
 
+[qweave-python]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/qweave-python.git' 'qweave-python'
+	cd qweave-python
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qweave-python.git
+
