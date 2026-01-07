@@ -107,3 +107,9 @@ checkout =
 	cd qweave-python
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qweave-python.git
 
+[python-copier-template]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/python-copier-template.git' 'python-copier-template'
+	cd python-copier-template
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/python-copier-template.git
+
