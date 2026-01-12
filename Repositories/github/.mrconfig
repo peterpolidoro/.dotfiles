@@ -448,3 +448,10 @@ checkout =
 	cd ef-euphoria-theme
 	git remote add public https://github.com/peterpolidoro/ef-euphoria-theme.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/ef-euphoria-theme.git
+
+[mouse-joystick-poster]
+checkout =
+	git clone 'git@github.com:peterpolidoro/mouse-joystick-poster.git' 'mouse-joystick-poster'
+	cd mouse-joystick-poster
+	git remote add public https://github.com/peterpolidoro/mouse-joystick-poster.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/mouse-joystick-poster.git
