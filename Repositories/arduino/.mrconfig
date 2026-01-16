@@ -839,6 +839,7 @@ checkout =
 	cd ArenaController
 	git remote add public https://github.com/janelia-arduino/ArenaController.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/ArenaController.git
+	git remote add frank git@github.com:floesche/G4.1-ArenaController.git
 
 [ILI9341_t3n]
 checkout =
