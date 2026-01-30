@@ -455,3 +455,10 @@ checkout =
 	cd mouse-joystick-poster
 	git remote add public https://github.com/peterpolidoro/mouse-joystick-poster.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/mouse-joystick-poster.git
+
+[science-mechatronics-poster]
+checkout =
+	git clone 'git@github.com:peterpolidoro/science-mechatronics-poster.git' 'science-mechatronics-poster'
+	cd science-mechatronics-poster
+	git remote add public https://github.com/peterpolidoro/science-mechatronics-poster.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/science-mechatronics-poster.git
