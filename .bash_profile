@@ -9,10 +9,17 @@
 #   - Keep session-wide environment variables in ~/.profile (POSIX sh).
 #   - Keep interactive-only settings (prompt, aliases, completion, etc.) in
 #     ~/.bashrc.
+#
+# Note about Guix:
+#   - When you're inside `guix shell`, Guix sets up an ephemeral environment
+#     and sets $GUIX_ENVIRONMENT. In that case we avoid sourcing ~/.profile
+#     from here because ~/.profile sources your “permanent” Guix profiles and
+#     can accidentally reorder PATH, de-prioritizing the ephemeral shell.
 # ----------------------------------------------------------------------
 
-# Load the POSIX login environment (works for both sh and bash).
-if [ -r "$HOME/.profile" ]; then
+# Load the POSIX login environment (works for both sh and bash), unless
+# we're in a Guix ephemeral environment.
+if [ -z "${GUIX_ENVIRONMENT:-}" ] && [ -r "$HOME/.profile" ]; then
   . "$HOME/.profile"
 fi
 

@@ -8,8 +8,7 @@
 #   - ~/.bash_profile / ~/.profile are NOT read
 #
 # This file is based on Debian's default ~/.bashrc, with your custom Guix
-# and direnv bits preserved, and an added PATH section so ~/.local/bin is
-# available in QTerminal.
+# and direnv bits preserved.
 # ----------------------------------------------------------------------
 
 # If not running interactively, don't do anything
@@ -19,45 +18,57 @@ case $- in
 esac
 
 # ----------------------------------------------------------------------
-# PATH: make sure personal/Guix bins are reachable in interactive terminals
+# Import session/login environment for non-login interactive shells
 # ----------------------------------------------------------------------
-# We add common user bin directories here because non-login shells won't
-# read ~/.profile. We also avoid disturbing PATH precedence inside `guix shell`:
-#   - Outside a Guix environment: prepend (user tools first).
-#   - Inside a Guix environment: append (environment keeps priority).
-path_add_front() {
-  [[ -d "$1" ]] || return 0
-  case ":$PATH:" in
-    *":$1:"*) ;;
-    *) PATH="$1:$PATH" ;;
-  esac
-}
-path_add_back() {
-  [[ -d "$1" ]] || return 0
-  case ":$PATH:" in
-    *":$1:"*) ;;
-    *) PATH="$PATH:$1" ;;
-  esac
-}
+# LXQt/QTerminal commonly starts bash as an interactive *non-login* shell.
+# That means ~/.profile is not read automatically, so Guix exports like
+# GUIX_LOCPATH (and other profile-derived search paths) won't be present.
+#
+# We source ~/.profile here when:
+#   - this is NOT a login shell, and
+#   - we're NOT inside an ephemeral `guix shell` (GUIX_ENVIRONMENT is empty)
+#
+# We also only do this once per process tree to avoid PATH growth when you
+# run nested shells (e.g. typing `bash` inside an existing terminal).
+if ! shopt -q login_shell && [[ -z "${GUIX_ENVIRONMENT:-}" ]]; then
+  if [[ -z "${__GUIX_PROFILE_INITIALIZED:-}" ]]; then
+    # Heuristic: if the session already loaded ~/.profile, GUIX_LOCPATH and
+    # the Guix bins may already be present.
+    if [[ -z "${GUIX_LOCPATH:-}" || ":$PATH:" != *":$HOME/.config/guix/current/bin:"* ]]; then
+      __GUIX_PROFILE_INITIALIZED=1
+      export __GUIX_PROFILE_INITIALIZED
+      [ -r "$HOME/.profile" ] && . "$HOME/.profile"
+    fi
+  fi
+fi
 
-if [[ -n "$GUIX_ENVIRONMENT" ]]; then
-  # In `guix shell`, keep the environment's bins first.
+# ----------------------------------------------------------------------
+# PATH fallback inside `guix shell`
+# ----------------------------------------------------------------------
+# When inside `guix shell`, we avoid sourcing ~/.profile above (it would
+# reorder PATH and can de-prioritize the ephemeral environment).
+#
+# We *do* still want convenient access to your personal scripts. Add them at
+# the end so the ephemeral environment stays first.
+if [[ -n "${GUIX_ENVIRONMENT:-}" ]]; then
+  path_add_back() {
+    [[ -d "$1" ]] || return 0
+    case ":$PATH:" in
+      *":$1:"*) ;;
+      *) PATH="$PATH:$1" ;;
+    esac
+  }
+
   path_add_back "$HOME/bin"
   path_add_back "$HOME/.local/bin"
   path_add_back "$HOME/.bin"
-  path_add_back "$HOME/.guix-profile/bin"
+  # Keep your `guix` command reachable even if not included in the shell.
   path_add_back "$HOME/.config/guix/current/bin"
-else
-  # Normal interactive shell: prefer user/Guix tools first.
-  path_add_front "$HOME/.config/guix/current/bin"
-  path_add_front "$HOME/.guix-profile/bin"
-  path_add_front "$HOME/bin"
-  path_add_front "$HOME/.local/bin"
-  path_add_front "$HOME/.bin"
-fi
+  path_add_back "$HOME/.guix-profile/bin"
 
-export PATH
-unset -f path_add_front path_add_back
+  export PATH
+  unset -f path_add_back
+fi
 
 # ----------------------------------------------------------------------
 # History behavior

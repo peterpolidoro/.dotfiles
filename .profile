@@ -15,12 +15,33 @@
 # ----------------------------------------------------------------------
 # Guix: locale archive path (GUIX_LOCPATH)
 # ----------------------------------------------------------------------
-# Prefer a Guix-provided locale archive (from your "desktop" profile),
-# if it exists. This helps applications find locales when using Guix
-# packages on a foreign distro.
-if [ -d "$HOME/.guix-extra-profiles/desktop/desktop/lib/locale" ]; then
+# Many Guix-built programs expect a locale archive produced by Guix.
+# You previously hard-coded this to the “desktop” extra profile.
+#
+# We now choose the first existing locale directory among a few candidates.
+# If none exist, we still set GUIX_LOCPATH to your historical default so that
+# it shows up in `env` (and reminds you which profile should provide locales).
+_guix_locale_candidates=
+for _d in \
+  "$HOME/.guix-extra-profiles/desktop/desktop/lib/locale" \
+  "$HOME/.guix-profile/lib/locale" \
+  "$HOME/.config/guix/current/lib/locale"
+
+do
+  if [ -d "$_d" ]; then
+    _guix_locale_candidates="$_d"
+    break
+  fi
+done
+
+if [ -n "$_guix_locale_candidates" ]; then
+  export GUIX_LOCPATH="$_guix_locale_candidates"
+else
+  # Fallback to your old value (even if it doesn't exist yet).
   export GUIX_LOCPATH="$HOME/.guix-extra-profiles/desktop/desktop/lib/locale"
 fi
+
+unset _d _guix_locale_candidates
 
 # ----------------------------------------------------------------------
 # Guix: load profiles
@@ -29,7 +50,7 @@ fi
 # 2) Default profile: ~/.guix-profile
 # 3) Current profile (from `guix pull`): ~/.config/guix/current  (source LAST)
 #
-# Sourcing the "current" profile last ensures the newest Guix has priority.
+# Sourcing the “current” profile last ensures the newest Guix has priority.
 GUIX_EXTRA_PROFILES="$HOME/.guix-extra-profiles"
 if [ -d "$GUIX_EXTRA_PROFILES" ]; then
   for i in "$GUIX_EXTRA_PROFILES"/*; do
@@ -56,6 +77,10 @@ if [ -r "$GUIX_PROFILE/etc/profile" ]; then
   . "$GUIX_PROFILE/etc/profile"
 fi
 
+# Note: we intentionally leave GUIX_PROFILE set (not exported) for debugging.
+# If you *want* it exported for child processes, uncomment:
+# export GUIX_PROFILE
+
 # ----------------------------------------------------------------------
 # SSH: use GnuPG's agent as an SSH agent (if available)
 # ----------------------------------------------------------------------
@@ -72,7 +97,7 @@ fi
 # ----------------------------------------------------------------------
 # Build / tooling defaults
 # ----------------------------------------------------------------------
-# Make `ls` collate dotfiles first (useful for Emacs/dired)
+# Make `ls` collates dotfiles first (useful for Emacs/dired)
 export LC_COLLATE="C"
 
 # Many build scripts expect CC to contain the compiler command
@@ -100,9 +125,10 @@ unset cert_dir cert_bundle
 # ----------------------------------------------------------------------
 # PATH: personal executables
 # ----------------------------------------------------------------------
-# These are *session-wide* PATH tweaks. Your terminal emulator may start
-# a non-login shell (which reads ~/.bashrc but not ~/.profile), so we also
-# add these in ~/.bashrc (see that file).
+# These are *session-wide* PATH tweaks.
+#
+# IMPORTANT: QTerminal often launches non-login shells, so ~/.profile might
+# not be sourced automatically. ~/.bashrc handles that case.
 path_prepend() {
   [ -d "$1" ] || return 0
   case ":$PATH:" in
@@ -114,9 +140,11 @@ path_prepend() {
 path_prepend "$HOME/bin"
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.bin"
-unset path_prepend
 
 export PATH
+
+# Clean up helper
+unset -f path_prepend 2>/dev/null || unset path_prepend
 
 # ----------------------------------------------------------------------
 # Flatpak: ensure exported apps are discoverable
