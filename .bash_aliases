@@ -44,6 +44,7 @@ alias mrstatus='mr -m run git status -s'
 # ----------------------------------------------------------------------
 alias qm='~/qp/qm-5.2.3/bin/qm.sh'
 alias qspy='~/qp/qtools-6.9.3/bin/qspy'
+alias blender='~/bin/blender-5.0.1-linux-x64/blender'
 
 # ----------------------------------------------------------------------
 # Emacs config shortcuts
