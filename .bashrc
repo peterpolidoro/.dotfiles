@@ -188,3 +188,5 @@ if [ -x "$(command -v direnv)" ]; then
   export -f show_virtual_env
   PS1='$(show_virtual_env)'$PS1
 fi
+
+export PATH="/home/peter/.pixi/bin:$PATH"
