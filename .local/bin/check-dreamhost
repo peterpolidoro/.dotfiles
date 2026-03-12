@@ -1,0 +1,25 @@
+ROOT=~/Dreamhost
+BARE="$ROOT/git/public.git"
+LIVE="$ROOT/public/peterpolidoro"
+
+git --git-dir="$BARE" rev-parse --is-bare-repository
+BRANCH=$(git --git-dir="$BARE" symbolic-ref --short HEAD)
+echo "Default branch: $BRANCH"
+
+echo
+echo "Recent history from bare repo:"
+git --git-dir="$BARE" log --oneline --decorate --graph --all | head -50
+
+echo
+if [ -e "$LIVE/.git" ]; then
+  echo "Live tree has a .git entry:"
+  cat "$LIVE/.git"
+else
+  echo "Live tree has no .git entry"
+fi
+
+echo
+echo "Does the live tree match the bare repo checkout?"
+git --git-dir="$BARE" --work-tree="$LIVE" status --untracked-files=all
+git --git-dir="$BARE" --work-tree="$LIVE" diff --stat
+git --git-dir="$BARE" --work-tree="$LIVE" ls-files --others --exclude-standard
