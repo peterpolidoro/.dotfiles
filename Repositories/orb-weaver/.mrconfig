@@ -113,9 +113,9 @@ checkout =
 	cd python-copier-template
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/python-copier-template.git
 
-[codex-starter-kit]
+[guix-agent-tools]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/codex-starter-kit.git' 'codex-starter-kit'
-	cd codex-starter-kit
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/codex-starter-kit.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/guix-agent-tools.git' 'guix-agent-tools'
+	cd guix-agent-tools
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/guix-agent-tools.git
 
