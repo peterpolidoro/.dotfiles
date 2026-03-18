@@ -18,7 +18,10 @@
    "cifs-utils"
    "exa"
    "bat"
-   "guile-hall";; Settin gs Manager
+   "guile-hall"
+   "guix-agent-tools"
+   
+   ;; Settings Manager
    "xsettingsd"
    
    ;; GTK Themes

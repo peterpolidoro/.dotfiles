@@ -79,6 +79,7 @@ This file contains configuration for my overall desktop environment.  My workflo
 "exa"
 "bat"
 "guile-hall"
+"guix-agent-tools"
 #+end_src
 
 * Fonts and Themes
@@ -121,7 +122,9 @@ I also have to do an extra step to make sure Emacs can find the font path from t
 *Guix Packages*
 
 #+begin_src scheme :noweb-ref packages :noweb-sep ""
-;; Settin gs Manager
+
+
+;; Settings Manager
 "xsettingsd"
 
 ;; GTK Themes
