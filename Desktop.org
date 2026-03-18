@@ -62,7 +62,11 @@ This file contains configuration for my overall desktop environment.  My workflo
          (name 'emacs-config-peter)
          (url "https://codeberg.org/peterpolidoro/emacs-config-peter.git")
          (branch "main"))
-       %default-channels)
+       (channel
+         (name 'guix-agent-tools)
+         (url "https://codeberg.org/orb-weaver/guix-agent-tools.git")
+         (branch "main")) 
+      %default-channels)
 #+end_src
 
 * System Packages

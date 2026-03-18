@@ -51,4 +51,8 @@
          (name 'emacs-config-peter)
          (url "https://codeberg.org/peterpolidoro/emacs-config-peter.git")
          (branch "main"))
-       %default-channels)
+       (channel
+         (name 'guix-agent-tools)
+         (url "https://codeberg.org/orb-weaver/guix-agent-tools.git")
+         (branch "main")) 
+      %default-channels)
