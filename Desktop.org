@@ -65,7 +65,7 @@ This file contains configuration for my overall desktop environment.  My workflo
        (channel
          (name 'guix-agent-tools)
          (url "https://codeberg.org/orb-weaver/guix-agent-tools.git")
-         (branch "main")) 
+         (branch "main"))
       %default-channels)
 #+end_src
 

@@ -54,5 +54,5 @@
        (channel
          (name 'guix-agent-tools)
          (url "https://codeberg.org/orb-weaver/guix-agent-tools.git")
-         (branch "main")) 
+         (branch "main"))
       %default-channels)
