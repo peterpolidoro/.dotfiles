@@ -11,3 +11,10 @@ checkout =
 [addresses]
 checkout =
 	git clone 'ssh://git@codeberg.org/peterpolidoro/addresses.git' 'addresses'
+
+[guix-artwork]
+checkout =
+	git clone 'ssh://git@codeberg.org/peterpolidoro/guix-artwork.git' 'guix-artwork'
+	cd guix-artwork
+	git remote add source ssh://git@codeberg.org/guix/artwork.git
+
