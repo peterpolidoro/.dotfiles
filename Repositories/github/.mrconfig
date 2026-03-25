@@ -469,3 +469,10 @@ checkout =
 	cd documentation-presentation
 	git remote add public https://github.com/peterpolidoro/documentation-presentation.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/documentation-presentation.git
+
+[tektronix-interface]
+checkout =
+	git clone 'git@github.com:peterpolidoro/tektronix-interface.git' 'tektronix-interface'
+	cd tektronix-interface
+	git remote add public https://github.com/peterpolidoro/tektronix-interface.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/tektronix-interface.git
