@@ -119,3 +119,8 @@ checkout =
 	cd guix-agent-tools
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/guix-agent-tools.git
 
+[logic-analyzer-interface]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git' 'logic-analyzer-interface'
+	cd logic-analyzer-interface
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git
