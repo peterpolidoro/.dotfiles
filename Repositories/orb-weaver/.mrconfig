@@ -124,3 +124,9 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git' 'logic-analyzer-interface'
 	cd logic-analyzer-interface
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git
+
+[logic-analyzer-nonfree]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/logic-analyzer-nonfree.git' 'logic-analyzer-nonfree'
+	cd logic-analyzer-nonfree
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-nonfree.git
