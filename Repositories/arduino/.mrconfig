@@ -939,3 +939,10 @@ checkout =
 	git remote add public https://github.com/janelia-arduino/ArduinoSort.git
 	git remote add source git@github.com:emilv/ArduinoSort.git
 
+[LED-Display_G4.1_ArenaController_Slim]
+checkout =
+	git clone 'git@github.com:janelia-arduino/LED-Display_G4.1_ArenaController_Slim.git' 'LED-Display_G4.1_ArenaController_Slim'
+	cd LED-Display_G4.1_ArenaController_Slim
+	git remote add public https://github.com/janelia-arduino/LED-Display_G4.1_ArenaController_Slim.git
+	git remote add source git@github.com:floesche/LED-Display_G4.1_ArenaController_Slim.git
+
