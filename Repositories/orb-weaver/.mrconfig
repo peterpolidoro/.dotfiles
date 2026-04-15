@@ -131,8 +131,8 @@ checkout =
 	cd logic-analyzer-nonfree
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-nonfree.git
 
-[orb-weaver-kicad-libs]
+[kicad-libs]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-kicad-libs.git' 'orb-weaver-kicad-libs'
-	cd orb-weaver-kicad-libs
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-kicad-libs.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-libs.git' 'kicad-libs'
+	cd kicad-libs
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-libs.git
