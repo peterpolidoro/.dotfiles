@@ -136,3 +136,15 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-libs.git' 'kicad-libs'
 	cd kicad-libs
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-libs.git
+
+[kicad-playground]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-playground.git' 'kicad-playground'
+	cd kicad-playground
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-playground.git
+
+[code-to-copper]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/code-to-copper.git' 'code-to-copper'
+	cd code-to-copper
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/code-to-copper.git
