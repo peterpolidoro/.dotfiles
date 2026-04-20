@@ -16,7 +16,7 @@
    "flatpak"
    "nfs-utils"
    "cifs-utils"
-   "exa"
+   "eza"
    "bat"
    "guile-hall"
    "guix-agent-tools"
