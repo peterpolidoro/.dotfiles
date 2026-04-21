@@ -20,9 +20,29 @@ else
     echo "Upgrading Guix on a Debian-based foreign distro..."
     sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
     sudo -i guix pull
-    sudo systemctl restart guix-daemon.service
+    echo
+    echo "Root's Guix was updated."
+    echo "Skipping automatic guix-daemon restart in the current session."
+    echo "Restart guix-daemon from a clean TTY or after logging out to avoid"
+    echo "making /gnu/store busy with store-backed session processes."
 fi
 #+end_src
+
+On a Debian-based foreign distro, do not restart =guix-daemon= automatically
+from a live graphical session if the session is using Guix-backed binaries.
+Those processes can keep =/gnu/store= busy, which prevents =gnu-store.mount=
+from unmounting cleanly during daemon restart and leaves the daemon with a
+read-only store view.
+
+If you need to restart =guix-daemon= after updating root's Guix, do it from a
+clean TTY or after logging out of the desktop session:
+
+#+begin_src sh
+sudo systemctl restart guix-daemon
+sudo nsenter -t "$(pidof guix-daemon)" -m findmnt /gnu/store
+#+end_src
+
+The daemon's view of =/gnu/store= should be =rw=.
 
 *.local/bin/upgrade-guix-user*
 

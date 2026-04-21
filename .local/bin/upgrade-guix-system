@@ -8,5 +8,9 @@ else
     echo "Upgrading Guix on a Debian-based foreign distro..."
     sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
     sudo -i guix pull
-    sudo systemctl restart guix-daemon.service
+    echo
+    echo "Root's Guix was updated."
+    echo "Skipping automatic guix-daemon restart in the current session."
+    echo "Restart guix-daemon from a clean TTY or after logging out to avoid"
+    echo "making /gnu/store busy with store-backed session processes."
 fi
