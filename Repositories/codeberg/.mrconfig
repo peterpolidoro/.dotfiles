@@ -18,3 +18,11 @@ checkout =
 	cd guix-artwork
 	git remote add source ssh://git@codeberg.org/guix/artwork.git
 
+[home-config]
+checkout =
+	git clone 'ssh://git@codeberg.org/peterpolidoro/home-config.git' 'home-config'
+
+[repo-catalog]
+checkout =
+	git clone 'ssh://git@codeberg.org/peterpolidoro/repo-catalog.git' 'repo-catalog'
+
