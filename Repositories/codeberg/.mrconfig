@@ -26,3 +26,7 @@ checkout =
 checkout =
 	git clone 'ssh://git@codeberg.org/peterpolidoro/repo-catalog.git' 'repo-catalog'
 
+[restore-secrets]
+checkout =
+	git clone 'ssh://git@codeberg.org/peterpolidoro/restore-secrets.git' 'restore-secrets'
+

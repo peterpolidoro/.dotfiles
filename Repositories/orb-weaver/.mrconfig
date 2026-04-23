@@ -148,3 +148,21 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/code-to-copper.git' 'code-to-copper'
 	cd code-to-copper
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/code-to-copper.git
+
+[ctc-spec]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-spec.git' 'ctc-spec'
+	cd ctc-spec
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-spec.git
+
+[ctc-adapter-m2k]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-adapter-m2k.git' 'ctc-adapter-m2k'
+	cd ctc-adapter-m2k
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-adapter-m2k.git
+
+[ctc-benchctl]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-benchctl.git' 'ctc-benchctl'
+	cd ctc-benchctl
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-benchctl.git
