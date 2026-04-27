@@ -473,3 +473,12 @@ checkout =
 	git remote add floesche git@github.com:floesche/LED-Display_G6_Hardware_Panel.git
 	git remote add iorodeo git@github.com:iorodeo/LED-Display_G6_Hardware_Panel.git
 
+[LED-Display_G6_Hardware_Arena]
+checkout =
+	git clone 'git@github.com:janelia-kicad/LED-Display_G6_Hardware_Arena.git' 'LED-Display_G6_Hardware_Arena'
+	cd LED-Display_G6_Hardware_Arena
+	git remote add public https://github.com/janelia-kicad/LED-Display_G6_Hardware_Arena.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/LED-Display_G6_Hardware_Arena.git
+	git remote add floesche git@github.com:floesche/LED-Display_G6_Hardware_Arena.git
+	git remote add iorodeo git@github.com:iorodeo/LED-Display_G6_Hardware_Arena.git
+
