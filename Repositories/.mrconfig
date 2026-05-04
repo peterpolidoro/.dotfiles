@@ -54,3 +54,6 @@ chain = true
 
 [orb-weaver]
 chain = true
+
+[symbiosystem]
+chain = true

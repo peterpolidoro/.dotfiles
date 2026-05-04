@@ -1,0 +1,6 @@
+[symbiosystem]
+checkout =
+	git clone 'ssh://git@github.org/symbiosystem/symbiosystem.git' 'symbiosystem'
+	cd symbiosystem
+	git remote add github ssh://git@github.org/symbiosystem/symbiosystem.git
+	git remote add codeberg ssh://git@codeberg.org/symbiosystem/symbiosystem.git
