@@ -4,3 +4,10 @@ checkout =
 	cd symbiosystem
 	git remote add github ssh://git@github.com/symbiosystem/symbiosystem.git
 	git remote add codeberg ssh://git@codeberg.org/symbiosystem/symbiosystem.git
+
+[hex-maze]
+checkout =
+	git clone 'ssh://git@github.com/symbiosystem/hex-maze.git' 'hex-maze'
+	cd hex-maze
+	git remote add github ssh://git@github.com/symbiosystem/hex-maze.git
+	git remote add codeberg ssh://git@codeberg.org/symbiosystem/hex-maze.git
