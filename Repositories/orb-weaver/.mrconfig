@@ -100,3 +100,9 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-playground.git' 'kicad-playground'
 	cd kicad-playground
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-playground.git
+
+[hex-maze]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/hex-maze.git' 'hex-maze'
+	cd hex-maze
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/hex-maze.git
