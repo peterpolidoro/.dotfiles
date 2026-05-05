@@ -112,3 +112,9 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/board-interfaces.git' 'board-interfaces'
 	cd board-interfaces
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/board-interfaces.git
+
+[orb-weaver-context]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-context.git' 'orb-weaver-context'
+	cd orb-weaver-context
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-context.git
