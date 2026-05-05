@@ -1,38 +1,8 @@
-[codex]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/codex.git' 'codex'
-	cd codex
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/codex.git
-
 [emacs-config]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/emacs-config.git' 'emacs-config'
 	cd emacs-config
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/emacs-config.git
-
-[indras-context]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/indras-context.git' 'indras-context'
-	cd indras-context
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/indras-context.git
-
-[loom]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/loom.git' 'loom'
-	cd loom
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/loom.git
-
-[orb-weaver-specs]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-specs.git' 'orb-weaver-specs'
-	cd orb-weaver-specs
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-specs.git
-
-[orb-channel]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/orb-channel.git' 'orb-channel'
-	cd orb-channel
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-channel.git
 
 [orb-weaver-art]
 checkout =
@@ -95,23 +65,11 @@ checkout =
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qp-arduino-example.git
 	git remote add source ssh://git@github.com/QuantumLeaps/qp-arduino-example.git
 
-[peter-orb-vault]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/peter-orb-vault.git' 'peter-orb-vault'
-	cd peter-orb-vault
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/peter-orb-vault.git
-
 [qweave-python]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/qweave-python.git' 'qweave-python'
 	cd qweave-python
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qweave-python.git
-
-[python-copier-template]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/python-copier-template.git' 'python-copier-template'
-	cd python-copier-template
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/python-copier-template.git
 
 [guix-agent-tools]
 checkout =
@@ -142,27 +100,3 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-playground.git' 'kicad-playground'
 	cd kicad-playground
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-playground.git
-
-[code-to-copper]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/code-to-copper.git' 'code-to-copper'
-	cd code-to-copper
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/code-to-copper.git
-
-[ctc-spec]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-spec.git' 'ctc-spec'
-	cd ctc-spec
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-spec.git
-
-[ctc-adapter-m2k]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-adapter-m2k.git' 'ctc-adapter-m2k'
-	cd ctc-adapter-m2k
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-adapter-m2k.git
-
-[ctc-benchctl]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/ctc-benchctl.git' 'ctc-benchctl'
-	cd ctc-benchctl
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/ctc-benchctl.git
