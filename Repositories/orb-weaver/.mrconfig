@@ -77,17 +77,17 @@ checkout =
 	cd guix-agent-tools
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/guix-agent-tools.git
 
-[logic-analyzer-interface]
+[instrument-control]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git' 'logic-analyzer-interface'
-	cd logic-analyzer-interface
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-interface.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/instrument-control.git' 'instrument-control'
+	cd instrument-control
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/instrument-control.git
 
-[logic-analyzer-nonfree]
+[instrument-nonfree]
 checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/logic-analyzer-nonfree.git' 'logic-analyzer-nonfree'
-	cd logic-analyzer-nonfree
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/logic-analyzer-nonfree.git
+	git clone 'ssh://git@codeberg.org/orb-weaver/instrument-nonfree.git' 'instrument-nonfree'
+	cd instrument-nonfree
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/instrument-nonfree.git
 
 [kicad-libs]
 checkout =
