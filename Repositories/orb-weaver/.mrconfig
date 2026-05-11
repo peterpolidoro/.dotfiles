@@ -118,3 +118,10 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/orb-weaver-context.git' 'orb-weaver-context'
 	cd orb-weaver-context
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/orb-weaver-context.git
+
+[minimal-emacs.d]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/minimal-emacs.d.git' 'minimal-emacs.d'
+	cd minimal-emacs.d
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/minimal-emacs.d.git
+	git remote add source ssh://git@github.com/jamescherti/minimal-emacs.d.git
