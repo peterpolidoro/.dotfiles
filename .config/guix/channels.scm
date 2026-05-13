@@ -37,12 +37,6 @@
 ;; Administration of cuirass.genenetwork.org
 ;; details maintenance and administration of cuirass.genenetwork.org
 
-(use-modules (guix ci))
-
-(list (channel-with-substitutes-available
-       %default-guix-channel
-       "https://ci.guix.gnu.org"))
-
 (cons* (channel
          (name 'emacs-config)
          (url "https://codeberg.org/orb-weaver/emacs-config.git")
