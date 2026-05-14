@@ -123,5 +123,24 @@ checkout =
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/minimal-emacs.d.git' 'minimal-emacs.d'
 	cd minimal-emacs.d
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/minimal-emacs.d.git
+	git remote add board-interfaces ssh://git@codeberg.org/orb-weaver/minimal-emacs.d.git
 	git remote add source ssh://git@github.com/jamescherti/minimal-emacs.d.git
+
+[la5032-instrument-port-adapter]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/la5032-instrument-port-adapter.git' 'la5032-instrument-port-adapter'
+	cd la5032-instrument-port-adapter
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/la5032-instrument-port-adapter.git
+
+[m2k-instrument-port-adapter]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/m2k-instrument-port-adapter.git' 'm2k-instrument-port-adapter'
+	cd m2k-instrument-port-adapter
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/m2k-instrument-port-adapter.git
+
+[tmc51x0-driver-dev-pcb]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/tmc51x0-driver-dev-pcb.git' 'tmc51x0-driver-dev-pcb'
+	cd tmc51x0-driver-dev-pcb
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/tmc51x0-driver-dev-pcb.git
+
