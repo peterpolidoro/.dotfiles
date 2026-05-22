@@ -144,3 +144,9 @@ checkout =
 	cd tmc51x0-driver-dev-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/tmc51x0-driver-dev-pcb.git
 
+[agent-memory]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/agent-memory.git' 'agent-memory'
+	cd agent-memory
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/agent-memory.git
+
