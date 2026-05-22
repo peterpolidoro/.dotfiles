@@ -150,3 +150,9 @@ checkout =
 	cd agent-memory
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/agent-memory.git
 
+[loom]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/loom.git' 'loom'
+	cd loom
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/loom.git
+
