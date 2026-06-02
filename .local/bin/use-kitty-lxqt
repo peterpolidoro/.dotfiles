@@ -1,0 +1,126 @@
+#!/bin/sh
+set -eu
+
+backup_once() {
+    file=$1
+    if [ -e "$file" ] && [ ! -e "$file.before-kitty" ]; then
+        cp -a "$file" "$file.before-kitty"
+    fi
+}
+
+ensure_key_value() {
+    file=$1
+    section=$2
+    key=$3
+    value=$4
+
+    mkdir -p "$(dirname "$file")"
+    case ":${prepared_files:-}:" in
+        *":$file:"*) ;;
+        *)
+            if [ -e "$file" ]; then
+                backup_once "$file"
+            else
+                : > "$file"
+            fi
+            prepared_files="${prepared_files:-}:$file"
+            ;;
+    esac
+
+    awk -v section="$section" -v key="$key" -v value="$value" '
+      BEGIN {
+        in_section = 0
+        seen_section = 0
+        set_key = 0
+      }
+      $0 == "[" section "]" {
+        if (seen_section && !set_key) {
+          print key "=" value
+        }
+        in_section = 1
+        seen_section = 1
+        set_key = 0
+        print
+        next
+      }
+      /^\[/ {
+        if (in_section && !set_key) {
+          print key "=" value
+          set_key = 1
+        }
+        in_section = 0
+        print
+        next
+      }
+      in_section && index($0, key "=") == 1 {
+        print key "=" value
+        set_key = 1
+        next
+      }
+      { print }
+      END {
+        if (!seen_section) {
+          print ""
+          print "[" section "]"
+          print key "=" value
+        } else if (in_section && !set_key) {
+          print key "=" value
+        }
+      }
+    ' "$file" > "$file.tmp"
+    mv "$file.tmp" "$file"
+}
+
+find_kitty_desktop() {
+    for dir in \
+        "$HOME/.guix-extra-profiles/desktop/desktop/share/applications" \
+        "$HOME/.guix-home/profile/share/applications" \
+        "$HOME/.guix-profile/share/applications" \
+        /usr/share/applications
+    do
+        if [ -f "$dir/kitty.desktop" ]; then
+            printf '%s\n' "$dir/kitty.desktop"
+            return 0
+        fi
+    done
+    printf 'kitty.desktop\n'
+}
+
+kitty_desktop=$(find_kitty_desktop)
+
+qtxdg_file="$HOME/.config/lxqt-qtxdg.conf"
+mkdir -p "$(dirname "$qtxdg_file")"
+backup_once "$qtxdg_file"
+printf 'TerminalEmulator=kitty.desktop\n' > "$qtxdg_file"
+
+ensure_key_value \
+    "$HOME/.config/pcmanfm-qt/lxqt/settings.conf" \
+    "System" \
+    "Terminal" \
+    "kitty"
+
+keys_file="$HOME/.config/lxqt/globalkeyshortcuts.conf"
+if [ -e "$keys_file" ]; then
+    backup_once "$keys_file"
+    sed 's/^Comment=QTerminal$/Comment=Kitty/; s/^Exec=qterminal$/Exec=kitty/' \
+        "$keys_file" > "$keys_file.tmp"
+    mv "$keys_file.tmp" "$keys_file"
+fi
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Comment" "Kitty"
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Enabled" "true"
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Exec" "kitty"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Comment" "Kitty"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Enabled" "true"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Exec" "kitty"
+
+panel_file="$HOME/.config/lxqt/panel.conf"
+if [ -e "$panel_file" ]; then
+    backup_once "$panel_file"
+    escaped_kitty_desktop=$(printf '%s\n' "$kitty_desktop" | sed 's/[\/&]/\\&/g')
+    sed "s#/usr/share/applications/qterminal.desktop#$escaped_kitty_desktop#g; s#qterminal.desktop#$escaped_kitty_desktop#g" \
+        "$panel_file" > "$panel_file.tmp"
+    mv "$panel_file.tmp" "$panel_file"
+fi
+
+printf 'LXQt terminal settings now prefer kitty.\n'
+printf 'Log out and back in, or restart lxqt-panel and pcmanfm-qt, for all changes to take effect.\n'

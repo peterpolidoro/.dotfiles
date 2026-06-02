@@ -57,12 +57,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 ;; Administration of cuirass.genenetwork.org
 ;; details maintenance and administration of cuirass.genenetwork.org
 
-(use-modules (guix ci))
-
-(list (channel-with-substitutes-available
-       %default-guix-channel
-       "https://ci.guix.gnu.org"))
-
 (cons* (channel
          (name 'emacs-config)
          (url "https://codeberg.org/orb-weaver/emacs-config.git")
@@ -103,6 +97,183 @@ This file contains configuration for my overall desktop environment.  My workflo
 "bat"
 "guile-hall"
 "guix-agent-tools"
+#+end_src
+
+* Terminal Emulator
+
+Kitty is the external terminal emulator.  Long-lived interactive project or
+agent sessions should still live in =tmux= so they can be reattached from
+Kitty, Emacs =vterm=, or a TTY.
+
+*Guix Packages*
+
+#+begin_src scheme :noweb-ref packages :noweb-sep ""
+
+"kitty"
+"tmux"
+#+end_src
+
+*.config/kitty/kitty.conf:*
+
+#+begin_src conf :tangle .config/kitty/kitty.conf
+# This file is generated from ~/.dotfiles/Desktop.org.
+
+# xterm-kitty is more precise, but xterm-256color avoids terminfo problems in
+# Guix containers, remote hosts, and agent-managed shells.
+term xterm-256color
+
+font_family JetBrains Mono
+font_size 11.0
+
+cursor_shape block
+cursor_blink_interval 0
+scrollback_lines 10000
+enable_audio_bell no
+window_padding_width 4
+copy_on_select no
+strip_trailing_spaces smart
+confirm_os_window_close 0
+
+map ctrl+shift+t new_tab_with_cwd
+map ctrl+shift+n new_os_window_with_cwd
+map ctrl+shift+w close_tab
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+v paste_from_clipboard
+#+end_src
+
+This helper updates the live LXQt terminal integration while preserving the
+rest of the generated LXQt settings files.  Keeping this as a script is less
+brittle than checking a whole =globalkeyshortcuts.conf= or =panel.conf= snapshot
+into Stow.
+
+*.local/bin/use-kitty-lxqt:*
+
+#+begin_src sh :tangle .local/bin/use-kitty-lxqt :shebang #!/bin/sh
+set -eu
+
+backup_once() {
+    file=$1
+    if [ -e "$file" ] && [ ! -e "$file.before-kitty" ]; then
+        cp -a "$file" "$file.before-kitty"
+    fi
+}
+
+ensure_key_value() {
+    file=$1
+    section=$2
+    key=$3
+    value=$4
+
+    mkdir -p "$(dirname "$file")"
+    case ":${prepared_files:-}:" in
+        *":$file:"*) ;;
+        *)
+            if [ -e "$file" ]; then
+                backup_once "$file"
+            else
+                : > "$file"
+            fi
+            prepared_files="${prepared_files:-}:$file"
+            ;;
+    esac
+
+    awk -v section="$section" -v key="$key" -v value="$value" '
+      BEGIN {
+        in_section = 0
+        seen_section = 0
+        set_key = 0
+      }
+      $0 == "[" section "]" {
+        if (seen_section && !set_key) {
+          print key "=" value
+        }
+        in_section = 1
+        seen_section = 1
+        set_key = 0
+        print
+        next
+      }
+      /^\[/ {
+        if (in_section && !set_key) {
+          print key "=" value
+          set_key = 1
+        }
+        in_section = 0
+        print
+        next
+      }
+      in_section && index($0, key "=") == 1 {
+        print key "=" value
+        set_key = 1
+        next
+      }
+      { print }
+      END {
+        if (!seen_section) {
+          print ""
+          print "[" section "]"
+          print key "=" value
+        } else if (in_section && !set_key) {
+          print key "=" value
+        }
+      }
+    ' "$file" > "$file.tmp"
+    mv "$file.tmp" "$file"
+}
+
+find_kitty_desktop() {
+    for dir in \
+        "$HOME/.guix-extra-profiles/desktop/desktop/share/applications" \
+        "$HOME/.guix-home/profile/share/applications" \
+        "$HOME/.guix-profile/share/applications" \
+        /usr/share/applications
+    do
+        if [ -f "$dir/kitty.desktop" ]; then
+            printf '%s\n' "$dir/kitty.desktop"
+            return 0
+        fi
+    done
+    printf 'kitty.desktop\n'
+}
+
+kitty_desktop=$(find_kitty_desktop)
+
+qtxdg_file="$HOME/.config/lxqt-qtxdg.conf"
+mkdir -p "$(dirname "$qtxdg_file")"
+backup_once "$qtxdg_file"
+printf 'TerminalEmulator=kitty.desktop\n' > "$qtxdg_file"
+
+ensure_key_value \
+    "$HOME/.config/pcmanfm-qt/lxqt/settings.conf" \
+    "System" \
+    "Terminal" \
+    "kitty"
+
+keys_file="$HOME/.config/lxqt/globalkeyshortcuts.conf"
+if [ -e "$keys_file" ]; then
+    backup_once "$keys_file"
+    sed 's/^Comment=QTerminal$/Comment=Kitty/; s/^Exec=qterminal$/Exec=kitty/' \
+        "$keys_file" > "$keys_file.tmp"
+    mv "$keys_file.tmp" "$keys_file"
+fi
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Comment" "Kitty"
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Enabled" "true"
+ensure_key_value "$keys_file" "Control%2BAlt%2BT.1" "Exec" "kitty"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Comment" "Kitty"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Enabled" "true"
+ensure_key_value "$keys_file" "Meta%2BReturn.42" "Exec" "kitty"
+
+panel_file="$HOME/.config/lxqt/panel.conf"
+if [ -e "$panel_file" ]; then
+    backup_once "$panel_file"
+    escaped_kitty_desktop=$(printf '%s\n' "$kitty_desktop" | sed 's/[\/&]/\\&/g')
+    sed "s#/usr/share/applications/qterminal.desktop#$escaped_kitty_desktop#g; s#qterminal.desktop#$escaped_kitty_desktop#g" \
+        "$panel_file" > "$panel_file.tmp"
+    mv "$panel_file.tmp" "$panel_file"
+fi
+
+printf 'LXQt terminal settings now prefer kitty.\n'
+printf 'Log out and back in, or restart lxqt-panel and pcmanfm-qt, for all changes to take effect.\n'
 #+end_src
 
 * Fonts and Themes

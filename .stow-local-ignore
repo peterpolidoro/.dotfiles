@@ -1,4 +1,5 @@
 ^/.*\.org
+tangle-dotfiles\.el
 Makefile
 archive
 backgrounds

@@ -20,6 +20,8 @@
    "bat"
    "guile-hall"
    "guix-agent-tools"
+   "kitty"
+   "tmux"
    
    ;; Settings Manager
    "xsettingsd"

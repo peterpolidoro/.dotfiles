@@ -22,13 +22,22 @@
 
 ;; curl -L   -o /tmp/cuirass.genenetwork.org.pub   'https://git.genenetwork.org/guix-north-america/plain/.pubkeys/guix/cuirass.genenetwork.org.pub'
 ;; sudo guix archive --authorize < cuirass.genenetwork.org.pub
-;; Add the substitute url using the --substitute-urls option to guix-daemon. Assuming your foreign distribution uses systemd, this can be done using the following.
+;; Add the substitute url using a systemd drop-in rather than replacing the
+;; full guix-daemon unit. Full overrides drift as Guix updates its canonical
+;; unit files.
 
-;; sudo systemctl edit --full guix-daemon
-;; If you want to just use ci.guix.gnu.org, or cuirass.genenetwork.org for that matter, you'll need to adjust the substitute URLs configuration for the guix-daemon to just refer to the substitute servers you want to use. Once edited and saved, restart the guix daemon.
-;; ExecStart=/gnu/store/.../bin/guix-daemon --build-users-group=guixbuild \
+;; sudo systemctl edit guix-daemon
+;; Add the following:
+;; [Service]
+;; ExecStart=
+;; ExecStart=/var/guix/profiles/per-user/root/current-guix/bin/guix-daemon \
+;;   --discover=yes \
 ;;   --substitute-urls='https://cuirass.genenetwork.org https://ci.guix.gnu.org https://bordeaux.guix.gnu.org'
 
+;; Then reload systemd and restart guix-daemon from a clean TTY or after
+;; logging out of the graphical session. Restarting guix-daemon from a live
+;; Guix-backed desktop session can leave /gnu/store busy and break the daemon's
+;; writable store view.
 ;; sudo systemctl daemon-reload
 ;; sudo systemctl restart guix-daemon.service
 ;; Reference
