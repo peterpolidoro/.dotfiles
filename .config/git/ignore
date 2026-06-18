@@ -5,3 +5,5 @@
 *cache*
 .opi-transient
 *.backup
+
+**/.claude/settings.local.json
