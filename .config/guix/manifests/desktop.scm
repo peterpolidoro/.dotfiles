@@ -18,7 +18,6 @@
    "cifs-utils"
    "eza"
    "bat"
-   "guile-hall"
    "guix-agent-tools"
    "kitty"
    "tmux"

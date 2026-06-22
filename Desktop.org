@@ -95,7 +95,6 @@ This file contains configuration for my overall desktop environment.  My workflo
 "cifs-utils"
 "eza"
 "bat"
-"guile-hall"
 "guix-agent-tools"
 #+end_src
 
