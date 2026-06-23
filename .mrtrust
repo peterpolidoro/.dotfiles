@@ -13,6 +13,7 @@
 ~/Repositories/modular-devices/.mrconfig
 ~/Repositories/npm/.mrconfig
 ~/Repositories/github/.mrconfig
+~/Repositories/gitlab/.mrconfig
 ~/Repositories/codeberg/.mrconfig
 ~/Repositories/python/.mrconfig
 ~/Repositories/ros/.mrconfig

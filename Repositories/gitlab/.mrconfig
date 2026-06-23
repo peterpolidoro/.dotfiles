@@ -1,0 +1,3 @@
+[kicad]
+checkout =
+	git clone 'git@gitlab.com:peterpolidoro/kicad.git' 'kicad'
