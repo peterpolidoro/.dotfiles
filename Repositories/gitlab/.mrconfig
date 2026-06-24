@@ -1,3 +1,7 @@
 [kicad]
 checkout =
 	git clone 'git@gitlab.com:peterpolidoro/kicad.git' 'kicad'
+	cd kicad
+	git remote add public https://gitlab.com/peterpolidoro/kicad.git
+	git remote add peterpolidoro git@gitlab.com:peterpolidoro/kicad.git
+	git remote add source git@gitlab.com:kicad/code/kicad.git
