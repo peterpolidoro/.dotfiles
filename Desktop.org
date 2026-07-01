@@ -145,6 +145,20 @@ rest of the generated LXQt settings files.  Keeping this as a script is less
 brittle than checking a whole =globalkeyshortcuts.conf= or =panel.conf= snapshot
 into Stow.
 
+On a new LXQt machine, updating or stowing the dotfiles only installs the Kitty
+configuration and this helper.  LXQt stores the selected terminal, panel
+launcher, and keyboard shortcuts in machine-local files under =~/.config=, so
+run the helper once after installing the dotfiles:
+
+#+begin_src sh
+cd ~/.dotfiles
+make install
+~/.local/bin/use-kitty-lxqt
+#+end_src
+
+Then log out and back in, or restart =lxqt-panel= and =pcmanfm-qt=, so the live
+desktop session reloads those settings.
+
 *.local/bin/use-kitty-lxqt:*
 
 #+begin_src sh :tangle .local/bin/use-kitty-lxqt :shebang #!/bin/sh
