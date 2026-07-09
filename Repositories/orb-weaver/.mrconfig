@@ -156,3 +156,9 @@ checkout =
 	cd loom
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/loom.git
 
+[mechatronic-boundary-model]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mechatronic-boundary-model.git' 'mechatronic-boundary-model'
+	cd mechatronic-boundary-model
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mechatronic-boundary-model.git
+
