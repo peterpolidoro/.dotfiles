@@ -22,9 +22,9 @@ checkout =
 checkout =
 	git clone 'ssh://git@codeberg.org/peterpolidoro/home-config.git' 'home-config'
 
-[repo-catalog]
+[orb-registry]
 checkout =
-	git clone 'ssh://git@codeberg.org/peterpolidoro/repo-catalog.git' 'repo-catalog'
+	git clone 'ssh://git@codeberg.org/peterpolidoro/orb-registry.git' 'orb-registry'
 
 [secrets]
 checkout =
