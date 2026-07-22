@@ -162,3 +162,9 @@ checkout =
 	cd mechatronic-boundary-modeling
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mechatronic-boundary-modeling.git
 
+[mouse-joysticks-mech]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joysticks-mech.git' 'mouse-joysticks-mech'
+	cd mouse-joysticks-mech
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joysticks-mech.git
+
