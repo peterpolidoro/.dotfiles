@@ -483,3 +483,11 @@ checkout =
 	cd tektronix-interface
 	git remote add public https://github.com/peterpolidoro/tektronix-interface.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/tektronix-interface.git
+
+[syringe-pump]
+checkout =
+	git clone 'git@github.com:peterpolidoro/syringe-pump.git' 'syringe-pump'
+	cd syringe-pump
+	git remote add public https://github.com/peterpolidoro/syringe-pump.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/syringe-pump.git
+	git remote add source git@github.com:Karpova-Lab/syringe-pump.git
