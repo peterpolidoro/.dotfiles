@@ -547,3 +547,11 @@ checkout =
 	git remote add public https://github.com/peterpolidoro/pyboard.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/pyboard.git
 	git remote add source git@github.com:micropython/pyboard.git
+
+[joystick-rig]
+checkout =
+	git clone 'git@github.com:peterpolidoro/joystick-rig.git' 'joystick-rig'
+	cd joystick-rig
+	git remote add public https://github.com/peterpolidoro/joystick-rig.git
+	git remote add peterpolidoro git@github.com:peterpolidoro/joystick-rig.git
+	git remote add source git@github.com:sourishmukh/joystick-rig.git
