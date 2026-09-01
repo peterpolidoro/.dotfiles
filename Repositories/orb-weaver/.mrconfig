@@ -179,3 +179,9 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joystick-pcb.git' 'mouse-joystick-pcb'
 	cd mouse-joystick-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-pcb.git
+
+[mouse-joystick-firm]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joystick-firm.git' 'mouse-joystick-firm'
+	cd mouse-joystick-firm
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-firm.git
