@@ -1,4 +1,38 @@
 #!/bin/sh
+set -eu
+
+sync_guix_apparmor_profiles()
+{
+    # guix pull updates root's profile, but it does not update the copies of
+    # Guix's AppArmor policies under /etc.  Keep those copies and the loaded
+    # policies in sync on foreign distributions that enable AppArmor.
+    if [ ! -r /sys/module/apparmor/parameters/enabled ] ||
+       ! grep -qx 'Y' /sys/module/apparmor/parameters/enabled; then
+        return 0
+    fi
+
+    GUIX_APPARMOR_SOURCE=/var/guix/profiles/per-user/root/current-guix/etc/apparmor.d
+    if [ ! -d "$GUIX_APPARMOR_SOURCE" ]; then
+        echo "AppArmor is enabled, but root's Guix profile contains no AppArmor policies; skipping synchronization." >&2
+        return 0
+    fi
+
+    if [ -x /usr/sbin/apparmor_parser ]; then
+        GUIX_APPARMOR_PARSER=/usr/sbin/apparmor_parser
+    elif [ -x /sbin/apparmor_parser ]; then
+        GUIX_APPARMOR_PARSER=/sbin/apparmor_parser
+    else
+        echo "AppArmor is enabled, but apparmor_parser is unavailable." >&2
+        return 1
+    fi
+
+    echo "Synchronizing Guix AppArmor policies..."
+    sudo cp -f "$GUIX_APPARMOR_SOURCE/tunables/guix" /etc/apparmor.d/tunables/guix
+    sudo cp -f "$GUIX_APPARMOR_SOURCE/guix-daemon" "$GUIX_APPARMOR_SOURCE/guix" /etc/apparmor.d/
+    sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix-daemon
+    sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix
+}
+
 FILE=/etc/config.scm
 if [ -f "$FILE" ]; then
     echo "Upgrading Guix System..."
@@ -7,7 +41,11 @@ if [ -f "$FILE" ]; then
 else
     echo "Upgrading Guix on a Debian-based foreign distro..."
     sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
+    # Load the policy from the last successful root pull before starting a new
+    # one, then synchronize again in case the pull updated the policy.
+    sync_guix_apparmor_profiles
     sudo -i guix pull
+    sync_guix_apparmor_profiles
     echo
     echo "Root's Guix was updated."
     echo "Skipping automatic guix-daemon restart in the current session."

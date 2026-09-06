@@ -1,5 +1,7 @@
 #!/bin/sh
+set -eu
+
 # Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd $(dirname $(readlink -f $0))
+cd "$(dirname "$(readlink -f "$0")")"
 ./upgrade-guix-system
 ./upgrade-guix-user

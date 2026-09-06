@@ -190,3 +190,7 @@ if [ -x "$(command -v direnv)" ]; then
 fi
 
 export PATH="/home/peter/.pixi/bin:$PATH"
+
+# >>> Codex installer >>>
+export PATH="/home/polidorop/.local/bin:$PATH"
+# <<< Codex installer <<<
