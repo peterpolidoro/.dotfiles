@@ -561,3 +561,10 @@ checkout =
 	cd LaserLickPort
 	git remote add peterpolidoro git@github.com:peterpolidoro/LaserLickPort.git
 	git remote add source git@github.com:JSTalbotHHMI/LaserLickPort.git
+
+[mcp-server-kicad]
+checkout =
+	git clone 'git@github.com:peterpolidoro/mcp-server-kicad.git' 'mcp-server-kicad'
+	cd mcp-server-kicad
+	git remote add peterpolidoro git@github.com:peterpolidoro/mcp-server-kicad.git
+	git remote add source git@github.com:ProductOfAmerica/mcp-server-kicad.git
