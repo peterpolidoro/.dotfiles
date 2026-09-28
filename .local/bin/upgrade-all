@@ -7,4 +7,3 @@ cd "$(dirname "$(readlink -f "$0")")"
 ./upgrade-guix-user
 ./pull-repositories
 ./sync-email
-./upgrade-guix-repository
