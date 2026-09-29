@@ -1,10 +1,14 @@
 #!/bin/sh
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd $(dirname $(readlink -f $0))
-cd ..
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# The heavy lifting is done by an Emacs script
-emacs -Q --script ./tangle-dotfiles.el
-
-# Upgrade configuration symlinks
-make install
+upgrade_usage() { echo 'Usage: upgrade-dotfiles [--dry-run]'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+# .local/bin is two levels below the repository root.
+upgrade_repo=$(dirname "$(dirname "$UPGRADE_SCRIPT_DIR")")
+cd "$upgrade_repo"
+upgrade_run emacs -Q --script ./tangle-dotfiles.el
+upgrade_run make install

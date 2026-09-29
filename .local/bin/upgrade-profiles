@@ -1,19 +1,20 @@
 #!/bin/sh
-# NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-GREEN='\033[1;32m'
-NC='\033[0m'
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-
-profiles="$GUIX_EXTRA_PROFILES/*";
-
-for profile in $profiles; do
-    profileName=$(basename $profile)
-    profilePath=$GUIX_EXTRA_PROFILES/$profileName
-
-    echo
-    echo -e "${GREEN}Upgrading profile:" $profilePath "${NC}"
-    echo
-
-    guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
+upgrade_usage() { echo 'Usage: upgrade-profiles [--dry-run] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_no_root_option
+upgrade_select_guix
+upgrade_prepare_profiles
+if [ -z "$UPGRADE_NAMES" ]; then
+    printf 'No extra profiles are installed under %s\n' "$UPGRADE_PROFILE_ROOT"
+fi
+for upgrade_name in $UPGRADE_NAMES; do
+    upgrade_profile="$UPGRADE_PROFILE_ROOT/$upgrade_name/$upgrade_name"
+    printf 'Rebuilding profile %s\n' "$upgrade_profile"
+    upgrade_run mkdir -p "$UPGRADE_PROFILE_ROOT/$upgrade_name"
+    upgrade_run "$UPGRADE_GUIX" package --profile="$upgrade_profile" \
+        --manifest="$UPGRADE_MANIFEST_DIR/$upgrade_name.scm"
 done

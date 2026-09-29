@@ -1,0 +1,29 @@
+#!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-system [--dry-run]'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_system_kind
+case "$UPGRADE_SYSTEM_KIND" in
+    guix)
+        upgrade_select_guix
+        upgrade_check_channels
+        upgrade_config=${GUIX_UPDATE_SYSTEM_CONFIG:-/etc/config.scm}
+        [ -r "$upgrade_config" ] || upgrade_die "Missing Guix System configuration: $upgrade_config"
+        upgrade_run "$UPGRADE_GUIX" pull --channels="$UPGRADE_CHANNELS"
+        upgrade_select_guix
+        upgrade_run sudo "$UPGRADE_GUIX" system reconfigure "$upgrade_config"
+        ;;
+    debian)
+        # Separate commands ensure an apt failure stops the entire upgrade.
+        upgrade_run sudo apt update -y
+        upgrade_run sudo apt full-upgrade -y
+        upgrade_run sudo apt autoremove -y
+        upgrade_run sudo apt clean -y
+        upgrade_run sudo apt autoclean -y
+        ;;
+esac

@@ -1,0 +1,19 @@
+#!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-workstation [--dry-run] [--root-guix] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_select_guix
+upgrade_check_channels
+upgrade_requested_names=$UPGRADE_NAMES
+upgrade_prepare_profiles
+upgrade_child upgrade-system
+upgrade_system_kind
+if [ "$UPGRADE_ROOT_GUIX" -eq 1 ] && [ "$UPGRADE_SYSTEM_KIND" = debian ]; then
+    upgrade_child upgrade-guix-root
+fi
+# All profile names have already been validated; pass them as separate words.
+# Keep the original empty selection so upgrade-guix-user can update the default profile.
+upgrade_child upgrade-guix-user $upgrade_requested_names

@@ -8,10 +8,287 @@
 
 ** Upgrading
 
-*.local/bin/upgrade-guix-system*
+The live workstation still uses Debian plus Stow and the =desktop= / =emacs=
+extra Guix profiles.  Guix Home has been tested separately, but has not taken
+ownership of this home yet.  These commands are the transition interface:
 
-#+begin_src sh :tangle .local/bin/upgrade-guix-system :shebang #!/bin/sh
+| Command | Scope |
+|---------+-------|
+| =upgrade-workstation --dry-run= | Preview the routine update without changing packages |
+| =upgrade-workstation= | Debian (or Guix System), user Guix pins, default profile if present, installed extra profiles |
+| =upgrade-guix-user= | Apply user channel pins and rebuild user profiles; no OS/root update |
+| =upgrade-guix-user emacs= | Apply user channel pins, then rebuild only the Emacs extra profile |
+| =upgrade-profiles emacs= | Rebuild only Emacs using the already-selected user Guix |
+| =activate-profiles desktop emacs= | Install exactly the named profiles |
+| =upgrade-system= | Debian packages, or Guix System reconfiguration |
+| =upgrade-guix-root= | Root's Guix and AppArmor policies on Debian; separate manual maintenance |
+| =upgrade-workstation --root-guix= | Include root Guix maintenance in this run |
+| =upgrade-guix= | Compatibility command preserving the old OS + root + user update |
+| =upgrade-all= | The legacy broader update, then repository pulls and mail synchronization |
+| =upgrade-dotfiles= | Retangle the Org sources and refresh Stow links |
+
+All of these commands accept =--dry-run=.  The preview prints commands and
+validates inputs; it does not call apt, sudo, Guix, Stow, repository pulls, or
+mail synchronization.  APT uses the same full-upgrade / autoremove policy as
+the old script.  A failed step stops later steps; earlier successful steps
+are not rolled back automatically.
+
+Use =upgrade-workstation= for the regular update.  Keep root Guix maintenance
+manual and less frequent (the migration plan proposes monthly).  Root has its
+own channels and daemon lifecycle; the canonical user pin set does not replace
+root's channel configuration.  =upgrade-all= remains an explicit broad action
+because it also modifies repository checkouts and synchronizes mail.
+
+*** Applying pins versus choosing newer versions
+
+User channels are pinned to exact commits.  =guix pull= now applies that pin set;
+it does not advance those commits to current branch tips.  User update scripts
+pass the live channel file explicitly and prefer the user's current Guix over
+an executable inherited from a project shell.  After pulling, profile rebuilds
+use the newly selected user Guix.  No profiles are sourced into these child
+scripts; open a new login session when the login environment needs refreshing.
+
+Before pulling, the helpers compare =~/.config/guix/channels.scm= with
+=~/Repositories/codeberg/home-config/files/config/guix/channels.scm= when the
+canonical checkout is present.  Drift stops the update before any package
+changes.  The canonical file is maintained in =home-config=; =Desktop.org=
+and its tangled channel file are the Stow-era mirror.  Edit the Org block too
+when changing that mirror, so retangling cannot silently restore older pins.
+
+For a new package set:
+
+1. Choose and validate new commits in the canonical =home-config= pin file.
+   Check substitutes for the heavy manifests before advancing Guix itself.
+2. Update the mirror in =Desktop.org= and retangle the channel file.  Sync only
+   the project channel subsets that are intended to adopt this change, using
+   =guix-agent-tools-sync-channels= from its checkout until the installed
+   package includes that helper.
+3. Run =upgrade-workstation --dry-run=, then =upgrade-workstation=, or use
+   =upgrade-guix-user emacs= for an Emacs-only profile rebuild after pulling.
+
+Unpublished configuration edits are a separate input: the Emacs packages fetch
+pinned source payload commits.  Publish the Emacs source changes, update the
+package payload commit/hash and release version, then publish that package
+recipe and update the canonical Emacs channel pin to that recipe commit.
+Only then will a routine user update install those edits.  A channel pin and a
+package's source pin are two distinct revisions.
+
+On another machine joining an older shared pin set, an intentional one-time
+pull may require =--allow-downgrades=.  The routine scripts do not add that
+flag automatically:
+
+#+begin_src sh
+~/.config/guix/current/bin/guix pull --channels="$HOME/.config/guix/channels.scm" --allow-downgrades
+upgrade-profiles
+#+end_src
+
+*** Migration boundary and validation
+
+Keep these helpers in =.dotfiles= until the helper-file cutover to =home-config=.
+At that cutover each path gets one owner: remove its Stow ownership as Guix Home
+starts managing it.  Later the user-package step becomes =guix home reconfigure=
+when packages migrate.  The separate OS command remains useful.  Repository
+management stays a separate action while Orb Registry and Loom are adopted.
+
+The planned weekly pin-selection/substitute-check/warm job belongs in
+=home-config=.  The current helpers apply reviewed pins and do not schedule
+updates, advance pins, switch home ownership, or collect Guix generations.
+
+Run =make test= to exercise the orchestration against fake executables in
+temporary directories.  The tests never perform a real upgrade.  The optional
+=GUIX_UPDATE_GUIX=, =GUIX_UPDATE_CHANNELS=, =GUIX_UPDATE_CANONICAL_CHANNELS=,
+=GUIX_UPDATE_PROFILE_ROOT=, =GUIX_UPDATE_MANIFEST_DIR=, and
+=GUIX_UPDATE_DEFAULT_PROFILE= environment variables select alternate locations;
+they also allow tests without changing =HOME=.  A bootstrap without an installed
+user Guix falls back to =guix= on =PATH= for the first pull.
+
+*** =.local/libexec/upgrade-common.sh=
+
+#+begin_src sh :tangle .local/libexec/upgrade-common.sh :tangle-mode (identity #o444)
+# Generated from Systems.org; sourced by the upgrade commands.
+# Always resolve sibling commands through the real script, including Stow links.
+UPGRADE_SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+UPGRADE_DRY_RUN=0
+UPGRADE_ROOT_GUIX=0
+UPGRADE_NAMES=
+
+upgrade_die() { printf '%s\n' "$*" >&2; exit 1; }
+
+upgrade_parse()
+{
+    for upgrade_arg do
+        case "$upgrade_arg" in
+            --dry-run) UPGRADE_DRY_RUN=1 ;;
+            --root-guix) UPGRADE_ROOT_GUIX=1 ;;
+            -h|--help) upgrade_usage; exit 0 ;;
+            ''|[!a-zA-Z0-9]*|*[!a-zA-Z0-9._-]*)
+                upgrade_die "Invalid option or profile name: $upgrade_arg" ;;
+            *) UPGRADE_NAMES="${UPGRADE_NAMES}${UPGRADE_NAMES:+ }$upgrade_arg" ;;
+        esac
+    done
+}
+
+upgrade_run()
+{
+    if [ "$UPGRADE_DRY_RUN" -eq 1 ]; then
+        printf 'Would run:'
+        for upgrade_arg do printf ' <%s>' "$upgrade_arg"; done
+        printf '\n'
+    else
+        "$@"
+    fi
+}
+
+upgrade_child()
+{
+    upgrade_command=$1
+    shift
+    if [ "$UPGRADE_DRY_RUN" -eq 1 ]; then
+        "$UPGRADE_SCRIPT_DIR/$upgrade_command" --dry-run "$@"
+    else
+        "$UPGRADE_SCRIPT_DIR/$upgrade_command" "$@"
+    fi
+}
+
+upgrade_no_profiles()
+{
+    [ -z "$UPGRADE_NAMES" ] || upgrade_die 'This command does not accept profile names.'
+}
+
+upgrade_no_root_option()
+{
+    [ "$UPGRADE_ROOT_GUIX" -eq 0 ] || upgrade_die 'Use upgrade-guix-root for root Guix maintenance.'
+}
+
+upgrade_select_guix()
+{
+    # A project shell can put a different, single-channel Guix first on PATH.
+    UPGRADE_GUIX=${GUIX_UPDATE_GUIX:-${XDG_CONFIG_HOME:-$HOME/.config}/guix/current/bin/guix}
+    if [ ! -x "$UPGRADE_GUIX" ]; then
+        [ -z "${GUIX_UPDATE_GUIX:-}" ] || upgrade_die "Guix is not executable: $UPGRADE_GUIX"
+        UPGRADE_GUIX=$(command -v guix) || upgrade_die 'No Guix executable found.'
+        printf 'Bootstrapping user Guix with %s\n' "$UPGRADE_GUIX" >&2
+    fi
+}
+
+upgrade_check_channels()
+{
+    UPGRADE_CHANNELS=${GUIX_UPDATE_CHANNELS:-${XDG_CONFIG_HOME:-$HOME/.config}/guix/channels.scm}
+    UPGRADE_CANONICAL_CHANNELS=${GUIX_UPDATE_CANONICAL_CHANNELS:-$HOME/Repositories/codeberg/home-config/files/config/guix/channels.scm}
+    [ -r "$UPGRADE_CHANNELS" ] || upgrade_die "Missing channel file: $UPGRADE_CHANNELS"
+    if [ -f "$UPGRADE_CANONICAL_CHANNELS" ] &&
+       ! cmp -s "$UPGRADE_CANONICAL_CHANNELS" "$UPGRADE_CHANNELS"; then
+        upgrade_die "Channel files differ. Reconcile $UPGRADE_CHANNELS with $UPGRADE_CANONICAL_CHANNELS before updating. See Systems.org."
+    fi
+}
+
+upgrade_prepare_profiles()
+{
+    UPGRADE_PROFILE_ROOT=${GUIX_UPDATE_PROFILE_ROOT:-$HOME/.guix-extra-profiles}
+    UPGRADE_MANIFEST_DIR=${GUIX_UPDATE_MANIFEST_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/guix/manifests}
+    # Names are validated by upgrade_parse, so this split cannot expand globs.
+    if [ -z "$UPGRADE_NAMES" ]; then
+        for upgrade_dir in "$UPGRADE_PROFILE_ROOT"/*; do
+            [ -d "$upgrade_dir" ] || continue
+            upgrade_name=${upgrade_dir##*/}
+            case "$upgrade_name" in
+                ''|[!a-zA-Z0-9]*|*[!a-zA-Z0-9._-]*)
+                    upgrade_die "Invalid installed profile name: $upgrade_name" ;;
+            esac
+            UPGRADE_NAMES="${UPGRADE_NAMES}${UPGRADE_NAMES:+ }$upgrade_name"
+        done
+    fi
+    # Validate the entire selection before changing the first profile.
+    for upgrade_name in $UPGRADE_NAMES; do
+        [ -r "$UPGRADE_MANIFEST_DIR/$upgrade_name.scm" ] ||
+            upgrade_die "Missing manifest: $UPGRADE_MANIFEST_DIR/$upgrade_name.scm"
+    done
+}
+
+upgrade_system_kind()
+{
+    if [ -n "${GUIX_UPDATE_SYSTEM_KIND:-}" ]; then
+        UPGRADE_SYSTEM_KIND=$GUIX_UPDATE_SYSTEM_KIND
+    elif [ -e /run/current-system ]; then
+        UPGRADE_SYSTEM_KIND=guix
+    elif [ -r /etc/debian_version ]; then
+        UPGRADE_SYSTEM_KIND=debian
+    else
+        upgrade_die 'Unsupported host OS; this helper supports Debian and Guix System.'
+    fi
+    case "$UPGRADE_SYSTEM_KIND" in debian|guix) ;; *) upgrade_die 'Unsupported host OS.' ;; esac
+}
+#+end_src
+
+*** =.local/bin/upgrade-workstation=
+
+#+begin_src sh :tangle .local/bin/upgrade-workstation :shebang #!/bin/sh
+# Generated from Systems.org.
 set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-workstation [--dry-run] [--root-guix] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_select_guix
+upgrade_check_channels
+upgrade_requested_names=$UPGRADE_NAMES
+upgrade_prepare_profiles
+upgrade_child upgrade-system
+upgrade_system_kind
+if [ "$UPGRADE_ROOT_GUIX" -eq 1 ] && [ "$UPGRADE_SYSTEM_KIND" = debian ]; then
+    upgrade_child upgrade-guix-root
+fi
+# All profile names have already been validated; pass them as separate words.
+# Keep the original empty selection so upgrade-guix-user can update the default profile.
+upgrade_child upgrade-guix-user $upgrade_requested_names
+#+end_src
+
+*** =.local/bin/upgrade-system=
+
+#+begin_src sh :tangle .local/bin/upgrade-system :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-system [--dry-run]'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_system_kind
+case "$UPGRADE_SYSTEM_KIND" in
+    guix)
+        upgrade_select_guix
+        upgrade_check_channels
+        upgrade_config=${GUIX_UPDATE_SYSTEM_CONFIG:-/etc/config.scm}
+        [ -r "$upgrade_config" ] || upgrade_die "Missing Guix System configuration: $upgrade_config"
+        upgrade_run "$UPGRADE_GUIX" pull --channels="$UPGRADE_CHANNELS"
+        upgrade_select_guix
+        upgrade_run sudo "$UPGRADE_GUIX" system reconfigure "$upgrade_config"
+        ;;
+    debian)
+        # Separate commands ensure an apt failure stops the entire upgrade.
+        upgrade_run sudo apt update -y
+        upgrade_run sudo apt full-upgrade -y
+        upgrade_run sudo apt autoremove -y
+        upgrade_run sudo apt clean -y
+        upgrade_run sudo apt autoclean -y
+        ;;
+esac
+#+end_src
+
+*** =.local/bin/upgrade-guix-root=
+
+#+begin_src sh :tangle .local/bin/upgrade-guix-root :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-guix-root [--dry-run]'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_system_kind
+[ "$UPGRADE_SYSTEM_KIND" = debian ] || upgrade_die 'On Guix System, update the daemon through upgrade-system.'
 
 sync_guix_apparmor_profiles()
 {
@@ -39,30 +316,37 @@ sync_guix_apparmor_profiles()
     fi
 
     echo "Synchronizing Guix AppArmor policies..."
-    sudo cp -f "$GUIX_APPARMOR_SOURCE/tunables/guix" /etc/apparmor.d/tunables/guix
-    sudo cp -f "$GUIX_APPARMOR_SOURCE/guix-daemon" "$GUIX_APPARMOR_SOURCE/guix" /etc/apparmor.d/
-    sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix-daemon
-    sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix
+    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/tunables/guix" /etc/apparmor.d/tunables/guix
+    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/guix-daemon" "$GUIX_APPARMOR_SOURCE/guix" /etc/apparmor.d/
+    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix-daemon
+    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix
 }
 
-FILE=/etc/config.scm
-if [ -f "$FILE" ]; then
-    echo "Upgrading Guix System..."
-    guix pull
-    sudo guix system reconfigure /etc/config.scm
-else
-    echo "Upgrading Guix on a Debian-based foreign distro..."
-    sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
-    # Load the policy from the last successful root pull before starting a new
-    # one, then synchronize again in case the pull updated the policy.
-    sync_guix_apparmor_profiles
-    sudo -i guix pull
-    sync_guix_apparmor_profiles
-    echo
-    echo "Root's Guix was updated."
-    echo "Skipping automatic guix-daemon restart in the current session."
-    echo "Restart guix-daemon from a clean TTY or after logging out to avoid"
-    echo "making /gnu/store busy with store-backed session processes."
+
+# Root keeps its own Guix channels; this is separate from the user's pin set.
+sync_guix_apparmor_profiles
+upgrade_run sudo -i guix pull
+sync_guix_apparmor_profiles
+printf '%s\n' 'Root Guix update does not restart the daemon.' \
+    'Restart guix-daemon from a clean TTY or after leaving the Guix-backed desktop.'
+#+end_src
+
+
+*.local/bin/upgrade-guix-system*
+
+#+begin_src sh :tangle .local/bin/upgrade-guix-system :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
+
+upgrade_usage() { echo 'Usage: upgrade-guix-system [--dry-run] (legacy OS + root Guix update)'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_child upgrade-system
+upgrade_system_kind
+if [ "$UPGRADE_SYSTEM_KIND" = debian ]; then
+    upgrade_child upgrade-guix-root
 fi
 #+end_src
 
@@ -92,14 +376,28 @@ The daemon's view of =/gnu/store= should be =rw=.
 *.local/bin/upgrade-guix-user*
 
 #+begin_src sh :tangle .local/bin/upgrade-guix-user :shebang #!/bin/sh
+# Generated from Systems.org.
 set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd "$(dirname "$(readlink -f "$0")")"
-
-guix pull
-guix package -u
-./upgrade-profiles
+upgrade_usage() { echo 'Usage: upgrade-guix-user [--dry-run] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_no_root_option
+upgrade_select_guix
+upgrade_check_channels
+upgrade_requested_names=$UPGRADE_NAMES
+upgrade_prepare_profiles
+printf 'Applying user channel pins from %s\n' "$UPGRADE_CHANNELS"
+upgrade_run "$UPGRADE_GUIX" pull --channels="$UPGRADE_CHANNELS"
+# Pull changes the current symlink; do not keep using an inherited PATH entry.
+upgrade_select_guix
+if [ -z "$upgrade_requested_names" ]; then
+    upgrade_default_profile=${GUIX_UPDATE_DEFAULT_PROFILE:-$HOME/.guix-profile}
+    if [ -e "$upgrade_default_profile" ] || [ -L "$upgrade_default_profile" ]; then
+        upgrade_run "$UPGRADE_GUIX" package --profile="$upgrade_default_profile" --upgrade
+    fi
+fi
+upgrade_child upgrade-profiles $UPGRADE_NAMES
 #+end_src
 
 *.local/bin/get-status*
@@ -168,25 +466,25 @@ cd ~/guix && git checkout master && git clean -xdf && git checkout . && git pull
 *.local/bin/upgrade-guix*
 
 #+begin_src sh :tangle .local/bin/upgrade-guix :shebang #!/bin/sh
+# Generated from Systems.org. Preserve the legacy OS + root + user workflow.
 set -eu
-
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd "$(dirname "$(readlink -f "$0")")"
-./upgrade-guix-system
-./upgrade-guix-user
+exec "$(dirname "$(readlink -f "$0")")/upgrade-workstation" --root-guix "$@"
 #+end_src
 
 *.local/bin/upgrade-all*
 
 #+begin_src sh :tangle .local/bin/upgrade-all :shebang #!/bin/sh
+# Generated from Systems.org.
 set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd "$(dirname "$(readlink -f "$0")")"
-./upgrade-guix-system
-./upgrade-guix-user
-./pull-repositories
-./sync-email
+upgrade_usage() { echo 'Usage: upgrade-all [--dry-run] (legacy full update, repository pulls, and mail sync)'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_child upgrade-guix
+upgrade_run "$UPGRADE_SCRIPT_DIR/pull-repositories"
+upgrade_run "$UPGRADE_SCRIPT_DIR/sync-email"
 #+end_src
 
 *.local/bin/mount-janelia-misc*
@@ -205,7 +503,7 @@ To make the management of multiple profiles easier, I've created a couple of she
 
 ** Activating Profiles
 
-This script accepts a space-separated list of manifest file names (without extension) under the =~/.config/guix/manifests= folder and then installs those profiles for the first time.  For example:
+This script requires explicit manifest names (without extension) under =~/.config/guix/manifests= and installs only those profiles.  It uses the same rebuild helper as =upgrade-profiles=.  For example:
 
 #+begin_src sh
 
@@ -216,43 +514,16 @@ activate-profiles desktop emacs music
 *.local/bin/activate-profiles:*
 
 #+begin_src sh :tangle .local/bin/activate-profiles :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
-
-GREEN='\033[1;32m'
-RED='\033[1;30m'
-NC='\033[0m'
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-
-profiles="$HOME/.config/guix/manifests/*.scm";
-
-for profile in $profiles; do
-    # Remove the path and file extension, if any
-    profileName=$(basename $profile)
-    profileName="${profileName%.*}"
-    profilePath="$GUIX_EXTRA_PROFILES/$profileName"
-    manifestPath=$HOME/.config/guix/manifests/$profileName.scm
-
-    if [ -f $manifestPath ]; then
-        echo
-        echo -e "${GREEN}Activating profile:" $manifestPath "${NC}"
-        echo
-
-        mkdir -p $profilePath
-        guix package --manifest=$manifestPath --profile="$profilePath/$profileName"
-
-        # Source the new profile
-        GUIX_PROFILE="$profilePath/$profileName"
-        if [ -f $GUIX_PROFILE/etc/profile ]; then
-            . "$GUIX_PROFILE"/etc/profile
-        else
-            echo -e "${RED}Couldn't find profile:" $GUIX_PROFILE/etc/profile "${NC}"
-        fi
-    else
-        echo "No profile found at path" $profilePath
-    fi
-done
-
+upgrade_usage() { echo 'Usage: activate-profiles [--dry-run] PROFILE ...'; }
+upgrade_parse "$@"
+upgrade_no_root_option
+[ -n "$UPGRADE_NAMES" ] || upgrade_die 'Name the profiles to activate, for example: activate-profiles desktop emacs'
+upgrade_child upgrade-profiles $UPGRADE_NAMES
+printf '%s\n' 'Open a new login session to load activated profiles into its environment.'
 #+end_src
 
 ** Upgrading Profiles
@@ -268,26 +539,25 @@ upgrade-profiles emacs
 *.local/bin/upgrade-profiles:*
 
 #+begin_src sh :tangle .local/bin/upgrade-profiles :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# NOTE: This file is generated from ~/.dotfiles/Systems.org.  Please see commentary there.
-
-GREEN='\033[1;32m'
-NC='\033[0m'
-GUIX_EXTRA_PROFILES=$HOME/.guix-extra-profiles
-
-profiles="$GUIX_EXTRA_PROFILES/*";
-
-for profile in $profiles; do
-    profileName=$(basename $profile)
-    profilePath=$GUIX_EXTRA_PROFILES/$profileName
-
-    echo
-    echo -e "${GREEN}Upgrading profile:" $profilePath "${NC}"
-    echo
-
-    guix package --profile="$profilePath/$profileName" --manifest="$HOME/.config/guix/manifests/$profileName.scm"
+upgrade_usage() { echo 'Usage: upgrade-profiles [--dry-run] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_no_root_option
+upgrade_select_guix
+upgrade_prepare_profiles
+if [ -z "$UPGRADE_NAMES" ]; then
+    printf 'No extra profiles are installed under %s\n' "$UPGRADE_PROFILE_ROOT"
+fi
+for upgrade_name in $UPGRADE_NAMES; do
+    upgrade_profile="$UPGRADE_PROFILE_ROOT/$upgrade_name/$upgrade_name"
+    printf 'Rebuilding profile %s\n' "$upgrade_profile"
+    upgrade_run mkdir -p "$UPGRADE_PROFILE_ROOT/$upgrade_name"
+    upgrade_run "$UPGRADE_GUIX" package --profile="$upgrade_profile" \
+        --manifest="$UPGRADE_MANIFEST_DIR/$upgrade_name.scm"
 done
-
 #+end_src
 
 * Dotfiles Management
@@ -299,17 +569,19 @@ Upgrading my dotfiles requires running a script in Emacs to loop over all of my 
 *.local/bin/upgrade-dotfiles*
 
 #+begin_src sh :tangle .local/bin/upgrade-dotfiles :shebang #!/bin/sh
+# Generated from Systems.org.
+set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd $(dirname $(readlink -f $0))
-cd ..
-
-# The heavy lifting is done by an Emacs script
-emacs -Q --script ./tangle-dotfiles.el
-
-# Upgrade configuration symlinks
-make install
-
+upgrade_usage() { echo 'Usage: upgrade-dotfiles [--dry-run]'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+# .local/bin is two levels below the repository root.
+upgrade_repo=$(dirname "$(dirname "$UPGRADE_SCRIPT_DIR")")
+cd "$upgrade_repo"
+upgrade_run emacs -Q --script ./tangle-dotfiles.el
+upgrade_run make install
 #+end_src
 
 *tangle-dotfiles.el*

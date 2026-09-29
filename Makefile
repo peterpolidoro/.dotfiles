@@ -1,3 +1,9 @@
+.DEFAULT_GOAL := tangle
+.PHONY: tangle simulate install clean checkout test
+
+test:
+	python3 tests/test_upgrade_scripts.py -v
+
 tangle:
 	emacs -Q --script ./tangle-dotfiles.el
 simulate:

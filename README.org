@@ -23,6 +23,19 @@ cd .dotfiles
 make install
 #+END_SRC
 
+* Routine Updates During Migration
+
+Use =upgrade-workstation --dry-run= to preview, then =upgrade-workstation= to
+update the OS and user profiles from the current channel pins.  Root Guix is
+separate manual maintenance via =upgrade-guix-root=, or include it with
+=upgrade-workstation --root-guix=.  The old =upgrade-guix= command preserves its
+previous OS + root + user behavior.
+
+For a focused update, =upgrade-guix-user emacs= applies the channel pins and
+rebuilds only the Emacs extra profile; =upgrade-profiles emacs= rebuilds it without
+pulling.  Profile arguments are now honored.  See [[file:Systems.org::*Upgrading][Systems.org]] for pin updates,
+Emacs payload releases, dry-run behavior, and the later Guix Home cutover.
+
 * System Installation
 
 Instructions for installing a system from a Guix configuration can be found in

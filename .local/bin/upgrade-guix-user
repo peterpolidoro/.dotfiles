@@ -1,9 +1,23 @@
 #!/bin/sh
+# Generated from Systems.org.
 set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd "$(dirname "$(readlink -f "$0")")"
-
-guix pull
-guix package -u
-./upgrade-profiles
+upgrade_usage() { echo 'Usage: upgrade-guix-user [--dry-run] [PROFILE ...]'; }
+upgrade_parse "$@"
+upgrade_no_root_option
+upgrade_select_guix
+upgrade_check_channels
+upgrade_requested_names=$UPGRADE_NAMES
+upgrade_prepare_profiles
+printf 'Applying user channel pins from %s\n' "$UPGRADE_CHANNELS"
+upgrade_run "$UPGRADE_GUIX" pull --channels="$UPGRADE_CHANNELS"
+# Pull changes the current symlink; do not keep using an inherited PATH entry.
+upgrade_select_guix
+if [ -z "$upgrade_requested_names" ]; then
+    upgrade_default_profile=${GUIX_UPDATE_DEFAULT_PROFILE:-$HOME/.guix-profile}
+    if [ -e "$upgrade_default_profile" ] || [ -L "$upgrade_default_profile" ]; then
+        upgrade_run "$UPGRADE_GUIX" package --profile="$upgrade_default_profile" --upgrade
+    fi
+fi
+upgrade_child upgrade-profiles $UPGRADE_NAMES

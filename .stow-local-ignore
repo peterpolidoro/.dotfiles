@@ -24,3 +24,6 @@ _darcs
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
+
+# Test harnesses belong in the checkout, not the home directory.
+^/tests

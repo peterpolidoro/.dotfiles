@@ -1,9 +1,12 @@
 #!/bin/sh
+# Generated from Systems.org.
 set -eu
+. "$(dirname "$(readlink -f "$0")")/../libexec/upgrade-common.sh"
 
-# Navigate to the directory of this script (generally ~/.dotfiles/.local/bin)
-cd "$(dirname "$(readlink -f "$0")")"
-./upgrade-guix-system
-./upgrade-guix-user
-./pull-repositories
-./sync-email
+upgrade_usage() { echo 'Usage: upgrade-all [--dry-run] (legacy full update, repository pulls, and mail sync)'; }
+upgrade_parse "$@"
+upgrade_no_profiles
+upgrade_no_root_option
+upgrade_child upgrade-guix
+upgrade_run "$UPGRADE_SCRIPT_DIR/pull-repositories"
+upgrade_run "$UPGRADE_SCRIPT_DIR/sync-email"
