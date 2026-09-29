@@ -144,7 +144,8 @@ cursor_blink_interval 0
 scrollback_lines 10000
 enable_audio_bell no
 window_padding_width 4
-copy_on_select no
+# Make mouse selections available to normal Emacs yank (C-y).
+copy_on_select clipboard
 strip_trailing_spaces smart
 confirm_os_window_close 0
 
@@ -154,6 +155,18 @@ map ctrl+shift+w close_tab
 map ctrl+shift+c copy_to_clipboard
 map ctrl+shift+v paste_from_clipboard
 #+end_src
+
+Selecting text in Kitty copies it to both the primary selection and the
+system clipboard.  In graphical Emacs/vterm, click the mouse wheel to paste
+the primary selection, or use ordinary =C-y= to yank from the clipboard.
+Kitty's existing =Ctrl+Shift+C= / =Ctrl+Shift+V= bindings still copy/paste
+explicitly.  Hold =Shift= while dragging if a terminal application captures
+mouse events.  Reload Kitty configuration with =Ctrl+Shift+F5=.
+
+To copy from vterm, enter copy mode with =C-c C-t=, select text, then press
+=RET= to copy and resume output.  Paste in Kitty with the mouse wheel or
+=Ctrl+Shift+V=.  Selecting text in Kitty replaces the clipboard contents;
+set =copy_on_select no= if you prefer to keep mouse selection separate.
 
 This helper updates the live LXQt terminal integration while preserving the
 rest of the generated LXQt settings files.  Keeping this as a script is less
