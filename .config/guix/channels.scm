@@ -10,10 +10,10 @@
 ;; migration plan in orb-weaver-context/.agents/PLANS.md, and adopt a new Guix
 ;; commit only after `guix weather` shows substitutes for the heavy tiers.
 ;;
-;; Pins as of 2026-09-28: Guix dd8c1c5 (2026-09-09, "gnu: kicad: Update to
-;; 10.0.6") and the Orb Weaver commits every converted repository already
-;; used, plus the two Emacs channels at the commits `guix describe` reported
-;; that morning.
+;; Pins as of 2026-09-29: retain the 2026-09-28 Guix dd8c1c5, Orb Weaver,
+;; and shared emacs-config commits. Advance only emacs-config-peter to
+;; b54187b: public 1.8.5, personal 1.12.10, and email 1.2.5, including the
+;; startup garbage-collection and vterm responsiveness fixes.
 ;;
 ;; Substitute servers: besides the two default farms, the daemon on each
 ;; machine uses the North America build farm. On a foreign distro:
@@ -66,4 +66,4 @@
   (name 'emacs-config-peter)
   (url "https://codeberg.org/peterpolidoro/emacs-config-peter.git")
   (branch "main")
-  (commit "316bac533f09a06ad56a3b12fc716db2389f592b")))
+  (commit "b54187bf5b63328682061c030e53c438560e253f")))
