@@ -154,6 +154,10 @@ map ctrl+shift+n new_os_window_with_cwd
 map ctrl+shift+w close_tab
 map ctrl+shift+c copy_to_clipboard
 map ctrl+shift+v paste_from_clipboard
+
+# Keep middle-click paste available when agents or tmux capture the mouse.
+mouse_map middle press grabbed discard_event
+mouse_map middle release grabbed,ungrabbed paste_selection
 #+end_src
 
 Selecting text in Kitty copies it to both the primary selection and the
@@ -161,7 +165,16 @@ system clipboard.  In graphical Emacs/vterm, click the mouse wheel to paste
 the primary selection, or use ordinary =C-y= to yank from the clipboard.
 Kitty's existing =Ctrl+Shift+C= / =Ctrl+Shift+V= bindings still copy/paste
 explicitly.  Hold =Shift= while dragging if a terminal application captures
-mouse events.  Reload Kitty configuration with =Ctrl+Shift+F5=.
+mouse events.  Middle-click pastes the primary selection even when an agent
+or tmux captures the mouse; Kitty consumes that button instead of forwarding
+it to the application.  Reload Kitty configuration with =Ctrl+Shift+F5=.
+
+On Linux/X11, Kitty supplies the primary selection automatically; no extra
+clipboard package is needed.  The =copy_on_select clipboard= setting also
+copies to the separate system clipboard for =Ctrl+Shift+V= or Emacs =C-y=.
+In a browser, middle-click inside an editable text field.  If middle-click
+still fails in every application, run =xev -event button= and click the wheel
+inside its window: the press and release should report =button 2=.
 
 To copy from vterm, enter copy mode with =C-c C-t=, select text, then press
 =RET= to copy and resume output.  Paste in Kitty with the mouse wheel or
