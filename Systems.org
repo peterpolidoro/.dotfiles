@@ -312,7 +312,7 @@ After syncing dotfiles on each Debian machine, run:
 #+begin_src sh
 upgrade-dotfiles
 setup-guix-apparmor --dry-run
-setup-guix-apparmor
+setup-guix-apparmor --check-build
 #+end_src
 
 The standalone helper requires Python 3 and the distro's =apparmor_parser=.
@@ -320,15 +320,28 @@ It also works directly from the checkout as =./.local/bin/setup-guix-apparmor=.
 It skips Guix System and hosts where AppArmor is disabled. It uses the profiles
 from root's current Guix installation, preserves site-specific local rules, and
 adds a marked block to =/etc/apparmor.d/local/guix-daemon=. For a root daemon
-the block allows =capability setuid,=, needed when switching to the separate
-=guixbuild= users. A rootless daemon gets no extra capabilities. Auto-detection
+the block allows =setuid= to switch to the separate =guixbuild= users, plus
+=dac_override=, =dac_read_search=, =fowner= and =fsetid= to enter and clean up
+builder-owned directories and normalize build outputs. These capabilities
+also appear in Guix's upstream root-daemon SELinux policy
+(=etc/guix-daemon.cil.in=). Guix changes the build directory's owner before
+the child enters it and drops its root UID; cleanup must also handle
+builder-owned directories with mode 000. The block adds access specifically
+to =/tmp/guix-build-*/**= and =/var/tmp/guix-build-*/**= because the packaged
+=owner= temporary-file rules stop matching once Guix changes ownership.
+A daemon configured with a different build temporary directory needs an
+equivalent site-specific rule in the local policy.
+A rootless daemon gets no extra capabilities or paths. Auto-detection
 checks both the configured systemd user and the running daemon, since updating
 the service file does not change an already-running daemon. For non-systemd
 hosts use =--daemon-mode root= or =--daemon-mode rootless= explicitly.
 
 The October 2026 failure was a denied =setuid= operation in the daemon's build
 user cleanup, surfaced as =cannot kill processes for uid `999'=.
-Copying the packaged policy alone reproduced the missing permission.
+Copying the packaged policy alone reproduced the missing permission. Adding
+=setuid= alone got past that failure but exposed denied directory access at
+the =chdir= phase and denied =chmod= during cleanup. This is a compatibility
+gap between the packaged rootless policy and the root daemon's build-user mode.
 
 Dry-run displays the proposed diff and compiles both candidate profiles against
 a temporary copy of the host's policy includes. It never invokes sudo, changes
@@ -359,7 +372,14 @@ sudo journalctl -k -b --since '10 minutes ago' --no-pager | grep -E 'apparmor="D
 #+end_src
 
 Only add further permissions for a demonstrated operation that Guix needs.
-Profile validation alone does not prove a build works on every host.
+Profile validation alone does not prove a build works on every host. Pass
+=--check-build= after installing the policy to create a fresh local derivation
+using root's Guix CLI. A unique name prevents a cached success; substitutes and
+offloading are disabled, and the check uses the local daemon socket. The build
+creates a builder-owned mode-000 directory to exercise cleanup too. A failed
+build, an ignored cleanup error, or a missing output makes the command fail.
+This leaves a small output in the Guix store for normal garbage collection.
+The check does not run in =--dry-run= and does not change channel pins.
 The parser's validation, cache and reload options are documented in the
 [[https://manpages.debian.org/trixie/apparmor/apparmor_parser.8.en.html][Debian AppArmor parser manual]].
 

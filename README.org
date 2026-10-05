@@ -37,8 +37,8 @@ pulling.  Profile arguments are now honored.  See [[file:Systems.org::*Upgrading
 Emacs payload releases, dry-run behavior, and the later Guix Home cutover.
 
 For Guix/AppArmor trouble on a Debian machine, sync and run =upgrade-dotfiles=,
-then =setup-guix-apparmor --dry-run= and =setup-guix-apparmor=. This preserves
-local rules, adds the build-user permission when the daemon runs as root, and
+then =setup-guix-apparmor --dry-run= and =setup-guix-apparmor --check-build=. This preserves
+local rules, adds build-user access when the daemon runs as root, and
 reloads validated Guix profiles without restarting the daemon. Root Guix
 updates run the same repair automatically. See [[file:Systems.org::*=.local/bin/setup-guix-apparmor=][Systems.org]]
 for backups, supported hosts, and diagnostics.

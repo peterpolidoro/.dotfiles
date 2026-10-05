@@ -102,7 +102,33 @@ class AppArmorSetup(unittest.TestCase):
         text = self.local.read_text()
         self.assertIn("capability setuid, # manual", text)
         self.assertNotIn("capability setuid,\n", text)
+        self.assertNotIn("capability dac_override,", text)
+        self.assertNotIn("capability fowner,", text)
+        self.assertNotIn("/tmp/guix-build-", text)
         self.assertIn("no additional capabilities", text)
+
+    def test_old_setuid_only_block_is_upgraded_without_duplication(self):
+        self.local.write_text(self.original + helper.BEGIN + "capability setuid,\n" + helper.END)
+        self.assertEqual(self.setup(), 0, self.errors.getvalue())
+        rules = self.local.read_text()
+        self.assertTrue(rules.startswith(self.original))
+        self.assertEqual(rules.count(helper.BEGIN), 1)
+        self.assertEqual(rules.count("capability setuid,"), 1)
+        for rule in ("capability dac_override,", "capability dac_read_search,",
+                     "capability fowner,", "capability fsetid,", "/tmp/guix-build-*/** rwkl,"):
+            self.assertIn(rule, rules)
+
+    def test_build_check_runs_after_reload_and_never_in_dry_run(self):
+        with patch.object(helper, "check_build") as check:
+            self.assertEqual(self.setup("--dry-run", "--check-build"), 0)
+            check.assert_not_called()
+
+            def verify_reload():
+                self.assertEqual(self.privileged[-1][0], "apparmor_parser")
+
+            check.side_effect = verify_reload
+            self.assertEqual(self.setup("--check-build"), 0)
+            check.assert_called_once()
 
     def test_disabled_apparmor_and_guix_system_are_noops(self):
         self.enabled.write_text("N\n")
@@ -184,6 +210,42 @@ class DaemonMode(unittest.TestCase):
         result = subprocess.CompletedProcess([], 0, "LoadState=not-found\nUser=\nMainPID=0\n")
         with patch.object(helper, "run", return_value=result), self.assertRaises(ValueError):
             helper.daemon_mode()
+
+
+class BuildCheck(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="apparmor build test ")
+        self.addCleanup(temporary.cleanup)
+        self.output = Path(temporary.name)
+        (self.output / "ok").write_text("ok")
+        self.enterContext(patch.object(helper.os, "access", return_value=True))
+        self.enterContext(contextlib.redirect_stdout(io.StringIO()))
+        self.enterContext(contextlib.redirect_stderr(io.StringIO()))
+
+    def test_fresh_local_build_disables_substitutes_and_offloading(self):
+        result = subprocess.CompletedProcess([], 0, str(self.output) + "\n", "")
+        with patch.object(helper.subprocess, "run", return_value=result) as run:
+            helper.check_build()
+            helper.check_build()
+        commands = [call.args[0] for call in run.call_args_list]
+        self.assertNotEqual(commands[0][-1], commands[1][-1])
+        for flag in ("--no-substitutes", "--no-offload", "--no-grafts"):
+            self.assertIn(flag, commands[0])
+        self.assertIn('(chmod "private" #o000)', commands[0][-1])
+        self.assertEqual(run.call_args.kwargs["env"]["GUIX_DAEMON_SOCKET"],
+                         "/var/guix/daemon-socket/socket")
+
+    def test_ignored_cleanup_errors_fail_even_when_build_returns_zero(self):
+        result = subprocess.CompletedProcess([], 0, str(self.output) + "\n",
+                                             "error (ignored): chmod: Permission denied\n")
+        with patch.object(helper.subprocess, "run", return_value=result), self.assertRaises(ValueError):
+            helper.check_build()
+
+    def test_build_failure_and_missing_output_fail(self):
+        for status, stdout in ((1, ""), (0, str(self.output / "missing") + "\n")):
+            result = subprocess.CompletedProcess([], status, stdout, "")
+            with patch.object(helper.subprocess, "run", return_value=result), self.assertRaises(ValueError):
+                helper.check_build()
 
 
 if __name__ == "__main__":

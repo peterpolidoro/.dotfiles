@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import uuid
 
 
 POLICY_DIR = Path("/etc/apparmor.d")
@@ -24,6 +25,20 @@ PACKAGED = ("tunables/guix", "guix-daemon", "guix")
 LOCAL = "local/guix-daemon"
 BEGIN = "# BEGIN dotfiles Guix daemon compatibility\n"
 END = "# END dotfiles Guix daemon compatibility\n"
+ROOT_GUIX = Path("/var/guix/profiles/per-user/root/current-guix/bin/guix")
+# Guix's root daemon manages files owned by its separate build users. These
+# are also in upstream's root-daemon SELinux policy (etc/guix-daemon.cil.in).
+ROOT_RULES = """# Switch to the separate guixbuild users.
+capability setuid,
+# Enter, normalize and clean up files owned by those users, including mode 000.
+capability dac_override,
+capability dac_read_search,
+capability fowner,
+capability fsetid,
+# The packaged owner-only temporary rules stop matching after chown to a builder.
+/tmp/guix-build-*/** rwkl,
+/var/tmp/guix-build-*/** rwkl,
+"""
 
 
 def run(*args, **kwargs):
@@ -66,7 +81,7 @@ def local_rules(original, mode):
         original = before + after
     block = BEGIN
     if mode == "root":
-        block += "# Switching to the guixbuild users requires CAP_SETUID.\ncapability setuid,\n"
+        block += ROOT_RULES
     else:
         block += "# Rootless daemon: no additional capabilities.\n"
     block += END
@@ -150,12 +165,47 @@ def synchronize(source, mode, dry_run):
         print("Guix AppArmor profiles reloaded. The daemon was not restarted.")
 
 
+def check_build():
+    """Force a local build, including cleanup of a builder-owned mode-000 dir."""
+    if not os.access(ROOT_GUIX, os.X_OK):
+        raise ValueError(f"Cannot run the build check: {ROOT_GUIX} is unavailable.")
+    name = "guix-apparmor-check-" + uuid.uuid4().hex
+    expression = '''(begin
+      (use-modules (guix gexp))
+      (computed-file "%s"
+        #~(begin
+            (mkdir #$output)
+            (mkdir "private")
+            (call-with-output-file "private/probe"
+              (lambda (port) (display "cleanup check" port)))
+            (chmod "private" #o000)
+            (call-with-output-file (string-append #$output "/ok")
+              (lambda (port) (display "ok" port))))))''' % name
+    print("Checking a fresh local Guix build and build-user cleanup...", flush=True)
+    # The policy just changed on this host; don't accidentally test a remote
+    # daemon selected by an inherited GUIX_DAEMON_SOCKET.
+    environment = dict(os.environ, GUIX_DAEMON_SOCKET="/var/guix/daemon-socket/socket")
+    result = subprocess.run([str(ROOT_GUIX), "build", "--no-substitutes", "--no-offload",
+                             "--no-grafts", "-e", expression], env=environment,
+                            text=True, capture_output=True)
+    print(result.stdout, end="")
+    print(result.stderr, end="", file=sys.stderr)
+    if result.returncode or "error (ignored):" in result.stderr:
+        raise ValueError("The live Guix build/cleanup check failed. Inspect the recent kernel AppArmor denials.")
+    output = Path(result.stdout.strip())
+    if not (output / "ok").is_file() or (output / "ok").read_text() != "ok":
+        raise ValueError("The live Guix build did not produce its expected output.")
+    print("Fresh local build and cleanup passed.")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--dry-run", action="store_true", help="show differences and compile in a temporary directory; no sudo or system changes")
     parser.add_argument("--daemon-mode", choices=("auto", "root", "rootless"), default="auto",
                         help="auto checks the systemd service and running daemon")
     parser.add_argument("--source", type=Path, default=SOURCE, help="Guix's packaged apparmor.d directory")
+    parser.add_argument("--check-build", action="store_true",
+                        help="after reloading, verify a fresh local build and cleanup (skipped in dry-run)")
     args = parser.parse_args(argv)
     try:
         if GUIX_SYSTEM.exists():
@@ -166,6 +216,11 @@ def main(argv=None):
             return 0
         mode = daemon_mode() if args.daemon_mode == "auto" else args.daemon_mode
         synchronize(args.source.resolve(), mode, args.dry_run)
+        if args.check_build:
+            if args.dry_run:
+                print("Would run a fresh local build and cleanup check after reloading.")
+            else:
+                check_build()
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         print(f"Guix AppArmor setup failed: {error}", file=sys.stderr)
         print("No daemon restart was attempted. If installation had begun, use the printed backup directory to recover prior files.", file=sys.stderr)
