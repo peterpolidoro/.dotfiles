@@ -36,6 +36,13 @@ rebuilds only the Emacs extra profile; =upgrade-profiles emacs= rebuilds it with
 pulling.  Profile arguments are now honored.  See [[file:Systems.org::*Upgrading][Systems.org]] for pin updates,
 Emacs payload releases, dry-run behavior, and the later Guix Home cutover.
 
+For Guix/AppArmor trouble on a Debian machine, sync and run =upgrade-dotfiles=,
+then =setup-guix-apparmor --dry-run= and =setup-guix-apparmor=. This preserves
+local rules, adds the build-user permission when the daemon runs as root, and
+reloads validated Guix profiles without restarting the daemon. Root Guix
+updates run the same repair automatically. See [[file:Systems.org::*=.local/bin/setup-guix-apparmor=][Systems.org]]
+for backups, supported hosts, and diagnostics.
+
 * System Installation
 
 Instructions for installing a system from a Guix configuration can be found in

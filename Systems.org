@@ -22,6 +22,7 @@ ownership of this home yet.  These commands are the transition interface:
 | =activate-profiles desktop emacs= | Install exactly the named profiles |
 | =upgrade-system= | Debian packages, or Guix System reconfiguration |
 | =upgrade-guix-root= | Root's Guix and AppArmor policies on Debian; separate manual maintenance |
+| =setup-guix-apparmor= | Validate and repair Guix AppArmor policies without pulling or restarting |
 | =upgrade-workstation --root-guix= | Include root Guix maintenance in this run |
 | =upgrade-guix= | Compatibility command preserving the old OS + root + user update |
 | =upgrade-all= | The legacy broader update, then repository pulls and mail synchronization |
@@ -290,47 +291,77 @@ upgrade_no_root_option
 upgrade_system_kind
 [ "$UPGRADE_SYSTEM_KIND" = debian ] || upgrade_die 'On Guix System, update the daemon through upgrade-system.'
 
-sync_guix_apparmor_profiles()
-{
-    # guix pull updates root's profile, but it does not update the copies of
-    # Guix's AppArmor policies under /etc.  Keep those copies and the loaded
-    # policies in sync on foreign distributions that enable AppArmor.
-    if [ ! -r /sys/module/apparmor/parameters/enabled ] ||
-       ! grep -qx 'Y' /sys/module/apparmor/parameters/enabled; then
-        return 0
-    fi
-
-    GUIX_APPARMOR_SOURCE=/var/guix/profiles/per-user/root/current-guix/etc/apparmor.d
-    if [ ! -d "$GUIX_APPARMOR_SOURCE" ]; then
-        echo "AppArmor is enabled, but root's Guix profile contains no AppArmor policies; skipping synchronization." >&2
-        return 0
-    fi
-
-    if [ -x /usr/sbin/apparmor_parser ]; then
-        GUIX_APPARMOR_PARSER=/usr/sbin/apparmor_parser
-    elif [ -x /sbin/apparmor_parser ]; then
-        GUIX_APPARMOR_PARSER=/sbin/apparmor_parser
-    else
-        echo "AppArmor is enabled, but apparmor_parser is unavailable." >&2
-        return 1
-    fi
-
-    echo "Synchronizing Guix AppArmor policies..."
-    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/tunables/guix" /etc/apparmor.d/tunables/guix
-    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/guix-daemon" "$GUIX_APPARMOR_SOURCE/guix" /etc/apparmor.d/
-    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix-daemon
-    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix
-}
-
-
 # Root keeps its own Guix channels; this is separate from the user's pin set.
-sync_guix_apparmor_profiles
+upgrade_child setup-guix-apparmor
 upgrade_run sudo -i guix pull
-sync_guix_apparmor_profiles
+upgrade_child setup-guix-apparmor
 printf '%s\n' 'Root Guix update does not restart the daemon.' \
     'Restart guix-daemon from a clean TTY or after leaving the Guix-backed desktop.'
 #+end_src
 
+*** =.local/bin/setup-guix-apparmor=
+
+#+begin_src sh :tangle .local/bin/setup-guix-apparmor :shebang #!/bin/sh
+# Generated from Systems.org. The Python implementation is maintained directly.
+set -eu
+exec python3 "$(dirname "$(readlink -f "$0")")/../libexec/guix-apparmor.py" "$@"
+#+end_src
+
+After syncing dotfiles on each Debian machine, run:
+
+#+begin_src sh
+upgrade-dotfiles
+setup-guix-apparmor --dry-run
+setup-guix-apparmor
+#+end_src
+
+The standalone helper requires Python 3 and the distro's =apparmor_parser=.
+It also works directly from the checkout as =./.local/bin/setup-guix-apparmor=.
+It skips Guix System and hosts where AppArmor is disabled. It uses the profiles
+from root's current Guix installation, preserves site-specific local rules, and
+adds a marked block to =/etc/apparmor.d/local/guix-daemon=. For a root daemon
+the block allows =capability setuid,=, needed when switching to the separate
+=guixbuild= users. A rootless daemon gets no extra capabilities. Auto-detection
+checks both the configured systemd user and the running daemon, since updating
+the service file does not change an already-running daemon. For non-systemd
+hosts use =--daemon-mode root= or =--daemon-mode rootless= explicitly.
+
+The October 2026 failure was a denied =setuid= operation in the daemon's build
+user cleanup, surfaced as =cannot kill processes for uid `999'=.
+Copying the packaged policy alone reproduced the missing permission.
+
+Dry-run displays the proposed diff and compiles both candidate profiles against
+a temporary copy of the host's policy includes. It never invokes sudo, changes
+installed files, or loads kernel policy. A real run validates first, backs up
+changed existing files under =/var/backups/guix-apparmor/<timestamp>/=, installs
+the candidate files, and reloads only Guix's profiles with the cache bypassed.
+It does not restart the daemon or weaken AppArmor globally. Repeated runs
+preserve local rules and do not duplicate the compatibility block. A manually
+added =capability setuid,= outside that block remains yours, even after a switch
+to rootless mode.
+
+Missing sources, an incompatible parser, malformed local rules, disabled or
+complain-mode override links, and symlinked destination files stop the repair
+with an error. Resolve the reported problem first; =--source DIR= can select a
+complete Guix =apparmor.d= directory. A failure after installation begins stops
+the update but does not automatically roll back earlier writes. The printed
+backup directory mirrors the changed files beneath =/etc/apparmor.d=; copy the
+needed files back, remove only newly created files if reverting those too,
+then reload the restored Guix policies.
+
+The implementation lives in =.local/libexec/guix-apparmor.py= and is maintained
+directly; this Org file owns its launcher and the root-upgrade integration.
+The tests use temporary policies and mock privilege operations. To diagnose
+additional denials after retrying an actual build:
+
+#+begin_src sh
+sudo journalctl -k -b --since '10 minutes ago' --no-pager | grep -E 'apparmor="DENIED".*guix'
+#+end_src
+
+Only add further permissions for a demonstrated operation that Guix needs.
+Profile validation alone does not prove a build works on every host.
+The parser's validation, cache and reload options are documented in the
+[[https://manpages.debian.org/trixie/apparmor/apparmor_parser.8.en.html][Debian AppArmor parser manual]].
 
 *.local/bin/upgrade-guix-system*
 
@@ -356,12 +387,11 @@ Those processes can keep =/gnu/store= busy, which prevents =gnu-store.mount=
 from unmounting cleanly during daemon restart and leaves the daemon with a
 read-only store view.
 
-If AppArmor is enabled, the upgrade script copies the policies shipped by
-root's current Guix profile to =/etc/apparmor.d= and reloads them both before
-and after =guix pull=.  The first synchronization repairs stale installed
-policies using the last successful pull; the second picks up policy changes
-from the new pull.  Reloading an AppArmor policy does not require restarting
-=guix-daemon=.
+If AppArmor is enabled, =upgrade-guix-root= runs =setup-guix-apparmor= before
+and after =guix pull=. The first repair uses the last successful pull so a
+broken policy cannot block the upgrade; the second picks up the new packaged
+policies and reapplies compatibility rules. A failed repair stops the update.
+Reloading an AppArmor policy does not require restarting =guix-daemon=.
 
 If you need to restart =guix-daemon= after updating root's Guix, do it from a
 clean TTY or after logging out of the desktop session:

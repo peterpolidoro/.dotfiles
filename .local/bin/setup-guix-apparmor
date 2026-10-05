@@ -1,0 +1,4 @@
+#!/bin/sh
+# Generated from Systems.org. The Python implementation is maintained directly.
+set -eu
+exec python3 "$(dirname "$(readlink -f "$0")")/../libexec/guix-apparmor.py" "$@"

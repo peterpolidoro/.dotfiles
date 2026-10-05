@@ -10,42 +10,9 @@ upgrade_no_root_option
 upgrade_system_kind
 [ "$UPGRADE_SYSTEM_KIND" = debian ] || upgrade_die 'On Guix System, update the daemon through upgrade-system.'
 
-sync_guix_apparmor_profiles()
-{
-    # guix pull updates root's profile, but it does not update the copies of
-    # Guix's AppArmor policies under /etc.  Keep those copies and the loaded
-    # policies in sync on foreign distributions that enable AppArmor.
-    if [ ! -r /sys/module/apparmor/parameters/enabled ] ||
-       ! grep -qx 'Y' /sys/module/apparmor/parameters/enabled; then
-        return 0
-    fi
-
-    GUIX_APPARMOR_SOURCE=/var/guix/profiles/per-user/root/current-guix/etc/apparmor.d
-    if [ ! -d "$GUIX_APPARMOR_SOURCE" ]; then
-        echo "AppArmor is enabled, but root's Guix profile contains no AppArmor policies; skipping synchronization." >&2
-        return 0
-    fi
-
-    if [ -x /usr/sbin/apparmor_parser ]; then
-        GUIX_APPARMOR_PARSER=/usr/sbin/apparmor_parser
-    elif [ -x /sbin/apparmor_parser ]; then
-        GUIX_APPARMOR_PARSER=/sbin/apparmor_parser
-    else
-        echo "AppArmor is enabled, but apparmor_parser is unavailable." >&2
-        return 1
-    fi
-
-    echo "Synchronizing Guix AppArmor policies..."
-    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/tunables/guix" /etc/apparmor.d/tunables/guix
-    upgrade_run sudo cp -f "$GUIX_APPARMOR_SOURCE/guix-daemon" "$GUIX_APPARMOR_SOURCE/guix" /etc/apparmor.d/
-    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix-daemon
-    upgrade_run sudo "$GUIX_APPARMOR_PARSER" --warn=all -r /etc/apparmor.d/guix
-}
-
-
 # Root keeps its own Guix channels; this is separate from the user's pin set.
-sync_guix_apparmor_profiles
+upgrade_child setup-guix-apparmor
 upgrade_run sudo -i guix pull
-sync_guix_apparmor_profiles
+upgrade_child setup-guix-apparmor
 printf '%s\n' 'Root Guix update does not restart the daemon.' \
     'Restart guix-daemon from a clean TTY or after leaving the Guix-backed desktop.'

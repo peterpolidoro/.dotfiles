@@ -48,6 +48,9 @@ class UpgradeScripts(unittest.TestCase):
         self.make_tool("guix", "wrong-guix")
         for tool in ["sudo", "emacs", "make"]:
             self.make_tool(tool, tool)
+        # AppArmor has its own isolated tests; orchestration must not touch /etc.
+        repair = self.make_tool("setup-guix-apparmor", "setup-guix-apparmor")
+        shutil.copy2(repair, self.bin / "setup-guix-apparmor")
         self.env = dict(os.environ, PATH=str(self.tools) + os.pathsep + os.environ["PATH"],
                         GUIX_UPDATE_GUIX=str(self.user_guix),
                         GUIX_UPDATE_CHANNELS=str(self.channels),
@@ -65,10 +68,15 @@ class UpgradeScripts(unittest.TestCase):
 import json, os, sys
 from pathlib import Path
 role = {role!r}
+if role == 'setup-guix-apparmor' and '--dry-run' in sys.argv:
+    print('Would repair Guix AppArmor policies')
+    sys.exit(0)
 with open(os.environ['UPGRADE_TEST_LOG'], 'a') as f:
     f.write(json.dumps([role, sys.argv[1:], os.getcwd()]) + '\\n')
 if role == 'wrong-guix':
     sys.exit(91)
+if role == 'setup-guix-apparmor' and os.environ.get('UPGRADE_TEST_FAIL') == 'apparmor':
+    sys.exit(13)
 if os.environ.get('UPGRADE_TEST_FAIL') and os.environ['UPGRADE_TEST_FAIL'] in ' '.join(sys.argv[1:]):
     sys.exit(13)
 if role == 'initial-guix' and sys.argv[1:2] == ['pull']:
@@ -192,6 +200,19 @@ if role == 'initial-guix' and sys.argv[1:2] == ['pull']:
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual([c[0] for c in self.calls()], ["emacs", "make"])
         self.assertTrue(all(c[2] == str(self.repo) for c in self.calls()))
+
+    def test_root_upgrade_repairs_apparmor_before_and_after_pull(self):
+        result = self.run_script("upgrade-guix-root")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual([c[:2] for c in self.calls()], [
+            ["setup-guix-apparmor", []], ["sudo", ["-i", "guix", "pull"]],
+            ["setup-guix-apparmor", []]])
+
+    def test_apparmor_failure_stops_root_pull(self):
+        self.env["UPGRADE_TEST_FAIL"] = "apparmor"
+        result = self.run_script("upgrade-guix-root")
+        self.assertEqual(result.returncode, 13)
+        self.assertEqual([c[0] for c in self.calls()], ["setup-guix-apparmor"])
 
     def test_bad_profile_names_and_options_fail_before_commands(self):
         for argument in ["../emacs", "a b", "--unknown"]:

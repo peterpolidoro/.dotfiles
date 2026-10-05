@@ -3,6 +3,7 @@
 
 test:
 	python3 tests/test_upgrade_scripts.py -v
+	python3 tests/test_guix_apparmor.py -v
 
 tangle:
 	emacs -Q --script ./tangle-dotfiles.el
