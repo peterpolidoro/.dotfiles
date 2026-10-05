@@ -158,7 +158,7 @@ checkout =
 	cd skidl
 	git remote add public https://github.com/janelia-python/skidl.git
 	git remote add peterpolidoro git@github.com:peterpolidoro/skidl.git
-	git remote add source git@github.com:xesscorp/skidl.git
+	git remote add source git@github.com:devbisme/skidl.git
 
 [firmware_uploader_python]
 checkout =
