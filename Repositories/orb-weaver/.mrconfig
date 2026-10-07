@@ -95,6 +95,12 @@ checkout =
 	cd kicad-libs
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-libs.git
 
+[kicad-libs-nonfree]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-libs-nonfree.git' 'kicad-libs-nonfree'
+	cd kicad-libs-nonfree
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/kicad-libs-nonfree.git
+
 [kicad-playground]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/kicad-playground.git' 'kicad-playground'
