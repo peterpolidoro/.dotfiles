@@ -10,8 +10,9 @@
 ;; migration plan in orb-weaver-context/.agents/PLANS.md, and adopt a new Guix
 ;; commit only after `guix weather` shows substitutes for the heavy tiers.
 ;;
-;; Pins as of 2026-10-05: advance guix-agent-tools to 267a880 for Codex
-;; 0.160.0 and Claude Code 2.1.289 (Pixi remains at 0.81.0). Retain Guix
+;; Pins as of 2026-10-08: advance guix-agent-tools to 788874e (0.4.3)
+;; for pure agent shells and the Claude find/grep repair. Codex 0.160.0,
+;; Claude Code 2.1.289, and Pixi 0.81.0 are unchanged. Retain Guix
 ;; dd8c1c5 and the other existing channel pins, including emacs-config-peter
 ;; b54187b: public 1.8.5, personal 1.12.10, and email 1.2.5, with the
 ;; startup garbage-collection and vterm responsiveness fixes.
@@ -47,7 +48,7 @@
   (name 'guix-agent-tools)
   (url "https://codeberg.org/orb-weaver/guix-agent-tools.git")
   (branch "main")
-  (commit "267a880c323735687592286e8d69bf880b5e224e"))
+  (commit "788874ea3af208c30d66bd4e415b18e35ec14c2b"))
  (channel
   (name 'orb-weaver-context)
   (url "https://codeberg.org/orb-weaver/orb-weaver-context.git")
