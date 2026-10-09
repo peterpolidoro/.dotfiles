@@ -73,6 +73,10 @@ class LXQtSetup(unittest.TestCase):
         self.assertEqual(keys["XF86MonBrightnessUp.1"]["Exec"], "lxqt-config-brightness, -i")
         self.assertEqual(sum(values.get("Exec") == "kitty" for values in keys.values()), 2)
         self.assertFalse((self.config / "lxqt/lxqt-powermanagement.conf").exists())
+        desktop = helper.ini((self.config / "pcmanfm-qt/lxqt/settings.conf").read_text())["Desktop"]
+        self.assertEqual(desktop["Wallpaper"], "/usr/share/lxqt/themes/debian/wallpaper.svg")
+        self.assertEqual(desktop["WallpaperMode"], "zoom")
+        self.assertNotIn("PerScreenWallpaper", desktop)
         root = ET.parse(self.config / "xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml")
         self.assertEqual(root.find(".//property[@name='workspace_count']").get("value"), "6")
 
@@ -110,6 +114,22 @@ class LXQtSetup(unittest.TestCase):
         self.assertEqual(sum(section.startswith("Control%2BAlt%2BT.") for section in config), 1)
         self.assertEqual(config["Meta%2BX.6"]["Exec"], "my-command")
         self.assertIn("Browser=firefox.desktop", qtxdg.read_text())
+
+    def test_black_wallpaper_is_repaired_without_changing_screen_preferences(self):
+        path = self.file("pcmanfm-qt/lxqt/settings.conf",
+                         "[Desktop]\nWallpaper=\nWallpaperMode=color\n"
+                         "PerScreenWallpaper=false\nWallpaperDialogSize=@Size(800 500)\n")
+        original = path.read_bytes()
+        self.assertEqual(self.apply(), 0, self.errors.getvalue())
+        desktop = helper.ini(path.read_text())["Desktop"]
+        self.assertEqual(desktop["Wallpaper"], "/usr/share/lxqt/themes/debian/wallpaper.svg")
+        self.assertEqual(desktop["WallpaperMode"], "zoom")
+        self.assertEqual(desktop["PerScreenWallpaper"], "false")
+        self.assertEqual(desktop["WallpaperDialogSize"], "@Size(800 500)")
+        self.assertEqual(path.with_name(path.name + ".before-dotfiles-lxqt").read_bytes(), original)
+        first = self.snapshot()
+        self.assertEqual(self.apply(), 0, self.errors.getvalue())
+        self.assertEqual(self.snapshot(), first)
 
     def test_running_desktop_prevents_any_writes(self):
         self.writers.return_value = ["lxqt-panel", "xfconfd"]

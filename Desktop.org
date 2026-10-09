@@ -356,7 +356,7 @@ In particular, the desktop's =enableBatteryWatcher=false= and
 Install the Debian desktop packages on a new machine:
 
 #+begin_src sh
-sudo apt install lxqt xfwm4 python3
+sudo apt install lxqt lxqt-theme-debian qt6-svg-plugins xfwm4 python3
 #+end_src
 
 Install/activate the Guix desktop profile as described in [[file:Systems.org][Systems.org]] so
@@ -434,6 +434,17 @@ style=Fusion
 
 Only preferences are saved here; dialog geometry, navigation history, and
 per-monitor wallpaper/desktop settings are intentionally absent.
+The common wallpaper uses Debian's installed theme, just as on the source
+desktop. Set it explicitly: a partial user file created before first login
+can leave PCManFM-Qt with an empty wallpaper instead of the distro default.
+The =lxqt-theme-debian= package supplies the wallpaper link and depends on
+=desktop-base= for the image; =qt6-svg-plugins= supplies Qt's SVG reader.
+
+To repair a black wallpaper immediately, run this inside the LXQt session:
+
+#+begin_src sh
+pcmanfm-qt --profile=lxqt --set-wallpaper=/usr/share/lxqt/themes/debian/wallpaper.svg --wallpaper-mode=fit
+#+end_src
 
 #+begin_src conf :tangle .local/share/dotfiles/lxqt/lxqt/filedialog.conf
 [View]
@@ -455,6 +466,12 @@ ConfirmDelete=true
 ConfirmTrash=false
 SingleClick=false
 UseTrash=true
+
+[Desktop]
+DesktopShortcuts=Home, Trash, Computer, Network
+Wallpaper=/usr/share/lxqt/themes/debian/wallpaper.svg
+WallpaperMode=zoom
+WallpaperRandomize=false
 
 [FolderView]
 Mode=icon
