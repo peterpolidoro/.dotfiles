@@ -25,6 +25,12 @@ make install
 
 * Routine Updates During Migration
 
+For a Debian 13 LXQt desktop or laptop, see [[file:Desktop.org::*LXQt settings shared between machines][LXQt setup in Desktop.org]].
+=make install-lxqt= installs the dotfiles and applies the shared panels,
+Kitty integration, file preferences, and six xfwm4 workspaces. Run it before
+the first graphical login or from a text console after logging out. Monitor
+layouts and laptop power settings stay local; existing settings are backed up.
+
 Use =upgrade-workstation --dry-run= to preview, then =upgrade-workstation= to
 update the OS and user profiles from the current channel pins.  Root Guix is
 separate manual maintenance via =upgrade-guix-root=, or include it with

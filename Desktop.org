@@ -188,8 +188,9 @@ rest of the generated LXQt settings files.  Keeping this as a script is less
 brittle than checking a whole =globalkeyshortcuts.conf= or =panel.conf= snapshot
 into Stow.
 
-On a new LXQt machine, updating or stowing the dotfiles only installs the Kitty
-configuration and this helper.  LXQt stores the selected terminal, panel
+For complete LXQt setup on a new machine, use [[*LXQt settings shared between machines][the shared LXQt setup]] below.
+For terminal-only setup, updating or stowing the dotfiles installs the Kitty
+configuration and this helper. LXQt stores the selected terminal, panel
 launcher, and keyboard shortcuts in machine-local files under =~/.config=, so
 run the helper once after installing the dotfiles:
 
@@ -330,6 +331,302 @@ fi
 
 printf 'LXQt terminal settings now prefer kitty.\n'
 printf 'Log out and back in, or restart lxqt-panel and pcmanfm-qt, for all changes to take effect.\n'
+#+end_src
+
+* LXQt settings shared between machines
+
+** Audit and installation
+
+The desktop audit on 2026-10-09 found that Stow managed Kitty, fonts,
+xsettingsd, and xkeysnail configuration, but no LXQt or xfwm4 settings.
+Local preferences included top and bottom panels, quick launchers, ungrouped
+current-workspace tasks, a custom clock format, detailed file dialogs with
+hidden files visible, Kitty shortcuts, xfwm4, and six workspaces. Most other
+xfwm4 values matched its defaults. LXQt appearance inherited Debian's
+Papirus / Debian / Fusion defaults; the xsettingsd file alone does not set
+LXQt's Qt theme or arrange to start xsettingsd.
+
+The presets below reproduce those portable preferences on Debian 13 with
+Guix user profiles. Monitor outputs, resolution, scaling, desktop icon
+positions, window sizes, recent files, and battery/lid settings remain local.
+In particular, the desktop's =enableBatteryWatcher=false= and
+=enableLidWatcher=false= must not become laptop defaults. The existing XFCE
+=displays.xml= contains desktop monitor identities and is not imported.
+
+Install the Debian desktop packages on a new machine:
+
+#+begin_src sh
+sudo apt install lxqt xfwm4 python3
+#+end_src
+
+Install/activate the Guix desktop profile as described in [[file:Systems.org][Systems.org]] so
+Kitty is available. Firefox ESR, Chrome, LXImage, and Thunar launchers are
+included only when those applications are installed. Guix and Debian desktop
+file paths are resolved on the destination machine; there are no saved
+=/home/peter= launcher paths.
+
+Preview from the checkout at any time:
+
+#+begin_src sh
+./.local/bin/setup-lxqt --dry-run
+#+end_src
+
+Before first LXQt login, or after logging out of the graphical session, use
+a text console (e.g. =Ctrl+Alt+F3=) to install the links and apply preferences:
+
+#+begin_src sh
+cd ~/.dotfiles
+make install-lxqt
+#+end_src
+
+Then select LXQt at graphical login. This command configures the desktop;
+there is no need to visit the individual settings dialogs. Run it again
+from a text console after pulling changes to these presets. Ordinary
+=make install= and =upgrade-dotfiles= still only refresh Stow links: they do
+not overwrite settings in a running desktop. The helper refuses to apply
+changes while LXQt/xfwm4/xfconf processes are running because they can
+rewrite the files from memory.
+
+The helper keeps writable local files because these applications rewrite
+their settings. It merges the preferences below and xfwm4's six-workspace
+setting, leaving unrelated keys in those files intact. The panel layout is
+replaced with the saved two-panel layout; any existing output selection is
+retained by matching each panel's top/bottom edge. New machines use LXQt's
+default screen selection. Existing extra panels and custom panel plugins
+are replaced. Other keyboard shortcuts are preserved, including distro
+brightness/display bindings on a fresh installation; duplicate Kitty
+bindings are consolidated.
+
+Changed existing files are backed up once beside the original as
+=*.before-dotfiles-lxqt=. Restore those files while logged out to undo the
+setup. Later GUI edits stay local until intentionally added to these
+presets; Git does not automatically capture them. Edit this Org file and
+retangle for shared preference changes. The merge/backup implementation is
+maintained directly in =.local/libexec/lxqt-settings.py=.
+
+** Setup helper
+
+#+begin_src sh :tangle .local/bin/setup-lxqt :shebang #!/bin/sh
+set -eu
+exec python3 "$(dirname "$(readlink -f "$0")")/../libexec/lxqt-settings.py" "$@"
+#+end_src
+
+** Session and appearance
+
+#+begin_src conf :tangle .local/share/dotfiles/lxqt/lxqt/session.conf
+[General]
+__userfile__=true
+window_manager=xfwm4
+#+end_src
+
+#+begin_src conf :tangle .local/share/dotfiles/lxqt/lxqt/lxqt.conf
+[General]
+__userfile__=true
+icon_theme=Papirus
+icon_follow_color_scheme=false
+theme=debian
+
+[Qt]
+style=Fusion
+#+end_src
+
+** File dialogs and file manager
+
+Only preferences are saved here; dialog geometry, navigation history, and
+per-monitor wallpaper/desktop settings are intentionally absent.
+
+#+begin_src conf :tangle .local/share/dotfiles/lxqt/lxqt/filedialog.conf
+[View]
+BigIconSize=48
+Mode=Detailed
+ScrollPerPixel=true
+ShowHidden=true
+ShowThumbnails=true
+SmallIconSize=24
+SortColumn=mtime
+SortFolderFirst=true
+SortOrder=ascending
+ThumbnailIconSize=128
+#+end_src
+
+#+begin_src conf :tangle .local/share/dotfiles/lxqt/pcmanfm-qt/lxqt/settings.conf
+[Behavior]
+ConfirmDelete=true
+ConfirmTrash=false
+SingleClick=false
+UseTrash=true
+
+[FolderView]
+Mode=icon
+ShowHidden=false
+SortCaseSensitive=false
+SortColumn=name
+SortFolderFirst=true
+SortOrder=ascending
+
+[System]
+Archiver=xarchiver
+Terminal=kitty
+
+[Thumbnail]
+ShowThumbnails=true
+ThumbnailLocalFilesOnly=true
+
+[Window]
+AlwaysShowTabs=true
+PathBarButtons=true
+ReopenLastTabs=false
+ShowMenuBar=true
+ShowTabClose=true
+SidePaneMode=places
+SidePaneVisible=true
+SwitchToNewTab=false
+#+end_src
+
+** Panel layout
+
+#+begin_src conf :tangle .local/share/dotfiles/lxqt/panel.conf
+[General]
+__userfile__=true
+panels=panel1, panel2
+
+[desktopswitch]
+alignment=Left
+rows=1
+showOnlyActive=false
+type=desktopswitch
+
+[fancymenu2]
+alignment=Left
+ownIcon=true
+type=fancymenu
+
+[kbindicator2]
+alignment=Right
+type=kbindicator
+
+[mount2]
+alignment=Right
+type=mount
+
+[panel1]
+alignment=-1
+animation-duration=0
+background-color=@Variant(\0\0\0\x43\0\xff\xff\0\0\0\0\0\0\0\0)
+background-image=
+desktop=0
+font-color=@Variant(\0\0\0\x43\0\xff\xff\0\0\0\0\0\0\0\0)
+hidable=false
+hide-on-overlap=false
+iconSize=22
+lineCount=1
+lockPanel=false
+opacity=100
+panelSize=32
+plugins=showdesktop, taskbar, desktopswitch
+position=Bottom
+reserve-space=true
+show-delay=0
+visible-margin=true
+width=100
+width-percent=true
+
+[showdesktop]
+alignment=Right
+type=showdesktop
+
+[spacer]
+alignment=Left
+expandable=true
+spaceType=invisible
+type=spacer
+
+[statusnotifier2]
+alignment=Left
+type=statusnotifier
+
+[sysstat]
+alignment=Right
+type=sysstat
+
+[taskbar]
+alignment=Left
+autoRotate=true
+buttonHeight=100
+buttonStyle=IconText
+buttonWidth=200
+closeOnMiddleClick=true
+excludedList=
+groupingEnabled=false
+iconByClass=false
+raiseOnCurrentDesktop=true
+showDesktopNum=0
+showGroupOnHover=true
+showOnlyCurrentScreenTasks=false
+showOnlyMinimizedTasks=false
+showOnlyOneDesktopTasks=true
+type=taskbar
+ungroupedNextToExisting=false
+wheelDeltaThreshold=300
+wheelEventsAction=0
+
+[worldclock2]
+alignment=Right
+autoRotate=true
+customFormat="'<b>'HH:mm:ss'</b><br/><font size=\"-2\">'ddd, d MMM yyyy'<br/>'TT'</font>'"
+dateFormatType=custom
+dateLongNames=false
+datePadDay=false
+datePosition=after
+dateShowDoW=true
+dateShowYear=false
+defaultTimeZone=
+formatType=custom-timeonly
+showDate=true
+showTimezone=false
+showTooltip=false
+showWeekNumber=true
+timeAMPM=true
+timePadHour=false
+timeShowSeconds=false
+timeZones\size=0
+timezoneFormatType=iana
+timezonePosition=below
+type=worldclock
+useAdvancedManualFormat=false
+
+[panel2]
+alignment=0
+animation-duration=0
+background-color=@Variant(\0\0\0\x43\0\xff\xff\0\0\0\0\0\0\0\0)
+background-image=
+desktop=0
+font-color=@Variant(\0\0\0\x43\0\xff\xff\0\0\0\0\0\0\0\0)
+hidable=false
+hide-on-overlap=false
+iconSize=22
+lineCount=1
+lockPanel=false
+opacity=100
+panelSize=32
+plugins=fancymenu2, quicklaunch, spacer, kbindicator2, sysstat, statusnotifier2, mount2, worldclock2
+position=Top
+reserve-space=true
+show-delay=0
+visible-margin=true
+width=100
+width-percent=true
+
+[quicklaunch]
+alignment=Left
+apps\1\desktop=kitty.desktop
+apps\2\desktop=firefox-esr.desktop
+apps\3\desktop=google-chrome.desktop
+apps\4\desktop=lximage-qt.desktop
+apps\5\desktop=thunar.desktop
+apps\size=5
+type=quicklaunch
+
 #+end_src
 
 * Fonts and Themes
