@@ -57,6 +57,8 @@ checkout =
 	cd qp-arduino
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/qp-arduino.git
 	git remote add source ssh://git@github.com/QuantumLeaps/qp-arduino.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/qp-arduino.git
+	git remote add janelia-arduino ssh://git@github.com/janelia-arduino/qp-arduino.git
 
 [qp-arduino-example]
 checkout =
@@ -173,27 +175,25 @@ checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joysticks-mech.git' 'mouse-joysticks-mech'
 	cd mouse-joysticks-mech
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joysticks-mech.git
-
-[mouse-joysticks-pcb]
-checkout =
-	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joysticks-pcb.git' 'mouse-joysticks-pcb'
-	cd mouse-joysticks-pcb
-	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joysticks-pcb.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joysticks-mech.git
 
 [mouse-joystick-pcb]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joystick-pcb.git' 'mouse-joystick-pcb'
 	cd mouse-joystick-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-pcb.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joystick-pcb.git
 
 [mouse-joystick-firm]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/mouse-joystick-firm.git' 'mouse-joystick-firm'
 	cd mouse-joystick-firm
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-firm.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joystick-firm.git
 
 [camera-gpio-interface-pcb]
 checkout =
 	git clone 'ssh://git@codeberg.org/orb-weaver/camera-gpio-interface-pcb.git' 'camera-gpio-interface-pcb'
 	cd camera-gpio-interface-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/camera-gpio-interface-pcb.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/camera-gpio-interface-pcb.git
