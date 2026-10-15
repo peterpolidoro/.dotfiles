@@ -176,6 +176,7 @@ checkout =
 	cd mouse-joysticks-mech
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joysticks-mech.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joysticks-mech.git
+	git remote add jet ssh://git@github.com/janelia-experimental-technology/mouse-joysticks-mech.git
 
 [mouse-joystick-pcb]
 checkout =
@@ -183,6 +184,7 @@ checkout =
 	cd mouse-joystick-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-pcb.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joystick-pcb.git
+	git remote add jet ssh://git@github.com/janelia-experimental-technology/mouse-joysticks-pcb.git
 
 [mouse-joystick-firm]
 checkout =
@@ -190,6 +192,7 @@ checkout =
 	cd mouse-joystick-firm
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mouse-joystick-firm.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mouse-joystick-firm.git
+	git remote add jet ssh://git@github.com/janelia-experimental-technology/mouse-joysticks-firm.git
 
 [camera-gpio-interface-pcb]
 checkout =
@@ -197,3 +200,4 @@ checkout =
 	cd camera-gpio-interface-pcb
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/camera-gpio-interface-pcb.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/camera-gpio-interface-pcb.git
+	git remote add jet ssh://git@github.com/janelia-experimental-technology/camera-gpio-interface-pcb.git
