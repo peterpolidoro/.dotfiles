@@ -197,6 +197,152 @@ sudo apt install pinentry-qt -y
 rsync -avzhn /home/polidorop/ polidorop@athena:/home/polidorop
 #+END_SRC
 
+* Work File Shares
+
+Notes from 2026-10-20 on reaching Janelia Windows file shares and OneDrive from
+the Debian + Guix desk machine. Everyone else on the team uses Windows or macOS,
+so shares are published as SMB UNC paths such as =\\prfs\sciserv$=.
+
+** Facts
+
+- Server: =prfs.hhmi.org=. Internally it is a CNAME to
+  =building.prfs.janelia.org=, which resolves to a 10.39.131.x address with a
+  zero TTL (round robin). Source: =TechTips-for-New-Hires-HQ-Janelia.pdf= and
+  the campus DNS.
+- Login: domain =HHMI=, user =polidorop=. Local account is =peter= (uid 1001).
+- Share paths are listed on https://wikis.janelia.org under "Lab and Project
+  File Share Paths". The =$= suffix marks a hidden share.
+- The desk is on the campus network behind the libreCMC router at
+  192.168.10.1 (WAN 10.101.30.x from campus DHCP, public egress registered to
+  HHMI). No VPN is needed. The PDF's VPN portal =access.janelia.org= no longer
+  resolves; that section of the PDF is stale.
+- Campus DNS servers from the router's WAN lease: 172.19.15.120, 172.19.15.10,
+  172.18.29.60, 172.18.27.60, 172.18.27.123. Search domain =hhmi.org=.
+
+** Router DNS forwarding (done 2026-10-20)
+
+=prfs.hhmi.org= is an internal-only name; public DNS returns NXDOMAIN. The
+router runs =https-dns-proxy= (Quad9 DoH) with =force_dns=, which redirects all
+LAN port 53 traffic to the router's dnsmasq, so client-side DNS overrides do
+nothing. The fix lives in dnsmasq on the router. In LuCI, Network → DHCP and
+DNS:
+
+- DNS forwardings: =/hhmi.org/172.19.15.120=, =/hhmi.org/172.19.15.10=,
+  =/janelia.org/172.19.15.120=, =/janelia.org/172.19.15.10=
+- Domain whitelist (rebind protection exemption): =hhmi.org=, =janelia.org=.
+  Without this dnsmasq drops the private 10.x answers.
+
+Equivalent from the router shell:
+
+#+BEGIN_SRC sh
+uci add_list dhcp.@dnsmasq[0].server='/hhmi.org/172.19.15.120'
+uci add_list dhcp.@dnsmasq[0].server='/hhmi.org/172.19.15.10'
+uci add_list dhcp.@dnsmasq[0].server='/janelia.org/172.19.15.120'
+uci add_list dhcp.@dnsmasq[0].server='/janelia.org/172.19.15.10'
+uci add_list dhcp.@dnsmasq[0].rebind_domain='hhmi.org'
+uci add_list dhcp.@dnsmasq[0].rebind_domain='janelia.org'
+uci commit dhcp && /etc/init.d/dnsmasq restart
+#+END_SRC
+
+The =https-dns-proxy= init script keeps =/domain/ip= entries across restarts;
+it only strips plain IP upstreams, and only once when it takes its backup.
+dnsmasq has "Domain required" on, so bare =prfs= never resolves. Use the full
+name, or add DHCP option =119,hhmi.org= on the LAN interface so clients append
+the search domain.
+
+Verify from a LAN machine:
+
+#+BEGIN_SRC sh
+dig @192.168.10.1 prfs.hhmi.org +short     # CNAME then a 10.39.131.x address
+getent hosts prfs.hhmi.org
+#+END_SRC
+
+** What is already on the machine
+
+- Debian's =gvfs-backends= and =gvfs-fuse= are installed and =gvfsd= runs in the
+  LXQt session, so =gio mount smb://...= and =smb://= URLs in PCManFM-Qt work
+  without root.
+- The kernel ships the =cifs= module.
+- =cifs-utils= (=mount.cifs=) comes from the Guix desktop manifest. sudo's
+  =secure_path= hides Guix profiles, so give sudo the absolute path; the
+  =mount-sciserv= script does this. Debian's =cifs-utils= works too.
+- Guix's =samba= is old (4.18), so use Debian's =smbclient= for listing shares.
+- The HHMI password lives in =pass= at =web/hhmi.okta.com=.
+
+** Quick mount without root (GVFS)
+
+The =$= in the share name must be single-quoted in bash. =gio mount= reads the
+user, domain, and password as three lines on stdin, so =pass= can feed it.
+
+#+BEGIN_SRC sh
+printf '%s\n%s\n%s\n' polidorop HHMI "$(pass show web/hhmi.okta.com | head -n1)" \
+  | gio mount 'smb://prfs.hhmi.org/sciserv$'
+ls /run/user/1001/gvfs/
+gio mount -u 'smb://prfs.hhmi.org/sciserv$'
+#+END_SRC
+
+In PCManFM-Qt, type =smb://prfs.hhmi.org/sciserv$= in the location bar and
+enter user =polidorop=, domain =HHMI=.
+
+** Kernel mount with the password from pass
+
+=.local/bin/mount-sciserv= (defined in Systems.org beside =mount-janelia-misc=)
+mounts the share at =/janelia/sciserv=. It reads the password from =pass= once,
+then hands it to =mount.cifs= on stdin through =PASSWD_FD=, so nothing touches
+the disk or the process list.
+
+#+BEGIN_SRC sh
+mount-sciserv        # pinentry for gpg, then the sudo prompt
+mount-sciserv -u     # unmount
+#+END_SRC
+
+Manual equivalent, plus =smbclient= to list shares and confirm the login:
+
+#+BEGIN_SRC sh
+sudo apt install smbclient
+smbclient -L //prfs.hhmi.org -U HHMI/polidorop
+sudo mkdir -p /janelia/sciserv
+pass show web/hhmi.okta.com | head -n1 \
+  | sudo env PASSWD_FD=0 "$(command -v mount.cifs)" '//prfs.hhmi.org/sciserv$' /janelia/sciserv \
+      -o username=polidorop,domain=HHMI,uid=peter,gid=peter
+#+END_SRC
+
+** Boot-time automount (plaintext credentials, not used)
+
+=pass= cannot unlock the gpg key before login, so a boot-time automount would
+need a root-only plaintext credentials file instead. Kept for reference.
+
+#+BEGIN_SRC sh
+sudo install -d -m 700 /etc/cifs
+sudo tee /etc/cifs/prfs >/dev/null <<'CREDS'
+username=polidorop
+password=YOURPASSWORD
+domain=HHMI
+CREDS
+sudo chmod 600 /etc/cifs/prfs
+#+END_SRC
+
+Add to =/etc/fstab= (one line), then =sudo systemctl daemon-reload= and
+=ls /janelia/sciserv=:
+
+#+BEGIN_EXAMPLE
+//prfs.hhmi.org/sciserv$  /janelia/sciserv  cifs  credentials=/etc/cifs/prfs,uid=peter,gid=peter,file_mode=0664,dir_mode=0775,noauto,x-systemd.automount,x-systemd.idle-timeout=600,_netdev  0  0
+#+END_EXAMPLE
+
+** OneDrive
+
+Office 365 includes 1 TB of OneDrive and it is the recommended backed-up
+location. There is no official Linux client. Use rclone, available from apt and
+Guix. =rclone config= with the =onedrive= backend opens a browser for the
+Microsoft login. If the login fails with a consent error, the Office 365 tenant
+blocks third-party apps and IT (support@hhmi.org, x4030) must approve rclone.
+
+#+BEGIN_SRC sh
+rclone config
+rclone sync onedrive: ~/OneDrive
+rclone mount onedrive: ~/OneDrive --vfs-cache-mode full
+#+END_SRC
+
 * Run Commands in Every Directory
 
 #+BEGIN_SRC sh
