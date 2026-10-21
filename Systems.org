@@ -545,69 +545,61 @@ sudo mkdir -p /janelia/misc && sudo mount -o rw,hard,bg,nolock,nfsvers=4.1,sec=k
 
 *.local/bin/mount-sciserv*
 
-Mounts the Janelia =sciserv$= SMB share at =/janelia/sciserv= with the HHMI
-password taken from =pass=. The password is read once (pinentry), then handed
-to =mount.cifs= on stdin through =PASSWD_FD=, so it is never written to disk or
-visible in the process list. sudo's =secure_path= hides Guix profiles, so the
-script resolves =mount.cifs= itself and passes the absolute path to sudo. See
-"Work File Shares" in README.org for the network background.
+Mounts the Janelia =sciserv$= SMB share through GVFS with the HHMI password
+taken from =pass=, and links it at =~/sciserv=. No root is needed and nothing
+is written to disk: =gio mount= reads user, domain, and password as three lines
+on stdin. GVFS is used rather than a kernel =mount.cifs= because, as of
+2026-10-21, the file server accepts the Samba-based clients (GVFS, smbclient)
+but answers the kernel CIFS client's session setup with STATUS_LOGON_FAILURE
+for the same credentials. See "Work File Shares" in README.org.
 
 #+begin_src sh :tangle .local/bin/mount-sciserv :shebang #!/bin/sh
-# Generated from Systems.org. Mount the Janelia sciserv$ SMB share using the
-# HHMI password from pass; nothing is written to disk.
+# Generated from Systems.org. Mount the Janelia sciserv$ SMB share through GVFS
+# using the HHMI password from pass; no root, nothing written to disk.
 set -eu
 
-share='//prfs.hhmi.org/sciserv$'
-mount_point='/janelia/sciserv'
+share_url='smb://prfs.hhmi.org/sciserv$'
+gvfs_dir="/run/user/$(id -u)/gvfs/smb-share:server=prfs.hhmi.org,share=sciserv\$"
+link="$HOME/sciserv"
 pass_entry='web/hhmi.okta.com'
 smb_user='polidorop'
 smb_domain='HHMI'
 
-usage() { echo 'Usage: mount-sciserv [-u]   (-u unmounts)'; }
+usage() { echo 'Usage: mount-sciserv [-u]   (-u unmounts and removes ~/sciserv)'; }
 
 case "${1:-}" in
-    -u|--unmount) sudo umount "$mount_point"; echo "Unmounted $mount_point"; exit 0 ;;
+    -u|--unmount)
+        gio mount -u "$share_url"
+        [ -L "$link" ] && rm -f "$link"
+        echo "Unmounted $share_url"
+        exit 0 ;;
     -h|--help) usage; exit 0 ;;
     '') ;;
     *) usage >&2; exit 2 ;;
 esac
 
-if grep -qs " $mount_point cifs " /proc/mounts; then
-    echo "$mount_point is already mounted"
-    exit 0
-fi
-
-# sudo's secure_path hides Guix profiles: resolve mount.cifs here and give sudo
-# the absolute path. Guix cifs-utils first, Debian's cifs-utils as fallback.
-mount_cifs=''
-for candidate in "$(command -v mount.cifs 2>/dev/null || true)" \
-                 "$HOME/.guix-extra-profiles/desktop/desktop/sbin/mount.cifs" \
-                 /sbin/mount.cifs; do
-    if [ -n "$candidate" ] && [ -x "$candidate" ]; then
-        mount_cifs="$candidate"
-        break
+if [ -d "$gvfs_dir" ]; then
+    echo "$share_url is already mounted"
+else
+    # Only the first line of the pass entry is the password.
+    password="$(pass show "$pass_entry" | head -n1)"
+    if [ -z "$password" ]; then
+        echo "Could not read a password from pass entry $pass_entry" >&2
+        exit 1
     fi
-done
-if [ -z "$mount_cifs" ]; then
-    echo 'mount.cifs not found: add cifs-utils to the Guix desktop manifest or run: sudo apt install cifs-utils' >&2
-    exit 1
+    # gio reads user, domain and password from stdin; printf is a shell
+    # builtin, so the password never appears in the process list.
+    printf '%s\n%s\n%s\n' "$smb_user" "$smb_domain" "$password" \
+        | gio mount "$share_url" >/dev/null \
+        || { echo "Failed to mount $share_url" >&2; exit 1; }
+    echo "Mounted $share_url"
 fi
 
-# Read the password before calling sudo so pinentry and the sudo prompt do not
-# overlap. Only the first line of the pass entry is the password.
-password="$(pass show "$pass_entry" | head -n1)"
-if [ -z "$password" ]; then
-    echo "Could not read a password from pass entry $pass_entry" >&2
-    exit 1
+# Convenience link; only touch it if it is absent or already a symlink.
+if [ ! -e "$link" ] || [ -L "$link" ]; then
+    ln -sfn "$gvfs_dir" "$link"
 fi
-
-sudo mkdir -p "$mount_point"
-# printf is a shell builtin, so the password never appears in the process list.
-printf '%s\n' "$password" \
-    | sudo env PASSWD_FD=0 "$mount_cifs" "$share" "$mount_point" \
-        -o "username=$smb_user,domain=$smb_domain,uid=$(id -u),gid=$(id -g),file_mode=0664,dir_mode=0775" \
-    || { echo "Failed to mount $mount_point" >&2; exit 1; }
-echo "Mounted $share at $mount_point"
+echo "$link -> $gvfs_dir"
 #+end_src
 
 * Profile Management

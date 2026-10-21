@@ -263,54 +263,64 @@ getent hosts prfs.hhmi.org
   LXQt session, so =gio mount smb://...= and =smb://= URLs in PCManFM-Qt work
   without root.
 - The kernel ships the =cifs= module.
-- =cifs-utils= (=mount.cifs=) comes from the Guix desktop manifest. sudo's
-  =secure_path= hides Guix profiles, so give sudo the absolute path; the
-  =mount-sciserv= script does this. Debian's =cifs-utils= works too.
+- =cifs-utils= (=mount.cifs=) comes from the Guix desktop manifest, but kernel
+  CIFS mounts are currently refused by the server (see below). sudo's
+  =secure_path= hides Guix profiles, so give sudo the absolute path when trying.
 - Guix's =samba= is old (4.18), so use Debian's =smbclient= for listing shares.
 - The HHMI password lives in =pass= at =web/hhmi.okta.com=.
 
-** Quick mount without root (GVFS)
+** Quick mount without root (GVFS): what the script does
 
-The =$= in the share name must be single-quoted in bash. =gio mount= reads the
-user, domain, and password as three lines on stdin, so =pass= can feed it.
+=.local/bin/mount-sciserv= (defined in Systems.org beside =mount-janelia-misc=)
+mounts the share through GVFS with the password from =pass= and links it at
+=~/sciserv=. The real path is
+=/run/user/1001/gvfs/smb-share:server=prfs.hhmi.org,share=sciserv$=.
+
+#+BEGIN_SRC sh
+mount-sciserv        # pinentry for gpg if the agent cache is cold
+ls ~/sciserv
+mount-sciserv -u     # unmount and remove ~/sciserv
+#+END_SRC
+
+Manual equivalent. The =$= in the share name must be single-quoted in bash.
+=gio mount= reads user, domain, and password as three lines on stdin.
 
 #+BEGIN_SRC sh
 printf '%s\n%s\n%s\n' polidorop HHMI "$(pass show web/hhmi.okta.com | head -n1)" \
   | gio mount 'smb://prfs.hhmi.org/sciserv$'
-ls /run/user/1001/gvfs/
-gio mount -u 'smb://prfs.hhmi.org/sciserv$'
 #+END_SRC
 
 In PCManFM-Qt, type =smb://prfs.hhmi.org/sciserv$= in the location bar and
 enter user =polidorop=, domain =HHMI=.
 
-** Kernel mount with the password from pass
+** Kernel mount: not working as of 2026-10-21
 
-=.local/bin/mount-sciserv= (defined in Systems.org beside =mount-janelia-misc=)
-mounts the share at =/janelia/sciserv=. It reads the password from =pass= once,
-then hands it to =mount.cifs= on stdin through =PASSWD_FD=, so nothing touches
-the disk or the process list.
-
-#+BEGIN_SRC sh
-mount-sciserv        # pinentry for gpg, then the sudo prompt
-mount-sciserv -u     # unmount
-#+END_SRC
-
-Manual equivalent, plus =smbclient= to list shares and confirm the login:
+A kernel =mount.cifs= mount fails with =mount error(13)= and the kernel log
+shows =STATUS_LOGON_FAILURE= at session setup, with both =prfs.hhmi.org= and
+its target =building.prfs.janelia.org=, and with the password typed by hand.
+The same user, domain, and password are accepted by the Samba-based clients
+(GVFS and =smbclient=, which negotiated SMB 3.0 with the server), so the
+credentials are right and the server is refusing the Linux kernel client
+specifically. Untried variations, each a login attempt against the account:
 
 #+BEGIN_SRC sh
-sudo apt install smbclient
-smbclient -L //prfs.hhmi.org -U HHMI/polidorop
-sudo mkdir -p /janelia/sciserv
-pass show web/hhmi.okta.com | head -n1 \
-  | sudo env PASSWD_FD=0 "$(command -v mount.cifs)" '//prfs.hhmi.org/sciserv$' /janelia/sciserv \
-      -o username=polidorop,domain=HHMI,uid=peter,gid=peter
+sudo ~/.guix-extra-profiles/desktop/desktop/sbin/mount.cifs '//prfs.hhmi.org/sciserv$' /janelia/sciserv \
+  -o username=polidorop,domain=HHMI,uid=peter,gid=peter,vers=3.0
+# or username=polidorop@hhmi.org without domain=, or sec=krb5 after kinit
 #+END_SRC
+
+If one works, switch the script back to a kernel mount, feeding the password
+with =pass show web/hhmi.okta.com | head -n1 | sudo env PASSWD_FD=0 mount.cifs ...=
+so it never touches the disk. =mount-janelia-misc= mounts NFS from the same
+server with =sec=krb5=, so a Kerberos ticket (=kinit polidorop@HHMI.ORG=) is
+the likely long-term route for kernel mounts; it needs =krb5-user=, Debian's
+=cifs-utils= for =cifs.upcall=, =keyutils=, and an =/etc/krb5.conf=.
 
 ** Boot-time automount (plaintext credentials, not used)
 
 =pass= cannot unlock the gpg key before login, so a boot-time automount would
-need a root-only plaintext credentials file instead. Kept for reference.
+need a root-only plaintext credentials file instead, and the kernel mount it
+relies on does not currently work. Kept for reference.
 
 #+BEGIN_SRC sh
 sudo install -d -m 700 /etc/cifs
