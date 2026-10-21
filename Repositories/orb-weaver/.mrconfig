@@ -201,3 +201,10 @@ checkout =
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/camera-gpio-interface-pcb.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/camera-gpio-interface-pcb.git
 	git remote add jet ssh://git@github.com/janelia-experimental-technology/camera-gpio-interface-pcb.git
+
+[mechanical-docs]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mechanical-docs.git' 'mechanical-docs'
+	cd mechanical-docs
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mechanical-docs.git
+	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mechanical-docs.git
