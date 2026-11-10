@@ -208,3 +208,9 @@ checkout =
 	cd mechanical-docs
 	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mechanical-docs.git
 	git remote add peterpolidoro ssh://git@github.com/peterpolidoro/mechanical-docs.git
+
+[mechanical-cad]
+checkout =
+	git clone 'ssh://git@codeberg.org/orb-weaver/mechanical-cad.git' 'mechanical-cad'
+	cd mechanical-cad
+	git remote add codeberg ssh://git@codeberg.org/orb-weaver/mechanical-cad.git
