@@ -580,3 +580,4 @@ checkout =
 	git clone 'git@github.com:peterpolidoro/free-standing-tank-enclosure.git' 'free-standing-tank-enclosure'
 	cd free-standing-tank-enclosure
 	git remote add peterpolidoro git@github.com:peterpolidoro/free-standing-tank-enclosure.git
+	git remote add jet git@github.com:janelia-experimental-technology/free-standing-tank-enclosure.git
